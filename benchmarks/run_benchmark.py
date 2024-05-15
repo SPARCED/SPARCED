@@ -11,8 +11,6 @@
 # ----------------------------------------------------------------------------#
 import os
 import sys
-import glob
-import shutil
 import pickle
 import argparse
 import importlib
@@ -52,8 +50,6 @@ parser.add_argument('--benchmark', '-b',
                     type=str,
                     help='benchmark to evaluate the model against',
                     default='stochastic_expression')
-
-
 args = parser.parse_args()
 
 # Append utilities and model directories to the path
@@ -196,17 +192,23 @@ class RunUnitTest:
         for round_i in range(rounds_to_complete):
         
             if rank == 0:
+                
                 print(f'rounds to complete: {rounds_to_complete}')
                 print(f'Round {round_i}')
+
                 # Assign each rank it's task for the round
                 for i in range(size):
 
                     rank_jobs = rank_jobs_directory[i]
-                    # it needs to handle if there are no more tasks
+
                     if round_i < len(rank_jobs):
+
                         rank_job_for_round = rank_jobs[round_i]
+
                     else:
+
                         rank_job_for_round = None
+
                     communicator.send(rank_job_for_round, dest=i, tag=round_i)
 
             # Receive the task for the round
@@ -244,10 +246,7 @@ class RunUnitTest:
                 'toutS': tout,
                 'xoutG': xoutG
             }
-            # if xoutG != []:
-            #     rank_results['xoutG'] = xoutG
 
-           
             rank_results['xoutS'], rank_results['toutS'] = utm._results_size_checker(
                                                                 rank_results['xoutS'], 
                                                                 rank_results['toutS']
@@ -258,7 +257,6 @@ class RunUnitTest:
                 results[condition_id][f'cell {cell}']['xoutS'] = rank_results['xoutS']
                 results[condition_id][f'cell {cell}']['toutS'] = rank_results['toutS']
                 results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
-                print('rank 0 catalogued')
 
                 tasks_this_round = utm._tasks_this_round(size, total_jobs, round_i) - 1
                 print(f'tasks this round: {tasks_this_round + 1}')
@@ -266,23 +264,19 @@ class RunUnitTest:
                 while completed_tasks < tasks_this_round:
                     print('receiving')
                     rank_results = communicator.recv(source=MPI.ANY_SOURCE, tag = MPI.ANY_TAG)
-                    print(f'received results')
                     condition_id = rank_results['condition_name']
                     cell = rank_results['cell']
                     results[condition_id][f'cell {cell}']['xoutS'] = rank_results['xoutS']
                     results[condition_id][f'cell {cell}']['toutS'] = rank_results['toutS']
-                    if xoutG != []:
-                        results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
+                    # if xoutG != []:
+                    results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
                     completed_tasks += 1
                     print(f'completed tasks: {completed_tasks}')
                     if completed_tasks == tasks_this_round:
-                        print('breaking')
                         break
             
             else:
-                print(f'Rank {rank} sending')
                 communicator.send(rank_results, dest=0, tag=round_i)
-                print(f'Rank {rank} sent')
 
 
         #------------------------Observable Calculation-----------------------#
@@ -360,7 +354,6 @@ class RunUnitTest:
                                 )
                             )
                             
-
                 else:
                     # jd.save(observables_data, results_path)
                     with open(results_path, 'wb') as f:

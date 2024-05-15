@@ -250,40 +250,33 @@ class UnitTestModules:
             output:
                 model: libsbml.Model - the updated SBML model"""
         
-        ### JRH - I think this is the function that needs to be fixed 
-        
-        print('activating the set_species_value function')
         # Get the list of species
         species_ids = list(model.getStateIds())
-        print('species ids obtained')
+
         # Get the initial values
         species_initializations = np.array(model.getInitialStates())
         
         # Set the initial values
         index = species_ids.index(species)
+
         species_initializations[index] = species_value
+
         model.setInitialStates(species_initializations)
         
         return model
     
     @staticmethod
-    def _assign_sbml_path(path: str):
-        with open(path, 'r') as f:
-            config = yaml.safe_load(f)
+    def _assign_sbml_path(model_path: str):
 
-       # Construct paths to SBML files in the specified directory
-        sbml_files = [os.path.join(path, filename) for filename in os.listdir(path) if filename.endswith('.xml')]
+        # Construct paths to SBML files in the specified directory
+        sbml_files = [os.path.join(model_path, filename) for filename in os.listdir(model_path) if filename.endswith('.xml')][0]
 
-        # Update the paths in the configuration
-        for problem in config['problems']:
-            problem['sbml_files'] = sbml_files
-
-        # Use the modified config
-        print(config)
+        # return the sbml file path
+        return sbml_files
 
 
     @staticmethod
-    def import_module_from_path(module_path):
+    def _import_module_from_path(module_path: str):
         # Add the directory containing the module to sys.path
         module_dir = os.path.dirname(module_path)
         sys.path.append(module_dir)
@@ -412,7 +405,7 @@ class UnitTestModules:
             config = yaml.safe_load(f)
 
         try:
-            sim_file_dir = os.path.join(data_dir, config['simulation']['root'])
+            sim_file_dir = os.path.join(data_path, config['simulation']['root'])
 
             genereg = config['simulation']['genereg']
 
