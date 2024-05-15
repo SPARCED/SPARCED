@@ -1,4 +1,4 @@
-model:
+compilation:
     root: "model"
     compartments: "Compartments.txt"
     observables: "Observables.txt"
@@ -8,7 +8,7 @@ model:
 simulation:
     root: "simulation"
     genereg: "GeneReg.txt"
-    omics: "Omics.txt"
+    omics: "OmicsData.txt"
     perturbations:
         root: "perturbations"
         default: "default.txt"
