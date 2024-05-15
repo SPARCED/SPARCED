@@ -278,8 +278,6 @@ class UnitTestModules:
         for problem in config['problems']:
             problem['sbml_files'] = sbml_files
 
-  
-
         # Use the modified config
         print(config)
 
@@ -302,3 +300,84 @@ class UnitTestModules:
         sys.path.remove(module_dir)
 
         return module
+    
+
+    @staticmethod
+    def _add_amici_path(model_path: str):
+        """This function finds the AMICI model from the path
+        input:
+            model_path: str - the path to the model
+        output:
+            amici_module_path: str - the path to the AMICI module
+        """
+        # Get the directory contents
+        try:
+            directory_contents = os.listdir(model_path)
+        except FileNotFoundError:
+            raise ValueError(f"Model path '{model_path}' does not exist.")
+
+        # Ignore any potential directories labeled 'results'
+        directory_contents = [d for d in directory_contents if d != 'results']
+
+        # Find the AMICI module via its setup.py file
+        amici_module_path = None
+        for directory in directory_contents:
+            dir_path = os.path.join(model_path, directory)
+            if os.path.isdir(dir_path):
+                setup_path = os.path.join(dir_path, 'setup.py')
+                if os.path.isfile(setup_path):
+                    try:
+                        with open(setup_path, 'r') as setup_file:
+                            first_line = setup_file.readline().strip()
+                            if 'AMICI model package setup' in first_line:
+                                amici_module_path = dir_path
+                                sys.path.append(amici_module_path)
+                                break
+                    except IOError as e:
+                        print(f"Error reading setup file: {e}")
+
+        if amici_module_path is None:
+            raise ValueError("No valid AMICI module found in the provided path.")
+
+        return amici_module_path
+
+    @staticmethod
+    def _swig_interface_path(model_path: str):
+        """This function finds the SWIG python interface from the path
+        input:
+            model_path: str - the path to the model
+        output:
+            swig_interface_path: str - the path to the SWIG python interface
+        """
+        amici_module_path = UnitTestModules._add_amici_path(model_path)
+
+        # Get the directory contents
+        try:
+            amici_contents = os.listdir(amici_module_path)
+        except FileNotFoundError:
+            raise ValueError(f"AMICI module path '{amici_module_path}' does not exist.")
+
+        directories = [item for item in amici_contents 
+                       if os.path.isdir(os.path.join(amici_module_path, item))]
+
+        # Iterate over the directories to find the SWIG interface file
+        swig_interface_path = None
+        for directory in directories:
+            directory_path = os.path.join(amici_module_path, directory)
+            try:
+                directory_contents = os.listdir(directory_path)
+            except FileNotFoundError:
+                continue
+            
+            for item in directory_contents:
+                if item == directory + '.py':
+                    swig_interface_path = os.path.join(directory_path, item)
+                    break
+
+            if swig_interface_path:
+                break
+
+        if swig_interface_path is None:
+            raise ValueError("No SWIG interface file found in the AMICI module directories.")
+
+        return swig_interface_path

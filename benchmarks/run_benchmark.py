@@ -63,7 +63,8 @@ f_omics = os.path.join(args.model + '/data/simulation/OmicsData.txt')
 benchmark_utils_dir = os.path.join(sparced_root, 'benchmarks/benchmark_utils')
 sys.path.append(benchmark_utils_dir)
 sys.path.append(args.model)
-sys.path.append(os.path.join(args.model, 'amici_SPARCED/'))
+
+# sys.path.append(os.path.join(args.model, 'amici_SPARCED/'))
 
 # Import the required modules
 from petab_file_loader import PEtabFileLoader
@@ -71,8 +72,14 @@ from unit_test_modules import UnitTestModules as utm
 from sparced_condition_based_simulation import SPARCED_CBS as cbs
 from observable_calc import ObservableCalculator
 from visualization_plotting import VisualizationPlotting
-# import SPARCED.SPARCED as SPARCED
-SPARCED = importlib.import_module('SPARCED.SPARCED')
+
+# Dynamic locator for custom amici module
+utm._add_amici_path(args.model) 
+
+sparced = utm._swig_interface_path(args.model)
+sys.path.append(sparced)
+SPARCED = importlib.import_module(sparced.split('/')[-1].split('.')[0])
+
 
 communicator = MPI.COMM_WORLD # Create the MPI communicator
 rank = communicator.Get_rank() # The rank of the current process
@@ -238,7 +245,6 @@ class RunUnitTest:
             }
             # if xoutG != []:
             #     rank_results['xoutG'] = xoutG
-
 
            
             rank_results['xoutS'], rank_results['toutS'] = utm._results_size_checker(

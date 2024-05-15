@@ -54,21 +54,17 @@ class SPARCED_CBS:
         output:
             result: pd.DataFrame - the simulation results
         """
-        print('activating the run_condition_simulation function')
 
         # Look for heterogenize parameters in the condition
         if 'heterogenize' in condition and not math.isnan(condition['heterogenize']):
             
             self.model = self._heterogenize(condition)
-            print('heterogenized')
         
         if 'preequilibrationConditionId' in condition and not math.isnan(
             condition['preequilibrationConditionId']):
 
             self.model = self._preequilibrate(condition)
-            print('preequilibrated')
-    
-        print('setting perturbations')
+
         species_ids = list(self.model.getStateIds())
 
         # Find out if starting cPARP is too high to start the simulation
