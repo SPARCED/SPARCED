@@ -45,23 +45,17 @@ parser.add_argument('--model', '-m',
                     help='path to the model dirctory \
                     to be used for unit testing', 
                     default=(os.path.join(sparced_root, 
-                                          'SPARCED/models/SPARCED-standard')))
+                                          'SPARCED/models/SPARCED_standard')))
 parser.add_argument('--benchmark', '-b', 
                     required = True, 
                     type=str,
                     help='benchmark to evaluate the model against',
                     default='stochastic_expression')
-parser.add_argument('-J', '--inputsim',      default=f"{sparced_root}/SPARCED/data/simulation/",
-                    help="relative path to the simulation input directory")
-parser.add_argument('-G', '--genereg',       default="GeneReg.txt",
-                    help="name of the simulation gene regulation file")
-parser.add_argument('-X', '--omics',        default="OmicsData.txt",
-                    help="name of the simulation omics data file")
-
 
 args = parser.parse_args()
-f_genereg = args.inputsim + args.genereg
-f_omics = args.inputsim + args.omics
+
+f_genereg = os.path.join(args.model + '/data/simulation/GeneReg.txt')
+f_omics = os.path.join(args.model + '/data/simulation/OmicsData.txt')
 
 # Append utilities and model directories to the path
 benchmark_utils_dir = os.path.join(sparced_root, 'benchmarks/benchmark_utils')
@@ -277,8 +271,8 @@ class RunUnitTest:
                             )
                         )
 # ----------------------------------------------------------------------------#
-
-# Create a unit test for each YAML file
-RunUnitTest( model_path=args.model, benchmark = args.benchmark,
-            observable=args.observable, name=args.name).__call__()
+if __name__ == '__main__':
+    # Create a unit test for each YAML file
+    RunUnitTest( model_path=args.model, benchmark = args.benchmark,
+                observable=args.observable, name=args.name).__call__()
 

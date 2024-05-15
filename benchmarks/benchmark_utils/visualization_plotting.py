@@ -117,8 +117,6 @@ class VisualizationPlotting:
             axes[row, col].set_xscale(xScale)
             axes[row, col].set_yscale(yScale)
             axes[row, col].set_title(visualization_df['plotName'][i], weight='bold')
-            axes[row, col].set_xlim(0, 5)
-            axes[row, col].set_ylim(0, 150)
 
         # Remove unused subplots
         for i in range(len(unique_plots), num_rows * num_cols):

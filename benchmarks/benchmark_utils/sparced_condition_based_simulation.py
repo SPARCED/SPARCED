@@ -180,16 +180,13 @@ class SPARCED_CBS:
         output:
             model: libsbml.Model - the updated SBML model
         """
-        print('activating the set_perturbations function')
         # Get the perturbations for the condition
         perturbations = list(self.conditions_df.columns[2:]) 
 
         for perturbant in perturbations:
             try:
-                print('setting perturbations')
                 self.model = utm._set_species_value(self.model, perturbant, 
                                                      condition[perturbant])
-                print('perturbations set')
             except:
                 pass
 

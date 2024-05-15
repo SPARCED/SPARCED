@@ -46,7 +46,7 @@ parser.add_argument('--model', '-m',
                     help='path to the model dirctory \
                     to be used for unit testing', 
                     default=(os.path.join(sparced_root, 
-                                          'SPARCED/models/SPARCED-standard')))
+                                          'SPARCED/models/SPARCED_standard')))
 parser.add_argument('--benchmark', '-b', 
                     required = True, 
                     type=str,
@@ -56,11 +56,15 @@ parser.add_argument('--benchmark', '-b',
 
 args = parser.parse_args()
 
+f_genereg = os.path.join(args.model + '/data/simulation/GeneReg.txt')
+f_omics = os.path.join(args.model + '/data/simulation/OmicsData.txt')
+
 # Append utilities and model directories to the path
 benchmark_utils_dir = os.path.join(sparced_root, 'benchmarks/benchmark_utils')
 sys.path.append(benchmark_utils_dir)
 sys.path.append(args.model)
 sys.path.append(os.path.join(args.model, 'amici_SPARCED/'))
+
 # Import the required modules
 from petab_file_loader import PEtabFileLoader
 from unit_test_modules import UnitTestModules as utm
@@ -210,8 +214,6 @@ class RunUnitTest:
                                                             conditions_df, 
                                                             measurement_df)
             print(f"Rank {rank} is running {condition_id} for cell {cell}")
-            
-            print(model.getInitialStates())
 
             xoutS, tout, xoutG = (
                             cbs(
@@ -220,7 +222,9 @@ class RunUnitTest:
                                 conditions_df=conditions_df, 
                                 measurement_df=measurement_df, 
                                 parameters_df=parameters_df, 
-                                sbml_file=sbml_file)
+                                sbml_file=sbml_file,
+                                f_genereg=f_genereg,
+                                f_omics=f_omics)
                             ._run_condition_simulation(condition)
                             )
         
@@ -230,9 +234,10 @@ class RunUnitTest:
                 'cell': cell,
                 'xoutS': xoutS,
                 'toutS': tout,
+                'xoutG': xoutG
             }
-            if xoutG != []:
-                rank_results['xoutG'] = xoutG
+            # if xoutG != []:
+            #     rank_results['xoutG'] = xoutG
 
 
            
@@ -245,9 +250,8 @@ class RunUnitTest:
             if rank == 0:
                 results[condition_id][f'cell {cell}']['xoutS'] = rank_results['xoutS']
                 results[condition_id][f'cell {cell}']['toutS'] = rank_results['toutS']
-                if xoutG != []:
-                    results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
-                    print('rank 0 catalogued')
+                results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
+                print('rank 0 catalogued')
 
                 tasks_this_round = utm._tasks_this_round(size, total_jobs, round_i) - 1
                 print(f'tasks this round: {tasks_this_round + 1}')
