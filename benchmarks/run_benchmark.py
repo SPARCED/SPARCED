@@ -56,9 +56,6 @@ parser.add_argument('--benchmark', '-b',
 
 args = parser.parse_args()
 
-f_genereg = os.path.join(args.model + '/data/simulation/GeneReg.txt')
-f_omics = os.path.join(args.model + '/data/simulation/OmicsData.txt')
-
 # Append utilities and model directories to the path
 benchmark_utils_dir = os.path.join(sparced_root, 'benchmarks/benchmark_utils')
 sys.path.append(benchmark_utils_dir)
@@ -173,6 +170,9 @@ class RunUnitTest:
         solver = model.getSolver()
         solver.setMaxSteps = 1e10
 
+        # Load the gene regulation and omics data; done here to avoid repeated loading
+        genereg, omicsdata = utm._extract_simulation_files(args.model)
+
         #----------------------Job Asisgnment-------------------------------#
         list_of_jobs = utm._total_tasks(conditions_df, measurement_df)
 
@@ -220,6 +220,7 @@ class RunUnitTest:
             condition, cell, condition_id = utm._condition_cell_id(rank_task, 
                                                             conditions_df, 
                                                             measurement_df)
+            
             print(f"Rank {rank} is running {condition_id} for cell {cell}")
 
             xoutS, tout, xoutG = (
@@ -230,8 +231,8 @@ class RunUnitTest:
                                 measurement_df=measurement_df, 
                                 parameters_df=parameters_df, 
                                 sbml_file=sbml_file,
-                                f_genereg=f_genereg,
-                                f_omics=f_omics)
+                                f_genereg=genereg,
+                                f_omics=omicsdata)
                             ._run_condition_simulation(condition)
                             )
         

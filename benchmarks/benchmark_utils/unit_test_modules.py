@@ -381,3 +381,48 @@ class UnitTestModules:
             raise ValueError("No SWIG interface file found in the AMICI module directories.")
 
         return swig_interface_path
+
+
+    @staticmethod
+    def _extract_simulation_files(model_path: str):
+        """This function extracts the simulation files from the model path
+        Input:
+            model_path: str - the path to the model
+        Output:
+            simulation_files: list - the list of simulation files
+        
+        """
+        # Filters for the data folder and config.yaml file within
+        try:
+            directory_contents = os.listdir(model_path)
+
+            data_dir = [d for d in directory_contents if d == 'data'][0]
+            
+            data_path = os.path.join(model_path, data_dir)
+
+            config_file = [f for f in os.listdir(data_path) if f == 'config.yaml'][0]
+
+            config_path = os.path.join(data_path, config_file)
+
+        except FileNotFoundError:
+
+            raise ValueError(f"No config.yaml file found in the data directory of {model_path}; check model path.")
+            
+        with open(config_path, 'r') as f:
+            config = yaml.safe_load(f)
+
+        try:
+            sim_file_dir = os.path.join(data_dir, config['simulation']['root'])
+
+            genereg = config['simulation']['genereg']
+
+            GeneReg = os.path.join(sim_file_dir, genereg)
+
+            omicsdata = config['simulation']['OmicsData']
+
+            OmicsData = os.path.join(sim_file_dir, omicsdata)
+
+        except KeyError:
+            raise KeyError(f"Simulation files not found in {data_dir}")
+        
+        return GeneReg, OmicsData
