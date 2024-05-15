@@ -418,7 +418,7 @@ class UnitTestModules:
 
             GeneReg = os.path.join(sim_file_dir, genereg)
 
-            omicsdata = config['simulation']['OmicsData']
+            omicsdata = config['simulation']['omics']
 
             OmicsData = os.path.join(sim_file_dir, omicsdata)
 
