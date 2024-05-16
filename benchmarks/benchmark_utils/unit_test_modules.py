@@ -9,7 +9,7 @@ import sys
 import yaml
 
 class UnitTestModules:
-    """A class for storing helper functions for the unit tests
+    """A class for storing helper functions for the benchmarks
     """
     @staticmethod
     def _results_size_checker(species_data, time_trajectories):
@@ -79,8 +79,6 @@ class UnitTestModules:
             condition for condition in filtered_conditions if 
             condition['conditionId'] == condition_id][0]) 
     
-
-
         return condition, cell, condition_id
 
     @staticmethod
