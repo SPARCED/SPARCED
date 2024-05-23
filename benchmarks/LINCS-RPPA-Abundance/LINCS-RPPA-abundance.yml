@@ -10,7 +10,7 @@ problems:
     observable_files:
     - observables.tsv
     sbml_files:
-    - SPARCED.xml
+    - {path}
     visualization_files:
     - visualizations.tsv
 
