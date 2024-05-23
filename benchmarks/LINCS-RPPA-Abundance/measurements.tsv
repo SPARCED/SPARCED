@@ -1,4 +1,5 @@
 observableId	preequilibrationConditionId	simulationConditionId	measurement	time
+cMyc abundance	serum_fed_equilibrium	serum_fed_equilibrium		86400
 cMyc abundance	serum_fed_equilibrium	EGF	0.0599474284989293	3600
 cMyc abundance	serum_fed_equilibrium	EGF	0.0855000844976374	14400
 cMyc abundance	serum_fed_equilibrium	EGF	0.175498387909299	28800
