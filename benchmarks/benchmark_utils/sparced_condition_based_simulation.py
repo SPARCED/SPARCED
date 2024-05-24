@@ -161,7 +161,9 @@ class SPARCED_CBS:
                                      [],
                                      [],
                                      self.sbml_file,
-                                     self.model)
+                                     model=self.model,
+                                     f_genereg=self.f_genereg,
+                                     f_omics=self.f_omics)
         
         # Return the final values
         self.model.setInitialStates(xoutS_all[-1])
@@ -228,7 +230,9 @@ class SPARCED_CBS:
                                      spdata = [],
                                      genedata = [], 
                                      sbml_file = self.sbml_file, 
-                                     model = self.model)
+                                     model=self.model,
+                                     f_genereg=self.f_genereg,
+                                     f_omics=self.f_omics)
 
 
         self.model.setInitialStates(xoutS_all[-1])
