@@ -1,10 +1,20 @@
-#!/usr/bin/env python     
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# ----------------------------------------------------------------------------#
-# This file orchestrates the Message Passing Interface (MPI) job querying 
-# and data saving of unit tests defined in PEtab files. Input is user 
-# defined, condition-specific simulations details, output returns the results
-# in a dictionary.
+
+"""
+Module Name: run_benchmark.py
+Description: This file orchestrates the Message Passing Interface (MPI) job 
+querying and data saving of biological benchmarks defined in PEtab files. 
+Input is user defined, condition-specific simulations details, output returns 
+the results in a pickle-dictionary.
+
+Author: Jonah R. Huggins
+Date: 2024-04-30
+Version: 1.0.0
+"""
+
+# Licensed under the MIT License (see LICENSE file for details) ###JRH: Add appropriate license, just place holder. 
+
 # ----------------------------------------------------------------------------#
 # Import required libraries and required internal functions, append to path 
 # necessary directories, and instantiate the MPI communicator
@@ -17,10 +27,8 @@ import importlib
 from mpi4py import MPI
 from typing import Optional
 
-# Get the directory path
 wd = os.path.dirname(os.path.abspath(__file__))
 
-# Create the formatted path to the SPARCED input files
 sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
                                               .index('SPARCED')+1]))
 
@@ -57,8 +65,6 @@ benchmark_utils_dir = os.path.join(sparced_root, 'benchmarks/benchmark_utils')
 sys.path.append(benchmark_utils_dir)
 sys.path.append(args.model)
 
-# sys.path.append(os.path.join(args.model, 'amici_SPARCED/'))
-
 # Import the required modules
 from petab_file_loader import PEtabFileLoader
 from unit_test_modules import UnitTestModules as utm
@@ -66,19 +72,20 @@ from sparced_condition_based_simulation import SPARCED_CBS as cbs
 from observable_calc import ObservableCalculator
 from visualization_plotting import VisualizationPlotting
 
-# Dynamic locator for custom amici module
+# Dynamic locator for custom amici module, 
+# see unit_test_modules.py for details
 utm._add_amici_path(args.model) 
 
 sparced = utm._swig_interface_path(args.model)
 sys.path.append(sparced)
 SPARCED = importlib.import_module(sparced.split('/')[-1].split('.')[0])
 
-
 communicator = MPI.COMM_WORLD # Create the MPI communicator
 rank = communicator.Get_rank() # The rank of the current process
 size = communicator.Get_size() # Total number of processes assigned
 
-class RunUnitTest:
+# ----------------------------------------------------------------------------#
+class RunBenchmark:
     """Input the PEtab files and broadcast them to all processes. Then, load 
         the SBML model and create a list of unique conditions. Assign tasks 
         to ranks based on the number of jobs and the number of ranks. Send 
@@ -90,6 +97,8 @@ class RunUnitTest:
         observable: int - 1 for run with observable, 
                     0 for run without observable
         name: str - name of the file to save the results
+        model_path: str - path to the model directory
+        benchmark: str - benchmark to evaluate the model against
     
     output:
         returns the results of the SPARCED model unit test simulation
@@ -112,7 +121,7 @@ class RunUnitTest:
 
 
     def __call__(self):
-        """Create a unit test for a given observable.
+        """ Perform the benchmark simulation and save the results.
         input:
             yaml_file: str - path to the YAML file
             observable: int - 1 for run with observable, 0 for run without
@@ -161,15 +170,17 @@ class RunUnitTest:
 
         communicator.Barrier()
         
-        # Load the SBML model
+        # Here, we create an instance of the AMICI model. 
         model = SPARCED.getModel()
         solver = model.getSolver()
         solver.setMaxSteps = 1e10
 
-        # Load the gene regulation and omics data; done here to avoid repeated loading
+        # Gene regulation and OmicsData files are used for stochastic gene
+        # expression. 
         genereg, omicsdata = utm._extract_simulation_files(args.model)
 
         #----------------------Job Asisgnment-------------------------------#
+
         list_of_jobs = utm._total_tasks(conditions_df, measurement_df)
 
         total_jobs = len(list_of_jobs)
@@ -259,7 +270,7 @@ class RunUnitTest:
                 results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
 
                 tasks_this_round = utm._tasks_this_round(size, total_jobs, round_i) - 1
-                print(f'tasks this round: {tasks_this_round + 1}')
+
                 completed_tasks = 0
                 while completed_tasks < tasks_this_round:
                     print('receiving')
@@ -268,7 +279,7 @@ class RunUnitTest:
                     cell = rank_results['cell']
                     results[condition_id][f'cell {cell}']['xoutS'] = rank_results['xoutS']
                     results[condition_id][f'cell {cell}']['toutS'] = rank_results['toutS']
-                    # if xoutG != []:
+
                     results[condition_id][f'cell {cell}']['xoutG'] = rank_results['xoutG']
                     completed_tasks += 1
                     print(f'completed tasks: {completed_tasks}')
@@ -281,7 +292,8 @@ class RunUnitTest:
 
         #------------------------Observable Calculation-----------------------#
         if rank == 0:
-            # Create a results directory adjacent to scripts directory
+
+            # Benchmark results are stored within the specified model directory
             yaml_name = os.path.basename(self.yaml_file).split('.')[0]
             results_directory = os.path.join(
                                 self.model_path, 
@@ -313,7 +325,12 @@ class RunUnitTest:
 
             else: 
                 print("Calculating observable")
-                # Instantiate the observable calculator
+
+                # Instantiate the observable calculator, which filters
+                # the results dictionary to only include the observable data
+                # of interest
+
+                # See observable_calc.py for more details
                 observable_calc = ObservableCalculator(
                                         yaml_file=self.yaml_file, 
                                         results_dict=results, 
@@ -321,8 +338,10 @@ class RunUnitTest:
                                         measurement_df=measurement_df,
                                         model=model
                                         )
+                
                 # Return the observable data                       
                 observables_data = observable_calc.__call__()
+
                 # Add the experimental data to the observable dictionary
                 observables_data = (observable_calc
                                     ._add_experimental_data(
@@ -355,7 +374,7 @@ class RunUnitTest:
                             )
                             
                 else:
-                    # jd.save(observables_data, results_path)
+
                     with open(results_path, 'wb') as f:
                         pickle.dump(observables_data, f)
 
@@ -378,7 +397,8 @@ class RunUnitTest:
                             )
 # ----------------------------------------------------------------------------#
 
-# Create a unit test for each YAML file
-RunUnitTest( model_path=args.model, benchmark = args.benchmark,
-            observable=args.observable, name=args.name).__call__()
+if __name__ == '__main__':
+    # Run the benchmark
+    RunBenchmark( model_path=args.model, benchmark = args.benchmark,
+                observable=args.observable, name=args.name).__call__()
 

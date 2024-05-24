@@ -11,8 +11,6 @@
 # ----------------------------------------------------------------------------#
 import os
 import sys
-import glob
-import shutil
 import pickle
 import argparse
 import importlib
@@ -54,14 +52,10 @@ parser.add_argument('--benchmark', '-b',
 
 args = parser.parse_args()
 
-f_genereg = os.path.join(args.model + '/data/simulation/GeneReg.txt')
-f_omics = os.path.join(args.model + '/data/simulation/OmicsData.txt')
-
 # Append utilities and model directories to the path
 benchmark_utils_dir = os.path.join(sparced_root, 'benchmarks/benchmark_utils')
 sys.path.append(benchmark_utils_dir)
 sys.path.append(args.model)
-sys.path.append(os.path.join(args.model, 'amici_SPARCED/'))
 
 # Import the required modules
 from petab_file_loader import PEtabFileLoader
@@ -69,7 +63,14 @@ from unit_test_modules import UnitTestModules as utm
 from sparced_condition_based_simulation import SPARCED_CBS as cbs
 from observable_calc import ObservableCalculator
 from visualization_plotting import VisualizationPlotting
-SPARCED = importlib.import_module('SPARCED.SPARCED')
+
+# Dynamic locator for custom amici module, 
+# see unit_test_modules.py for details
+utm._add_amici_path(args.model) 
+
+sparced = utm._swig_interface_path(args.model)
+sys.path.append(sparced)
+SPARCED = importlib.import_module(sparced.split('/')[-1].split('.')[0])
 
 class RunUnitTest:
     """Input the PEtab files and broadcast them to all processes. Then, load 
@@ -144,6 +145,7 @@ class RunUnitTest:
         solver = model.getSolver()
         solver.setMaxSteps = 1e10
 
+        genereg, omicsdata = utm._extract_simulation_files(args.model)
         #---------------------------Simulation--------------------------------#
         # list out the number of conditional simulations
         for index, condition in conditions_df.iterrows():
@@ -159,8 +161,8 @@ class RunUnitTest:
                                     measurement_df=measurement_df, 
                                     parameters_df=parameters_df, 
                                     sbml_file=sbml_file,
-                                    f_genereg=f_genereg,
-                                    f_omics=f_omics)
+                                    f_genereg=genereg,
+                                    f_omics=omicsdata)
                                 ._run_condition_simulation(condition)
                                 )
                 print('we proceed to the next condition')
