@@ -172,7 +172,6 @@ class RunBenchmark:
         """
 
         # Benchmark results are stored within the specified model directory
-        print(self.yaml_file)
         yaml_name = os.path.basename(self.yaml_file).split('.')[0]
 
         results_directory = os.path.join(self.model_path, 'results')
