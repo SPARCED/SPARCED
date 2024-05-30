@@ -3,9 +3,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
 
-class VisualizationPlotting:
+
+class Visualizer:
     def __init__(self, yaml_file: str, results_dict: dict, visualization_df: pd.DataFrame, observable_df: pd.DataFrame, measurement_df: pd.DataFrame):
         """This class is designed to plot and save the visualization data.
         input:

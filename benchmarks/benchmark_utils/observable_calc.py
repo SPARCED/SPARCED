@@ -11,7 +11,7 @@ class ObservableCalculator:
             yaml_file: str - path to the YAML file
             results_dict: dict - dictionary containing the simulation results
             observable_df: str - path to the observable dataframe
-            model: str - path to the SBML model
+            model: libSBML model - the model used for the simulation
         """
         self.yaml_file = yaml_file
         self.results_dict = results_dict
@@ -24,7 +24,6 @@ class ObservableCalculator:
         """isolate only the observables of interest from the simulation data. Primary function is to cut down on data.
 
         output: dictionary containing the observables of interest"""
-
 
         species_ids = list(self.model.getStateIds()) # assign species IDs to a list
 

@@ -1,8 +1,7 @@
 import os
-import shutil
 import yaml
 import pandas as pd
-from unit_test_modules import UnitTestModules as utm
+from benchmark_utils.utils import Utils as utils
 
 
 # Load the PEtab files
@@ -33,7 +32,7 @@ class PEtabFileLoader:
             yaml_dict = yaml.safe_load(file)
 
         # Construct full paths to petab files based on the YAML file's directory
-        self.sbml_file = utm._assign_sbml_path(self.model_path)
+        self.sbml_file = utils._assign_sbml_path(self.model_path)
 
 
         self.parameter_df = pd.read_csv(os.path.join(yaml_directory, yaml_dict['parameter_file']), sep='\t')

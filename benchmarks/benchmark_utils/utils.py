@@ -8,7 +8,7 @@ import os
 import sys
 import yaml
 
-class UnitTestModules:
+class Utils:
     """A class for storing helper functions for the benchmarks
     """
     @staticmethod
@@ -47,7 +47,7 @@ class UnitTestModules:
         output:
             returns the number of tasks for the current round
         """
-        number_of_rounds = UnitTestModules._number_of_rounds(total_jobs, size)
+        number_of_rounds = Utils._number_of_rounds(total_jobs, size)
         # tasks_per_round = total_jobs // size
         tasks_per_round = size
         remainder = total_jobs % size
@@ -69,7 +69,7 @@ class UnitTestModules:
         output:
             returns the condition for the task
         """
-        filtered_conditions = UnitTestModules._filter_conditions(conditions_df, measurement_df)
+        filtered_conditions = Utils._filter_conditions(conditions_df, measurement_df)
         
         cell = rank_task.split('+')[1]
 
@@ -91,7 +91,7 @@ class UnitTestModules:
             returns the empty results dictionary, ready to be filled
         """
 
-        filtered_conditions = UnitTestModules._filter_conditions(conditions_df, measurement_df)
+        filtered_conditions = Utils._filter_conditions(conditions_df, measurement_df)
 
         results = {}
 
@@ -132,7 +132,7 @@ class UnitTestModules:
             returns the total number of tasks
         """
 
-        filtered_conditions = UnitTestModules._filter_conditions(conditions_df, measurement_df)
+        filtered_conditions = Utils._filter_conditions(conditions_df, measurement_df)
 
         list_of_jobs = []
 
@@ -340,7 +340,7 @@ class UnitTestModules:
         output:
             swig_interface_path: str - the path to the SWIG python interface
         """
-        amici_module_path = UnitTestModules._add_amici_path(model_path)
+        amici_module_path = Utils._add_amici_path(model_path)
 
         # Get the directory contents
         try:
@@ -417,3 +417,6 @@ class UnitTestModules:
             raise KeyError(f"Simulation files not found in {data_dir}")
         
         return GeneReg, OmicsData
+    
+
+        

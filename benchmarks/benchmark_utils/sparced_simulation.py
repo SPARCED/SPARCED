@@ -9,21 +9,17 @@
 import os
 import sys
 import math
-import libsbml
 import pandas as pd
 import numpy as np
-
+from benchmark_utils.utils import Utils as utils
 # Get the directory path
 wd = os.path.dirname(os.path.abspath(__file__))
-
 # Ensure the SPARCED root and bin directories are in the system path
 sparced_root = '/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep).index('SPARCED')+1])
 sys.path.append(os.path.join(sparced_root, 'SPARCED/src/'))
-# sys.path.append(os.path.join(sparced_root, 'SPARCED/src/simulation/'))
-from unit_test_modules import UnitTestModules as utm
 from simulation.modules.RunSPARCED import RunSPARCED
 
-class SPARCED_CBS:
+class Simulation:
     def __init__(self, yaml_file: str, model: str, conditions_df: pd.DataFrame,
                   measurement_df: pd.DataFrame, parameters_df: pd.DataFrame, 
                   sbml_file: str, f_genereg: str, f_omics: str):
@@ -158,7 +154,7 @@ class SPARCED_CBS:
         # Run the simulation
         xoutS_all, _, _ = RunSPARCED(flagD, 
                                      simulation_timeframe,
-                                     [],
+                                     species_initializations,
                                      [],
                                      self.sbml_file,
                                      model=self.model,
@@ -183,19 +179,19 @@ class SPARCED_CBS:
 
         for perturbant in perturbations:
             try:
-                self.model = utm._set_species_value(self.model, perturbant, 
+                self.model = utils._set_species_value(self.model, perturbant, 
                                                      condition[perturbant])
             except:
                 pass
 
             try:
-                self.model = utm._set_parameter_value(self.model, perturbant, 
+                self.model = utils._set_parameter_value(self.model, perturbant, 
                                                      condition[perturbant])
             except:
                 pass
 
             try:
-                self.model = utm._set_compartmental_volume(self.model, perturbant, 
+                self.model = utils._set_compartmental_volume(self.model, perturbant, 
                                                      condition[perturbant])
             except:
                 pass
@@ -223,7 +219,7 @@ class SPARCED_CBS:
         
         
         for species in growth_factors:
-            self.model = utm._set_species_value(self.model, species, 0) 
+            self.model = utils._set_species_value(self.model, species, 0) 
 
         xoutS_all, _, _ = RunSPARCED(flagD=0, 
                                      th=simulation_time,
