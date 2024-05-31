@@ -70,20 +70,34 @@ class RunBenchmark:
 
         self.communicator, self.rank, self.size = org.mpi_communicator()
 
+ 
     def run(self):
+        """Run the SPARCED model unit test simulation
 
-        sbml_file, conditions_df, measurement_df, observable_df, parameters_df, visualization_df = org.broadcast_petab_files(self.rank, 
-                                                                                                                         self.communicator, 
-                                                                                                                         self.yaml_file, 
-                                                                                                                         self.model_path)
+        Arguements:
+            self: object - the RunBenchmark object
 
-        self.sbm_file = sbml_file
-        self.conditions_df = conditions_df
-        self.measurement_df = measurement_df
-        self.observable_df = observable_df
-        self.parameters_df = parameters_df
-        self.visualization_df = visualization_df
+        Returns:
+            results: dict - the results of the SPARCED model unit test simulation
+        """
 
+        # (s)bml_file, (c)onditions_df, (m)easurement_df, 
+        # (o)bservable_df, (p)arameters_df, (v)isualization_df 
+        # abbreviated notation for brevity
+        sbml_file, c, m, o, p, v = org.broadcast_petab_files(self.rank, 
+                                                     self.communicator, 
+                                                     self.yaml_file, 
+                                                     self.model_path
+                                                     )
+
+        self.sbm_file = sbml_file # SBML file
+        self.conditions_df = c # Conditions dataframe
+        self.measurement_df = m # Measurement dataframe
+        self.observable_df = o # Observable dataframe
+        self.parameters_df = p # Parameters dataframe
+        self.visualization_df = v # Visualization dataframe
+
+        # Pause placement to ensure all ranks receive the broadcasted files:
         self.communicator.Barrier()
 
         # Create an instance of the AMICI model. 
@@ -95,43 +109,51 @@ class RunBenchmark:
         # expression. 
         genereg, omicsdata = Utils._extract_simulation_files(args.model)
 
-        # Catalogue each rank's list of tasks, 
+        # Catalogue each rank's list of tasks at root (rank 0)
         if self.rank == 0:
             
-            self.results_dictionary = Utils._results_dictionary(conditions_df = conditions_df, 
-                                                           measurement_df = measurement_df)
-            
-        rounds_to_complete, rank_jobs_directory = org.task_organization(self.rank, self.size, self.communicator, 
-                                                conditions_df, measurement_df)
-            
+            # Results dictionary is initialized prior to simulation for convenience
+            self.results_dictionary = Utils._results_dictionary(self.conditions_df, 
+                                                                self.measurement_df
+                                                                )
+        
+        # Determine the number of rounds and the directory of tasks for each rank
+        rounds_to_complete, rank_jobs_directory = org.task_organization(self.rank, 
+                                                                        self.size, 
+                                                                        self.communicator, 
+                                                                        self.conditions_df,
+                                                                        self. measurement_df
+                                                                        )
+        # For every cell and condition, run the simulation based on the number of rounds
         for round_i in range(rounds_to_complete):
         
             if self.rank == 0:
                 print(f'Round {round_i} of {rounds_to_complete}')
 
             task = org.task_assignment(rank = self.rank, 
-                                   size = self.size,
-                                   communicator = self.communicator, 
-                                   rank_jobs_directory = rank_jobs_directory, 
-                                   round_i = round_i, 
-                                   conditions_df = conditions_df, 
-                                   measurement_df = measurement_df)
-            
+                                       size = self.size,
+                                       communicator = self.communicator, 
+                                       rank_jobs_directory = rank_jobs_directory, 
+                                       round_i = round_i, 
+                                       conditions_df = self.conditions_df, 
+                                       measurement_df = self.measurement_df)
+
             if task is None:
                 print(f'Rank {self.rank} has no tasks to complete')
                 continue
 
             condition, cell, condition_id = Utils._condition_cell_id(task, 
-                                                            conditions_df, 
-                                                            measurement_df)
+                                                            self.conditions_df, 
+                                                           self.measurement_df)
             
             print(f"Rank {self.rank} is running {condition_id} for cell {cell}")
 
+            # Run the simulation for the given condition
             xoutS, toutS, xoutG = Simulation(yaml_file=self.yaml_file, 
                                              model=self.model, 
-                                             conditions_df=conditions_df, 
-                                             measurement_df=measurement_df, 
-                                             parameters_df=parameters_df, 
+                                             conditions_df=self.conditions_df, 
+                                             measurement_df=self.measurement_df, 
+                                             parameters_df=self.parameters_df, 
                                              sbml_file=sbml_file,
                                              f_genereg=genereg,
                                              f_omics=omicsdata
@@ -152,11 +174,14 @@ class RunBenchmark:
                                                                   communicator = self.communicator, 
                                                                   results_dict = self.results_dictionary, 
                                                                   round_i = round_i, 
-                                                                  total_jobs = len(conditions_df)
+                                                                  total_jobs = len(self.conditions_df)
                                                                  )
 
             else:
+                # All non-root ranks send results to rank 0
                 self.communicator.send(results_catalogue, dest=0, tag=round_i)
+
+            print(f"Rank {self.rank} has completed {condition_id} for cell {cell}")
 
         return self
     
@@ -239,4 +264,3 @@ class RunBenchmark:
                              ).dynamic_plot()
         
             fig.savefig(os.path.join(results_directory, f"{self.name}.png"))
-                            
