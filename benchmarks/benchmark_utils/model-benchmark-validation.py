@@ -15,16 +15,11 @@ Users are anticipated to compare simulation results to prior validated results.
 
 #-----------------------Package Import & Defined Arguements-------------------#
 import os
-import argparse
+from benchmark_utils.arguements import parse_args
 import subprocess, sys
 
-
-# Parse the command line arguments
-parser = argparse.ArgumentParser(description=
-                                 'Perform model benchmark validation')
-parser.add_argument('-m', '--model', type=str, 
-                                    help='Path to the model directory')
-args = parser.parse_args()
+# Parse the arguements
+args = parse_args()
 
 # Check if the model directory was provided
 try:
@@ -61,7 +56,7 @@ def run_all_benchmarks(model_path: str):
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = "mpiexec -n 4 python3 run_benchmark.py -m {args.model} -b {benchmark}"
+        Command = f"mpiexec -n 4 python3 run_benchmark.py -m {args.model} -b {benchmark}"
 
         subprocess.Popen(Command, shell=True, stdout=subprocess.PIPE)
 
