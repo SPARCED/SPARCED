@@ -109,6 +109,7 @@ class Organizer:
 
                 else:
                     rank_job_for_round = None
+
                 communicator.send(rank_job_for_round, dest=i, tag=round_i)
         
 
@@ -120,8 +121,22 @@ class Organizer:
         return rank_task
 
 
-    def results_catalogue(xoutS: numpy.array, toutS: numpy.array, 
+    def package_results(xoutS: numpy.array, toutS: numpy.array, 
                         xoutG: numpy.array, condition_id: str, cell: str) -> None:
+        """
+        This function gathers all of the results from the simulation into a single 
+        dictionary to simplify the process of sending the results to the root rank
+        
+        Input:
+            xoutS: numpy.array - the simulation results for the state variables
+            toutS: numpy.array - the time points for the state variables
+            xoutG: numpy.array - the simulation results for the gene expression variables
+            condition_id: str - the condition identifier
+            cell: str - the cell identifier
+            
+        Output:
+            rank_results: dict - the results dictionary for the rank
+        """
         
         rank_results = {'condition_name': condition_id,
                                 'cell': cell,
@@ -133,7 +148,7 @@ class Organizer:
         return rank_results
 
 
-    def results_aggregation(size: int, communicator: MPI.Comm,
+    def results_aggregation(size: int, communicator,
                             results_dict: dict, round_i: int, total_jobs: int):
         """This function aggregates the results from the ranks and
         stores them in the final simulation results dictionary
@@ -149,21 +164,25 @@ class Organizer:
             Output:
                 results_dict: dict - the results dictionary"""
 
+        # Determine the number of tasks to be completed this round, subtract 1
+        # to account for the root rank saving results prior. 
         tasks_this_round = Utils._tasks_this_round(size, total_jobs, round_i) - 1
 
         completed_tasks = 0
+
         while completed_tasks < tasks_this_round:
-            print('receiving')
+
             results = communicator.recv(source=MPI.ANY_SOURCE, tag = MPI.ANY_TAG)
 
             results_dict = Organizer.results_storage(results, results_dict)
 
             completed_tasks += 1
-            print(f'completed tasks: {completed_tasks}')
+
             if completed_tasks == tasks_this_round:
                 break
 
         return results_dict
+    
     
     def results_storage(results_catalogue: dict, results_dict: dict) -> dict:
         """This function stores the results in the results dictionary

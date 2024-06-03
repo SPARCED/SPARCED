@@ -126,9 +126,9 @@ class RunBenchmark:
                                                                         )
         # For every cell and condition, run the simulation based on the number of rounds
         for round_i in range(rounds_to_complete):
-        
+            
             if self.rank == 0:
-                print(f'Round {round_i} of {rounds_to_complete}')
+                print(f'Round {round_i+1} of {rounds_to_complete}')
 
             task = org.task_assignment(rank = self.rank, 
                                        size = self.size,
@@ -160,26 +160,30 @@ class RunBenchmark:
                                             )._run_condition_simulation(condition)
 
             # Results are packaged into a single object to reduce the number of items sent via MPI
-            results_catalogue = org.results_catalogue(xoutS = xoutS, toutS= toutS, xoutG= xoutG, 
-                                                      condition_id=condition_id, cell=cell)
-            
+            parcel = org.package_results(xoutS = xoutS, toutS= toutS, xoutG= xoutG,
+                                         condition_id=condition_id, cell=cell
+                                         )
+
             if self.rank == 0:
                 
                 # Store rank 0's results prior to storing other ranks
                 self.results_dictionary = org.results_storage(results_dict = self.results_dictionary, 
-                                                              results_catalogue = results_catalogue
-                                                             ) 
+                                                              results_catalogue = parcel
+                                                             )               
+              
+                # Define the total number of jobs for the results aggregation stage
+                total_jobs = Utils._total_tasks(self.conditions_df, self.measurement_df)
+
                 # Collect results from other ranks and store in results dictionary            
                 self.results_dictionary = org.results_aggregation(size = self.size, 
                                                                   communicator = self.communicator, 
                                                                   results_dict = self.results_dictionary, 
                                                                   round_i = round_i, 
-                                                                  total_jobs = len(self.conditions_df)
+                                                                  total_jobs = len(total_jobs)
                                                                  )
-
             else:
                 # All non-root ranks send results to rank 0
-                self.communicator.send(results_catalogue, dest=0, tag=round_i)
+                self.communicator.send(parcel, dest=0, tag=round_i)
 
             print(f"Rank {self.rank} has completed {condition_id} for cell {cell}")
 

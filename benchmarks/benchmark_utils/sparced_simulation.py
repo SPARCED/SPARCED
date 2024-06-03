@@ -91,7 +91,6 @@ class Simulation:
             flagD = 1
 
         # Run the simulation
-        print('running simulation')
         xoutS_all, xoutG_all, tout_all = RunSPARCED(
                                     flagD=flagD,
                                     th=(simulation_timeframe/3600),
@@ -104,7 +103,6 @@ class Simulation:
         
 
         return xoutS_all, tout_all, xoutG_all
-
 
 
     def _preequilibrate(self, condition: pd.Series):      
@@ -216,7 +214,6 @@ class Simulation:
         self.model.setTimepoints(np.linspace(0,30))
 
         growth_factors = ['E', 'H', 'HGF', 'P', 'F', 'I', 'INS']
-        
         
         for species in growth_factors:
             self.model = utils._set_species_value(self.model, species, 0) 

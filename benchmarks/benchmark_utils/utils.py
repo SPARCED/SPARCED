@@ -48,16 +48,22 @@ class Utils:
             returns the number of tasks for the current round
         """
         number_of_rounds = Utils._number_of_rounds(total_jobs, size)
-        # tasks_per_round = total_jobs // size
+
         tasks_per_round = size
         remainder = total_jobs % size
 
-        if round_number+1 < number_of_rounds:
+        # This accounts for pythonic indexing starting at 0
+        round_number += 1
+
+        if round_number < number_of_rounds:
             tasks_this_round = tasks_per_round
-        elif round_number+1 == number_of_rounds and remainder != 0:
+        elif round_number == number_of_rounds and remainder != 0:
             tasks_this_round = remainder
-        elif round_number+1 == number_of_rounds and remainder == 0:
+        elif round_number == number_of_rounds and remainder == 0:
             tasks_this_round = tasks_per_round
+        else:
+            #provide an error and message exit
+            raise ValueError("Round number exceeds the number of rounds")
 
         return tasks_this_round
     
@@ -115,10 +121,13 @@ class Utils:
             returns the number of rounds
         """
         rounds_to_complete = total_jobs // size
+
         remainder = total_jobs % size
 
         if remainder > 0:
+        
             rounds_to_complete += 1
+        
         return rounds_to_complete
 
 
