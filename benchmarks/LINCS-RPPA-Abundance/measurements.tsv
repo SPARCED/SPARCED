@@ -1,1140 +1,1368 @@
 observableId	preequilibrationConditionId	simulationConditionId	measurement	time
 cMyc abundance	serum_fed_equilibrium	serum_fed_equilibrium		86400
+cMyc abundance	serum_fed_equilibrium	EGF	0.177106571801339	0
 cMyc abundance	serum_fed_equilibrium	EGF	0.0599474284989293	3600
 cMyc abundance	serum_fed_equilibrium	EGF	0.0855000844976374	14400
 cMyc abundance	serum_fed_equilibrium	EGF	0.175498387909299	28800
 cMyc abundance	serum_fed_equilibrium	EGF	0.32268550554809	86400
 cMyc abundance	serum_fed_equilibrium	EGF	0.394548895977395	172800
+cMyc abundance	serum_fed_equilibrium	HGF only	0.177106571801339	0
 cMyc abundance	serum_fed_equilibrium	HGF only	0.0938006682370534	3600
 cMyc abundance	serum_fed_equilibrium	HGF only	-0.112041241649314	14400
 cMyc abundance	serum_fed_equilibrium	HGF only	0.17541475878018	28800
 cMyc abundance	serum_fed_equilibrium	HGF only	0.129529132170238	86400
 cMyc abundance	serum_fed_equilibrium	HGF only	-0.00561599800759121	172800
+cMyc abundance	serum_fed_equilibrium	PBS only	0.177106571801339	0
 cMyc abundance	serum_fed_equilibrium	PBS only	-0.00673884008598343	3600
 cMyc abundance	serum_fed_equilibrium	PBS only	-0.361368378919934	14400
 cMyc abundance	serum_fed_equilibrium	PBS only	-0.27925364009848	28800
 cMyc abundance	serum_fed_equilibrium	PBS only	-0.280621131641666	86400
 cMyc abundance	serum_fed_equilibrium	PBS only	-0.318142819607446	172800
+EGFR abundance	serum_fed_equilibrium	EGF	-0.23734651003731	0
 EGFR abundance	serum_fed_equilibrium	EGF	-0.250015032754985	3600
 EGFR abundance	serum_fed_equilibrium	EGF	-0.165066639061277	14400
 EGFR abundance	serum_fed_equilibrium	EGF	-0.0437007773858512	28800
 EGFR abundance	serum_fed_equilibrium	EGF	0.363417215738173	86400
 EGFR abundance	serum_fed_equilibrium	EGF	0.218137464415484	172800
+EGFR abundance	serum_fed_equilibrium	HGF only	-0.23734651003731	0
 EGFR abundance	serum_fed_equilibrium	HGF only	-0.128394728034373	3600
 EGFR abundance	serum_fed_equilibrium	HGF only	-0.0967669812457396	14400
 EGFR abundance	serum_fed_equilibrium	HGF only	0.0485514460372046	28800
 EGFR abundance	serum_fed_equilibrium	HGF only	0.15419103092052	86400
 EGFR abundance	serum_fed_equilibrium	HGF only	0.319115135552492	172800
+EGFR abundance	serum_fed_equilibrium	PBS only	-0.23734651003731	0
 EGFR abundance	serum_fed_equilibrium	PBS only	-0.0994503046804551	3600
 EGFR abundance	serum_fed_equilibrium	PBS only	-0.11338561342236	14400
 EGFR abundance	serum_fed_equilibrium	PBS only	-0.130278118074565	28800
 EGFR abundance	serum_fed_equilibrium	PBS only	-0.0324448742499125	86400
 EGFR abundance	serum_fed_equilibrium	PBS only	-0.37998731129297	172800
+AKT abundance	serum_fed_equilibrium	EGF	0.670791488454112	0
 AKT abundance	serum_fed_equilibrium	EGF	0.219613620867367	3600
 AKT abundance	serum_fed_equilibrium	EGF	-0.101025434124046	14400
 AKT abundance	serum_fed_equilibrium	EGF	0.186205494373978	28800
 AKT abundance	serum_fed_equilibrium	EGF	0.0758683009208257	86400
 AKT abundance	serum_fed_equilibrium	EGF	-0.0508927783149279	172800
+AKT abundance	serum_fed_equilibrium	HGF only	0.670791488454112	0
 AKT abundance	serum_fed_equilibrium	HGF only	0.0935650555662817	3600
 AKT abundance	serum_fed_equilibrium	HGF only	-0.157913241000195	14400
 AKT abundance	serum_fed_equilibrium	HGF only	-0.114709629073996	28800
 AKT abundance	serum_fed_equilibrium	HGF only	-0.161319421714838	86400
 AKT abundance	serum_fed_equilibrium	HGF only	-0.000587414386092211	172800
+AKT abundance	serum_fed_equilibrium	PBS only	0.670791488454112	0
 AKT abundance	serum_fed_equilibrium	PBS only	-0.748575550418309	3600
 AKT abundance	serum_fed_equilibrium	PBS only	0.0705050681501876	14400
 AKT abundance	serum_fed_equilibrium	PBS only	0.0146324717831872	28800
 AKT abundance	serum_fed_equilibrium	PBS only	-0.133822404371569	86400
 AKT abundance	serum_fed_equilibrium	PBS only	-0.316532258299415	172800
+pAKT abundance	serum_fed_equilibrium	EGF	0.350581959406794	0
 pAKT abundance	serum_fed_equilibrium	EGF	0.156104202158369	3600
 pAKT abundance	serum_fed_equilibrium	EGF	0.013361704319275	14400
 pAKT abundance	serum_fed_equilibrium	EGF	0.0988148327450276	28800
 pAKT abundance	serum_fed_equilibrium	EGF	0.059779618800489	86400
 pAKT abundance	serum_fed_equilibrium	EGF	0.0821144610192995	172800
+pAKT abundance	serum_fed_equilibrium	HGF only	0.350581959406794	0
 pAKT abundance	serum_fed_equilibrium	HGF only	0.0541272922061766	3600
 pAKT abundance	serum_fed_equilibrium	HGF only	-0.0743939244981224	14400
 pAKT abundance	serum_fed_equilibrium	HGF only	-0.0370127026889261	28800
 pAKT abundance	serum_fed_equilibrium	HGF only	-0.0739418747121309	86400
 pAKT abundance	serum_fed_equilibrium	HGF only	-0.0307627341888173	172800
+pAKT abundance	serum_fed_equilibrium	PBS only	0.350581959406794	0
 pAKT abundance	serum_fed_equilibrium	PBS only	-0.240491585604245	3600
 pAKT abundance	serum_fed_equilibrium	PBS only	-0.116036334119742	14400
 pAKT abundance	serum_fed_equilibrium	PBS only	-0.0132394823169487	28800
 pAKT abundance	serum_fed_equilibrium	PBS only	-0.0417984349507053	86400
 pAKT abundance	serum_fed_equilibrium	PBS only	0.0293743368358075	172800
+ppAKT abundance	serum_fed_equilibrium	EGF	-0.0106316483610782	0
 ppAKT abundance	serum_fed_equilibrium	EGF	-0.0100550549518347	3600
 ppAKT abundance	serum_fed_equilibrium	EGF	-0.0298952586846791	14400
 ppAKT abundance	serum_fed_equilibrium	EGF	-0.0365343458846588	28800
 ppAKT abundance	serum_fed_equilibrium	EGF	0.0369913056213148	86400
 ppAKT abundance	serum_fed_equilibrium	EGF	0.125272358470622	172800
+ppAKT abundance	serum_fed_equilibrium	HGF only	-0.0106316483610782	0
 ppAKT abundance	serum_fed_equilibrium	HGF only	-0.0136991191352406	3600
 ppAKT abundance	serum_fed_equilibrium	HGF only	0.0109180060533945	14400
 ppAKT abundance	serum_fed_equilibrium	HGF only	-0.00457351037477747	28800
 ppAKT abundance	serum_fed_equilibrium	HGF only	0.111789388272949	86400
 ppAKT abundance	serum_fed_equilibrium	HGF only	0.139966385430701	172800
+ppAKT abundance	serum_fed_equilibrium	PBS only	-0.0106316483610782	0
 ppAKT abundance	serum_fed_equilibrium	PBS only	-0.0760848248839418	3600
 ppAKT abundance	serum_fed_equilibrium	PBS only	-0.036326123279737	14400
 ppAKT abundance	serum_fed_equilibrium	PBS only	0.0137802547105742	28800
 ppAKT abundance	serum_fed_equilibrium	PBS only	-0.0397578808977754	86400
 ppAKT abundance	serum_fed_equilibrium	PBS only	-0.0513205672475716	172800
+ATM abundance	serum_fed_equilibrium	EGF	-0.0412249079940915	0
 ATM abundance	serum_fed_equilibrium	EGF	-0.0301966158467256	3600
 ATM abundance	serum_fed_equilibrium	EGF	-0.0230671488570192	14400
 ATM abundance	serum_fed_equilibrium	EGF	0.0307915859294141	28800
 ATM abundance	serum_fed_equilibrium	EGF	0.0757228476717572	86400
 ATM abundance	serum_fed_equilibrium	EGF	0.100323097114197	172800
+ATM abundance	serum_fed_equilibrium	HGF only	-0.0412249079940915	0
 ATM abundance	serum_fed_equilibrium	HGF only	-0.0683913902181129	3600
 ATM abundance	serum_fed_equilibrium	HGF only	0.0420600722256025	14400
 ATM abundance	serum_fed_equilibrium	HGF only	0.0457506311824564	28800
 ATM abundance	serum_fed_equilibrium	HGF only	0.0456916427494971	86400
 ATM abundance	serum_fed_equilibrium	HGF only	0.0567476613906127	172800
+ATM abundance	serum_fed_equilibrium	PBS only	-0.0412249079940915	0
 ATM abundance	serum_fed_equilibrium	PBS only	-0.0277554934615146	3600
 ATM abundance	serum_fed_equilibrium	PBS only	0.0326508246947447	14400
 ATM abundance	serum_fed_equilibrium	PBS only	0.0199242679382858	28800
 ATM abundance	serum_fed_equilibrium	PBS only	0.0376247916211893	86400
 ATM abundance	serum_fed_equilibrium	PBS only	0.0721025711234682	172800
+ATMP abunance	serum_fed_equilibrium	EGF	-0.0518948377628041	0
 ATMP abunance	serum_fed_equilibrium	EGF	-0.0266014630173093	3600
 ATMP abunance	serum_fed_equilibrium	EGF	-0.0374495794052227	14400
 ATMP abunance	serum_fed_equilibrium	EGF	-0.0392858061686824	28800
 ATMP abunance	serum_fed_equilibrium	EGF	0.033910951118292	86400
 ATMP abunance	serum_fed_equilibrium	EGF	0.126668724803602	172800
+ATMP abunance	serum_fed_equilibrium	HGF only	-0.0518948377628041	0
 ATMP abunance	serum_fed_equilibrium	HGF only	-0.0171768535438653	3600
 ATMP abunance	serum_fed_equilibrium	HGF only	0.00123872349804167	14400
 ATMP abunance	serum_fed_equilibrium	HGF only	0.0130101158699679	28800
 ATMP abunance	serum_fed_equilibrium	HGF only	-0.0418729583675655	86400
 ATMP abunance	serum_fed_equilibrium	HGF only	-0.18862209858716	172800
+ATMP abunance	serum_fed_equilibrium	PBS only	-0.0518948377628041	0
 ATMP abunance	serum_fed_equilibrium	PBS only	-0.042030533899147	3600
 ATMP abunance	serum_fed_equilibrium	PBS only	0.00057679001551474	14400
 ATMP abunance	serum_fed_equilibrium	PBS only	-0.0327470489724495	28800
 ATMP abunance	serum_fed_equilibrium	PBS only	-0.366133053997314	86400
 ATMP abunance	serum_fed_equilibrium	PBS only	-0.454849239598854	172800
+ATRac abundance	serum_fed_equilibrium	EGF	0.0283909028103564	0
 ATRac abundance	serum_fed_equilibrium	EGF	0.0373331096929497	3600
 ATRac abundance	serum_fed_equilibrium	EGF	0.0487488523351659	14400
 ATRac abundance	serum_fed_equilibrium	EGF	0.0708484990601922	28800
 ATRac abundance	serum_fed_equilibrium	EGF	0.0569600517731109	86400
 ATRac abundance	serum_fed_equilibrium	EGF	0.0869456096718748	172800
+ATRac abundance	serum_fed_equilibrium	HGF only	0.0283909028103564	0
 ATRac abundance	serum_fed_equilibrium	HGF only	-0.0330408943834324	3600
 ATRac abundance	serum_fed_equilibrium	HGF only	-0.0523003837839825	14400
 ATRac abundance	serum_fed_equilibrium	HGF only	-0.00858983590093308	28800
 ATRac abundance	serum_fed_equilibrium	HGF only	0.0130130792378883	86400
 ATRac abundance	serum_fed_equilibrium	HGF only	0.0189303468894388	172800
+ATRac abundance	serum_fed_equilibrium	PBS only	0.0283909028103564	0
 ATRac abundance	serum_fed_equilibrium	PBS only	-0.0875865343206146	3600
 ATRac abundance	serum_fed_equilibrium	PBS only	-0.0916824297260975	14400
 ATRac abundance	serum_fed_equilibrium	PBS only	-0.0427590467981337	28800
 ATRac abundance	serum_fed_equilibrium	PBS only	0.0281598315007793	86400
 ATRac abundance	serum_fed_equilibrium	PBS only	-0.0766577464689056	172800
+pBAD abundance	serum_fed_equilibrium	EGF	-0.0213974136490399	0
 pBAD abundance	serum_fed_equilibrium	EGF	-0.0246014816748002	3600
 pBAD abundance	serum_fed_equilibrium	EGF	-0.00816021066405955	14400
 pBAD abundance	serum_fed_equilibrium	EGF	-0.0056204497154381	28800
 pBAD abundance	serum_fed_equilibrium	EGF	0.00794923749653153	86400
 pBAD abundance	serum_fed_equilibrium	EGF	0.0679052889070652	172800
+pBAD abundance	serum_fed_equilibrium	HGF only	-0.0213974136490399	0
 pBAD abundance	serum_fed_equilibrium	HGF only	-0.0261669219720036	3600
 pBAD abundance	serum_fed_equilibrium	HGF only	0.0406701978977969	14400
 pBAD abundance	serum_fed_equilibrium	HGF only	0.027501670681848	28800
 pBAD abundance	serum_fed_equilibrium	HGF only	0.0934456386893652	86400
 pBAD abundance	serum_fed_equilibrium	HGF only	0.18290015244193	172800
+pBAD abundance	serum_fed_equilibrium	PBS only	-0.0213974136490399	0
 pBAD abundance	serum_fed_equilibrium	PBS only	0.0335311241126834	3600
 pBAD abundance	serum_fed_equilibrium	PBS only	-0.0147575054268303	14400
 pBAD abundance	serum_fed_equilibrium	PBS only	0.044536877115183	28800
 pBAD abundance	serum_fed_equilibrium	PBS only	0.182787213967544	86400
 pBAD abundance	serum_fed_equilibrium	PBS only	0.0579725814083875	172800
+Bax abundance	serum_fed_equilibrium	EGF	-0.0677974417615406	0
 Bax abundance	serum_fed_equilibrium	EGF	0.00452132290906045	3600
 Bax abundance	serum_fed_equilibrium	EGF	-0.0279717226852394	14400
 Bax abundance	serum_fed_equilibrium	EGF	-0.0544203268278131	28800
 Bax abundance	serum_fed_equilibrium	EGF	0.175222150306052	86400
 Bax abundance	serum_fed_equilibrium	EGF	0.271337484239912	172800
+Bax abundance	serum_fed_equilibrium	HGF only	-0.0677974417615406	0
 Bax abundance	serum_fed_equilibrium	HGF only	-0.0310357322449173	3600
 Bax abundance	serum_fed_equilibrium	HGF only	-0.0175645741952778	14400
 Bax abundance	serum_fed_equilibrium	HGF only	-0.0527619774267614	28800
 Bax abundance	serum_fed_equilibrium	HGF only	0.0929410001142747	86400
 Bax abundance	serum_fed_equilibrium	HGF only	0.144303940023023	172800
+Bax abundance	serum_fed_equilibrium	PBS only	-0.0677974417615406	0
 Bax abundance	serum_fed_equilibrium	PBS only	-0.0261556186264729	3600
 Bax abundance	serum_fed_equilibrium	PBS only	-0.0447393970019814	14400
 Bax abundance	serum_fed_equilibrium	PBS only	-0.129443014726935	28800
 Bax abundance	serum_fed_equilibrium	PBS only	-0.153262739674452	86400
 Bax abundance	serum_fed_equilibrium	PBS only	-0.223566739790493	172800
+Bcl2 abundance	serum_fed_equilibrium	EGF	0.0979378509470468	0
 Bcl2 abundance	serum_fed_equilibrium	EGF	0.0657496900641202	3600
 Bcl2 abundance	serum_fed_equilibrium	EGF	0.0701137736873902	14400
 Bcl2 abundance	serum_fed_equilibrium	EGF	-0.00795592383309514	28800
 Bcl2 abundance	serum_fed_equilibrium	EGF	-0.00661125393690556	86400
 Bcl2 abundance	serum_fed_equilibrium	EGF	-0.0581814735447859	172800
+Bcl2 abundance	serum_fed_equilibrium	HGF only	0.0979378509470468	0
 Bcl2 abundance	serum_fed_equilibrium	HGF only	0.0256422004247321	3600
 Bcl2 abundance	serum_fed_equilibrium	HGF only	0.0977911967039868	14400
 Bcl2 abundance	serum_fed_equilibrium	HGF only	0.0153126270363106	28800
 Bcl2 abundance	serum_fed_equilibrium	HGF only	-0.0418137757503703	86400
 Bcl2 abundance	serum_fed_equilibrium	HGF only	-0.162415802021353	172800
+Bcl2 abundance	serum_fed_equilibrium	PBS only	0.0979378509470468	0
 Bcl2 abundance	serum_fed_equilibrium	PBS only	0.0652971582146271	3600
 Bcl2 abundance	serum_fed_equilibrium	PBS only	0.112288624813119	14400
 Bcl2 abundance	serum_fed_equilibrium	PBS only	0.0218902046001313	28800
 Bcl2 abundance	serum_fed_equilibrium	PBS only	0.0108452545454913	86400
 Bcl2 abundance	serum_fed_equilibrium	PBS only	0.0649120841590411	172800
+Bcl2c abundance	serum_fed_equilibrium	EGF	0.041210281638269	0
 Bcl2c abundance	serum_fed_equilibrium	EGF	0.0351602987421016	3600
 Bcl2c abundance	serum_fed_equilibrium	EGF	0.038351885960342	14400
 Bcl2c abundance	serum_fed_equilibrium	EGF	-0.0267381751611372	28800
 Bcl2c abundance	serum_fed_equilibrium	EGF	-0.0628305434674766	86400
 Bcl2c abundance	serum_fed_equilibrium	EGF	-0.0736456808542107	172800
+Bcl2c abundance	serum_fed_equilibrium	HGF only	0.041210281638269	0
 Bcl2c abundance	serum_fed_equilibrium	HGF only	0.0108647900464837	3600
 Bcl2c abundance	serum_fed_equilibrium	HGF only	0.153802387912938	14400
 Bcl2c abundance	serum_fed_equilibrium	HGF only	0.143981735679748	28800
 Bcl2c abundance	serum_fed_equilibrium	HGF only	0.400261924280371	86400
 Bcl2c abundance	serum_fed_equilibrium	HGF only	0.605145403771243	172800
+Bcl2c abundance	serum_fed_equilibrium	PBS only	0.041210281638269	0
 Bcl2c abundance	serum_fed_equilibrium	PBS only	0.189262428295583	3600
 Bcl2c abundance	serum_fed_equilibrium	PBS only	0.293665199505069	14400
 Bcl2c abundance	serum_fed_equilibrium	PBS only	0.332885189145088	28800
 Bcl2c abundance	serum_fed_equilibrium	PBS only	0.997121697065767	86400
 Bcl2c abundance	serum_fed_equilibrium	PBS only	1.0577926395477	172800
+BIM abundance	serum_fed_equilibrium	EGF	0.098895972870573	0
 BIM abundance	serum_fed_equilibrium	EGF	0.0806928564813469	3600
 BIM abundance	serum_fed_equilibrium	EGF	0.0194932999108723	14400
 BIM abundance	serum_fed_equilibrium	EGF	0.0287151645144753	28800
 BIM abundance	serum_fed_equilibrium	EGF	0.0925697685900802	86400
 BIM abundance	serum_fed_equilibrium	EGF	0.0270963957359959	172800
+BIM abundance	serum_fed_equilibrium	HGF only	0.098895972870573	0
 BIM abundance	serum_fed_equilibrium	HGF only	0.0379165522505162	3600
 BIM abundance	serum_fed_equilibrium	HGF only	0.0457280284821441	14400
 BIM abundance	serum_fed_equilibrium	HGF only	-0.0171605258222252	28800
 BIM abundance	serum_fed_equilibrium	HGF only	0.10648774863962	86400
 BIM abundance	serum_fed_equilibrium	HGF only	0.0762452104034523	172800
+BIM abundance	serum_fed_equilibrium	PBS only	0.098895972870573	0
 BIM abundance	serum_fed_equilibrium	PBS only	0.093980087642033	3600
 BIM abundance	serum_fed_equilibrium	PBS only	0.0805837839770946	14400
 BIM abundance	serum_fed_equilibrium	PBS only	0.115265872985361	28800
 BIM abundance	serum_fed_equilibrium	PBS only	0.00786306552498365	86400
 BIM abundance	serum_fed_equilibrium	PBS only	0.00691220331491933	172800
+Bid abundance	serum_fed_equilibrium	EGF	-0.0851728488259126	0
 Bid abundance	serum_fed_equilibrium	EGF	-0.0811739060675729	3600
 Bid abundance	serum_fed_equilibrium	EGF	-0.11295175147094	14400
 Bid abundance	serum_fed_equilibrium	EGF	-0.0690093025783979	28800
 Bid abundance	serum_fed_equilibrium	EGF	-0.147350356958049	86400
 Bid abundance	serum_fed_equilibrium	EGF	0.0119540595308631	172800
+Bid abundance	serum_fed_equilibrium	HGF only	-0.0851728488259126	0
 Bid abundance	serum_fed_equilibrium	HGF only	-0.0376653016909795	3600
 Bid abundance	serum_fed_equilibrium	HGF only	-0.116557451232339	14400
 Bid abundance	serum_fed_equilibrium	HGF only	-0.0566354204839401	28800
 Bid abundance	serum_fed_equilibrium	HGF only	0.015184574274527	86400
 Bid abundance	serum_fed_equilibrium	HGF only	0.0851853119134965	172800
+Bid abundance	serum_fed_equilibrium	PBS only	-0.0851728488259126	0
 Bid abundance	serum_fed_equilibrium	PBS only	0.0815141706866799	3600
 Bid abundance	serum_fed_equilibrium	PBS only	0.0791761800389346	14400
 Bid abundance	serum_fed_equilibrium	PBS only	-0.0913783464920194	28800
 Bid abundance	serum_fed_equilibrium	PBS only	0.0302924861613446	86400
 Bid abundance	serum_fed_equilibrium	PBS only	-0.111267382001371	172800
+BRaf abundance	serum_fed_equilibrium	EGF	0.0540630746447257	0
 BRaf abundance	serum_fed_equilibrium	EGF	0.0348776899483137	3600
 BRaf abundance	serum_fed_equilibrium	EGF	-0.0246202473159801	14400
 BRaf abundance	serum_fed_equilibrium	EGF	-0.0149848492755526	28800
 BRaf abundance	serum_fed_equilibrium	EGF	0.0952997765641822	86400
 BRaf abundance	serum_fed_equilibrium	EGF	0.0573225623532331	172800
+BRaf abundance	serum_fed_equilibrium	HGF only	0.0540630746447257	0
 BRaf abundance	serum_fed_equilibrium	HGF only	-0.0354054298961928	3600
 BRaf abundance	serum_fed_equilibrium	HGF only	-0.0124950322373992	14400
 BRaf abundance	serum_fed_equilibrium	HGF only	0.0180434238434993	28800
 BRaf abundance	serum_fed_equilibrium	HGF only	0.0741953071358162	86400
 BRaf abundance	serum_fed_equilibrium	HGF only	0.0601254952125056	172800
+BRaf abundance	serum_fed_equilibrium	PBS only	0.0540630746447257	0
 BRaf abundance	serum_fed_equilibrium	PBS only	0.0605314491489466	3600
 BRaf abundance	serum_fed_equilibrium	PBS only	0.0632619908369677	14400
 BRaf abundance	serum_fed_equilibrium	PBS only	0.0720121609811235	28800
 BRaf abundance	serum_fed_equilibrium	PBS only	0.1508560088109	86400
 BRaf abundance	serum_fed_equilibrium	PBS only	0.311286479529844	172800
+C3 abundance	serum_fed_equilibrium	EGF	0.0664847865052473	0
 C3 abundance	serum_fed_equilibrium	EGF	0.0392476897090654	3600
 C3 abundance	serum_fed_equilibrium	EGF	0.00264825269669851	14400
 C3 abundance	serum_fed_equilibrium	EGF	-0.00139811905973772	28800
 C3 abundance	serum_fed_equilibrium	EGF	0.0139138459792146	86400
 C3 abundance	serum_fed_equilibrium	EGF	0.0195935441575635	172800
+C3 abundance	serum_fed_equilibrium	HGF only	0.0664847865052473	0
 C3 abundance	serum_fed_equilibrium	HGF only	0.0191542745194911	3600
 C3 abundance	serum_fed_equilibrium	HGF only	0.000492452334903276	14400
 C3 abundance	serum_fed_equilibrium	HGF only	-0.0101117955659712	28800
 C3 abundance	serum_fed_equilibrium	HGF only	0.0486843964143485	86400
 C3 abundance	serum_fed_equilibrium	HGF only	-0.00301910021879715	172800
+C3 abundance	serum_fed_equilibrium	PBS only	0.0664847865052473	0
 C3 abundance	serum_fed_equilibrium	PBS only	0.127527042096175	3600
 C3 abundance	serum_fed_equilibrium	PBS only	0.0498711765196814	14400
 C3 abundance	serum_fed_equilibrium	PBS only	0.0522647574476772	28800
 C3 abundance	serum_fed_equilibrium	PBS only	0.113581499617249	86400
 C3 abundance	serum_fed_equilibrium	PBS only	0.129409136534871	172800
+C8 abundance	serum_fed_equilibrium	EGF	-0.304136301300004	0
 C8 abundance	serum_fed_equilibrium	EGF	-0.194408021613862	3600
 C8 abundance	serum_fed_equilibrium	EGF	0.151398495778294	14400
 C8 abundance	serum_fed_equilibrium	EGF	0.139721903611887	28800
 C8 abundance	serum_fed_equilibrium	EGF	0.619577025456287	86400
 C8 abundance	serum_fed_equilibrium	EGF	0.639528806522988	172800
+C8 abundance	serum_fed_equilibrium	HGF only	-0.304136301300004	0
 C8 abundance	serum_fed_equilibrium	HGF only	-0.012518150374798	3600
 C8 abundance	serum_fed_equilibrium	HGF only	0.120873268852373	14400
 C8 abundance	serum_fed_equilibrium	HGF only	0.118536446845768	28800
 C8 abundance	serum_fed_equilibrium	HGF only	-0.0605104920250727	86400
 C8 abundance	serum_fed_equilibrium	HGF only	-0.806326831078327	172800
+C8 abundance	serum_fed_equilibrium	PBS only	-0.304136301300004	0
 C8 abundance	serum_fed_equilibrium	PBS only	-0.14783873646088	3600
 C8 abundance	serum_fed_equilibrium	PBS only	-0.0779778333526634	14400
 C8 abundance	serum_fed_equilibrium	PBS only	-0.0988895815064568	28800
 C8 abundance	serum_fed_equilibrium	PBS only	-2.2948567367848	86400
 C8 abundance	serum_fed_equilibrium	PBS only	-4.01566627008341	172800
+Cb abundance	serum_fed_equilibrium	EGF	-0.0158658331605465	0
 Cb abundance	serum_fed_equilibrium	EGF	-0.0847689936915605	3600
 Cb abundance	serum_fed_equilibrium	EGF	-0.0876822644471867	14400
 Cb abundance	serum_fed_equilibrium	EGF	-0.0984282650138005	28800
 Cb abundance	serum_fed_equilibrium	EGF	-0.255446729965971	86400
 Cb abundance	serum_fed_equilibrium	EGF	-0.351570364121363	172800
+Cb abundance	serum_fed_equilibrium	HGF only	-0.0158658331605465	0
 Cb abundance	serum_fed_equilibrium	HGF only	0.00167058354266666	3600
 Cb abundance	serum_fed_equilibrium	HGF only	-0.103409979151586	14400
 Cb abundance	serum_fed_equilibrium	HGF only	-0.152279724917918	28800
 Cb abundance	serum_fed_equilibrium	HGF only	-0.200799921675029	86400
 Cb abundance	serum_fed_equilibrium	HGF only	-0.267913565960282	172800
+Cb abundance	serum_fed_equilibrium	PBS only	-0.0158658331605465	0
 Cb abundance	serum_fed_equilibrium	PBS only	0.0372828539202868	3600
 Cb abundance	serum_fed_equilibrium	PBS only	-0.0146078879622041	14400
 Cb abundance	serum_fed_equilibrium	PBS only	0.0881419655614144	28800
 Cb abundance	serum_fed_equilibrium	PBS only	0.188266790246459	86400
 Cb abundance	serum_fed_equilibrium	PBS only	0.400008970196184	172800
+Cd abundance	serum_fed_equilibrium	EGF	0.0743170925402674	0
 Cd abundance	serum_fed_equilibrium	EGF	0.0300318459356021	3600
 Cd abundance	serum_fed_equilibrium	EGF	0.0379164965402753	14400
 Cd abundance	serum_fed_equilibrium	EGF	0.0323853185879964	28800
 Cd abundance	serum_fed_equilibrium	EGF	-0.132308462983179	86400
 Cd abundance	serum_fed_equilibrium	EGF	-0.135902831465269	172800
+Cd abundance	serum_fed_equilibrium	HGF only	0.0743170925402674	0
 Cd abundance	serum_fed_equilibrium	HGF only	-0.0706410901163334	3600
 Cd abundance	serum_fed_equilibrium	HGF only	0.0584708080422244	14400
 Cd abundance	serum_fed_equilibrium	HGF only	0.00030005236785075	28800
 Cd abundance	serum_fed_equilibrium	HGF only	0.0364461728533671	86400
 Cd abundance	serum_fed_equilibrium	HGF only	0.00251427678351221	172800
+Cd abundance	serum_fed_equilibrium	PBS only	0.0743170925402674	0
 Cd abundance	serum_fed_equilibrium	PBS only	0.143334861747345	3600
 Cd abundance	serum_fed_equilibrium	PBS only	0.167528820004842	14400
 Cd abundance	serum_fed_equilibrium	PBS only	-0.045347616653148	28800
 Cd abundance	serum_fed_equilibrium	PBS only	0.0107360481203702	86400
 Cd abundance	serum_fed_equilibrium	PBS only	-0.0354298261076721	172800
+Ce abundance	serum_fed_equilibrium	EGF	-0.0481634117216132	0
 Ce abundance	serum_fed_equilibrium	EGF	-0.0302255252286148	3600
 Ce abundance	serum_fed_equilibrium	EGF	-0.04040238527573	14400
 Ce abundance	serum_fed_equilibrium	EGF	-0.0324608959373024	28800
 Ce abundance	serum_fed_equilibrium	EGF	0.236553164146727	86400
 Ce abundance	serum_fed_equilibrium	EGF	0.342059391857492	172800
+Ce abundance	serum_fed_equilibrium	HGF only	-0.0481634117216132	0
 Ce abundance	serum_fed_equilibrium	HGF only	-0.00258390009662442	3600
 Ce abundance	serum_fed_equilibrium	HGF only	0.0273149452466165	14400
 Ce abundance	serum_fed_equilibrium	HGF only	0.112628603110037	28800
 Ce abundance	serum_fed_equilibrium	HGF only	0.0598966782609845	86400
 Ce abundance	serum_fed_equilibrium	HGF only	-0.271914870441955	172800
+Ce abundance	serum_fed_equilibrium	PBS only	-0.0481634117216132	0
 Ce abundance	serum_fed_equilibrium	PBS only	-0.000482840270036432	3600
 Ce abundance	serum_fed_equilibrium	PBS only	-0.0283894228096894	14400
 Ce abundance	serum_fed_equilibrium	PBS only	0.192736017488464	28800
 Ce abundance	serum_fed_equilibrium	PBS only	-0.43776742757403	86400
 Ce abundance	serum_fed_equilibrium	PBS only	-1.55902715172152	172800
+Pb abundance	serum_fed_equilibrium	EGF	0.439922098801804	0
 Pb abundance	serum_fed_equilibrium	EGF	0.237722746878138	3600
 Pb abundance	serum_fed_equilibrium	EGF	0.125250563006601	14400
 Pb abundance	serum_fed_equilibrium	EGF	0.123754655134096	28800
 Pb abundance	serum_fed_equilibrium	EGF	-0.294122124487709	86400
 Pb abundance	serum_fed_equilibrium	EGF	-0.943009726742796	172800
+Pb abundance	serum_fed_equilibrium	HGF only	0.439922098801804	0
 Pb abundance	serum_fed_equilibrium	HGF only	0.213864659555138	3600
 Pb abundance	serum_fed_equilibrium	HGF only	0.0190334256059493	14400
 Pb abundance	serum_fed_equilibrium	HGF only	0.0325612246549911	28800
 Pb abundance	serum_fed_equilibrium	HGF only	-0.302687076158066	86400
 Pb abundance	serum_fed_equilibrium	HGF only	-0.470600207585156	172800
+Pb abundance	serum_fed_equilibrium	PBS only	0.439922098801804	0
 Pb abundance	serum_fed_equilibrium	PBS only	0.571049241708253	3600
 Pb abundance	serum_fed_equilibrium	PBS only	0.429974703793752	14400
 Pb abundance	serum_fed_equilibrium	PBS only	0.540609818283326	28800
 Pb abundance	serum_fed_equilibrium	PBS only	0.758648128220305	86400
 Pb abundance	serum_fed_equilibrium	PBS only	1.15298850250024	172800
+p21 abundance	serum_fed_equilibrium	EGF	0.00900192735456273	0
 p21 abundance	serum_fed_equilibrium	EGF	-0.0227577630499622	3600
 p21 abundance	serum_fed_equilibrium	EGF	-0.0270954615632564	14400
 p21 abundance	serum_fed_equilibrium	EGF	-0.028680288175105	28800
 p21 abundance	serum_fed_equilibrium	EGF	-0.0527194562647057	86400
 p21 abundance	serum_fed_equilibrium	EGF	-0.0124335576960394	172800
+p21 abundance	serum_fed_equilibrium	HGF only	0.00900192735456273	0
 p21 abundance	serum_fed_equilibrium	HGF only	-0.00341033034106912	3600
 p21 abundance	serum_fed_equilibrium	HGF only	-0.015371925432907	14400
 p21 abundance	serum_fed_equilibrium	HGF only	0.0189349675682237	28800
 p21 abundance	serum_fed_equilibrium	HGF only	0.0280521531145382	86400
 p21 abundance	serum_fed_equilibrium	HGF only	0.124545156636521	172800
+p21 abundance	serum_fed_equilibrium	PBS only	0.00900192735456273	0
 p21 abundance	serum_fed_equilibrium	PBS only	0.0576523054606126	3600
 p21 abundance	serum_fed_equilibrium	PBS only	0.0567753743691008	14400
 p21 abundance	serum_fed_equilibrium	PBS only	0.0540282139396432	28800
 p21 abundance	serum_fed_equilibrium	PBS only	0.211040346774486	86400
 p21 abundance	serum_fed_equilibrium	PBS only	0.430994682597907	172800
+p27 abundance	serum_fed_equilibrium	EGF	0.070522882666023	0
 p27 abundance	serum_fed_equilibrium	EGF	-0.138341829833021	3600
 p27 abundance	serum_fed_equilibrium	EGF	0.103742804631514	14400
 p27 abundance	serum_fed_equilibrium	EGF	0.119413106401537	28800
 p27 abundance	serum_fed_equilibrium	EGF	0.209007850894139	86400
 p27 abundance	serum_fed_equilibrium	EGF	0.310790075317639	172800
+p27 abundance	serum_fed_equilibrium	HGF only	0.070522882666023	0
 p27 abundance	serum_fed_equilibrium	HGF only	0.15141742933957	3600
 p27 abundance	serum_fed_equilibrium	HGF only	0.115888708435587	14400
 p27 abundance	serum_fed_equilibrium	HGF only	5.97889192643013e-05	28800
 p27 abundance	serum_fed_equilibrium	HGF only	-0.0629660653269313	86400
 p27 abundance	serum_fed_equilibrium	HGF only	-0.533960570084223	172800
+p27 abundance	serum_fed_equilibrium	PBS only	0.070522882666023	0
 p27 abundance	serum_fed_equilibrium	PBS only	0.0641194612135104	3600
 p27 abundance	serum_fed_equilibrium	PBS only	0.0463459910257325	14400
 p27 abundance	serum_fed_equilibrium	PBS only	0.0103451213409873	28800
 p27 abundance	serum_fed_equilibrium	PBS only	-0.720714769103615	86400
 p27 abundance	serum_fed_equilibrium	PBS only	-1.06535140281611	172800
+Chk1 abundance	serum_fed_equilibrium	EGF	-0.146752724242113	0
 Chk1 abundance	serum_fed_equilibrium	EGF	-0.074336651516015	3600
 Chk1 abundance	serum_fed_equilibrium	EGF	-0.0647181410572921	14400
 Chk1 abundance	serum_fed_equilibrium	EGF	-0.0240622918422548	28800
 Chk1 abundance	serum_fed_equilibrium	EGF	0.106864396853121	86400
 Chk1 abundance	serum_fed_equilibrium	EGF	0.323846844509846	172800
+Chk1 abundance	serum_fed_equilibrium	HGF only	-0.146752724242113	0
 Chk1 abundance	serum_fed_equilibrium	HGF only	-0.139066983824295	3600
 Chk1 abundance	serum_fed_equilibrium	HGF only	-0.0251356126537912	14400
 Chk1 abundance	serum_fed_equilibrium	HGF only	0.00993893136462289	28800
 Chk1 abundance	serum_fed_equilibrium	HGF only	0.0849058538656	86400
 Chk1 abundance	serum_fed_equilibrium	HGF only	0.404128562010482	172800
+Chk1 abundance	serum_fed_equilibrium	PBS only	-0.146752724242113	0
 Chk1 abundance	serum_fed_equilibrium	PBS only	-0.0952945735505367	3600
 Chk1 abundance	serum_fed_equilibrium	PBS only	-0.131047302882411	14400
 Chk1 abundance	serum_fed_equilibrium	PBS only	-0.167674622553033	28800
 Chk1 abundance	serum_fed_equilibrium	PBS only	-0.0296777982659653	86400
 Chk1 abundance	serum_fed_equilibrium	PBS only	-0.0248569168740238	172800
+bCATENIN abundance	serum_fed_equilibrium	EGF	0.0354815678531843	0
 bCATENIN abundance	serum_fed_equilibrium	EGF	-0.0423179708591613	3600
 bCATENIN abundance	serum_fed_equilibrium	EGF	-0.0314737806834546	14400
 bCATENIN abundance	serum_fed_equilibrium	EGF	-0.0415616485505863	28800
 bCATENIN abundance	serum_fed_equilibrium	EGF	-0.0137729359253968	86400
 bCATENIN abundance	serum_fed_equilibrium	EGF	0.0194956905969788	172800
+bCATENIN abundance	serum_fed_equilibrium	HGF only	0.0354815678531843	0
 bCATENIN abundance	serum_fed_equilibrium	HGF only	-0.0165463202875495	3600
 bCATENIN abundance	serum_fed_equilibrium	HGF only	0.00650727146724553	14400
 bCATENIN abundance	serum_fed_equilibrium	HGF only	-0.00569829115970534	28800
 bCATENIN abundance	serum_fed_equilibrium	HGF only	0.0275556827131437	86400
 bCATENIN abundance	serum_fed_equilibrium	HGF only	0.0323425274291552	172800
+bCATENIN abundance	serum_fed_equilibrium	PBS only	0.0354815678531843	0
 bCATENIN abundance	serum_fed_equilibrium	PBS only	0.00100529137713056	3600
 bCATENIN abundance	serum_fed_equilibrium	PBS only	0.0193948318016249	14400
 bCATENIN abundance	serum_fed_equilibrium	PBS only	-0.048542718903551	28800
 bCATENIN abundance	serum_fed_equilibrium	PBS only	0.0	86400
 bCATENIN abundance	serum_fed_equilibrium	PBS only	0.0176910476067507	172800
+pbCATENIN abundance	serum_fed_equilibrium	EGF	0.0209111616487105	0
 pbCATENIN abundance	serum_fed_equilibrium	EGF	0.00646410334158799	3600
 pbCATENIN abundance	serum_fed_equilibrium	EGF	0.0163107735536805	14400
 pbCATENIN abundance	serum_fed_equilibrium	EGF	0.0178427595192311	28800
 pbCATENIN abundance	serum_fed_equilibrium	EGF	-0.0282343197518003	86400
 pbCATENIN abundance	serum_fed_equilibrium	EGF	-0.09901102511754	172800
+pbCATENIN abundance	serum_fed_equilibrium	HGF only	0.0209111616487105	0
 pbCATENIN abundance	serum_fed_equilibrium	HGF only	-0.00146774705780376	3600
 pbCATENIN abundance	serum_fed_equilibrium	HGF only	0.0244784390141973	14400
 pbCATENIN abundance	serum_fed_equilibrium	HGF only	0.0268970986537754	28800
 pbCATENIN abundance	serum_fed_equilibrium	HGF only	0.0148592718470849	86400
 pbCATENIN abundance	serum_fed_equilibrium	HGF only	-0.117129567376898	172800
+pbCATENIN abundance	serum_fed_equilibrium	PBS only	0.0209111616487105	0
 pbCATENIN abundance	serum_fed_equilibrium	PBS only	0.0980406116760746	3600
 pbCATENIN abundance	serum_fed_equilibrium	PBS only	0.0817997820945654	14400
 pbCATENIN abundance	serum_fed_equilibrium	PBS only	0.0704288798665782	28800
 pbCATENIN abundance	serum_fed_equilibrium	PBS only	0.020995142589991	86400
 pbCATENIN abundance	serum_fed_equilibrium	PBS only	0.0387301688464982	172800
+E2F abundance	serum_fed_equilibrium	EGF	0.0391232997462527	0
 E2F abundance	serum_fed_equilibrium	EGF	-0.087103468185354	3600
 E2F abundance	serum_fed_equilibrium	EGF	-0.18295173656872	14400
 E2F abundance	serum_fed_equilibrium	EGF	-0.167745625903945	28800
 E2F abundance	serum_fed_equilibrium	EGF	-0.188558613639205	86400
 E2F abundance	serum_fed_equilibrium	EGF	-0.347042183270257	172800
+E2F abundance	serum_fed_equilibrium	HGF only	0.0391232997462527	0
 E2F abundance	serum_fed_equilibrium	HGF only	0.118911223909431	3600
 E2F abundance	serum_fed_equilibrium	HGF only	0.248367869060545	14400
 E2F abundance	serum_fed_equilibrium	HGF only	0.384616279893279	28800
 E2F abundance	serum_fed_equilibrium	HGF only	0.591160552949434	86400
 E2F abundance	serum_fed_equilibrium	HGF only	0.929644046343301	172800
+E2F abundance	serum_fed_equilibrium	PBS only	0.0391232997462527	0
 E2F abundance	serum_fed_equilibrium	PBS only	0.0775888211027501	3600
 E2F abundance	serum_fed_equilibrium	PBS only	0.182848206449254	14400
 E2F abundance	serum_fed_equilibrium	PBS only	0.331748641500046	28800
 E2F abundance	serum_fed_equilibrium	PBS only	0.295526061250708	86400
 E2F abundance	serum_fed_equilibrium	PBS only	0.0946805643656513	172800
+pE1 abundance	serum_fed_equilibrium	EGF	-0.0219754437533715	0
 pE1 abundance	serum_fed_equilibrium	EGF	0.181081300195867	3600
 pE1 abundance	serum_fed_equilibrium	EGF	0.0311667963584654	14400
 pE1 abundance	serum_fed_equilibrium	EGF	0.0346150386064921	28800
 pE1 abundance	serum_fed_equilibrium	EGF	-0.0151235796883213	86400
 pE1 abundance	serum_fed_equilibrium	EGF	-0.0377287542712976	172800
+pE1 abundance	serum_fed_equilibrium	HGF only	-0.0219754437533715	0
 pE1 abundance	serum_fed_equilibrium	HGF only	-0.0732282251834761	3600
 pE1 abundance	serum_fed_equilibrium	HGF only	-0.0629311489488969	14400
 pE1 abundance	serum_fed_equilibrium	HGF only	-0.121968407238035	28800
 pE1 abundance	serum_fed_equilibrium	HGF only	-0.189743206938715	86400
 pE1 abundance	serum_fed_equilibrium	HGF only	-0.104561529977592	172800
+pE1 abundance	serum_fed_equilibrium	PBS only	-0.0219754437533715	0
 pE1 abundance	serum_fed_equilibrium	PBS only	-0.0346962362867943	3600
 pE1 abundance	serum_fed_equilibrium	PBS only	-0.126411458479473	14400
 pE1 abundance	serum_fed_equilibrium	PBS only	-0.0853125649252913	28800
 pE1 abundance	serum_fed_equilibrium	PBS only	-0.156361257249925	86400
 pE1 abundance	serum_fed_equilibrium	PBS only	-0.113091505709815	172800
+EIF4E abundance	serum_fed_equilibrium	EGF	-0.0245322415944672	0
 EIF4E abundance	serum_fed_equilibrium	EGF	0.00270982116760354	3600
 EIF4E abundance	serum_fed_equilibrium	EGF	-0.0103487208926282	14400
 EIF4E abundance	serum_fed_equilibrium	EGF	-0.0163836412932575	28800
 EIF4E abundance	serum_fed_equilibrium	EGF	0.195859976342689	86400
 EIF4E abundance	serum_fed_equilibrium	EGF	0.061060082977533	172800
+EIF4E abundance	serum_fed_equilibrium	HGF only	-0.0245322415944672	0
 EIF4E abundance	serum_fed_equilibrium	HGF only	0.0505983057071443	3600
 EIF4E abundance	serum_fed_equilibrium	HGF only	0.0303505475806674	14400
 EIF4E abundance	serum_fed_equilibrium	HGF only	0.0353908691797946	28800
 EIF4E abundance	serum_fed_equilibrium	HGF only	0.0632145316731193	86400
 EIF4E abundance	serum_fed_equilibrium	HGF only	0.117014459930074	172800
+EIF4E abundance	serum_fed_equilibrium	PBS only	-0.0245322415944672	0
 EIF4E abundance	serum_fed_equilibrium	PBS only	0.0340300743421408	3600
 EIF4E abundance	serum_fed_equilibrium	PBS only	-0.0338534954683975	14400
 EIF4E abundance	serum_fed_equilibrium	PBS only	-0.0193699568453865	28800
 EIF4E abundance	serum_fed_equilibrium	PBS only	0.10954263395601	86400
 EIF4E abundance	serum_fed_equilibrium	PBS only	-0.0521519260774802	172800
+EIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.0707449746100434	0
 EIF4EBP1 abundance	serum_fed_equilibrium	EGF	-0.0469378551838887	3600
 EIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.0576346815983389	14400
 EIF4EBP1 abundance	serum_fed_equilibrium	EGF	-0.0190035993932333	28800
 EIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.0808874928067965	86400
 EIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.148216731687976	172800
+EIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.0707449746100434	0
 EIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.0315268732609036	3600
 EIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.0514883380686821	14400
 EIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.0305042983007578	28800
 EIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.142044512823132	86400
 EIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.138887837418619	172800
+EIF4EBP1 abundance	serum_fed_equilibrium	PBS only	0.0707449746100434	0
 EIF4EBP1 abundance	serum_fed_equilibrium	PBS only	0.276227628020162	3600
 EIF4EBP1 abundance	serum_fed_equilibrium	PBS only	0.163204908475377	14400
 EIF4EBP1 abundance	serum_fed_equilibrium	PBS only	0.227820594049638	28800
 EIF4EBP1 abundance	serum_fed_equilibrium	PBS only	0.255738787443457	86400
 EIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.00263988909445578	172800
+pEIF4EBP1 abundance	serum_fed_equilibrium	EGF	-0.0862440161078757	0
 pEIF4EBP1 abundance	serum_fed_equilibrium	EGF	-0.00456058538810706	3600
 pEIF4EBP1 abundance	serum_fed_equilibrium	EGF	-0.0276350889895753	14400
 pEIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.0753182144242953	28800
 pEIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.314507073463841	86400
 pEIF4EBP1 abundance	serum_fed_equilibrium	EGF	0.254575491868753	172800
+pEIF4EBP1 abundance	serum_fed_equilibrium	HGF only	-0.0862440161078757	0
 pEIF4EBP1 abundance	serum_fed_equilibrium	HGF only	-0.0214327362476697	3600
 pEIF4EBP1 abundance	serum_fed_equilibrium	HGF only	-0.0608758340895156	14400
 pEIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.0447476181705332	28800
 pEIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.142732202332902	86400
 pEIF4EBP1 abundance	serum_fed_equilibrium	HGF only	0.00993901337939824	172800
+pEIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.0862440161078757	0
 pEIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.249264078462775	3600
 pEIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.174866159716272	14400
 pEIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.060926200008272	28800
 pEIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.243230807603826	86400
 pEIF4EBP1 abundance	serum_fed_equilibrium	PBS only	-0.749095793240885	172800
+FOXO abundance	serum_fed_equilibrium	EGF	0.0447865421635987	0
 FOXO abundance	serum_fed_equilibrium	EGF	0.0327245909881916	3600
 FOXO abundance	serum_fed_equilibrium	EGF	0.0209383375119112	14400
 FOXO abundance	serum_fed_equilibrium	EGF	-0.0127825262426998	28800
 FOXO abundance	serum_fed_equilibrium	EGF	-0.0334625438666438	86400
 FOXO abundance	serum_fed_equilibrium	EGF	-0.0922698189918794	172800
+FOXO abundance	serum_fed_equilibrium	HGF only	0.0447865421635987	0
 FOXO abundance	serum_fed_equilibrium	HGF only	-0.0058701657511897	3600
 FOXO abundance	serum_fed_equilibrium	HGF only	0.0264116216565703	14400
 FOXO abundance	serum_fed_equilibrium	HGF only	0.0400163588303854	28800
 FOXO abundance	serum_fed_equilibrium	HGF only	0.0866386002837006	86400
 FOXO abundance	serum_fed_equilibrium	HGF only	0.0617618994456788	172800
+FOXO abundance	serum_fed_equilibrium	PBS only	0.0447865421635987	0
 FOXO abundance	serum_fed_equilibrium	PBS only	0.055452210622734	3600
 FOXO abundance	serum_fed_equilibrium	PBS only	0.0949974985999538	14400
 FOXO abundance	serum_fed_equilibrium	PBS only	0.10174947189421	28800
 FOXO abundance	serum_fed_equilibrium	PBS only	0.214256391350891	86400
 FOXO abundance	serum_fed_equilibrium	PBS only	0.432614196409343	172800
+pFOXO abundance	serum_fed_equilibrium	EGF	0.114064768022937	0
 pFOXO abundance	serum_fed_equilibrium	EGF	0.0722500456494343	3600
 pFOXO abundance	serum_fed_equilibrium	EGF	0.0277442155721451	14400
 pFOXO abundance	serum_fed_equilibrium	EGF	0.0355352307435642	28800
 pFOXO abundance	serum_fed_equilibrium	EGF	-0.0065714447966704	86400
 pFOXO abundance	serum_fed_equilibrium	EGF	0.0255600028486368	172800
+pFOXO abundance	serum_fed_equilibrium	HGF only	0.114064768022937	0
 pFOXO abundance	serum_fed_equilibrium	HGF only	0.0831465418030509	3600
 pFOXO abundance	serum_fed_equilibrium	HGF only	0.0681210090214113	14400
 pFOXO abundance	serum_fed_equilibrium	HGF only	0.0419387233566187	28800
 pFOXO abundance	serum_fed_equilibrium	HGF only	0.122098464491941	86400
 pFOXO abundance	serum_fed_equilibrium	HGF only	0.220083730374613	172800
+pFOXO abundance	serum_fed_equilibrium	PBS only	0.114064768022937	0
 pFOXO abundance	serum_fed_equilibrium	PBS only	-0.035861628094036	3600
 pFOXO abundance	serum_fed_equilibrium	PBS only	0.0394725351786763	14400
 pFOXO abundance	serum_fed_equilibrium	PBS only	0.0706281471069475	28800
 pFOXO abundance	serum_fed_equilibrium	PBS only	0.205713019887387	86400
 pFOXO abundance	serum_fed_equilibrium	PBS only	0.240124029819187	172800
+GSK3b abundance	serum_fed_equilibrium	EGF	-0.0703955318531868	0
 GSK3b abundance	serum_fed_equilibrium	EGF	0.00392617860722265	3600
 GSK3b abundance	serum_fed_equilibrium	EGF	-0.0526656762748848	14400
 GSK3b abundance	serum_fed_equilibrium	EGF	0.00681804251054639	28800
 GSK3b abundance	serum_fed_equilibrium	EGF	0.128622051618175	86400
 GSK3b abundance	serum_fed_equilibrium	EGF	0.183204799072476	172800
+GSK3b abundance	serum_fed_equilibrium	HGF only	-0.0703955318531868	0
 GSK3b abundance	serum_fed_equilibrium	HGF only	-0.0232001312819745	3600
 GSK3b abundance	serum_fed_equilibrium	HGF only	0.0318985217644628	14400
 GSK3b abundance	serum_fed_equilibrium	HGF only	0.0120714215786505	28800
 GSK3b abundance	serum_fed_equilibrium	HGF only	0.0332849971538198	86400
 GSK3b abundance	serum_fed_equilibrium	HGF only	0.0875357384875644	172800
+GSK3b abundance	serum_fed_equilibrium	PBS only	-0.0703955318531868	0
 GSK3b abundance	serum_fed_equilibrium	PBS only	-0.0093987695202932	3600
 GSK3b abundance	serum_fed_equilibrium	PBS only	-0.0267141515918022	14400
 GSK3b abundance	serum_fed_equilibrium	PBS only	-0.109072629638788	28800
 GSK3b abundance	serum_fed_equilibrium	PBS only	-0.122723880229423	86400
 GSK3b abundance	serum_fed_equilibrium	PBS only	-0.253059415893313	172800
+pGSK3b abundance	serum_fed_equilibrium	EGF	0.205456636637461	0
 pGSK3b abundance	serum_fed_equilibrium	EGF	0.156490007877804	3600
 pGSK3b abundance	serum_fed_equilibrium	EGF	0.169243563190428	14400
 pGSK3b abundance	serum_fed_equilibrium	EGF	0.17614723093097	28800
 pGSK3b abundance	serum_fed_equilibrium	EGF	0.0401900383439103	86400
 pGSK3b abundance	serum_fed_equilibrium	EGF	0.0940046440692598	172800
+pGSK3b abundance	serum_fed_equilibrium	HGF only	0.205456636637461	0
 pGSK3b abundance	serum_fed_equilibrium	HGF only	-0.0192299611240809	3600
 pGSK3b abundance	serum_fed_equilibrium	HGF only	-0.00242418032597005	14400
 pGSK3b abundance	serum_fed_equilibrium	HGF only	-0.106435708800568	28800
 pGSK3b abundance	serum_fed_equilibrium	HGF only	-0.282256717017745	86400
 pGSK3b abundance	serum_fed_equilibrium	HGF only	-0.178553493063769	172800
+pGSK3b abundance	serum_fed_equilibrium	PBS only	0.205456636637461	0
 pGSK3b abundance	serum_fed_equilibrium	PBS only	-0.532315466041091	3600
 pGSK3b abundance	serum_fed_equilibrium	PBS only	-0.18565129896159	14400
 pGSK3b abundance	serum_fed_equilibrium	PBS only	-0.266240394901794	28800
 pGSK3b abundance	serum_fed_equilibrium	PBS only	-0.27422927172153	86400
 pGSK3b abundance	serum_fed_equilibrium	PBS only	-0.323375036080539	172800
+E2 abundance	serum_fed_equilibrium	EGF	0.00787179474461281	0
 E2 abundance	serum_fed_equilibrium	EGF	0.0241288112939937	3600
 E2 abundance	serum_fed_equilibrium	EGF	-0.112299660220417	14400
 E2 abundance	serum_fed_equilibrium	EGF	-0.0952928160837551	28800
 E2 abundance	serum_fed_equilibrium	EGF	-0.209307103049731	86400
 E2 abundance	serum_fed_equilibrium	EGF	-0.352668695302966	172800
+E2 abundance	serum_fed_equilibrium	HGF only	0.00787179474461281	0
 E2 abundance	serum_fed_equilibrium	HGF only	-0.0691335941422779	3600
 E2 abundance	serum_fed_equilibrium	HGF only	0.01167116007017	14400
 E2 abundance	serum_fed_equilibrium	HGF only	0.139751642029579	28800
 E2 abundance	serum_fed_equilibrium	HGF only	0.250827802755739	86400
 E2 abundance	serum_fed_equilibrium	HGF only	0.45171210282248	172800
+E2 abundance	serum_fed_equilibrium	PBS only	0.00787179474461281	0
 E2 abundance	serum_fed_equilibrium	PBS only	0.0731638091000611	3600
 E2 abundance	serum_fed_equilibrium	PBS only	0.117434362629556	14400
 E2 abundance	serum_fed_equilibrium	PBS only	0.178061480349353	28800
 E2 abundance	serum_fed_equilibrium	PBS only	0.315462462352517	86400
 E2 abundance	serum_fed_equilibrium	PBS only	0.322298798568945	172800
+pE2 abundance	serum_fed_equilibrium	EGF	-0.0234210120719615	0
 pE2 abundance	serum_fed_equilibrium	EGF	0.618396713460854	3600
 pE2 abundance	serum_fed_equilibrium	EGF	0.289465152223013	14400
 pE2 abundance	serum_fed_equilibrium	EGF	0.193785813178555	28800
 pE2 abundance	serum_fed_equilibrium	EGF	0.146735126383528	86400
 pE2 abundance	serum_fed_equilibrium	EGF	0.0201072483408369	172800
+pE2 abundance	serum_fed_equilibrium	HGF only	-0.0234210120719615	0
 pE2 abundance	serum_fed_equilibrium	HGF only	-0.358861089456465	3600
 pE2 abundance	serum_fed_equilibrium	HGF only	-0.515630513120388	14400
 pE2 abundance	serum_fed_equilibrium	HGF only	-0.529552200624893	28800
 pE2 abundance	serum_fed_equilibrium	HGF only	-0.554559423132656	86400
 pE2 abundance	serum_fed_equilibrium	HGF only	-0.506617716469085	172800
+pE2 abundance	serum_fed_equilibrium	PBS only	-0.0234210120719615	0
 pE2 abundance	serum_fed_equilibrium	PBS only	-0.504084673012548	3600
 pE2 abundance	serum_fed_equilibrium	PBS only	-0.510835000527009	14400
 pE2 abundance	serum_fed_equilibrium	PBS only	-0.536460168831066	28800
 pE2 abundance	serum_fed_equilibrium	PBS only	-0.711540449314561	86400
 pE2 abundance	serum_fed_equilibrium	PBS only	-0.609367860433693	172800
+E3 abundance	serum_fed_equilibrium	EGF	0.379596754076994	0
 E3 abundance	serum_fed_equilibrium	EGF	0.121727499773339	3600
 E3 abundance	serum_fed_equilibrium	EGF	0.0606066977117041	14400
 E3 abundance	serum_fed_equilibrium	EGF	0.125934033594136	28800
 E3 abundance	serum_fed_equilibrium	EGF	-0.323624671002469	86400
 E3 abundance	serum_fed_equilibrium	EGF	-0.80193537724956	172800
+E3 abundance	serum_fed_equilibrium	HGF only	0.379596754076994	0
 E3 abundance	serum_fed_equilibrium	HGF only	0.16370677967338	3600
 E3 abundance	serum_fed_equilibrium	HGF only	0.0274320521430449	14400
 E3 abundance	serum_fed_equilibrium	HGF only	0.047815087657965	28800
 E3 abundance	serum_fed_equilibrium	HGF only	-0.0916300613034977	86400
 E3 abundance	serum_fed_equilibrium	HGF only	-0.339922173856522	172800
+E3 abundance	serum_fed_equilibrium	PBS only	0.379596754076994	0
 E3 abundance	serum_fed_equilibrium	PBS only	0.30649151885645	3600
 E3 abundance	serum_fed_equilibrium	PBS only	0.182129734458741	14400
 E3 abundance	serum_fed_equilibrium	PBS only	0.428843354072566	28800
 E3 abundance	serum_fed_equilibrium	PBS only	0.590780325123396	86400
 E3 abundance	serum_fed_equilibrium	PBS only	0.873475694650338	172800
+pE3 abundance	serum_fed_equilibrium	EGF	-0.0852003222346205	0
 pE3 abundance	serum_fed_equilibrium	EGF	-0.0828184387454966	3600
 pE3 abundance	serum_fed_equilibrium	EGF	0.0152517806066782	14400
 pE3 abundance	serum_fed_equilibrium	EGF	-0.0312850650468915	28800
 pE3 abundance	serum_fed_equilibrium	EGF	0.0136782700914483	86400
 pE3 abundance	serum_fed_equilibrium	EGF	-0.00260876972757831	172800
+pE3 abundance	serum_fed_equilibrium	HGF only	-0.0852003222346205	0
 pE3 abundance	serum_fed_equilibrium	HGF only	0.0139889667342892	3600
 pE3 abundance	serum_fed_equilibrium	HGF only	0.039114555482029	14400
 pE3 abundance	serum_fed_equilibrium	HGF only	0.0301972736019942	28800
 pE3 abundance	serum_fed_equilibrium	HGF only	0.0584102511654816	86400
 pE3 abundance	serum_fed_equilibrium	HGF only	0.170081436274003	172800
+pE3 abundance	serum_fed_equilibrium	PBS only	-0.0852003222346205	0
 pE3 abundance	serum_fed_equilibrium	PBS only	-0.0414366133739261	3600
 pE3 abundance	serum_fed_equilibrium	PBS only	-0.049284094352527	14400
 pE3 abundance	serum_fed_equilibrium	PBS only	-0.024656884840629	28800
 pE3 abundance	serum_fed_equilibrium	PBS only	0.0109688824222867	86400
 pE3 abundance	serum_fed_equilibrium	PBS only	-0.0965519964641131	172800
+pIr abundance	serum_fed_equilibrium	EGF	0.116835537803129	0
 pIr abundance	serum_fed_equilibrium	EGF	0.00905022338823291	3600
 pIr abundance	serum_fed_equilibrium	EGF	-0.0125439974790274	14400
 pIr abundance	serum_fed_equilibrium	EGF	0.00712345505402032	28800
 pIr abundance	serum_fed_equilibrium	EGF	-0.000461336373817485	86400
 pIr abundance	serum_fed_equilibrium	EGF	-0.0744532967889085	172800
+pIr abundance	serum_fed_equilibrium	HGF only	0.116835537803129	0
 pIr abundance	serum_fed_equilibrium	HGF only	-0.045827973048332	3600
 pIr abundance	serum_fed_equilibrium	HGF only	0.0380429409670429	14400
 pIr abundance	serum_fed_equilibrium	HGF only	-0.016759788589293	28800
 pIr abundance	serum_fed_equilibrium	HGF only	-0.0264119024962747	86400
 pIr abundance	serum_fed_equilibrium	HGF only	-0.00363755024426623	172800
+pIr abundance	serum_fed_equilibrium	PBS only	0.116835537803129	0
 pIr abundance	serum_fed_equilibrium	PBS only	0.0380332061393106	3600
 pIr abundance	serum_fed_equilibrium	PBS only	0.0932856685961965	14400
 pIr abundance	serum_fed_equilibrium	PBS only	0.0204700935130975	28800
 pIr abundance	serum_fed_equilibrium	PBS only	0.0281632669574937	86400
 pIr abundance	serum_fed_equilibrium	PBS only	0.244169601327686	172800
+Ir abundance	serum_fed_equilibrium	EGF	-0.118411228706216	0
 Ir abundance	serum_fed_equilibrium	EGF	-0.126442800326809	3600
 Ir abundance	serum_fed_equilibrium	EGF	-0.114579666411268	14400
 Ir abundance	serum_fed_equilibrium	EGF	-0.136340041067548	28800
 Ir abundance	serum_fed_equilibrium	EGF	-0.0844182217048259	86400
 Ir abundance	serum_fed_equilibrium	EGF	-0.0927535338991524	172800
+Ir abundance	serum_fed_equilibrium	HGF only	-0.118411228706216	0
 Ir abundance	serum_fed_equilibrium	HGF only	-0.0510260146702638	3600
 Ir abundance	serum_fed_equilibrium	HGF only	-0.0869590043277406	14400
 Ir abundance	serum_fed_equilibrium	HGF only	-0.101984459380505	28800
 Ir abundance	serum_fed_equilibrium	HGF only	-0.105641687347315	86400
 Ir abundance	serum_fed_equilibrium	HGF only	-0.164559554171636	172800
+Ir abundance	serum_fed_equilibrium	PBS only	-0.118411228706216	0
 Ir abundance	serum_fed_equilibrium	PBS only	-0.104982717141546	3600
 Ir abundance	serum_fed_equilibrium	PBS only	-0.0624193042013612	14400
 Ir abundance	serum_fed_equilibrium	PBS only	-0.110490610758827	28800
 Ir abundance	serum_fed_equilibrium	PBS only	-0.117556227981914	86400
 Ir abundance	serum_fed_equilibrium	PBS only	-0.136545479496351	172800
+Isr abundance	serum_fed_equilibrium	EGF	-0.0456721468415285	0
 Isr abundance	serum_fed_equilibrium	EGF	-0.0914613507846601	3600
 Isr abundance	serum_fed_equilibrium	EGF	-0.0432700983409535	14400
 Isr abundance	serum_fed_equilibrium	EGF	-0.00525350408252705	28800
 Isr abundance	serum_fed_equilibrium	EGF	0.0433237696044927	86400
 Isr abundance	serum_fed_equilibrium	EGF	0.0496122780752755	172800
+Isr abundance	serum_fed_equilibrium	HGF only	-0.0456721468415285	0
 Isr abundance	serum_fed_equilibrium	HGF only	-0.100559056044048	3600
 Isr abundance	serum_fed_equilibrium	HGF only	-0.0184848501599554	14400
 Isr abundance	serum_fed_equilibrium	HGF only	0.0128410250405252	28800
 Isr abundance	serum_fed_equilibrium	HGF only	0.116415530580599	86400
 Isr abundance	serum_fed_equilibrium	HGF only	0.0646012521413546	172800
+Isr abundance	serum_fed_equilibrium	PBS only	-0.0456721468415285	0
 Isr abundance	serum_fed_equilibrium	PBS only	0.0441030488019233	3600
 Isr abundance	serum_fed_equilibrium	PBS only	0.135473514968511	14400
 Isr abundance	serum_fed_equilibrium	PBS only	0.189369463958356	28800
 Isr abundance	serum_fed_equilibrium	PBS only	0.119517574464876	86400
 Isr abundance	serum_fed_equilibrium	PBS only	0.320015485446807	172800
+IRS abundance	serum_fed_equilibrium	EGF	-0.015495920143957	0
 IRS abundance	serum_fed_equilibrium	EGF	-0.00415564882761606	3600
 IRS abundance	serum_fed_equilibrium	EGF	-0.0214827426543164	14400
 IRS abundance	serum_fed_equilibrium	EGF	-0.0413545443584431	28800
 IRS abundance	serum_fed_equilibrium	EGF	-0.0911801607974686	86400
 IRS abundance	serum_fed_equilibrium	EGF	-0.03886380396116	172800
+IRS abundance	serum_fed_equilibrium	HGF only	-0.015495920143957	0
 IRS abundance	serum_fed_equilibrium	HGF only	-0.00219967424741155	3600
 IRS abundance	serum_fed_equilibrium	HGF only	-0.00391293300938413	14400
 IRS abundance	serum_fed_equilibrium	HGF only	-0.00775531824698416	28800
 IRS abundance	serum_fed_equilibrium	HGF only	-0.0328977203352471	86400
 IRS abundance	serum_fed_equilibrium	HGF only	-0.0907316292010802	172800
+IRS abundance	serum_fed_equilibrium	PBS only	-0.015495920143957	0
 IRS abundance	serum_fed_equilibrium	PBS only	-0.00357214564926211	3600
 IRS abundance	serum_fed_equilibrium	PBS only	0.0431830928311197	14400
 IRS abundance	serum_fed_equilibrium	PBS only	0.035120654633788	28800
 IRS abundance	serum_fed_equilibrium	PBS only	-0.0340609296885584	86400
 IRS abundance	serum_fed_equilibrium	PBS only	0.16163723217089	172800
+ppERK abundance	serum_fed_equilibrium	EGF	0.5674920181111	0
 ppERK abundance	serum_fed_equilibrium	EGF	0.370764158113906	3600
 ppERK abundance	serum_fed_equilibrium	EGF	0.434267273543063	14400
 ppERK abundance	serum_fed_equilibrium	EGF	0.369833267587957	28800
 ppERK abundance	serum_fed_equilibrium	EGF	0.118165629634577	86400
 ppERK abundance	serum_fed_equilibrium	EGF	-0.329794314870107	172800
+ppERK abundance	serum_fed_equilibrium	HGF only	0.5674920181111	0
 ppERK abundance	serum_fed_equilibrium	HGF only	-0.0823647163820054	3600
 ppERK abundance	serum_fed_equilibrium	HGF only	-0.0548771554713315	14400
 ppERK abundance	serum_fed_equilibrium	HGF only	-0.152211754157932	28800
 ppERK abundance	serum_fed_equilibrium	HGF only	-0.246378041908584	86400
 ppERK abundance	serum_fed_equilibrium	HGF only	-0.313829309705608	172800
+ppERK abundance	serum_fed_equilibrium	PBS only	0.5674920181111	0
 ppERK abundance	serum_fed_equilibrium	PBS only	-0.585869373074324	3600
 ppERK abundance	serum_fed_equilibrium	PBS only	-0.213415424007951	14400
 ppERK abundance	serum_fed_equilibrium	PBS only	-0.44197046178182	28800
 ppERK abundance	serum_fed_equilibrium	PBS only	-0.503921823125504	86400
 ppERK abundance	serum_fed_equilibrium	PBS only	-0.345042564414177	172800
+pMdm2 abundance	serum_fed_equilibrium	EGF	-0.0942227932372578	0
 pMdm2 abundance	serum_fed_equilibrium	EGF	0.0391883786842375	3600
 pMdm2 abundance	serum_fed_equilibrium	EGF	0.00618209643058591	14400
 pMdm2 abundance	serum_fed_equilibrium	EGF	0.0176968770955951	28800
 pMdm2 abundance	serum_fed_equilibrium	EGF	0.130590285435787	86400
 pMdm2 abundance	serum_fed_equilibrium	EGF	0.102151126430696	172800
+pMdm2 abundance	serum_fed_equilibrium	HGF only	-0.0942227932372578	0
 pMdm2 abundance	serum_fed_equilibrium	HGF only	-0.034040508830262	3600
 pMdm2 abundance	serum_fed_equilibrium	HGF only	-0.102711573166566	14400
 pMdm2 abundance	serum_fed_equilibrium	HGF only	-0.0690444474155159	28800
 pMdm2 abundance	serum_fed_equilibrium	HGF only	-0.0377043659113995	86400
 pMdm2 abundance	serum_fed_equilibrium	HGF only	-0.0680689847178547	172800
+pMdm2 abundance	serum_fed_equilibrium	PBS only	-0.0942227932372578	0
 pMdm2 abundance	serum_fed_equilibrium	PBS only	-0.32724589803968	3600
 pMdm2 abundance	serum_fed_equilibrium	PBS only	-0.325604351014189	14400
 pMdm2 abundance	serum_fed_equilibrium	PBS only	-0.399744625675176	28800
 pMdm2 abundance	serum_fed_equilibrium	PBS only	-0.354225607239345	86400
 pMdm2 abundance	serum_fed_equilibrium	PBS only	-0.457201200719702	172800
+MEK abundance	serum_fed_equilibrium	EGF	-0.077550549857473	0
 MEK abundance	serum_fed_equilibrium	EGF	0.0569894438971249	3600
 MEK abundance	serum_fed_equilibrium	EGF	0.0237119627914726	14400
 MEK abundance	serum_fed_equilibrium	EGF	-0.0732892866537438	28800
 MEK abundance	serum_fed_equilibrium	EGF	0.232376525592279	86400
 MEK abundance	serum_fed_equilibrium	EGF	0.111948397887047	172800
+MEK abundance	serum_fed_equilibrium	HGF only	-0.077550549857473	0
 MEK abundance	serum_fed_equilibrium	HGF only	0.0933524052295306	3600
 MEK abundance	serum_fed_equilibrium	HGF only	0.0154332135811805	14400
 MEK abundance	serum_fed_equilibrium	HGF only	0.00263284899930135	28800
 MEK abundance	serum_fed_equilibrium	HGF only	-0.0678812664373724	86400
 MEK abundance	serum_fed_equilibrium	HGF only	-0.0829605101687637	172800
+MEK abundance	serum_fed_equilibrium	PBS only	-0.077550549857473	0
 MEK abundance	serum_fed_equilibrium	PBS only	-0.215432925504942	3600
 MEK abundance	serum_fed_equilibrium	PBS only	-0.143967544875439	14400
 MEK abundance	serum_fed_equilibrium	PBS only	-0.217655976107645	28800
 MEK abundance	serum_fed_equilibrium	PBS only	-0.153398366902991	86400
 MEK abundance	serum_fed_equilibrium	PBS only	-0.357868049825808	172800
+ppMEK abundance	serum_fed_equilibrium	EGF	-0.019486755633733	0
 ppMEK abundance	serum_fed_equilibrium	EGF	-0.00585982701362002	3600
 ppMEK abundance	serum_fed_equilibrium	EGF	0.0102219812450066	14400
 ppMEK abundance	serum_fed_equilibrium	EGF	0.0497690627027826	28800
 ppMEK abundance	serum_fed_equilibrium	EGF	0.141590737435321	86400
 ppMEK abundance	serum_fed_equilibrium	EGF	0.05385961031384	172800
+ppMEK abundance	serum_fed_equilibrium	HGF only	-0.019486755633733	0
 ppMEK abundance	serum_fed_equilibrium	HGF only	0.0168288380632668	3600
 ppMEK abundance	serum_fed_equilibrium	HGF only	-0.113252968035387	14400
 ppMEK abundance	serum_fed_equilibrium	HGF only	-0.0982649248161654	28800
 ppMEK abundance	serum_fed_equilibrium	HGF only	-0.0320258018508437	86400
 ppMEK abundance	serum_fed_equilibrium	HGF only	0.0357234860708721	172800
+ppMEK abundance	serum_fed_equilibrium	PBS only	-0.019486755633733	0
 ppMEK abundance	serum_fed_equilibrium	PBS only	-0.147209877950512	3600
 ppMEK abundance	serum_fed_equilibrium	PBS only	-0.161396803857008	14400
 ppMEK abundance	serum_fed_equilibrium	PBS only	-0.162251887578339	28800
 ppMEK abundance	serum_fed_equilibrium	PBS only	-0.114103934483943	86400
 ppMEK abundance	serum_fed_equilibrium	PBS only	-0.13325491534562	172800
+MSH6 abundance	serum_fed_equilibrium	EGF	-0.0424577029971653	0
 MSH6 abundance	serum_fed_equilibrium	EGF	-0.0234333616480671	3600
 MSH6 abundance	serum_fed_equilibrium	EGF	0.0294512223554699	14400
 MSH6 abundance	serum_fed_equilibrium	EGF	-0.00434336922998554	28800
 MSH6 abundance	serum_fed_equilibrium	EGF	0.254091706194884	86400
 MSH6 abundance	serum_fed_equilibrium	EGF	0.361280700465297	172800
+MSH6 abundance	serum_fed_equilibrium	HGF only	-0.0424577029971653	0
 MSH6 abundance	serum_fed_equilibrium	HGF only	0.0123157746237294	3600
 MSH6 abundance	serum_fed_equilibrium	HGF only	0.00822891634982609	14400
 MSH6 abundance	serum_fed_equilibrium	HGF only	0.0112362811039544	28800
 MSH6 abundance	serum_fed_equilibrium	HGF only	0.0683067458862712	86400
 MSH6 abundance	serum_fed_equilibrium	HGF only	0.0114889200804291	172800
+MSH6 abundance	serum_fed_equilibrium	PBS only	-0.0424577029971653	0
 MSH6 abundance	serum_fed_equilibrium	PBS only	-0.012682239354702	3600
 MSH6 abundance	serum_fed_equilibrium	PBS only	0.0121010617048974	14400
 MSH6 abundance	serum_fed_equilibrium	PBS only	0.0216883917467828	28800
 MSH6 abundance	serum_fed_equilibrium	PBS only	-0.209686772495826	86400
 MSH6 abundance	serum_fed_equilibrium	PBS only	-0.690036110796959	172800
+mTOR abundance	serum_fed_equilibrium	EGF	-0.0601392960831227	0
 mTOR abundance	serum_fed_equilibrium	EGF	-0.0328962423155459	3600
 mTOR abundance	serum_fed_equilibrium	EGF	-0.0353130260081493	14400
 mTOR abundance	serum_fed_equilibrium	EGF	-0.0429165282826072	28800
 mTOR abundance	serum_fed_equilibrium	EGF	0.13963442446237	86400
 mTOR abundance	serum_fed_equilibrium	EGF	0.149287367889678	172800
+mTOR abundance	serum_fed_equilibrium	HGF only	-0.0601392960831227	0
 mTOR abundance	serum_fed_equilibrium	HGF only	-0.001471375454933	3600
 mTOR abundance	serum_fed_equilibrium	HGF only	0.0344953313070537	14400
 mTOR abundance	serum_fed_equilibrium	HGF only	0.0249746201766379	28800
 mTOR abundance	serum_fed_equilibrium	HGF only	0.24857054707996	86400
 mTOR abundance	serum_fed_equilibrium	HGF only	0.198074275679756	172800
+mTOR abundance	serum_fed_equilibrium	PBS only	-0.0601392960831227	0
 mTOR abundance	serum_fed_equilibrium	PBS only	-0.0863202122110528	3600
 mTOR abundance	serum_fed_equilibrium	PBS only	-0.0784289823881708	14400
 mTOR abundance	serum_fed_equilibrium	PBS only	0.0691908627604689	28800
 mTOR abundance	serum_fed_equilibrium	PBS only	0.0494930986728611	86400
 mTOR abundance	serum_fed_equilibrium	PBS only	0.000396904029373319	172800
+RasD abundance	serum_fed_equilibrium	EGF	0.0864870369758433	0
 RasD abundance	serum_fed_equilibrium	EGF	0.0504790169752064	3600
 RasD abundance	serum_fed_equilibrium	EGF	-0.0287098387058905	14400
 RasD abundance	serum_fed_equilibrium	EGF	0.0214739389195362	28800
 RasD abundance	serum_fed_equilibrium	EGF	0.0253650133721473	86400
 RasD abundance	serum_fed_equilibrium	EGF	-0.039226227142938	172800
+RasD abundance	serum_fed_equilibrium	HGF only	0.0864870369758433	0
 RasD abundance	serum_fed_equilibrium	HGF only	0.0208878227357666	3600
 RasD abundance	serum_fed_equilibrium	HGF only	0.103429686037409	14400
 RasD abundance	serum_fed_equilibrium	HGF only	0.0161129689125907	28800
 RasD abundance	serum_fed_equilibrium	HGF only	0.0501163551659108	86400
 RasD abundance	serum_fed_equilibrium	HGF only	0.0330337958077044	172800
+RasD abundance	serum_fed_equilibrium	PBS only	0.0864870369758433	0
 RasD abundance	serum_fed_equilibrium	PBS only	0.0141968441549308	3600
 RasD abundance	serum_fed_equilibrium	PBS only	0.240335545702167	14400
 RasD abundance	serum_fed_equilibrium	PBS only	0.0892798462951892	28800
 RasD abundance	serum_fed_equilibrium	PBS only	0.131380100068805	86400
 RasD abundance	serum_fed_equilibrium	PBS only	0.169528246930654	172800
+MET abundance	serum_fed_equilibrium	EGF	-0.0134152081668179	0
 MET abundance	serum_fed_equilibrium	EGF	0.0565318541921711	3600
 MET abundance	serum_fed_equilibrium	EGF	0.0233065726496385	14400
 MET abundance	serum_fed_equilibrium	EGF	0.0253930338970618	28800
 MET abundance	serum_fed_equilibrium	EGF	0.0487495495871492	86400
 MET abundance	serum_fed_equilibrium	EGF	0.0835590487048961	172800
+MET abundance	serum_fed_equilibrium	HGF only	-0.0134152081668179	0
 MET abundance	serum_fed_equilibrium	HGF only	0.202664730725198	3600
 MET abundance	serum_fed_equilibrium	HGF only	0.0310915324388854	14400
 MET abundance	serum_fed_equilibrium	HGF only	-0.000316884351060128	28800
 MET abundance	serum_fed_equilibrium	HGF only	0.0788053436275799	86400
 MET abundance	serum_fed_equilibrium	HGF only	0.0927399301705634	172800
+MET abundance	serum_fed_equilibrium	PBS only	-0.0134152081668179	0
 MET abundance	serum_fed_equilibrium	PBS only	0.055671268063112	3600
 MET abundance	serum_fed_equilibrium	PBS only	0.0126753060095639	14400
 MET abundance	serum_fed_equilibrium	PBS only	0.0213179527522755	28800
 MET abundance	serum_fed_equilibrium	PBS only	0.00841636776635907	86400
 MET abundance	serum_fed_equilibrium	PBS only	0.0428163323439834	172800
+ERK abundance	serum_fed_equilibrium	EGF	-0.0011555414031919	0
 ERK abundance	serum_fed_equilibrium	EGF	0.0491172791354035	3600
 ERK abundance	serum_fed_equilibrium	EGF	0.0341837351461166	14400
 ERK abundance	serum_fed_equilibrium	EGF	-0.0162989431374627	28800
 ERK abundance	serum_fed_equilibrium	EGF	0.0929925303196026	86400
 ERK abundance	serum_fed_equilibrium	EGF	-0.00512974252667434	172800
+ERK abundance	serum_fed_equilibrium	HGF only	-0.0011555414031919	0
 ERK abundance	serum_fed_equilibrium	HGF only	0.0884533736397477	3600
 ERK abundance	serum_fed_equilibrium	HGF only	0.0243157210344528	14400
 ERK abundance	serum_fed_equilibrium	HGF only	0.0203549204275822	28800
 ERK abundance	serum_fed_equilibrium	HGF only	0.0855751900989066	86400
 ERK abundance	serum_fed_equilibrium	HGF only	0.137964483365151	172800
+ERK abundance	serum_fed_equilibrium	PBS only	-0.0011555414031919	0
 ERK abundance	serum_fed_equilibrium	PBS only	-0.0292840849958732	3600
 ERK abundance	serum_fed_equilibrium	PBS only	-0.0217011528893819	14400
 ERK abundance	serum_fed_equilibrium	PBS only	-0.0126603742023691	28800
 ERK abundance	serum_fed_equilibrium	PBS only	0.0317768214188066	86400
 ERK abundance	serum_fed_equilibrium	PBS only	-0.055323637640735	172800
+p53 abundance	serum_fed_equilibrium	EGF	0.0	0
 p53 abundance	serum_fed_equilibrium	EGF	-0.0829900285816721	3600
 p53 abundance	serum_fed_equilibrium	EGF	0.0122824421107385	14400
 p53 abundance	serum_fed_equilibrium	EGF	-0.103475841473835	28800
 p53 abundance	serum_fed_equilibrium	EGF	-0.0678440172847209	86400
 p53 abundance	serum_fed_equilibrium	EGF	-0.0381824666030467	172800
+p53 abundance	serum_fed_equilibrium	HGF only	0.0	0
 p53 abundance	serum_fed_equilibrium	HGF only	0.0148519276299291	3600
 p53 abundance	serum_fed_equilibrium	HGF only	0.00333638440157576	14400
 p53 abundance	serum_fed_equilibrium	HGF only	0.0194702485249669	28800
 p53 abundance	serum_fed_equilibrium	HGF only	0.0690021728225337	86400
 p53 abundance	serum_fed_equilibrium	HGF only	-0.00355780317548771	172800
+p53 abundance	serum_fed_equilibrium	PBS only	0.0	0
 p53 abundance	serum_fed_equilibrium	PBS only	0.0177278388868116	3600
 p53 abundance	serum_fed_equilibrium	PBS only	0.122118793045301	14400
 p53 abundance	serum_fed_equilibrium	PBS only	0.0786569781830365	28800
 p53 abundance	serum_fed_equilibrium	PBS only	-0.0219463630145636	86400
 p53 abundance	serum_fed_equilibrium	PBS only	0.130391293784341	172800
+pS6K abundance	serum_fed_equilibrium	EGF	-0.0247335506199686	0
 pS6K abundance	serum_fed_equilibrium	EGF	0.0702053440625997	3600
 pS6K abundance	serum_fed_equilibrium	EGF	0.135495870998308	14400
 pS6K abundance	serum_fed_equilibrium	EGF	0.37731150447789	28800
 pS6K abundance	serum_fed_equilibrium	EGF	0.302127772392082	86400
 pS6K abundance	serum_fed_equilibrium	EGF	0.0820287619569889	172800
+pS6K abundance	serum_fed_equilibrium	HGF only	-0.0247335506199686	0
 pS6K abundance	serum_fed_equilibrium	HGF only	-0.115117779475682	3600
 pS6K abundance	serum_fed_equilibrium	HGF only	-0.138471616295168	14400
 pS6K abundance	serum_fed_equilibrium	HGF only	-0.0825205683042275	28800
 pS6K abundance	serum_fed_equilibrium	HGF only	-0.0611621133473761	86400
 pS6K abundance	serum_fed_equilibrium	HGF only	-0.355775076234813	172800
+pS6K abundance	serum_fed_equilibrium	PBS only	-0.0247335506199686	0
 pS6K abundance	serum_fed_equilibrium	PBS only	-0.709401618593391	3600
 pS6K abundance	serum_fed_equilibrium	PBS only	-0.417527668777899	14400
 pS6K abundance	serum_fed_equilibrium	PBS only	-0.503049792505586	28800
 pS6K abundance	serum_fed_equilibrium	PBS only	-0.973195886017521	86400
 pS6K abundance	serum_fed_equilibrium	PBS only	-0.750436451877382	172800
+S6K abundance	serum_fed_equilibrium	EGF	-0.0791075700498165	0
 S6K abundance	serum_fed_equilibrium	EGF	-0.00406664450950248	3600
 S6K abundance	serum_fed_equilibrium	EGF	-0.0510625753058705	14400
 S6K abundance	serum_fed_equilibrium	EGF	-0.0236566902890873	28800
 S6K abundance	serum_fed_equilibrium	EGF	0.0840528066305771	86400
 S6K abundance	serum_fed_equilibrium	EGF	0.219404760799951	172800
+S6K abundance	serum_fed_equilibrium	HGF only	-0.0791075700498165	0
 S6K abundance	serum_fed_equilibrium	HGF only	-0.0199893656849089	3600
 S6K abundance	serum_fed_equilibrium	HGF only	0.0313137074087327	14400
 S6K abundance	serum_fed_equilibrium	HGF only	0.0116155309539589	28800
 S6K abundance	serum_fed_equilibrium	HGF only	0.18457524773028	86400
 S6K abundance	serum_fed_equilibrium	HGF only	0.371856885712255	172800
+S6K abundance	serum_fed_equilibrium	PBS only	-0.0791075700498165	0
 S6K abundance	serum_fed_equilibrium	PBS only	0.0664784341793112	3600
 S6K abundance	serum_fed_equilibrium	PBS only	-0.022337681672475	14400
 S6K abundance	serum_fed_equilibrium	PBS only	0.0175145587536147	28800
 S6K abundance	serum_fed_equilibrium	PBS only	0.122806951356553	86400
 S6K abundance	serum_fed_equilibrium	PBS only	-0.114146855294309	172800
+pRSK abundance	serum_fed_equilibrium	EGF	-0.0247335506199686	0
 pRSK abundance	serum_fed_equilibrium	EGF	0.322274448010742	3600
 pRSK abundance	serum_fed_equilibrium	EGF	0.372315970023079	14400
 pRSK abundance	serum_fed_equilibrium	EGF	0.323746087791877	28800
 pRSK abundance	serum_fed_equilibrium	EGF	0.196510311900148	86400
 pRSK abundance	serum_fed_equilibrium	EGF	0.0423604617946659	172800
+pRSK abundance	serum_fed_equilibrium	HGF only	-0.0247335506199686	0
 pRSK abundance	serum_fed_equilibrium	HGF only	-0.199447918454649	3600
 pRSK abundance	serum_fed_equilibrium	HGF only	-0.152966687953205	14400
 pRSK abundance	serum_fed_equilibrium	HGF only	-0.0859834859629231	28800
 pRSK abundance	serum_fed_equilibrium	HGF only	-0.282518011436303	86400
 pRSK abundance	serum_fed_equilibrium	HGF only	-0.479305821105781	172800
+pRSK abundance	serum_fed_equilibrium	PBS only	-0.0247335506199686	0
 pRSK abundance	serum_fed_equilibrium	PBS only	-0.780924315861319	3600
 pRSK abundance	serum_fed_equilibrium	PBS only	-0.459233196513828	14400
 pRSK abundance	serum_fed_equilibrium	PBS only	-0.491848686091817	28800
 pRSK abundance	serum_fed_equilibrium	PBS only	-0.837664805269855	86400
 pRSK abundance	serum_fed_equilibrium	PBS only	-0.907726262063351	172800
+PARP abundance	serum_fed_equilibrium	EGF	-0.0330050271902995	0
 PARP abundance	serum_fed_equilibrium	EGF	-0.0289870856169584	3600
 PARP abundance	serum_fed_equilibrium	EGF	-0.0015705026998517	14400
 PARP abundance	serum_fed_equilibrium	EGF	-0.0511539362470253	28800
 PARP abundance	serum_fed_equilibrium	EGF	-0.0181779191908118	86400
 PARP abundance	serum_fed_equilibrium	EGF	0.167048885589491	172800
+PARP abundance	serum_fed_equilibrium	HGF only	-0.0330050271902995	0
 PARP abundance	serum_fed_equilibrium	HGF only	-0.0482099940805476	3600
 PARP abundance	serum_fed_equilibrium	HGF only	-0.0139094894830042	14400
 PARP abundance	serum_fed_equilibrium	HGF only	0.012304573662885	28800
 PARP abundance	serum_fed_equilibrium	HGF only	0.0943336653138254	86400
 PARP abundance	serum_fed_equilibrium	HGF only	0.150003907620743	172800
+PARP abundance	serum_fed_equilibrium	PBS only	-0.0330050271902995	0
 PARP abundance	serum_fed_equilibrium	PBS only	0.0822679873197154	3600
 PARP abundance	serum_fed_equilibrium	PBS only	0.0845816664512077	14400
 PARP abundance	serum_fed_equilibrium	PBS only	-0.0201814792557747	28800
 PARP abundance	serum_fed_equilibrium	PBS only	-0.0194469364100997	86400
 PARP abundance	serum_fed_equilibrium	PBS only	-0.286999089900958	172800
+Pr abundance	serum_fed_equilibrium	EGF	0.123848201032513	0
 Pr abundance	serum_fed_equilibrium	EGF	-0.0353525783664209	3600
 Pr abundance	serum_fed_equilibrium	EGF	-0.0270361877577888	14400
 Pr abundance	serum_fed_equilibrium	EGF	-0.0926750634822484	28800
 Pr abundance	serum_fed_equilibrium	EGF	0.352649564388569	86400
 Pr abundance	serum_fed_equilibrium	EGF	0.0257699836060857	172800
+Pr abundance	serum_fed_equilibrium	HGF only	0.123848201032513	0
 Pr abundance	serum_fed_equilibrium	HGF only	-0.047618357317586	3600
 Pr abundance	serum_fed_equilibrium	HGF only	0.0749894851092239	14400
 Pr abundance	serum_fed_equilibrium	HGF only	-0.19723377348874	28800
 Pr abundance	serum_fed_equilibrium	HGF only	0.239991552521363	86400
 Pr abundance	serum_fed_equilibrium	HGF only	0.153128006683647	172800
+Pr abundance	serum_fed_equilibrium	PBS only	0.123848201032513	0
 Pr abundance	serum_fed_equilibrium	PBS only	0.104054092202693	3600
 Pr abundance	serum_fed_equilibrium	PBS only	0.0234551617985843	14400
 Pr abundance	serum_fed_equilibrium	PBS only	0.5688407247916	28800
 Pr abundance	serum_fed_equilibrium	PBS only	0.236280732844642	86400
 Pr abundance	serum_fed_equilibrium	PBS only	0.254784044921578	172800
+PDK1 abundance	serum_fed_equilibrium	EGF	-0.0212029688015045	0
 PDK1 abundance	serum_fed_equilibrium	EGF	0.0140147057279398	3600
 PDK1 abundance	serum_fed_equilibrium	EGF	0.0058992624427904	14400
 PDK1 abundance	serum_fed_equilibrium	EGF	0.0153925590486958	28800
 PDK1 abundance	serum_fed_equilibrium	EGF	0.083300558607245	86400
 PDK1 abundance	serum_fed_equilibrium	EGF	0.0724232619612275	172800
+PDK1 abundance	serum_fed_equilibrium	HGF only	-0.0212029688015045	0
 PDK1 abundance	serum_fed_equilibrium	HGF only	0.016205939591695	3600
 PDK1 abundance	serum_fed_equilibrium	HGF only	0.0	14400
 PDK1 abundance	serum_fed_equilibrium	HGF only	-0.0298113288874184	28800
 PDK1 abundance	serum_fed_equilibrium	HGF only	0.111135215440797	86400
 PDK1 abundance	serum_fed_equilibrium	HGF only	0.190523171331435	172800
+PDK1 abundance	serum_fed_equilibrium	PBS only	-0.0212029688015045	0
 PDK1 abundance	serum_fed_equilibrium	PBS only	0.0507225069858765	3600
 PDK1 abundance	serum_fed_equilibrium	PBS only	0.0449067584059125	14400
 PDK1 abundance	serum_fed_equilibrium	PBS only	-0.00696682129589951	28800
 PDK1 abundance	serum_fed_equilibrium	PBS only	0.0231967011368316	86400
 PDK1 abundance	serum_fed_equilibrium	PBS only	0.00590493204177084	172800
+PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	EGF	0.027566907570922	0
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	EGF	0.0293538897992685	3600
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.010423256316608	14400
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	EGF	0.0173896001558248	28800
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.0123484167171576	86400
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.0990522819842794	172800
+PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.027566907570922	0
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.0193114530758583	3600
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.0356970358107469	14400
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.0143830590045554	28800
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	-0.00902794258794622	86400
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	-0.000431070147200343	172800
+PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.027566907570922	0
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.0475511121033985	3600
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	-0.0047483047945688	14400
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.0	28800
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.0555167636880853	86400
 PI3KC1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.0949204784322597	172800
+PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.0135113994177499	0
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.0514245934286588	3600
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	EGF	0.100017541966554	14400
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	EGF	0.00549409621297441	28800
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.0526832374549982	86400
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	EGF	-0.00680924317689739	172800
+PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	-0.0135113994177499	0
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	-0.0365015413812605	3600
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.0223847521302166	14400
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	-0.000795765902972295	28800
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.196964319410342	86400
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	HGF only	0.0759878995753214	172800
+PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	-0.0135113994177499	0
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	-0.043050999730627	3600
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	-0.0242896084313996	14400
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.0124931239988544	28800
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	-0.00295568911940973	86400
 PI3KR1 + PI3K1 abundance	serum_fed_equilibrium	PBS only	0.0545062634457496	172800
+PKC abundance	serum_fed_equilibrium	EGF	-0.041149483561982	0
 PKC abundance	serum_fed_equilibrium	EGF	-0.050256847465641	3600
 PKC abundance	serum_fed_equilibrium	EGF	-0.0306655951863542	14400
 PKC abundance	serum_fed_equilibrium	EGF	-0.0512497529714673	28800
 PKC abundance	serum_fed_equilibrium	EGF	-0.042056839721598	86400
 PKC abundance	serum_fed_equilibrium	EGF	-0.0851608771181386	172800
+PKC abundance	serum_fed_equilibrium	HGF only	-0.041149483561982	0
 PKC abundance	serum_fed_equilibrium	HGF only	-0.0609820698987525	3600
 PKC abundance	serum_fed_equilibrium	HGF only	0.027432530049996	14400
 PKC abundance	serum_fed_equilibrium	HGF only	0.00220582308299309	28800
 PKC abundance	serum_fed_equilibrium	HGF only	0.0811192499004477	86400
 PKC abundance	serum_fed_equilibrium	HGF only	0.0364664632529538	172800
+PKC abundance	serum_fed_equilibrium	PBS only	-0.041149483561982	0
 PKC abundance	serum_fed_equilibrium	PBS only	0.0567647090854682	3600
 PKC abundance	serum_fed_equilibrium	PBS only	-0.0197575835455789	14400
 PKC abundance	serum_fed_equilibrium	PBS only	0.00203852479495428	28800
 PKC abundance	serum_fed_equilibrium	PBS only	0.0753327064537973	86400
 PKC abundance	serum_fed_equilibrium	PBS only	0.0542385366423641	172800
+PTEN abundance	serum_fed_equilibrium	EGF	0.0408671102173387	0
 PTEN abundance	serum_fed_equilibrium	EGF	0.042801386295935	3600
 PTEN abundance	serum_fed_equilibrium	EGF	-0.0359952797336686	14400
 PTEN abundance	serum_fed_equilibrium	EGF	-0.0286040895449303	28800
 PTEN abundance	serum_fed_equilibrium	EGF	-0.020607020881906	86400
 PTEN abundance	serum_fed_equilibrium	EGF	-0.0819330235708439	172800
+PTEN abundance	serum_fed_equilibrium	HGF only	0.0408671102173387	0
 PTEN abundance	serum_fed_equilibrium	HGF only	-0.0156960859668863	3600
 PTEN abundance	serum_fed_equilibrium	HGF only	0.0411045578019349	14400
 PTEN abundance	serum_fed_equilibrium	HGF only	0.0448892632301197	28800
 PTEN abundance	serum_fed_equilibrium	HGF only	0.0396353242474426	86400
 PTEN abundance	serum_fed_equilibrium	HGF only	0.210808823700419	172800
+PTEN abundance	serum_fed_equilibrium	PBS only	0.0408671102173387	0
 PTEN abundance	serum_fed_equilibrium	PBS only	0.033005196053792	3600
 PTEN abundance	serum_fed_equilibrium	PBS only	0.0665528037833159	14400
 PTEN abundance	serum_fed_equilibrium	PBS only	-0.101752605565053	28800
 PTEN abundance	serum_fed_equilibrium	PBS only	0.0101756199536634	86400
 PTEN abundance	serum_fed_equilibrium	PBS only	-0.211750885911301	172800
+Raptor abundance	serum_fed_equilibrium	EGF	-0.0334581417091999	0
 Raptor abundance	serum_fed_equilibrium	EGF	0.0267437542393953	3600
 Raptor abundance	serum_fed_equilibrium	EGF	-0.0114164199219773	14400
 Raptor abundance	serum_fed_equilibrium	EGF	-0.0257762272739571	28800
 Raptor abundance	serum_fed_equilibrium	EGF	0.0323197255762326	86400
 Raptor abundance	serum_fed_equilibrium	EGF	0.184248175093539	172800
+Raptor abundance	serum_fed_equilibrium	HGF only	-0.0334581417091999	0
 Raptor abundance	serum_fed_equilibrium	HGF only	0.0543040313780845	3600
 Raptor abundance	serum_fed_equilibrium	HGF only	0.0372788707755731	14400
 Raptor abundance	serum_fed_equilibrium	HGF only	0.00742239741958523	28800
 Raptor abundance	serum_fed_equilibrium	HGF only	0.125965971611893	86400
 Raptor abundance	serum_fed_equilibrium	HGF only	0.28361876616887	172800
+Raptor abundance	serum_fed_equilibrium	PBS only	-0.0334581417091999	0
 Raptor abundance	serum_fed_equilibrium	PBS only	-0.0187470626532387	3600
 Raptor abundance	serum_fed_equilibrium	PBS only	-0.0352098276797474	14400
 Raptor abundance	serum_fed_equilibrium	PBS only	-0.0195218346497357	28800
 Raptor abundance	serum_fed_equilibrium	PBS only	0.0521894511698012	86400
 Raptor abundance	serum_fed_equilibrium	PBS only	0.0827031000234008	172800
+RSK abundance	serum_fed_equilibrium	EGF	-0.145662874520126	0
 RSK abundance	serum_fed_equilibrium	EGF	-0.101095232687026	3600
 RSK abundance	serum_fed_equilibrium	EGF	-0.096739968155287	14400
 RSK abundance	serum_fed_equilibrium	EGF	-0.0222848907624722	28800
 RSK abundance	serum_fed_equilibrium	EGF	-0.00977534866807566	86400
 RSK abundance	serum_fed_equilibrium	EGF	0.0600770934568282	172800
+RSK abundance	serum_fed_equilibrium	HGF only	-0.145662874520126	0
 RSK abundance	serum_fed_equilibrium	HGF only	-0.0965873486022294	3600
 RSK abundance	serum_fed_equilibrium	HGF only	-0.0486364169084355	14400
 RSK abundance	serum_fed_equilibrium	HGF only	-0.0120918419914225	28800
 RSK abundance	serum_fed_equilibrium	HGF only	0.110693601169903	86400
 RSK abundance	serum_fed_equilibrium	HGF only	0.126299462351876	172800
+RSK abundance	serum_fed_equilibrium	PBS only	-0.145662874520126	0
 RSK abundance	serum_fed_equilibrium	PBS only	0.0532115735604451	3600
 RSK abundance	serum_fed_equilibrium	PBS only	-0.00529990818405696	14400
 RSK abundance	serum_fed_equilibrium	PBS only	-0.0378067205995966	28800
 RSK abundance	serum_fed_equilibrium	PBS only	0.0568316521967986	86400
 RSK abundance	serum_fed_equilibrium	PBS only	-0.084033083568694	172800
+Smac abundance	serum_fed_equilibrium	EGF	0.126896763807785	0
 Smac abundance	serum_fed_equilibrium	EGF	0.0964125047019365	3600
 Smac abundance	serum_fed_equilibrium	EGF	0.134459026357354	14400
 Smac abundance	serum_fed_equilibrium	EGF	0.0788743463017026	28800
 Smac abundance	serum_fed_equilibrium	EGF	0.0590674977068942	86400
 Smac abundance	serum_fed_equilibrium	EGF	-0.0367150806961978	172800
+Smac abundance	serum_fed_equilibrium	HGF only	0.126896763807785	0
 Smac abundance	serum_fed_equilibrium	HGF only	0.0652461885989987	3600
 Smac abundance	serum_fed_equilibrium	HGF only	0.0857349101119504	14400
 Smac abundance	serum_fed_equilibrium	HGF only	0.0704800728435859	28800
 Smac abundance	serum_fed_equilibrium	HGF only	0.0588416833032042	86400
 Smac abundance	serum_fed_equilibrium	HGF only	0.19536249029526	172800
+Smac abundance	serum_fed_equilibrium	PBS only	0.126896763807785	0
 Smac abundance	serum_fed_equilibrium	PBS only	0.194281867799828	3600
 Smac abundance	serum_fed_equilibrium	PBS only	0.107234915669138	14400
 Smac abundance	serum_fed_equilibrium	PBS only	0.101069874721395	28800
 Smac abundance	serum_fed_equilibrium	PBS only	0.32017225031178	86400
 Smac abundance	serum_fed_equilibrium	PBS only	0.348830887193394	172800
+TSC1 abundance	serum_fed_equilibrium	EGF	-0.0703417970770759	0
 TSC1 abundance	serum_fed_equilibrium	EGF	-0.0048049443365622	3600
 TSC1 abundance	serum_fed_equilibrium	EGF	-0.049443729747776	14400
 TSC1 abundance	serum_fed_equilibrium	EGF	-0.0138567500938004	28800
 TSC1 abundance	serum_fed_equilibrium	EGF	0.138022419494382	86400
 TSC1 abundance	serum_fed_equilibrium	EGF	0.0975134690692978	172800
+TSC1 abundance	serum_fed_equilibrium	HGF only	-0.0703417970770759	0
 TSC1 abundance	serum_fed_equilibrium	HGF only	-0.0316105863658704	3600
 TSC1 abundance	serum_fed_equilibrium	HGF only	0.0182132351648254	14400
 TSC1 abundance	serum_fed_equilibrium	HGF only	0.0210038830782263	28800
 TSC1 abundance	serum_fed_equilibrium	HGF only	0.0759067097320289	86400
 TSC1 abundance	serum_fed_equilibrium	HGF only	0.160723573641127	172800
+TSC1 abundance	serum_fed_equilibrium	PBS only	-0.0703417970770759	0
 TSC1 abundance	serum_fed_equilibrium	PBS only	0.00965072631104919	3600
 TSC1 abundance	serum_fed_equilibrium	PBS only	-0.0067145057007351	14400
 TSC1 abundance	serum_fed_equilibrium	PBS only	0.00322049300741834	28800
 TSC1 abundance	serum_fed_equilibrium	PBS only	0.0239697628326458	86400
 TSC1 abundance	serum_fed_equilibrium	PBS only	-0.131867569076871	172800
+TSC2 abundance	serum_fed_equilibrium	EGF	-0.0331721102865528	0
 TSC2 abundance	serum_fed_equilibrium	EGF	-0.0529736437655595	3600
 TSC2 abundance	serum_fed_equilibrium	EGF	-0.0321372328141564	14400
 TSC2 abundance	serum_fed_equilibrium	EGF	-0.062210484871825	28800
 TSC2 abundance	serum_fed_equilibrium	EGF	-0.0103715611009464	86400
 TSC2 abundance	serum_fed_equilibrium	EGF	0.017165439332969	172800
+TSC2 abundance	serum_fed_equilibrium	HGF only	-0.0331721102865528	0
 TSC2 abundance	serum_fed_equilibrium	HGF only	-0.0351444545901002	3600
 TSC2 abundance	serum_fed_equilibrium	HGF only	-0.0485564685133048	14400
 TSC2 abundance	serum_fed_equilibrium	HGF only	-0.0578791311202538	28800
 TSC2 abundance	serum_fed_equilibrium	HGF only	0.118273440298599	86400
 TSC2 abundance	serum_fed_equilibrium	HGF only	0.0594595651696075	172800
+TSC2 abundance	serum_fed_equilibrium	PBS only	-0.0331721102865528	0
 TSC2 abundance	serum_fed_equilibrium	PBS only	-0.0724704817336173	3600
 TSC2 abundance	serum_fed_equilibrium	PBS only	-0.000331863488326649	14400
 TSC2 abundance	serum_fed_equilibrium	PBS only	-0.0902588846379151	28800
 TSC2 abundance	serum_fed_equilibrium	PBS only	-0.0706511305585483	86400
 TSC2 abundance	serum_fed_equilibrium	PBS only	-0.025500556325901	172800
+pTSC2 abunance	serum_fed_equilibrium	EGF	0.201479491492789	0
 pTSC2 abunance	serum_fed_equilibrium	EGF	0.0342449053561297	3600
 pTSC2 abunance	serum_fed_equilibrium	EGF	0.0564554186362457	14400
 pTSC2 abunance	serum_fed_equilibrium	EGF	-0.0121153852287405	28800
 pTSC2 abunance	serum_fed_equilibrium	EGF	0.013874828280287	86400
 pTSC2 abunance	serum_fed_equilibrium	EGF	0.170312337067597	172800
+pTSC2 abunance	serum_fed_equilibrium	HGF only	0.201479491492789	0
 pTSC2 abunance	serum_fed_equilibrium	HGF only	0.0452901755250497	3600
 pTSC2 abunance	serum_fed_equilibrium	HGF only	0.0168777647034934	14400
 pTSC2 abunance	serum_fed_equilibrium	HGF only	-0.0258689496038595	28800
 pTSC2 abunance	serum_fed_equilibrium	HGF only	0.0735930735409355	86400
 pTSC2 abunance	serum_fed_equilibrium	HGF only	0.186286659903667	172800
+pTSC2 abunance	serum_fed_equilibrium	PBS only	0.201479491492789	0
 pTSC2 abunance	serum_fed_equilibrium	PBS only	-0.101627291640755	3600
 pTSC2 abunance	serum_fed_equilibrium	PBS only	0.086592466148046	14400
 pTSC2 abunance	serum_fed_equilibrium	PBS only	0.0835286578444768	28800
 pTSC2 abunance	serum_fed_equilibrium	PBS only	0.185569408516848	86400
 pTSC2 abunance	serum_fed_equilibrium	PBS only	0.276568400802131	172800
+wee1 abundance	serum_fed_equilibrium	EGF	0.0518693105305103	0
 wee1 abundance	serum_fed_equilibrium	EGF	0.0741413257474439	3600
 wee1 abundance	serum_fed_equilibrium	EGF	0.160608412376081	14400
 wee1 abundance	serum_fed_equilibrium	EGF	0.0702605291316206	28800
 wee1 abundance	serum_fed_equilibrium	EGF	0.105385850903594	86400
 wee1 abundance	serum_fed_equilibrium	EGF	0.0933168662150349	172800
+wee1 abundance	serum_fed_equilibrium	HGF only	0.0518693105305103	0
 wee1 abundance	serum_fed_equilibrium	HGF only	0.0174462792657216	3600
 wee1 abundance	serum_fed_equilibrium	HGF only	0.179216332532674	14400
 wee1 abundance	serum_fed_equilibrium	HGF only	0.129434798226071	28800
 wee1 abundance	serum_fed_equilibrium	HGF only	-0.0171783793763052	86400
 wee1 abundance	serum_fed_equilibrium	HGF only	-0.325050892927411	172800
+wee1 abundance	serum_fed_equilibrium	PBS only	0.0518693105305103	0
 wee1 abundance	serum_fed_equilibrium	PBS only	0.021639795360631	3600
 wee1 abundance	serum_fed_equilibrium	PBS only	0.180948169024177	14400
 wee1 abundance	serum_fed_equilibrium	PBS only	0.0413406033918451	28800
 wee1 abundance	serum_fed_equilibrium	PBS only	-0.523166114261495	86400
 wee1 abundance	serum_fed_equilibrium	PBS only	-0.440336719614554	172800
+Rheb abundance	serum_fed_equilibrium	EGF	-0.0436340781143552	0
 Rheb abundance	serum_fed_equilibrium	EGF	0.0331838394782194	3600
 Rheb abundance	serum_fed_equilibrium	EGF	-0.0383614952480726	14400
 Rheb abundance	serum_fed_equilibrium	EGF	-0.0159091208026453	28800
 Rheb abundance	serum_fed_equilibrium	EGF	-0.0135978407566204	86400
 Rheb abundance	serum_fed_equilibrium	EGF	0.0503358272581377	172800
+Rheb abundance	serum_fed_equilibrium	HGF only	-0.0436340781143552	0
 Rheb abundance	serum_fed_equilibrium	HGF only	0.0510609387900081	3600
 Rheb abundance	serum_fed_equilibrium	HGF only	0.0199451100612725	14400
 Rheb abundance	serum_fed_equilibrium	HGF only	0.00729214862041147	28800
 Rheb abundance	serum_fed_equilibrium	HGF only	-0.176123460180224	86400
 Rheb abundance	serum_fed_equilibrium	HGF only	0.229831013981712	172800
+Rheb abundance	serum_fed_equilibrium	PBS only	-0.0436340781143552	0
 Rheb abundance	serum_fed_equilibrium	PBS only	-0.0700918545872485	3600
 Rheb abundance	serum_fed_equilibrium	PBS only	-0.11008360632903	14400
 Rheb abundance	serum_fed_equilibrium	PBS only	-0.126825527825768	28800
 Rheb abundance	serum_fed_equilibrium	PBS only	-0.023764522071445	86400
 Rheb abundance	serum_fed_equilibrium	PBS only	0.0143632281546583	172800
+Rictor abundance	serum_fed_equilibrium	EGF	-0.112738331560723	0
 Rictor abundance	serum_fed_equilibrium	EGF	-0.0568626999318673	3600
 Rictor abundance	serum_fed_equilibrium	EGF	-0.0646606677791259	14400
 Rictor abundance	serum_fed_equilibrium	EGF	0.0395636178297938	28800
 Rictor abundance	serum_fed_equilibrium	EGF	0.214186571904767	86400
 Rictor abundance	serum_fed_equilibrium	EGF	0.167725711962066	172800
+Rictor abundance	serum_fed_equilibrium	HGF only	-0.112738331560723	0
 Rictor abundance	serum_fed_equilibrium	HGF only	-0.01240973914107	3600
 Rictor abundance	serum_fed_equilibrium	HGF only	0.00494810162358489	14400
 Rictor abundance	serum_fed_equilibrium	HGF only	0.0118312636827186	28800
 Rictor abundance	serum_fed_equilibrium	HGF only	0.161835191676029	86400
 Rictor abundance	serum_fed_equilibrium	HGF only	0.166933263432153	172800
+Rictor abundance	serum_fed_equilibrium	PBS only	-0.112738331560723	0
 Rictor abundance	serum_fed_equilibrium	PBS only	-0.0228239321852751	3600
 Rictor abundance	serum_fed_equilibrium	PBS only	-0.0723768455448977	14400
 Rictor abundance	serum_fed_equilibrium	PBS only	0.0496165838881128	28800
 Rictor abundance	serum_fed_equilibrium	PBS only	0.00544749016894286	86400
 Rictor abundance	serum_fed_equilibrium	PBS only	-0.254463324902557	172800
+CRaf abundance	serum_fed_equilibrium	EGF	-0.051673815278212	0
 CRaf abundance	serum_fed_equilibrium	EGF	-0.0414559479651277	3600
 CRaf abundance	serum_fed_equilibrium	EGF	-0.0430867186815407	14400
 CRaf abundance	serum_fed_equilibrium	EGF	-0.040645890103995	28800
 CRaf abundance	serum_fed_equilibrium	EGF	0.00819066790927355	86400
 CRaf abundance	serum_fed_equilibrium	EGF	0.0892792169067942	172800
+CRaf abundance	serum_fed_equilibrium	HGF only	-0.051673815278212	0
 CRaf abundance	serum_fed_equilibrium	HGF only	-0.0226679421384838	3600
 CRaf abundance	serum_fed_equilibrium	HGF only	-0.049449527421689	14400
 CRaf abundance	serum_fed_equilibrium	HGF only	-0.0163713645309442	28800
 CRaf abundance	serum_fed_equilibrium	HGF only	-0.0103843973376228	86400
 CRaf abundance	serum_fed_equilibrium	HGF only	0.0702363058843512	172800
+CRaf abundance	serum_fed_equilibrium	PBS only	-0.051673815278212	0
 CRaf abundance	serum_fed_equilibrium	PBS only	-0.0278295471785997	3600
 CRaf abundance	serum_fed_equilibrium	PBS only	-0.0643520492703814	14400
 CRaf abundance	serum_fed_equilibrium	PBS only	-0.0593477516202995	28800
 CRaf abundance	serum_fed_equilibrium	PBS only	0.0190117266111866	86400
 CRaf abundance	serum_fed_equilibrium	PBS only	-0.0607205720648244	172800
+RasT_CRaf abundance	serum_fed_equilibrium	EGF	0.130046632005411	0
 RasT_CRaf abundance	serum_fed_equilibrium	EGF	0.192993306031999	3600
 RasT_CRaf abundance	serum_fed_equilibrium	EGF	0.20813998710024	14400
 RasT_CRaf abundance	serum_fed_equilibrium	EGF	0.30069200225614	28800
 RasT_CRaf abundance	serum_fed_equilibrium	EGF	0.377480405784755	86400
 RasT_CRaf abundance	serum_fed_equilibrium	EGF	-0.00416880222707616	172800
+RasT_CRaf abundance	serum_fed_equilibrium	HGF only	0.130046632005411	0
 RasT_CRaf abundance	serum_fed_equilibrium	HGF only	-0.0600010321547967	3600
 RasT_CRaf abundance	serum_fed_equilibrium	HGF only	-0.116309597453159	14400
 RasT_CRaf abundance	serum_fed_equilibrium	HGF only	-0.0785506778446445	28800
 RasT_CRaf abundance	serum_fed_equilibrium	HGF only	-0.133317172815793	86400
 RasT_CRaf abundance	serum_fed_equilibrium	HGF only	-0.590610374659516	172800
+RasT_CRaf abundance	serum_fed_equilibrium	PBS only	0.130046632005411	0
 RasT_CRaf abundance	serum_fed_equilibrium	PBS only	-0.510239959639281	3600
 RasT_CRaf abundance	serum_fed_equilibrium	PBS only	-0.410475692349252	14400
 RasT_CRaf abundance	serum_fed_equilibrium	PBS only	-0.538646742054305	28800
 RasT_CRaf abundance	serum_fed_equilibrium	PBS only	-0.726477528298592	86400
 RasT_CRaf abundance	serum_fed_equilibrium	PBS only	-0.723138789842088	172800
+pRb abundance	serum_fed_equilibrium	EGF	0.0162669781549631	0
 pRb abundance	serum_fed_equilibrium	EGF	-0.0181489541997353	3600
 pRb abundance	serum_fed_equilibrium	EGF	-0.0558097456329943	14400
 pRb abundance	serum_fed_equilibrium	EGF	0.0146267653897308	28800
 pRb abundance	serum_fed_equilibrium	EGF	-0.00476234743549446	86400
 pRb abundance	serum_fed_equilibrium	EGF	-0.0746531780417894	172800
+pRb abundance	serum_fed_equilibrium	HGF only	0.0162669781549631	0
 pRb abundance	serum_fed_equilibrium	HGF only	-0.0316493531060472	3600
 pRb abundance	serum_fed_equilibrium	HGF only	-0.0263186308968565	14400
 pRb abundance	serum_fed_equilibrium	HGF only	0.000287926815502305	28800
 pRb abundance	serum_fed_equilibrium	HGF only	0.0214426987088902	86400
 pRb abundance	serum_fed_equilibrium	HGF only	-0.0515399010372327	172800
+pRb abundance	serum_fed_equilibrium	PBS only	0.0162669781549631	0
 pRb abundance	serum_fed_equilibrium	PBS only	0.00437208137846416	3600
 pRb abundance	serum_fed_equilibrium	PBS only	0.0107521663461398	14400
 pRb abundance	serum_fed_equilibrium	PBS only	-0.0206042628216022	28800
 pRb abundance	serum_fed_equilibrium	PBS only	0.0884441649877988	86400
 pRb abundance	serum_fed_equilibrium	PBS only	0.000167336942461536	172800
+pRbp + pRbc2 abundance	serum_fed_equilibrium	EGF	-0.140087631497256	0
 pRbp + pRbc2 abundance	serum_fed_equilibrium	EGF	-0.0591524100326611	3600
 pRbp + pRbc2 abundance	serum_fed_equilibrium	EGF	-0.0259700813498857	14400
 pRbp + pRbc2 abundance	serum_fed_equilibrium	EGF	0.134188729229418	28800
 pRbp + pRbc2 abundance	serum_fed_equilibrium	EGF	0.600294960734324	86400
 pRbp + pRbc2 abundance	serum_fed_equilibrium	EGF	0.693728404769238	172800
+pRbp + pRbc2 abundance	serum_fed_equilibrium	HGF only	-0.140087631497256	0
 pRbp + pRbc2 abundance	serum_fed_equilibrium	HGF only	0.0562203906679447	3600
 pRbp + pRbc2 abundance	serum_fed_equilibrium	HGF only	0.0734942674403884	14400
 pRbp + pRbc2 abundance	serum_fed_equilibrium	HGF only	-0.0292420072551174	28800
 pRbp + pRbc2 abundance	serum_fed_equilibrium	HGF only	-0.0981994360261318	86400
 pRbp + pRbc2 abundance	serum_fed_equilibrium	HGF only	-0.742717452728181	172800
+pRbp + pRbc2 abundance	serum_fed_equilibrium	PBS only	-0.140087631497256	0
 pRbp + pRbc2 abundance	serum_fed_equilibrium	PBS only	-0.14348983001564	3600
 pRbp + pRbc2 abundance	serum_fed_equilibrium	PBS only	-0.124511299525655	14400
 pRbp + pRbc2 abundance	serum_fed_equilibrium	PBS only	-0.325849126448344	28800
