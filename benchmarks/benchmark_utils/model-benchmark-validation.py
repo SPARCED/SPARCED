@@ -15,7 +15,7 @@ Users are anticipated to compare simulation results to prior validated results.
 
 #-----------------------Package Import & Defined Arguements-------------------#
 import os
-from benchmark_utils.arguements import parse_args
+from arguements import parse_args
 import subprocess, sys
 
 # Parse the arguements
@@ -56,11 +56,12 @@ def run_all_benchmarks(model_path: str):
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = f"mpiexec -n 4 python3 run_benchmark.py -m {args.model} -b {benchmark}"
+        Command = f"mpiexec -n 4 python __main__.py -m {model_path} -b {benchmark}"
 
-        subprocess.Popen(Command, shell=True, stdout=subprocess.PIPE)
+        subprocess.run(Command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 
 
 #-----------------------Run All Benchmarks-------------------------------------#
 if __name__ == '__main__':
-    run_all_benchmarks()
+    run_all_benchmarks(args.model)

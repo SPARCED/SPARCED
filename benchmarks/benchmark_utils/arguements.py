@@ -38,9 +38,9 @@ def parse_args():
                         default=(os.path.join(sparced_root, 
                                             'SPARCED/models/SPARCED_standard')))
     parser.add_argument('--benchmark', '-b', 
-                        required = True, 
+                        required = False, 
                         type=str,
                         help='benchmark to evaluate the model against',
-                        default='stochastic_expression')
+                        default='stochastic-expression')
     
     return (parser.parse_args())
