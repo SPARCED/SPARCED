@@ -28,6 +28,11 @@ except:
     print("Please provide a path to the model directory")
     sys.exit(1)
 
+try:
+    assert args.cores is not None
+except:
+    print ("Number of cores is not assigned, defaulting to 1")
+
 #-----------------------Function to Run All Benchmarks-------------------------#
 def run_all_benchmarks(model_path: str):
     """
@@ -56,9 +61,10 @@ def run_all_benchmarks(model_path: str):
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = f"mpiexec -n 4 python __main__.py -m {model_path} -b {benchmark}"
+        Command = f"mpiexec -n {args.cores} python __main__.py -m {model_path} -b {benchmark}"
 
-        subprocess.run(Command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run(Command, shell=True, check=True, 
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
 

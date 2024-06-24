@@ -25,11 +25,13 @@ def parse_args():
                             calculated (1) or if the entire simulation is \
                                 saved (0)', 
                         default=1)
-    parser.add_argument('--name', 
+    
+    parser.add_argument('--name', '-n',
                         required=False, 
                         type=str, 
                         help='the name of the file to save the results', 
                         default=None)
+    
     parser.add_argument('--model', '-m', 
                         required = True, 
                         type=str, 
@@ -37,10 +39,18 @@ def parse_args():
                         to be used for unit testing', 
                         default=(os.path.join(sparced_root, 
                                             'SPARCED/models/SPARCED_standard')))
+    
     parser.add_argument('--benchmark', '-b', 
                         required = False, 
                         type=str,
                         help='benchmark to evaluate the model against',
                         default='stochastic-expression')
+    
+    parser.add_argument('--cores', '-c', 
+                        required=False, 
+                        type=int,
+                        help='Number of cores you which to use \
+                            for a parallel process', 
+                        default= 1)
     
     return (parser.parse_args())
