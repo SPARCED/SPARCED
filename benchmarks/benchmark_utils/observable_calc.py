@@ -98,6 +98,7 @@ class ObservableCalculator:
             for i in range(0, self._sum_unique_dict_entries()[condition]):
                 result_dict[condition][f'cell {i}'][f'experiment {observable}']['toutS'] = condition_data['time'].values
                 result_dict[condition][f'cell {i}'][f'experiment {observable}']['xoutS'] = condition_data['measurement'].values
+        
         return result_dict
 
 
