@@ -238,8 +238,6 @@ class Utils:
             model.setParameterById(parameter, parameter_value)
         except RuntimeError:
             model.setFixedParameterById(parameter, parameter_value)
-        
-        print(f"Parameter {parameter} set to {model.getParameterById(parameter)}")
 
         return model
 
