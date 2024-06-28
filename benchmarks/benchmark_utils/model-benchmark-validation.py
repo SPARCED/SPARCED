@@ -34,7 +34,7 @@ except:
     print ("Number of cores is not assigned, defaulting to 1")
 
 #-----------------------Function to Run All Benchmarks-------------------------#
-def run_all_benchmarks(model_path: str):
+def run_all_benchmarks(model_path: str | os.PathLike) -> None:
     """
     Run all benchmarks in the benchmarks directory
     Input:
@@ -47,27 +47,41 @@ def run_all_benchmarks(model_path: str):
 
     os.chdir('..')
 
-    # Find all benchmarks to be completed
-    directory_contents = os.listdir()
+    benchmarks = _get_list_of_benchmarks()
 
-    # Remove the benchmark_utils directory
-    directory_contents = [d for d in directory_contents if d!= 'benchmark_utils']
-
-    # Remove any files in the directory
-    directory_contents = [d for d in directory_contents if os.path.isdir(d)]
-
-    for benchmark in directory_contents:
+    for benchmark in benchmarks:
 
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = f"mpiexec -n {args.cores} python __main__.py -m {model_path} -b {benchmark}"
+        Command = f"mpiexec -n {args.cores} python __main__.py \
+                -m {model_path} -b {benchmark}"
 
         subprocess.run(Command, shell=True, check=True, 
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
+def _get_list_of_benchmarks() -> list:
+    """ Return a list of all benchmarks to be run
+    Inputs:
+        None
 
-#-----------------------Run All Benchmarks-------------------------------------#
+    Returns:
+        A list of all benchmarks to be run: list of strings
+    
+    """
+    return ["BIM-dependent-ERK-inhibition", "TRAIL-percent-death", 
+            "etoposide-induced-cell-death", "proliferation-growth", 
+            "DNA-repair", "TRAIL_time-to-death","LINCS-RPPA-Abundance",
+            "inhibition-of-stochastic-apoptosis","stochastic-expression",
+            "receptor-ligand_cooperativity", "cell_cycle", "p53-dynamics", 
+            "ERK-AKT-dose-response", "regulation-of-stochastic-proliferation", 
+            "IFNg-pulse-response","ribosome-doubling-rate",
+            "survival-signalling"]
+
+
+#-----------------------Run All Benchmarks------------------------------------#
 if __name__ == '__main__':
     run_all_benchmarks(args.model)
+
+

@@ -6,6 +6,14 @@ wd = os.path.dirname(os.path.abspath(__file__))
 
 sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
                                               .index('SPARCED')+1]))
+benchmarks = [
+            "BIM-dependent-ERK-inhibition", "TRAIL-percent-death", "etoposide-induced-cell-death", 
+            "proliferation-growth", "DNA-repair", "TRAIL_time-to-death", 
+            "inhibition-of-stochastic-apoptosis", "receptor-ligand_cooperativity", 
+            "ERK-AKT-dose-response", "regulation-of-stochastic-proliferation", "IFNg-pulse-response",
+            "ribosome-doubling-rate", "LINCS-RPPA-Abundance", "stochastic-expression",
+            "cell_cycle", "p53-dynamics", "survival-signalling"
+]
 
 def parse_args():
     """Retrieve and parse arguments necessary for model creation
@@ -43,7 +51,8 @@ def parse_args():
     parser.add_argument('--benchmark', '-b', 
                         required = False, 
                         type=str,
-                        help='benchmark to evaluate the model against',
+                        help=f'benchmark to evaluate the model against, \
+                            options are {benchmarks}',
                         default='stochastic-expression')
     
     parser.add_argument('--cores', '-c', 
@@ -54,3 +63,4 @@ def parse_args():
                         default= 1)
     
     return (parser.parse_args())
+

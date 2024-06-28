@@ -9,6 +9,7 @@
 import os
 import sys
 import math
+import libsbml
 import pandas as pd
 import numpy as np
 from benchmark_utils.utils import Utils as utils
@@ -43,7 +44,7 @@ class Simulation:
         self.f_genereg = f_genereg
         self.f_omics = f_omics
         
-    def _run_condition_simulation(self, condition: pd.Series):
+    def _run_condition_simulation(self, condition: pd.Series) -> np.ndarray:
         """This function runs the simulation for a single condition.
         input:
             condition: pd.Series - the condition to simulate
@@ -105,7 +106,7 @@ class Simulation:
         return xoutS_all, tout_all, xoutG_all
 
 
-    def _preequilibrate(self, condition: pd.Series):      
+    def _preequilibrate(self, condition: pd.Series) -> pd.DataFrame:      
         """This function assigns a set of conditions that replicate 
         prior experimental conditions before the primary stimulus of 
         interest.
@@ -165,7 +166,7 @@ class Simulation:
         return self.model
 
 
-    def _set_perturbations(self, condition: pd.Series):
+    def _set_perturbations(self, condition: pd.Series) -> libsbml.Model:
         """This function sets the perturbations for the simulation.
         input:
             condition: pd.Series - the condition to simulate
@@ -197,7 +198,7 @@ class Simulation:
         return self.model
 
         
-    def _heterogenize(self, condition: pd.Series):
+    def _heterogenize(self, condition: pd.Series) -> libsbml.Model:
         """This function runs the 'runSPARCED function and returns the final
         values, thus creating the simulated appearance of asynchrony among 
         replicates.
