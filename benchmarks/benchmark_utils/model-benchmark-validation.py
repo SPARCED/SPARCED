@@ -70,13 +70,22 @@ def _get_list_of_benchmarks() -> list:
         A list of all benchmarks to be run: list of strings
     
     """
-    return ["BIM-dependent-ERK-inhibition", "TRAIL-percent-death", 
-            "etoposide-induced-cell-death", "proliferation-growth", 
-            "DNA-repair", "TRAIL_time-to-death","LINCS-RPPA-Abundance",
-            "inhibition-of-stochastic-apoptosis","stochastic-expression",
-            "receptor-ligand_cooperativity", "cell_cycle", "p53-dynamics", 
-            "ERK-AKT-dose-response", "regulation-of-stochastic-proliferation", 
-            "IFNg-pulse-response","ribosome-doubling-rate",
+    return ["BIM-dependent-ERK-inhibition", 
+            "TRAIL-percent-death", 
+            "etoposide-induced-cell-death", 
+            "proliferation-growth", 
+            "DNA-repair", 
+            "TRAIL_time-to-death",
+            "LINCS-RPPA-Abundance",
+            "inhibition-of-stochastic-apoptosis",
+            "stochastic-expression",
+            "receptor-ligand_cooperativity", 
+            "cell_cycle", 
+            "p53-dynamics", 
+            "ERK-AKT-dose-response", 
+            "regulation-of-stochastic-proliferation", 
+            "IFNg-pulse-response",
+            "ribosome-doubling-rate",
             "survival-signalling"]
 
 
