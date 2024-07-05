@@ -1,11 +1,19 @@
+"""
+Created on Thurs. 05/16/2024 10:45:00 - JRH
+
+Script defining the arguements for the model-benchmark comparison to prior
+validated results of the SPARCED model.
+"""
+
+#-----------------------Package Import & Defined Arguements-------------------#
 import argparse
 import os
-
 
 wd = os.path.dirname(os.path.abspath(__file__))
 
 sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
                                               .index('SPARCED')+1]))
+
 benchmarks = [
             "BIM-dependent-ERK-inhibition", "TRAIL-percent-death", "etoposide-induced-cell-death", 
             "proliferation-growth", "DNA-repair", "TRAIL_time-to-death", 
@@ -41,7 +49,7 @@ def parse_args():
                         default=None)
     
     parser.add_argument('--model', '-m', 
-                        required = True, 
+                        required = False, 
                         type=str, 
                         help='path to the model dirctory \
                         to be used for unit testing', 

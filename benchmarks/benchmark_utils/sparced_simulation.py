@@ -1,11 +1,14 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# ----------------------------------------------------------------------------#
-# This file conducts user defined, condition-specific simulations using 
-# SPARCED and returns the results as nested NumPy arrays.
-# ----------------------------------------------------------------------------#
+"""
+Created on Thurs. 04/23/2024 9:00:00 - JRH
 
-# Import the necessary modules
+This file conducts user defined, condition-specific simulations using 
+SPARCED and returns the results as nested NumPy arrays.
+
+"""
+
+#-----------------------Package Import & Defined Arguements-------------------#
 import os
 import sys
 import math
@@ -33,7 +36,7 @@ class Simulation:
             parameters_df: pd.DataFrame - the parameters dataframe
             sbml_file: str - path to the SBML file
             """
-        # model_copy = model 
+        
         self.model = model.clone()
         self.model = model
         self.yaml_file = yaml_file
@@ -70,6 +73,9 @@ class Simulation:
 
         if parp_value < cPARP_value:
             pass # need to find a new way to move to next loop after this. 
+            ### JRH 07/05/24 -> Do I even need to do this if the values being used are
+            # for heterogenization?
+
 
         # # Set the perturbations for the simulation
         self.model = self._set_perturbations(condition)
@@ -120,15 +126,15 @@ class Simulation:
         # Isolate the preequilibration condition if included in the measurement
         # table
         preequilibrate_condition = (self.measurement_df.loc[
-            self.measurement_df['simulationConditionId'] 
-            == condition['conditionId'], 'preequilibrationConditionId']
-            .dropna()
-            .unique())
+                self.measurement_df['simulationConditionId'] 
+                == condition['conditionId'], 'preequilibrationConditionId']
+                                                                    .dropna()
+                                                                    .unique())
 
         # account for no preequilibration condition being found 
         if len(preequilibrate_condition) == 0:
             return self.model
-            
+
         # set perturbations for the simulation
         self.model = self._set_perturbations(condition)
 
@@ -214,7 +220,7 @@ class Simulation:
 
         self.model.setTimepoints(np.linspace(0,30))
 
-        growth_factors = ['E', 'H', 'HGF', 'P', 'F', 'I', 'INS']
+        growth_factors = ['E', 'H', 'HGF', 'P', 'F', 'I', 'INS'] # this needs to go.
         
         for species in growth_factors:
             self.model = utils._set_species_value(self.model, species, 0) 

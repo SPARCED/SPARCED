@@ -62,7 +62,8 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
 
 
 def _get_list_of_benchmarks() -> list:
-    """ Return a list of all benchmarks to be run
+    """ Return a list of all benchmarks to be run. Users defining new 
+        benchmarks should add them to this list.
     Inputs:
         None
 
