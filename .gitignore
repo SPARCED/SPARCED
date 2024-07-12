@@ -9,6 +9,8 @@ SPARCED/results/*
 !SPARCED/results/Control
 SPARCED/results/New-Simulation/*
 !SPARCED/results/New-Simulation/README.md
+SPARCED/models/SPARCED_standard/results
+# SPARCED/models/SPARCED_standard/results/*
 
 old*
 *.ipynb_check*

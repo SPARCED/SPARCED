@@ -149,7 +149,8 @@ class RunBenchmark:
             print(f"Rank {self.rank} is running {condition_id} for cell {cell}")
 
             # Run the simulation for the given condition
-            xoutS, toutS, xoutG = Simulation(yaml_file=self.yaml_file, 
+            xoutS, toutS, xoutG = Simulation(model_path=self.model_path,
+                                             yaml_file=self.yaml_file, 
                                              model=self.model, 
                                              conditions_df=self.conditions_df, 
                                              measurement_df=self.measurement_df, 

@@ -269,7 +269,8 @@ class Utils:
         model.setInitialStates(species_initializations)
         
         return model
-    
+
+
     @staticmethod
     def _assign_sbml_path(model_path: str):
 
@@ -424,6 +425,71 @@ class Utils:
             raise KeyError(f"Simulation files not found in {data_dir}")
         
         return GeneReg, OmicsData
-    
 
+
+    @staticmethod
+    def _set_transcription_values(model_path: str, gene: str, value: int) -> None:
+        """This function sets the value of a parameter within the SBML model.
+            input:
+                model_path:  model_path: str - the path to the model
+                gene: str - the gene to knockout
+                value: int - the value to set the gene to
+            output:
+                model: libsbml.Model - the updated SBML model
+        """
+
+        gene_reg, omics_data = Utils._extract_simulation_files(model_path)[1]
+
+        gene = gene.lower().strip()
+        with open(omics_data, 'r') as file:
+            lines = file.readlines()
         
+        found = False
+
+        prior_values = {}
+
+        for i, line in enumerate(lines):
+            if gene in line.lower():
+                found = True
+                parts = line.strip().split('\t')
+
+                prior_values['kTCleak'] = float(parts[1])
+                prior_values['kTCmaxs'] = float(parts[2])
+                prior_values['kTCd'] = float(parts[3])
+
+                parts[1] = str(value)  # Assuming 'kTCleak' is the second column
+                parts[2] = str(value)  # Assuming 'kTCmaxs' is the third column
+                parts[3] = str(value)  # Assuming 'kTCd' is the fourth column
+                lines[i] = '\t'.join(parts) + '\n'
+                break
+        
+        if found:
+            with open(omics_data, 'w') as file:
+                file.writelines(lines)
+
+        return prior_values if found else None
+
+
+    @staticmethod
+    def _reset_transcription_values(prior_values: dict, model_path: str) -> None: 
+        """This function resets the values of the transcription factors
+        input:
+            prior_values: dict - the values to reset
+            model_path: str - the path to the model
+        output:
+            None
+        """
+
+        gene_reg, omics_data = Utils._extract_simulation_files(model_path)[1]
+
+        with open(omics_data, 'r') as file:
+            lines = file.readlines()
+
+        for i, line in enumerate(lines):
+            parts = line.strip().split('\t')
+            if parts[0] in prior_values:
+                parts[1] = str(prior_values[parts[0]])
+                lines[i] = '\t'.join(parts) + '\n'
+
+        with open(omics_data, 'w') as file:
+            file.writelines(lines)

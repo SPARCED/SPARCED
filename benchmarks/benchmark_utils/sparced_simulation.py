@@ -24,9 +24,10 @@ sys.path.append(os.path.join(sparced_root, 'SPARCED/src/'))
 from simulation.modules.RunSPARCED import RunSPARCED
 
 class Simulation:
-    def __init__(self, yaml_file: str, model: str, conditions_df: pd.DataFrame,
-                  measurement_df: pd.DataFrame, parameters_df: pd.DataFrame, 
-                  sbml_file: str, f_genereg: str, f_omics: str):
+    def __init__(self, model_path: str, yaml_file: str, model: str, 
+                 conditions_df: pd.DataFrame, measurement_df: pd.DataFrame,
+                 parameters_df: pd.DataFrame, sbml_file: str, f_genereg: str,
+                 f_omics: str):
         """This class is designed to simulate the experimental replicate model.
         input:
             yaml_file: str - path to the YAML file
@@ -38,7 +39,7 @@ class Simulation:
             """
         
         self.model = model.clone()
-        self.model = model
+        self.model_path = model_path
         self.yaml_file = yaml_file
         self.conditions_df = conditions_df
         self.measurement_df = measurement_df
@@ -58,12 +59,15 @@ class Simulation:
         # Look for heterogenize parameters in the condition
         if 'heterogenize' in condition and not math.isnan(condition['heterogenize']):
             
-            self.model = self._heterogenize(condition)
-        
+            # self.model = self._heterogenize(condition)
+            self._heterogenize(condition)
+
         if 'preequilibrationConditionId' in condition and not math.isnan(
             condition['preequilibrationConditionId']):
 
             self.model = self._preequilibrate(condition)
+            self._preequilibrate(condition)
+
 
         species_ids = list(self.model.getStateIds())
 
@@ -78,7 +82,8 @@ class Simulation:
 
 
         # # Set the perturbations for the simulation
-        self.model = self._set_perturbations(condition)
+        # self.model, self.prior_values = self._set_perturbations(condition)
+        self._set_perturbations(condition)
 
         # Set the timepoints for the simulation
         simulation_timeframe = (
@@ -108,6 +113,10 @@ class Simulation:
                                     f_genereg=self.f_genereg,
                                     f_omics=self.f_omics)
         
+        # Reset the transcription values if they were changed
+        if hasattr(self, 'prior_values'):
+            utils._reset_transcription_values(prior_values=self.prior_values, 
+                                              model_path=self.model_path)
 
         return xoutS_all, tout_all, xoutG_all
 
@@ -169,7 +178,7 @@ class Simulation:
         # Return the final values
         self.model.setInitialStates(xoutS_all[-1])
 
-        return self.model
+        # return self.model
 
 
     def _set_perturbations(self, condition: pd.Series) -> libsbml.Model:
@@ -201,7 +210,15 @@ class Simulation:
             except:
                 pass
 
-        return self.model
+            try:
+                # Change the OmicsData values and save the prior values
+                self.prior_values = utils._set_transcription_values(model_path=self.model_path, 
+                                                                    gene=perturbant,
+                                                                    value=condition[perturbant])
+            except:
+                pass
+
+        # return self.model, self.prior_values
 
         
     def _heterogenize(self, condition: pd.Series) -> libsbml.Model:
