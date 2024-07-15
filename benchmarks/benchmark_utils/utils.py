@@ -467,6 +467,7 @@ class Utils:
             with open(omics_data, 'w') as file:
                 file.writelines(lines)
 
+        print(f"Transcription factor {gene} set to {value}")
         return prior_values if found else None
 
 
