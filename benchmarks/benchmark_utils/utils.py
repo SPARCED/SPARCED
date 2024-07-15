@@ -438,12 +438,13 @@ class Utils:
                 model: libsbml.Model - the updated SBML model
         """
 
-        gene_reg, omics_data = Utils._extract_simulation_files(model_path)[1]
+        gene_reg, omics_data = Utils._extract_simulation_files(model_path)
 
         gene = gene.lower().strip()
+
         with open(omics_data, 'r') as file:
             lines = file.readlines()
-        
+
         found = False
 
         prior_values = {}
@@ -451,23 +452,24 @@ class Utils:
         for i, line in enumerate(lines):
             if gene in line.lower():
                 found = True
+
                 parts = line.strip().split('\t')
 
-                prior_values['kTCleak'] = float(parts[1])
-                prior_values['kTCmaxs'] = float(parts[2])
-                prior_values['kTCd'] = float(parts[3])
+                prior_values['kTCleak'] = float(parts[5])
+                prior_values['kTCmaxs'] = float(parts[6])
+                prior_values['kTCd'] = float(parts[7])
 
-                parts[1] = str(value)  # Assuming 'kTCleak' is the second column
-                parts[2] = str(value)  # Assuming 'kTCmaxs' is the third column
-                parts[3] = str(value)  # Assuming 'kTCd' is the fourth column
+                parts[5] = value # 'kTCleak' is the 6th column
+                parts[6] = value # 'kTCmaxs' is the 7th column
+                parts[7] = value  #'kTCd' is the 8th column
                 lines[i] = '\t'.join(parts) + '\n'
+
                 break
-        
+
         if found:
             with open(omics_data, 'w') as file:
                 file.writelines(lines)
 
-        print(f"Transcription factor {gene} set to {value}")
         return prior_values if found else None
 
 
@@ -481,16 +483,22 @@ class Utils:
             None
         """
 
-        gene_reg, omics_data = Utils._extract_simulation_files(model_path)[1]
+        gene_reg, omics_data = Utils._extract_simulation_files(model_path)
 
         with open(omics_data, 'r') as file:
             lines = file.readlines()
 
-        for i, line in enumerate(lines):
-            parts = line.strip().split('\t')
-            if parts[0] in prior_values:
-                parts[1] = str(prior_values[parts[0]])
-                lines[i] = '\t'.join(parts) + '\n'
+
+        for i in prior_values:
+            print(prior_values[i])
+            for j, line in enumerate(lines):
+                parts = line.strip().split('\t')
+                if prior_values[i] in parts[0]:
+                    parts[5] = prior_values['kTCleak']
+                    parts[6] = prior_values['kTCmaxs']
+                    parts[7] = prior_values['kTCd']
+                    lines[j] = '\t'.join(parts) + '\n'
+                    break
 
         with open(omics_data, 'w') as file:
             file.writelines(lines)

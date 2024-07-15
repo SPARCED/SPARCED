@@ -65,7 +65,7 @@ class Simulation:
         if 'preequilibrationConditionId' in condition and not math.isnan(
             condition['preequilibrationConditionId']):
 
-            self.model = self._preequilibrate(condition)
+            # self.model = self._preequilibrate(condition)
             self._preequilibrate(condition)
 
 
@@ -84,7 +84,7 @@ class Simulation:
         # # Set the perturbations for the simulation
         # self.model, self.prior_values = self._set_perturbations(condition)
         self._set_perturbations(condition)
-
+        
         # Set the timepoints for the simulation
         simulation_timeframe = (
                                 self.measurement_df['time']
@@ -115,6 +115,7 @@ class Simulation:
         
         # Reset the transcription values if they were changed
         if hasattr(self, 'prior_values'):
+            print('prior size', len(self.prior_values))
             utils._reset_transcription_values(prior_values=self.prior_values, 
                                               model_path=self.model_path)
 
@@ -188,8 +189,12 @@ class Simulation:
         output:
             model: libsbml.Model - the updated SBML model
         """
-        # Get the perturbations for the condition
+
         perturbations = list(self.conditions_df.columns[2:]) 
+
+        # In case any gene data is altered, this serves as a backup to replace 
+        # in the function _reset_transcription_values()
+        self.prior_values = {}
 
         for perturbant in perturbations:
             try:
@@ -212,9 +217,12 @@ class Simulation:
 
             try:
                 # Change the OmicsData values and save the prior values
-                self.prior_values = utils._set_transcription_values(model_path=self.model_path, 
-                                                                    gene=perturbant,
-                                                                    value=condition[perturbant])
+                self.prior_values[perturbant] = utils._set_transcription_values(
+                                                                                model_path=self.model_path, 
+                                                                                gene=perturbant,
+                                                                                value=condition[perturbant]
+                                                                                )
+                print('No error got thrown: ', self.prior_values)
             except:
                 pass
 
