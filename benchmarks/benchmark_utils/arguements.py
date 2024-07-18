@@ -70,5 +70,11 @@ def parse_args():
                             for a parallel process', 
                         default= 1)
     
+    parser.add_argument('--benchmark_description', '-bd',
+                        required=False, 
+                        type=str, 
+                        help='Description of the benchmark', 
+                        default=None)
+    
     return (parser.parse_args())
 
