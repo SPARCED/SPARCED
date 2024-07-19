@@ -59,14 +59,14 @@ class Simulation:
         # Look for heterogenize parameters in the condition
         if 'heterogenize' in condition and not math.isnan(condition['heterogenize']):
             
-            # self.model = self._heterogenize(condition)
-            self._heterogenize(condition)
+            self.model = self._heterogenize(condition)
+            # self._heterogenize(condition)
 
         if 'preequilibrationConditionId' in condition and not math.isnan(
             condition['preequilibrationConditionId']):
 
-            # self.model = self._preequilibrate(condition)
-            self._preequilibrate(condition)
+            self.model = self._preequilibrate(condition)
+            # self._preequilibrate(condition)
 
 
         species_ids = list(self.model.getStateIds())
@@ -82,8 +82,8 @@ class Simulation:
 
 
         # # Set the perturbations for the simulation
-        # self.model, self.prior_values = self._set_perturbations(condition)
-        self._set_perturbations(condition)
+        self.model, self.prior_values = self._set_perturbations(condition)
+        # self._set_perturbations(condition)
         
         # Set the timepoints for the simulation
         simulation_timeframe = (
@@ -179,7 +179,7 @@ class Simulation:
         # Return the final values
         self.model.setInitialStates(xoutS_all[-1])
 
-        # return self.model
+        return self.model
 
 
     def _set_perturbations(self, condition: pd.Series) -> libsbml.Model:
@@ -226,7 +226,7 @@ class Simulation:
             except:
                 pass
 
-        # return self.model, self.prior_values
+        return self.model, self.prior_values
 
         
     def _heterogenize(self, condition: pd.Series) -> libsbml.Model:
