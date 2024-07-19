@@ -80,7 +80,7 @@ class Simulation:
             ### JRH 07/05/24 -> Do I even need to do this if the values being used are
             # for heterogenization?
 
-
+        # print(condition)
         # # Set the perturbations for the simulation
         self.model, self.prior_values = self._set_perturbations(condition)
         # self._set_perturbations(condition)
@@ -113,11 +113,10 @@ class Simulation:
                                     f_genereg=self.f_genereg,
                                     f_omics=self.f_omics)
         
-        # Reset the transcription values if they were changed
-        if hasattr(self, 'prior_values'):
-            print('prior size', len(self.prior_values))
-            utils._reset_transcription_values(prior_values=self.prior_values, 
-                                              model_path=self.model_path)
+    # Reset the transcription values if they were changed
+    # if hasattr(self, 'prior_values'):
+        utils._reset_transcription_values(prior_values=self.prior_values, 
+                                            model_path=self.model_path)
 
         return xoutS_all, tout_all, xoutG_all
 
@@ -133,6 +132,7 @@ class Simulation:
         output:
             preequilibrated_model: pd.DataFrame - the preequilibrated model
         """
+
         # Isolate the preequilibration condition if included in the measurement
         # table
         preequilibrate_condition = (self.measurement_df.loc[
@@ -222,7 +222,6 @@ class Simulation:
                                                                                 gene=perturbant,
                                                                                 value=condition[perturbant]
                                                                                 )
-                print('No error got thrown: ', self.prior_values)
             except:
                 pass
 
@@ -239,6 +238,7 @@ class Simulation:
             heterogenized_initial_values: pd.DataFrame - the heterogenized
             initial values
         """
+
         heterogenize = condition['heterogenize']
 
         simulation_time = int(heterogenize)/3600

@@ -4,6 +4,7 @@
 import libsbml
 import importlib.util
 import numpy as np
+import pandas as pd
 import os
 import sys
 import yaml
@@ -427,6 +428,7 @@ class Utils:
         return GeneReg, OmicsData
 
 
+
     @staticmethod
     def _set_transcription_values(model_path: str, gene: str, value: int) -> None:
         """This function sets the value of a parameter within the SBML model.
@@ -439,42 +441,31 @@ class Utils:
         """
 
         gene_reg, omics_data = Utils._extract_simulation_files(model_path)
-
-        gene = gene.lower().strip()
-
-        with open(omics_data, 'r') as file:
-            lines = file.readlines()
-
-        found = False
+        
+        # Read the omics_data file into a DataFrame
+        omics_data_df = pd.read_csv(omics_data, sep='\t')
 
         prior_values = {}
 
-        for i, line in enumerate(lines):
-            if gene in line.lower():
-                found = True
+        if gene in omics_data_df['gene'].values:
+            # Extract prior values
+            prior_values['kTCleak'] = omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'].values[0]
+            prior_values['kTCmaxs'] = omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'].values[0]
+            prior_values['kTCd'] = omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'].values[0]
 
-                parts = line.strip().split('\t')
+            # Update values
+            omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = value
+            omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = value
+            omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = value
 
-                prior_values['kTCleak'] = float(parts[5])
-                prior_values['kTCmaxs'] = float(parts[6])
-                prior_values['kTCd'] = float(parts[7])
+        # Write the updated DataFrame back to the file
+        omics_data_df.to_csv(omics_data, sep='\t', index=False)
 
-                parts[5] = value # 'kTCleak' is the 6th column
-                parts[6] = value # 'kTCmaxs' is the 7th column
-                parts[7] = value  #'kTCd' is the 8th column
-                lines[i] = '\t'.join(parts) + '\n'
-
-                break
-
-        if found:
-            with open(omics_data, 'w') as file:
-                file.writelines(lines)
-
-        return prior_values if found else None
+        return prior_values
 
 
     @staticmethod
-    def _reset_transcription_values(prior_values: dict, model_path: str) -> None: 
+    def _reset_transcription_values(prior_values: dict, model_path: str) -> None:
         """This function resets the values of the transcription factors
         input:
             prior_values: dict - the values to reset
@@ -484,21 +475,15 @@ class Utils:
         """
 
         gene_reg, omics_data = Utils._extract_simulation_files(model_path)
+        
+        # Read the omics_data file into a DataFrame
+        omics_data_df = pd.read_csv(omics_data, sep='\t')
 
-        with open(omics_data, 'r') as file:
-            lines = file.readlines()
+        for gene, values in prior_values.items():
+            if values is not None and gene in omics_data_df['gene'].values:
+                omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = values['kTCleak']
+                omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = values['kTCmaxs']
+                omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = values['kTCd']
 
-
-        for i in prior_values:
-            print(prior_values[i])
-            for j, line in enumerate(lines):
-                parts = line.strip().split('\t')
-                if prior_values[i] in parts[0]:
-                    parts[5] = prior_values['kTCleak']
-                    parts[6] = prior_values['kTCmaxs']
-                    parts[7] = prior_values['kTCd']
-                    lines[j] = '\t'.join(parts) + '\n'
-                    break
-
-        with open(omics_data, 'w') as file:
-            file.writelines(lines)
+        # Write the updated DataFrame back to the file
+        omics_data_df.to_csv(omics_data, sep='\t', index=False)

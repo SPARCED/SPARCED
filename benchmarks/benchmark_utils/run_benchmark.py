@@ -48,7 +48,7 @@ class RunBenchmark:
                                               .index('SPARCED')+1]))
 
         try: 
-
+            args.benchmark = args.benchmark.split('/')[0]
             if args.benchmark != 'benchmark_utils':
                 yaml_path = os.path.join(sparced_root, 
                         f'benchmarks/{args.benchmark}/{args.benchmark}.yml') 

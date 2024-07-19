@@ -86,7 +86,7 @@ using the --name or -n argument"
         """
         
         # Get the name of the benchmark
-        name = input("Enter the name of the benchmark: ")
+        name = args.name
 
         # Create the benchmark
         project_dir = Path(f"../{name}")
@@ -126,7 +126,24 @@ using the --name or -n argument"
         else:
             pass
 
-        return {"name": [name]}
+        condition_decision = input("Lets create some conditions, do you have a defined conditions file? (y/n): ")
+        if condition_decision == "y":
+            conditions = input("Enter the path to the conditions file: ")
+            shutil.copy(conditions, f"../{name}/conditions.tsv")
+        else:
+            manual_conditions = input("Would you like to manually create a conditions file? (y/n): ")
+            if manual_conditions == "y":
+                BenchmarkCreator.user_prompted_conditions_file()
+            else:
+                pass
+
+        model_specs_decision = input("Would you like to add a model specification file to the benchmark? (y/n): ")
+        if model_specs_decision == "y":
+            BenchmarkCreator.user_prompted_model_specs_file()
+        else:
+            pass
+
+        print(f"Created new benchmark: {name}")
 
 
     def readme_generator() -> Dict[str, List[str]]:
@@ -179,7 +196,7 @@ using the --name or -n argument"
                     f.write(line)
 
 
-    def populate_yml_file(file_path) -> __file__:
+    def populate_yml_file(file_path) -> None:
         """
         Opens an existing YAML file and populates it with specified information.
 
@@ -218,6 +235,124 @@ using the --name or -n argument"
         # Write the updated content back to the YAML file
         with open(file_path, 'w') as f:
             yaml.safe_dump(existing_data, f, default_flow_style=False)
+
+
+    def user_prompted_conditions_file() -> None:
+        """
+        Prompts the user to input a series of conditions and writes them to a
+        conditions file.
+
+        """
+
+        # Populate the first two column headers: conditionId and conditionName
+        conditions = "conditionId\tconditionName\t"
+
+        # Prompt for what species/parameter/gene (s) are being modified
+        perturbants = input("Enter the species/parameter(s)/gene(s) being modified: \
+(separate by commas) ")
+
+        # check how many perturbants are being modified
+        perturbants_list = perturbants.split(", ")
+        perturbants_len = len(perturbants_list)
+
+        # Add the perturbant names to the conditions string 
+        for perturbant in perturbants_list:
+            conditions += f"{perturbant}"
+            # I need to set the last perturbation to \n for a newline. 
+            if perturbant == perturbants_list[-1]:
+                conditions += "\n"
+            else:   
+                conditions += "\t"
+
+        # Prompt the user to input the condition and description 
+        def condition_input(conditions: str) -> None:    
+            condition_id = input("Enter the condition ID: ")
+            condition_name = input("Enter the condition's description: ")
+
+            # Add the first condition to the conditions string
+            conditions += f"{condition_id}\t{condition_name}\t"
+
+            for perturbant in perturbants_list:
+                perturbant_value = input(f"Enter the value of {perturbant} \
+                                        for {condition_id}: ")
+                conditions += f"{perturbant_value}"
+
+                if perturbant == perturbants_list[-1]:
+                    conditions += "\n"
+                else:
+                    conditions += "\t"
+
+            return conditions
+        # Prompt the user to input the conditions
+        conditions = condition_input(conditions=conditions)
+
+        # Prompt the user to input more conditions
+        more_conditions = input("Would you like to add more conditions? (y/n): ")
+        if more_conditions == "y":
+            while more_conditions == "y":
+                conditions = condition_input(conditions=conditions)
+                more_conditions = input("Would you like to add more conditions? (y/n): ")
+
+        # Write the conditions to the conditions file
+        with open(f"../{args.name}/conditions.tsv", "w") as f:
+            f.write(conditions)
+
+        print("Conditions file created")
+
+
+    def user_prompted_model_specs_file() -> None:
+        """ Creates a model specification file based on user input. Model specifications
+        Not listed in PEtab only pertain to SPARCED. Specific functionalities include
+        defining whether the simulation will be determinisitic (default, 1) or stochastic (0), 
+        as well as if a heterogeneous pre-existing population is to be used (default, none), and
+        the number of cells to be generated if the stochastic option is chosen. 
+        Input for heterogeneous populations should be an integer value in seconds for the duration
+        of the heterogenization simulation. 
+
+        """
+
+        # Obtain the conditionId's from the conditions.tsv file
+        with open(f"../{args.name}/conditions.tsv", "r") as f:
+            conditions = f.readlines()
+            condition_ids = [line.split("\t")[0] for line in conditions[1:]]
+
+        # Create the column headers for the model specification file
+        model_specs = "conditionId\tflagD\tnum_cells"
+
+        # Request if the user would like to add a heterogeneous population
+        heterogeneous = input("Would you like to add a heterogeneous population? (y/n): ")
+        if heterogeneous == "y":
+            model_specs += "\theterogenize\n"
+        else:
+            model_specs += "\n"
+
+        for condition in condition_ids:
+            
+            model_specs += f"{condition}\t"
+
+            print(f"Model specification for condition: {condition}")
+            # Request if the simulation will be deterministic or stochastic
+            flagD = input(f"Enter 1 for deterministic simulation or 0 for stochastic simulation: ")
+
+            model_specs += f"{flagD}\t"
+
+            # Request the number of cells to be generated
+            cell_num = input("Enter the number of cells to be generated: ")
+            model_specs += f"{cell_num}\t"
+
+            # Request the duration of the heterogeneous simulation
+            if heterogeneous == "y":
+                heterogenize = input("Enter the duration of the heterogeneous simulation in seconds: ")
+                model_specs += f"{heterogenize}\n"
+            else:
+                model_specs += "\n"
+            
+        # Write the model specifications to the model specification file
+        with open(f"../{args.name}/model_specification.tsv", "w") as f:
+            f.write(model_specs)
+
+        print("Model specification file created")
+
 
 
 #-----------------------Main Function-----------------------------------------#
