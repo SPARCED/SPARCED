@@ -1,6 +1,0 @@
-observableId	simulationConditionId	measurement	time	datasetId
-MAPK3ac	test_cond_1		60	Fig2B
-MAPK3_mRNA	test_cond_2		60	Fig2B
-MAPK1ac	test_cond_1		60	Fig2B
-MAPK1_mRNA	test_cond_2		60	Fig2B
-ERK_total	test_cond_1		60	Fig2B
