@@ -1,5 +1,7 @@
 # About
 
+[![Documentation Status](https://readthedocs.org/projects/sparced-documentation/badge/?version=latest)](https://sparced-documentation.readthedocs.io/en/latest/?badge=latest)
+
 SPARCED is a simple and efficient pipeline for constructing, merging, expanding
 and simulating large-scale, single-cell mechanistic models.
 
