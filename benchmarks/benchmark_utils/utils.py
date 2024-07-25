@@ -486,7 +486,7 @@ class Utils:
 
         # Ensure scientific notation is lowercase before saving
         omics_data_df.loc[:, omics_data_df.columns != 'gene'] = omics_data_df.loc[:, omics_data_df.columns != 'gene']\
-            .applymap(lambda x: str(x).replace('E', 'e') if isinstance(x, str) else x)
+            .applymap(lambda x: str(x).replace('e', 'E') if isinstance(x, str) else x)
         
         # Write the updated DataFrame back to the file
         omics_data_df.to_csv(omics_data, sep='\t', index=False)
