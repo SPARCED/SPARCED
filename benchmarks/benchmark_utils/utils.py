@@ -428,7 +428,6 @@ class Utils:
         return GeneReg, OmicsData
 
 
-
     @staticmethod
     def _set_transcription_values(model_path: str, gene: str, value: int) -> None:
         """This function sets the value of a parameter within the SBML model.
@@ -484,6 +483,9 @@ class Utils:
                 omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = values['kTCleak']
                 omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = values['kTCmaxs']
                 omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = values['kTCd']
+
+        # Ensure scientific notation is lowercase before saving
+        omics_data_df = omics_data_df.applymap(lambda x: str(x).replace('E', 'e') if isinstance(x, str) else x)
 
         # Write the updated DataFrame back to the file
         omics_data_df.to_csv(omics_data, sep='\t', index=False)
