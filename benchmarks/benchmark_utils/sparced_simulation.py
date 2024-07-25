@@ -26,8 +26,8 @@ from simulation.modules.RunSPARCED import RunSPARCED
 class Simulation:
     def __init__(self, model_path: str, yaml_file: str, model: str, 
                  conditions_df: pd.DataFrame, measurement_df: pd.DataFrame,
-                 parameters_df: pd.DataFrame, sbml_file: str, f_genereg: str,
-                 f_omics: str):
+                 parameters_df: pd.DataFrame, sbml_file: str, f_genereg: pd.DataFrame,
+                 f_omics: pd.DataFrame):
         """This class is designed to simulate the experimental replicate model.
         input:
             yaml_file: str - path to the YAML file
@@ -82,7 +82,7 @@ class Simulation:
 
         # print(condition)
         # # Set the perturbations for the simulation
-        self.model, self.prior_values = self._set_perturbations(condition)
+        self.model, self.f_omics = self._set_perturbations(condition)
         # self._set_perturbations(condition)
         
         # Set the timepoints for the simulation
@@ -113,10 +113,10 @@ class Simulation:
                                     f_genereg=self.f_genereg,
                                     f_omics=self.f_omics)
         
-    # Reset the transcription values if they were changed
-    # if hasattr(self, 'prior_values'):
-        utils._reset_transcription_values(prior_values=self.prior_values, 
-                                            model_path=self.model_path)
+    # # Reset the transcription values if they were changed
+    # # if hasattr(self, 'prior_values'):
+    #     utils._reset_transcription_values(prior_values=self.prior_values, 
+    #                                         model_path=self.model_path)
 
         return xoutS_all, tout_all, xoutG_all
 
@@ -194,7 +194,6 @@ class Simulation:
 
         # In case any gene data is altered, this serves as a backup to replace 
         # in the function _reset_transcription_values()
-        self.prior_values = {}
 
         for perturbant in perturbations:
             try:
@@ -217,15 +216,15 @@ class Simulation:
 
             try:
                 # Change the OmicsData values and save the prior values
-                self.prior_values[perturbant] = utils._set_transcription_values(
-                                                                                model_path=self.model_path, 
-                                                                                gene=perturbant,
-                                                                                value=condition[perturbant]
-                                                                                )
+                self.f_omics = utils._set_transcription_values(
+                                                                omics_data=self.f_omics, 
+                                                                gene=perturbant,
+                                                                value=condition[perturbant]
+                                                                )
             except:
                 pass
 
-        return self.model, self.prior_values
+        return self.model, self.f_omics
 
         
     def _heterogenize(self, condition: pd.Series) -> libsbml.Model:

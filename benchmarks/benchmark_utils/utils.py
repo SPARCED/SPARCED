@@ -418,9 +418,13 @@ class Utils:
 
             GeneReg = os.path.join(sim_file_dir, genereg)
 
+            GeneReg = pd.read_csv(GeneReg,header=0,index_col=0,sep="\t")
+
             omicsdata = config['simulation']['omics']
 
             OmicsData = os.path.join(sim_file_dir, omicsdata)
+
+            OmicsData = pd.read_csv(OmicsData,header=0,index_col=0,sep="\t")
 
         except KeyError:
             raise KeyError(f"Simulation files not found in {data_dir}")
@@ -429,7 +433,7 @@ class Utils:
 
 
     @staticmethod
-    def _set_transcription_values(model_path: str, gene: str, value: int) -> None:
+    def _set_transcription_values(omics_data: pd.DataFrame, gene: str, value: int) -> None:
         """This function sets the value of a parameter within the SBML model.
             input:
                 model_path:  model_path: str - the path to the model
@@ -438,55 +442,42 @@ class Utils:
             output:
                 model: libsbml.Model - the updated SBML model
         """
+        # # !!! Done in run_benchmark and passed to simulation function. 
+        # _, omics_data = Utils._extract_simulation_files(model_path)
 
-        gene_reg, omics_data = Utils._extract_simulation_files(model_path)
-        
-        # Read the omics_data file into a DataFrame
-        omics_data_df = pd.read_csv(omics_data, sep='\t')
-
-        prior_values = {}
-
-        if gene in omics_data_df['gene'].values:
-            # Extract prior values
-            prior_values['kTCleak'] = omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'].values[0]
-            prior_values['kTCmaxs'] = omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'].values[0]
-            prior_values['kTCd'] = omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'].values[0]
-
+        if gene in omics_data['gene'].values:
             # Update values
-            omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = value
-            omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = value
-            omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = value
+            omics_data.loc[omics_data['gene'] == gene, 'kTCleak'] = value
+            omics_data.loc[omics_data['gene'] == gene, 'kTCmaxs'] = value
+            omics_data.loc[omics_data['gene'] == gene, 'kTCd'] = value
 
-        # Write the updated DataFrame back to the file
-        omics_data_df.to_csv(omics_data, sep='\t', index=False)
-
-        return prior_values
+        return omics_data
 
 
-    @staticmethod
-    def _reset_transcription_values(prior_values: dict, model_path: str) -> None:
-        """This function resets the values of the transcription factors
-        input:
-            prior_values: dict - the values to reset
-            model_path: str - the path to the model
-        output:
-            None
-        """
+    # @staticmethod
+    # def _reset_transcription_values(prior_values: dict, model_path: str) -> None:
+    #     """This function resets the values of the transcription factors
+    #     input:
+    #         prior_values: dict - the values to reset
+    #         model_path: str - the path to the model
+    #     output:
+    #         None
+    #     """
 
-        gene_reg, omics_data = Utils._extract_simulation_files(model_path)
+    #     gene_reg, omics_data = Utils._extract_simulation_files(model_path)
         
-        # Read the omics_data file into a DataFrame
-        omics_data_df = pd.read_csv(omics_data, sep='\t')
+    #     # Read the omics_data file into a DataFrame
+    #     omics_data_df = pd.read_csv(omics_data, sep='\t')
 
-        for gene, values in prior_values.items():
-            if values is not None and gene in omics_data_df['gene'].values:
-                omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = values['kTCleak']
-                omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = values['kTCmaxs']
-                omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = values['kTCd']
+    #     for gene, values in prior_values.items():
+    #         if values is not None and gene in omics_data_df['gene'].values:
+    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = values['kTCleak']
+    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = values['kTCmaxs']
+    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = values['kTCd']
 
-        # Ensure scientific notation is lowercase before saving
-        omics_data_df.loc[:, omics_data_df.columns != 'gene'] = omics_data_df.loc[:, omics_data_df.columns != 'gene']\
-            .applymap(lambda x: str(x).replace('e', 'E') if isinstance(x, str) else x)
+    #     # Ensure scientific notation is lowercase before saving
+    #     omics_data_df.loc[:, omics_data_df.columns != 'gene'] = omics_data_df.loc[:, omics_data_df.columns != 'gene']\
+    #         .applymap(lambda x: str(x).replace('e', 'E') if isinstance(x, str) else x)
         
-        # Write the updated DataFrame back to the file
-        omics_data_df.to_csv(omics_data, sep='\t', index=False)
+    #     # Write the updated DataFrame back to the file
+    #     omics_data_df.to_csv(omics_data, sep='\t', index=False)

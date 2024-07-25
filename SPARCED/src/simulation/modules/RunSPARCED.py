@@ -7,7 +7,7 @@ import pandas as pd
 from simulation.modules.SGEmodule import SGEmodule
 from simulation.modules.RunPrep import RunPrep
 
-def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: str, f_omics: str):
+def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: pd.DataFrame, f_omics: pd.DataFrame):
     ts = 30 # time-step to update mRNA numbers
     NSteps = int(th*3600/ts)
     tout_all = np.arange(0,th*3600+1,ts) 
