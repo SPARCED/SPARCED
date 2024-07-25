@@ -93,6 +93,12 @@ def run_single_simulation(model, simulation_name: str, output_sim: str, simulati
     if verbose:
         print("{name} n°{number}: Now ready to run\n"
               .format(name=simulation_name, number=simulation_number))
+        
+    
+    # convert f_genereg and f_omics to pandas dataframes
+    f_genereg = pd.read_csv(f_genereg, header=0, index_col=0, sep="\t")
+    f_omics = pd.read_csv(f_omics, header=0, index_col=0, sep="\t")
+
     # Run the simulation
     xoutS_all, xoutG_all, tout_all = RunSPARCED(is_deterministic, float(duration),
                                                 species_initial_conditions, [],

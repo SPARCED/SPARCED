@@ -1,7 +1,8 @@
 import os
-import shutil
 import yaml
 import pandas as pd
+from benchmark_utils.utils import Utils as utils
+
 
 # Load the PEtab files
 class PEtabFileLoader:
@@ -31,7 +32,7 @@ class PEtabFileLoader:
             yaml_dict = yaml.safe_load(file)
 
         # Construct full paths to petab files based on the YAML file's directory
-        self.sbml_file = _assign_sbml_path(self.yaml_file, self.model_path)
+        self.sbml_file = utils._assign_sbml_path(self.model_path)
 
 
         self.parameter_df = pd.read_csv(os.path.join(yaml_directory, yaml_dict['parameter_file']), sep='\t')
@@ -49,14 +50,3 @@ class PEtabFileLoader:
         
         return self
     
-@staticmethod
-def _assign_sbml_path(yaml_file: str, model_path: str):
-    with open(yaml_file, 'r') as f:
-        config = yaml.safe_load(f)
-
-    # Construct paths to SBML files in the specified directory
-    sbml_files = [os.path.join(model_path, filename) for filename in os.listdir(model_path) if filename.endswith('.xml')][0]
-    print(sbml_files)
-
-    # return the sbml file path
-    return sbml_files

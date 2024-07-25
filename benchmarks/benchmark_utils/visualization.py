@@ -3,9 +3,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
 
-class VisualizationPlotting:
+
+class Visualizer:
     def __init__(self, yaml_file: str, results_dict: dict, visualization_df: pd.DataFrame, observable_df: pd.DataFrame, measurement_df: pd.DataFrame):
         """This class is designed to plot and save the visualization data.
         input:
@@ -117,8 +117,6 @@ class VisualizationPlotting:
             axes[row, col].set_xscale(xScale)
             axes[row, col].set_yscale(yScale)
             axes[row, col].set_title(visualization_df['plotName'][i], weight='bold')
-            axes[row, col].set_xlim(0, 5)
-            axes[row, col].set_ylim(0, 150)
 
         # Remove unused subplots
         for i in range(len(unique_plots), num_rows * num_cols):

@@ -11,5 +11,7 @@ problems:
     - observables.tsv
     sbml_files:
     - {path}
+    visualization_files:
+    - visualizations.tsv
 
     

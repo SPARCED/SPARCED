@@ -7,7 +7,7 @@ import pandas as pd
 from simulation.modules.SGEmodule import SGEmodule
 from simulation.modules.RunPrep import RunPrep
 
-def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: str, f_omics: str):
+def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: pd.DataFrame, f_omics: pd.DataFrame):
     ts = 30 # time-step to update mRNA numbers
     NSteps = int(th*3600/ts)
     tout_all = np.arange(0,th*3600+1,ts) 
@@ -21,8 +21,9 @@ def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: str, f_omics
     mpc2nM_Vc = (1E9/(Vc*6.023E+23))
     splist = list(model.getStateIds())
     if len(spdata)==0: # if no initial condition values are supplied, use the input file information
-        spdata0 = pd.read_csv('Species.txt',header=0,index_col=0,sep="\t")
-        spdata = np.float(spdata0.values[:,1])  
+        # spdata0 = pd.read_csv('Species.txt',header=0,index_col=0,sep="\t")
+        # spdata = np.float(spdata0.values[:,1])  
+        spdata = model.getInitialStates()
     
     # calculate 
     genedata, GenePositionMatrix, AllGenesVec, kTCmaxs, kTCleak, kGin_1, kGac_1, kTCd, TARs0, tcnas, tcnrs, tck50as, tck50rs, spIDs = RunPrep(flagD,Vn,model, f_genereg, f_omics)  

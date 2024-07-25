@@ -1,26 +1,25 @@
 import numpy as np
 import pandas as pd
 
-def RunPrep(flagD,Vn,model, f_genereg: str, f_omics: str):
-    kGsRead = pd.read_csv(f_omics,header=0,index_col=0,sep="\t")
-    gExp_mpc = np.float64(kGsRead.values[:,0])
-    mExp_mpc = np.float64(kGsRead.values[:,1])
-    kGin = np.float64(kGsRead.values[:,2])
-    kGac = np.float64(kGsRead.values[:,3])
-    kTCleak = np.float64(kGsRead.values[:,4])
-    kTCmaxs = np.float64(kGsRead.values[:,5])
-    kTCd = np.float64(kGsRead.values[:,6])
+def RunPrep(flagD,Vn,model, f_genereg, f_omics):
+    # Read-in the omics data and assign concentrations of genes
+    gExp_mpc = np.float64(f_omics.values[:,0])
+    mExp_mpc = np.float64(f_omics.values[:,1])
+    kGin = np.float64(f_omics.values[:,2])
+    kGac = np.float64(f_omics.values[:,3])
+    kTCleak = np.float64(f_omics.values[:,4])
+    kTCmaxs = np.float64(f_omics.values[:,5])
+    kTCd = np.float64(f_omics.values[:,6])
 
     # Read-in the activators matrix and assign concentrations of activators
-    TARsRead = pd.read_csv(f_genereg,header=0,index_col=0,sep="\t")
-    TARs0 = (TARsRead.values)
-    numberofTARs = len(TARsRead.columns)
+    TARs0 = (f_genereg.values)
+    numberofTARs = len(f_genereg.columns)
     spnames = [ele for ele in model.getStateIds()]
     spIDs = []
     for qq in range(numberofTARs):
-        sps = spnames.index(TARsRead.columns[qq]) 
+        sps = spnames.index(f_genereg.columns[qq]) 
         spIDs.append(sps)
-    TARsRead = None
+    f_genereg = None
     
     numberofgenes = int(len(gExp_mpc))
     indsDm = [5,6,7,8,12,13,14,15,16,17,18,19,20,21,22,23,24]
