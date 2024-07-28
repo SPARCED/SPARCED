@@ -187,9 +187,6 @@ class Simulation:
 
         perturbations = list(self.conditions_df.columns[2:]) 
 
-        # In case any gene data is altered, this serves as a backup to replace 
-        # in the function _reset_transcription_values()
-
         for perturbant in perturbations:
             try:
                 self.model = utils._set_species_value(self.model, perturbant, 
