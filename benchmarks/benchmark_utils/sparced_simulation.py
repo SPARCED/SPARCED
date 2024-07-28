@@ -113,11 +113,6 @@ class Simulation:
                                     f_genereg=self.f_genereg,
                                     f_omics=self.f_omics)
         
-    # # Reset the transcription values if they were changed
-    # # if hasattr(self, 'prior_values'):
-    #     utils._reset_transcription_values(prior_values=self.prior_values, 
-    #                                         model_path=self.model_path)
-
         return xoutS_all, tout_all, xoutG_all
 
 
@@ -146,7 +141,7 @@ class Simulation:
             return self.model
 
         # set perturbations for the simulation
-        self.model = self._set_perturbations(condition)
+        self.model, self.f_omics = self._set_perturbations(condition)
 
         #Find gene sampling method, flagD
         flagD = (self.conditions_df.loc[

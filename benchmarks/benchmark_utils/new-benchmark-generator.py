@@ -116,7 +116,7 @@ using the --name or -n argument"
 
         Measurements_decision = input("Would you like to add a measurements file to the benchmark? (y/n): ")
         if Measurements_decision == "y":
-            BenchmarkCreator.measurements_generator()
+            BenchmarkCreator.measurements_uploader()
         else:
             pass
 
@@ -177,7 +177,7 @@ using the --name or -n argument"
             f.write(readme_content)
 
 
-    def measurements_generator() -> dict[str, list[str]]:
+    def measurements_uploader() -> dict[str, list[str]]:
         """
         Generates a measurements file for the benchmark
         """
@@ -252,11 +252,12 @@ using the --name or -n argument"
 (separate by commas) ")
 
         # check how many perturbants are being modified
-        perturbants_list = perturbants.split(", ")
+        perturbants_list = perturbants.split(",")
         perturbants_len = len(perturbants_list)
 
         # Add the perturbant names to the conditions string 
         for perturbant in perturbants_list:
+            perturbant = perturbant.strip()
             conditions += f"{perturbant}"
             # I need to set the last perturbation to \n for a newline. 
             if perturbant == perturbants_list[-1]:
@@ -352,6 +353,16 @@ using the --name or -n argument"
             f.write(model_specs)
 
         print("Model specification file created")
+
+    def user_prompted_observables_file() -> None:
+        pass
+
+    def user_prompted_measurement_file() -> None:
+        """
+        Prompts the user to input a series of materials and writes them to a
+        measurements file.
+        """
+        pass
 
 
 
