@@ -1,3 +1,28 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+script name: createModel.py
+Created on Wed. 08/7/2024
+Author: Arnab Mutsuddy (edited by JRH)
+
+Description: This script reads in the input files for the model and creates 
+            an Antimony model file, which is then converted to SBML format. The SBML 
+            model is then compiled using the AMICI package. The script requires the 
+            following input files: Compartments.txt, Species.txt, StoicMat.txt, 
+            Ratelaws.txt, and Observables.txt. The script also requires the Antimony 
+            package to be installed. The script outputs a file called ParamsAll.txt, 
+            which lists all parameter names, reaction names, and values. The script 
+            also outputs an SBML file called SPARCED.xml, which is used to compile the 
+            model using the AMICI package. The script also outputs a folder called SPARCED, 
+            which contains the compiled model code. The script also annotates the SBML 
+            model with information from the input files. The script also defines 
+            observables for the model
+
+Output: ParamsAll.txt, SPARCED.txt, SPARCED.xml, SPARCED folder
+"""
+
+#-----------------------Package Import & Defined Arguements-------------------#
+
 # Input file name definitions
 fileComps = 'Compartments.txt' # input
 fileSpecies = 'Species.txt' # input
@@ -16,10 +41,9 @@ import amici
 import numpy as np
 import re
 import pandas as pd
-from antimony import *
+import antimony as sb
 
 #%% Define working directory, model name
-
 cd = os.getcwd()
 wd = os.path.dirname(cd)
 input_path = os.path.join(wd,'input_files')
@@ -38,7 +62,6 @@ model_output_dir = model_name
 # The AMICI package will create this folder while compiling the model, refer to AMICI github page for more details
 
 #%% Input file processing
-
 # Initializing compartment and volume lists
 compartments = []
 volumes = []
@@ -201,13 +224,13 @@ fileModel.close()
 #%% Antimony file import and conversion to SBML format
 
 # load model and convert to SBML
-if loadFile(os.path.join(wd,"SPARCED.txt")) == 1:
+if sb.loadFile(os.path.join(wd,"SPARCED.txt")) == 1:
     print("Success loading antimony file")
 else:
     print("Failed to load antimony file")
     exit(1)
 
-if writeSBMLFile(os.path.join(wd,"SPARCED.xml"),"SPARCED") == 1:
+if sb.writeSBMLFile(os.path.join(wd,"SPARCED.xml"),"SPARCED") == 1:
     print("Success converting antimony to SBML")
 else:
     print("Failure converting antimony to SBML")
@@ -297,10 +320,6 @@ sbml_importer.sbml2amici(model_name,
                           verbose=False,
                           observables=observables,
                           constantParameters=constantParameters)
-
-# sbml_importer.sbml2amici(model_name,
-#                           os.path.join(wd,model_output_dir),
-#                           verbose=False)
 
 
 
