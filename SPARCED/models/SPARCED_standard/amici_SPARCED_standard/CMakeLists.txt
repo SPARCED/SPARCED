@@ -11,7 +11,7 @@ if(POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif(POLICY CMP0074)
 
-project(SPARCED_standard)
+project(SPARCED_I)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -32,47 +32,47 @@ message(STATUS "Found AMICI ${Amici_DIR}")
 
 set(MODEL_DIR ${CMAKE_CURRENT_LIST_DIR})
 
-set(SRC_LIST_LIB SPARCED_standard_Jy.cpp 
-SPARCED_standard_dJydsigmay.cpp 
-SPARCED_standard_dJydy.cpp 
-SPARCED_standard_root.cpp 
-SPARCED_standard_dwdp.cpp 
-SPARCED_standard_dwdx.cpp 
-SPARCED_standard_dwdw.cpp 
-SPARCED_standard_dxdotdw.cpp 
-SPARCED_standard_dxdotdx_explicit.cpp 
-SPARCED_standard_dxdotdp_explicit.cpp 
-SPARCED_standard_dydx.cpp 
-SPARCED_standard_dydp.cpp 
-SPARCED_standard_dsigmaydp.cpp 
-SPARCED_standard_sigmay.cpp 
-SPARCED_standard_stau.cpp 
-SPARCED_standard_deltasx.cpp 
-SPARCED_standard_w.cpp 
-SPARCED_standard_x0.cpp 
-SPARCED_standard_x0_fixedParameters.cpp 
-SPARCED_standard_sx0.cpp 
-SPARCED_standard_sx0_fixedParameters.cpp 
-SPARCED_standard_xdot.cpp 
-SPARCED_standard_y.cpp 
-SPARCED_standard_x_rdata.cpp 
-SPARCED_standard_total_cl.cpp 
-SPARCED_standard_x_solver.cpp 
-SPARCED_standard_dJydy_colptrs.cpp
-SPARCED_standard_dJydy_rowvals.cpp 
-SPARCED_standard_dwdp_colptrs.cpp
-SPARCED_standard_dwdp_rowvals.cpp 
-SPARCED_standard_dwdx_colptrs.cpp
-SPARCED_standard_dwdx_rowvals.cpp 
-SPARCED_standard_dwdw_colptrs.cpp
-SPARCED_standard_dwdw_rowvals.cpp 
-SPARCED_standard_dxdotdw_colptrs.cpp
-SPARCED_standard_dxdotdw_rowvals.cpp 
-SPARCED_standard_dxdotdx_explicit_colptrs.cpp
-SPARCED_standard_dxdotdx_explicit_rowvals.cpp 
-SPARCED_standard_dxdotdp_explicit_colptrs.cpp
-SPARCED_standard_dxdotdp_explicit_rowvals.cpp 
-SPARCED_standard.cpp
+set(SRC_LIST_LIB SPARCED_I_Jy.cpp 
+SPARCED_I_dJydsigmay.cpp 
+SPARCED_I_dJydy.cpp 
+SPARCED_I_root.cpp 
+SPARCED_I_dwdp.cpp 
+SPARCED_I_dwdx.cpp 
+SPARCED_I_dwdw.cpp 
+SPARCED_I_dxdotdw.cpp 
+SPARCED_I_dxdotdx_explicit.cpp 
+SPARCED_I_dxdotdp_explicit.cpp 
+SPARCED_I_dydx.cpp 
+SPARCED_I_dydp.cpp 
+SPARCED_I_dsigmaydp.cpp 
+SPARCED_I_sigmay.cpp 
+SPARCED_I_stau.cpp 
+SPARCED_I_deltasx.cpp 
+SPARCED_I_w.cpp 
+SPARCED_I_x0.cpp 
+SPARCED_I_x0_fixedParameters.cpp 
+SPARCED_I_sx0.cpp 
+SPARCED_I_sx0_fixedParameters.cpp 
+SPARCED_I_xdot.cpp 
+SPARCED_I_y.cpp 
+SPARCED_I_x_rdata.cpp 
+SPARCED_I_total_cl.cpp 
+SPARCED_I_x_solver.cpp 
+SPARCED_I_dJydy_colptrs.cpp
+SPARCED_I_dJydy_rowvals.cpp 
+SPARCED_I_dwdp_colptrs.cpp
+SPARCED_I_dwdp_rowvals.cpp 
+SPARCED_I_dwdx_colptrs.cpp
+SPARCED_I_dwdx_rowvals.cpp 
+SPARCED_I_dwdw_colptrs.cpp
+SPARCED_I_dwdw_rowvals.cpp 
+SPARCED_I_dxdotdw_colptrs.cpp
+SPARCED_I_dxdotdw_rowvals.cpp 
+SPARCED_I_dxdotdx_explicit_colptrs.cpp
+SPARCED_I_dxdotdx_explicit_rowvals.cpp 
+SPARCED_I_dxdotdp_explicit_colptrs.cpp
+SPARCED_I_dxdotdp_explicit_rowvals.cpp 
+SPARCED_I.cpp
 ${MODEL_DIR}/wrapfunctions.cpp
 )
 

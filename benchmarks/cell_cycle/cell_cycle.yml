@@ -10,6 +10,8 @@ problems:
     observable_files:
     - observables.tsv
     sbml_files:
-    - {path}
+    - sbml_SPARCED_standard.xml
+    - sbml_SPARCED_legacy.xml
+    - sbml_SPARCED_tutorial.xml
 
     

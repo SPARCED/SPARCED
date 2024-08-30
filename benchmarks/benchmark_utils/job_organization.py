@@ -34,7 +34,8 @@ class Organizer:
                 'conditions_df': petab_files.conditions_df,
                 'measurement_df': petab_files.measurement_df,
                 'observable_df': petab_files.observable_df,
-                'parameter_df': petab_files.parameter_df
+                'parameter_df': petab_files.parameter_df,
+                'visualization_df': petab_files.visualization_df
             }
 
             sbml_file = petab_files_data['sbml_file']
@@ -199,5 +200,26 @@ class Organizer:
         results_dict[condition_id][f'cell {cell}']['xoutS'] = results_catalogue['xoutS']
         results_dict[condition_id][f'cell {cell}']['toutS'] = results_catalogue['toutS']
         results_dict[condition_id][f'cell {cell}']['xoutG'] = results_catalogue['xoutG']
+
+        return results_dict
+    
+    def results_storage2(results_catalogue: dict, results_dict: dict) -> dict:
+        """This function stores the results in the results dictionary
+        
+        Input:
+            results_catalogue: dict - the results catalogue
+            results_dict: dict - the results dictionary
+            
+        Output:
+            results_dict: dict - the results dictionary"""
+
+        condition_id = results_catalogue['condition_name']
+        cell = results_catalogue['cell']
+        results_dict[f'{condition_id}_{cell}']['xoutS'] = results_catalogue['xoutS']
+        results_dict[f'{condition_id}_{cell}']['toutS'] = results_catalogue['toutS']
+        results_dict[f'{condition_id}_{cell}']['xoutG'] = results_catalogue['xoutG']
+        results_dict[f'{condition_id}_{cell}']['condition_name'] = condition_id
+        results_dict[f'{condition_id}_{cell}']['cell'] = cell
+
 
         return results_dict

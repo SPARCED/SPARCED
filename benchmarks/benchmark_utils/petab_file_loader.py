@@ -47,6 +47,8 @@ class PEtabFileLoader:
 
         if 'visualization_files' in yaml_dict['problems'][0]:
             self.visualization_df = pd.read_csv(os.path.join(yaml_directory, yaml_dict['problems'][0]['visualization_files'][0]), sep='\t')
-        
+        else:
+            self.visualization_df = None
+
         return self
     

@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python     
 """
@@ -56,6 +57,17 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
 
         Command = f"mpiexec -n {args.cores} python __main__.py \
                 -m {model_path} -b {benchmark}"
+
+        try: 
+            result = subprocess.run(Command, shell=True, check=True, 
+                                    #stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                                    capture_output=True, text=True)
+            print("Command output:", result.stdout)
+            print("Command error:", result.stderr)
+        
+        except subprocess.CalledProcessError as e:
+            print("Command failed with exit status", e.returncode)
+            print("Error output:", e.stderr)
 
         subprocess.run(Command, shell=True, check=True, 
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)

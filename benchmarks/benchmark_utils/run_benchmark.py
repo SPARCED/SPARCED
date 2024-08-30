@@ -114,8 +114,8 @@ class RunBenchmark:
             
             # Results dictionary is initialized prior to simulation for convenience
             self.results_dictionary = Utils._results_dictionary(self.conditions_df, 
-                                                                self.measurement_df
-                                                                )
+                                                           self.measurement_df
+                                                           )
         
         # Determine the number of rounds and the directory of tasks for each rank
         rounds_to_complete, rank_jobs_directory = org.task_organization(self.rank, 
@@ -269,3 +269,6 @@ class RunBenchmark:
                              ).dynamic_plot()
         
             fig.savefig(os.path.join(results_directory, f"{self.name}.png"))
+
+        else:
+            print('No visualization dataframe provided')

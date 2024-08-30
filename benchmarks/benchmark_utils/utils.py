@@ -112,6 +112,36 @@ class Utils:
 
 
     @staticmethod
+    def _results_dict2(conditions_df, measurement_df):
+        """Create an empty dictionary for storing results
+        input:
+            filtered_conditions: pd.DataFrame - filtered conditions dataframe
+        
+        output:
+            returns the empty results dictionary, ready to be filled
+        """
+
+        filtered_conditions = Utils._filter_conditions(conditions_df, measurement_df)
+
+        results = {}
+
+        for condition in filtered_conditions:
+            condition_id = condition['conditionId']
+            results[condition_id] = {}
+            num_cells = condition['num_cells'] if 'num_cells' in condition else 1
+            for cell in range(num_cells):
+                results[f'{condition_id}_{cell}'] = {}
+
+                results[f'{condition_id}_{cell}']['toutS'] = []
+                results[f'{condition_id}_{cell}']['xoutS'] = []
+                results[f'{condition_id}_{cell}']['xoutG'] = []
+                results[f'{condition_id}_{cell}']['condition'] = []
+                results[f'{condition_id}_{cell}']['cell'] = []
+
+        return results
+
+
+    @staticmethod
     def _number_of_rounds(total_jobs, size):
         """Calculate the number of rounds
         input:
@@ -212,9 +242,6 @@ class Utils:
         output:
             model: libsbml.Model - the updated SBML model
         """
-        # Get the list of compartments
-        compartment_ids = list(model.getCompartmentIds())
-
         # assign the compartment volume
         model.setCompartmentVolumeById(compartment, compartment_volume)
 
@@ -232,8 +259,6 @@ class Utils:
         output:
             model: libsbml.Model - the updated SBML model
         """
-        # Get the list of parameters
-        parameter_ids = list(model.getParameterIds())
 
         try:# assign the parameter value
             model.setParameterById(parameter, parameter_value)
@@ -274,9 +299,16 @@ class Utils:
 
     @staticmethod
     def _assign_sbml_path(model_path: str):
+        """This function assigns the SBML path from the model path
+        input:
+            model_path: str - the path to the model
+        output:
+            sbml_files: str - the path to the SBML file
+        """
 
         # Construct paths to SBML files in the specified directory
-        sbml_files = [os.path.join(model_path, filename) for filename in os.listdir(model_path) if filename.endswith('.xml')][0]
+        sbml_files = [os.path.join(model_path, filename) for filename 
+                      in os.listdir(model_path) if filename.endswith('.xml')][0]
 
         # return the sbml file path
         return sbml_files
@@ -284,6 +316,12 @@ class Utils:
 
     @staticmethod
     def _import_module_from_path(module_path: str):
+        """This function imports a module from a specified path
+        input:
+            module_path: str - the path to the module
+        output:
+            module: module - the imported module"""
+
         # Add the directory containing the module to sys.path
         module_dir = os.path.dirname(module_path)
         sys.path.append(module_dir)
@@ -400,13 +438,17 @@ class Utils:
             
             data_path = os.path.join(model_path, data_dir)
 
-            config_file = [f for f in os.listdir(data_path) if f == 'config.yaml'][0]
+            config_file = [f for f in os.listdir(data_path) 
+                           if f == 'config.yaml'][0]
 
             config_path = os.path.join(data_path, config_file)
 
         except FileNotFoundError:
 
-            raise ValueError(f"No config.yaml file found in the data directory of {model_path}; check model path.")
+            val_error = (f"No config.yaml file found in the data directory"
+                            f" of {model_path}; check model path.")
+
+            raise ValueError(val_error)
             
         with open(config_path, 'r') as f:
             config = yaml.safe_load(f)
@@ -442,8 +484,6 @@ class Utils:
             output:
                 model: libsbml.Model - the updated SBML model
         """
-        # # !!! Done in run_benchmark and passed to simulation function. 
-        # _, omics_data = Utils._extract_simulation_files(model_path)
 
         if gene in omics_data['gene'].values:
             # Update values
@@ -452,32 +492,3 @@ class Utils:
             omics_data.loc[omics_data['gene'] == gene, 'kTCd'] = value
 
         return omics_data
-
-
-    # @staticmethod
-    # def _reset_transcription_values(prior_values: dict, model_path: str) -> None:
-    #     """This function resets the values of the transcription factors
-    #     input:
-    #         prior_values: dict - the values to reset
-    #         model_path: str - the path to the model
-    #     output:
-    #         None
-    #     """
-
-    #     gene_reg, omics_data = Utils._extract_simulation_files(model_path)
-        
-    #     # Read the omics_data file into a DataFrame
-    #     omics_data_df = pd.read_csv(omics_data, sep='\t')
-
-    #     for gene, values in prior_values.items():
-    #         if values is not None and gene in omics_data_df['gene'].values:
-    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = values['kTCleak']
-    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = values['kTCmaxs']
-    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = values['kTCd']
-
-    #     # Ensure scientific notation is lowercase before saving
-    #     omics_data_df.loc[:, omics_data_df.columns != 'gene'] = omics_data_df.loc[:, omics_data_df.columns != 'gene']\
-    #         .applymap(lambda x: str(x).replace('e', 'E') if isinstance(x, str) else x)
-        
-    #     # Write the updated DataFrame back to the file
-    #     omics_data_df.to_csv(omics_data, sep='\t', index=False)
