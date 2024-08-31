@@ -15,7 +15,7 @@ Users are anticipated to compare simulation results to prior validated results.
 
 #-----------------------Package Import & Defined Arguements-------------------#
 import sys
-from benchmark_utils.run_benchmark import RunBenchmark
+from benchmark_utils.simulation.run_benchmark import RunBenchmark
 
 sys.path.append('benchmark_utils')
 

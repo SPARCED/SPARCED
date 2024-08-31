@@ -6,9 +6,7 @@ import matplotlib.pyplot as plt
 
 
 class Visualizer:
-    def __init__(self, yaml_file: str, results_dict: dict, 
-                 visualization_df: pd.DataFrame, observable_df: pd.DataFrame, 
-                 measurement_df: pd.DataFrame):
+    def __init__(self, yaml_file: str, results_dict: dict, visualization_df: pd.DataFrame, observable_df: pd.DataFrame, measurement_df: pd.DataFrame):
         """This class is designed to plot and save the visualization data.
         input:
             yaml_file: str - path to the YAML file

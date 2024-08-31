@@ -2,12 +2,12 @@ import os
 import sys
 import pickle
 import importlib
-from benchmark_utils.job_organization import Organizer as org
-from benchmark_utils.arguements import parse_args
-from benchmark_utils.utils import Utils
-from benchmark_utils.sparced_simulation import Simulation
-from benchmark_utils.observable_calc import ObservableCalculator
-from benchmark_utils.visualization import Visualizer
+from benchmark_utils.simulation.job_organization import Organizer as org
+from benchmark_utils.simulation.arguements import parse_args
+from benchmark_utils.simulation.utils import Utils
+from benchmark_utils.simulation.sparced_simulation import Simulation
+from benchmark_utils.simulation.observable_calc import ObservableCalculator
+from benchmark_utils.visualization.visualization import Visualizer
 args = parse_args()
 
 # Append utilities and model directories to the path
@@ -114,8 +114,8 @@ class RunBenchmark:
             
             # Results dictionary is initialized prior to simulation for convenience
             self.results_dictionary = Utils._results_dictionary(self.conditions_df, 
-                                                           self.measurement_df
-                                                           )
+                                                                self.measurement_df
+                                                                )
         
         # Determine the number of rounds and the directory of tasks for each rank
         rounds_to_complete, rank_jobs_directory = org.task_organization(self.rank, 
@@ -269,6 +269,3 @@ class RunBenchmark:
                              ).dynamic_plot()
         
             fig.savefig(os.path.join(results_directory, f"{self.name}.png"))
-
-        else:
-            print('No visualization dataframe provided')

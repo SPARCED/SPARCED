@@ -69,8 +69,8 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
             print("Command failed with exit status", e.returncode)
             print("Error output:", e.stderr)
 
-        subprocess.run(Command, shell=True, check=True, 
-                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        #subprocess.run(Command, shell=True, check=True, 
+        #               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
 def _get_list_of_benchmarks() -> list:

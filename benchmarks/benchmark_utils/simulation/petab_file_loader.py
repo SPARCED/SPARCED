@@ -1,7 +1,7 @@
 import os
 import yaml
 import pandas as pd
-from benchmark_utils.utils import Utils as utils
+from benchmark_utils.simulation.utils import Utils as utils
 
 
 # Load the PEtab files
@@ -47,8 +47,6 @@ class PEtabFileLoader:
 
         if 'visualization_files' in yaml_dict['problems'][0]:
             self.visualization_df = pd.read_csv(os.path.join(yaml_directory, yaml_dict['problems'][0]['visualization_files'][0]), sep='\t')
-        else:
-            self.visualization_df = None
-
+        
         return self
     

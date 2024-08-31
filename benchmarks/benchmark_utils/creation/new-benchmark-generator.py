@@ -30,8 +30,10 @@ class BenchmarkCreator:
         Creates a new benchmark given a name
         """
 
+	os.chdir('../')
+
         assert os.path.basename(os.getcwd()) == 'benchmark_utils', \
-              "Please run this script from the benchmark_utils directory"
+              "Please run this script from the benchmark_utils/creation directory"
 
         # Get the name of the benchmark
         assert args.name is not None, "Please provide a name for the benchmark \

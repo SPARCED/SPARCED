@@ -1,16 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Script to reduce simulation results down to the core species, genes, and 
-time trajectories of interest.
-
-Author: Jonah R. Huggins
-
-Created on Thurs. 04/23/2024 9:00:00 
-
-"""
-
-#-----------------------Package Import & Defined Arguements-------------------#
 import re
 import numpy as np
 import pandas as pd
@@ -54,57 +41,18 @@ class ObservableCalculator:
                         # Construct the regex pattern to match the species name exactly
                         pattern = r'\b{}\b'.format(re.escape(species_i))
         #                 # Replace only the exact matches of the species name in the formula
-                        observable_formula = re.sub(pattern, 
-                                                    f'self.results_dict[condition]["{cell}"]["xoutS"][:, species_ids.index("{species_i}")]', observable_formula)
+                        observable_formula = re.sub(pattern, f'self.results_dict[condition]["{cell}"]["xoutS"][:, species_ids.index("{species_i}")]', observable_formula)
 
                     obs = eval(observable_formula)
 
                     observable_name = observable['observableId']
                     observable_dict[condition][cell][observable_name] = {}
                     observable_dict[condition][cell][observable_name]['xoutS'] = obs
-
-                    reduced_toutS = self.reduce_timepoints(
-                                                            self.results_dict[condition][cell]['toutS'], 
-                                                            self.measurement_df
-                                                            )
-
                     observable_dict[condition][cell][observable_name]['toutS'] = self.results_dict[condition][cell]['toutS']
                     if 'xoutG' in self.results_dict[condition][cell]:
                         observable_dict[condition][cell][observable_name]['xoutG'] = self.results_dict[condition][cell]['xoutG']
 
         return observable_dict
-
-    # def fixed_observable_calc(self, observable_name:str):
-        
-    #     observable_dict = {}
-        
-    #     for entry in self.results_dict:
-    #         observable_dict[entry] = {}
-
-    #         for _, observable in self.observable_df.iterrows():
-    #             observable_formula = str(observable['observableFormula'])
-    #             # Search the obs formula for species names
-    #             species = re.findall(r'\b[A-Za-z](?:[A-Za-z0-9_]*[A-Za-z0-9])?\b',
-    #                                   observable_formula)
-    #             for species_i in species:
-    #                 # Construct the regex pattern to match the species name exactly
-    #                 pattern = r'\b{}\b'.format(re.escape(species_i))
-    # #                 # Replace only the exact matches of the species name in the formula
-                    
-    #                 observable_formula = re.sub(pattern, 
-    #                                             f'self.results_dict[{entry}"]["xoutS"]
-    #                                             [:, species_ids.index("{species_i}")]',
-    #                                               observable_formula)
-
-    #             obs = eval(observable_formula)
-
-    #             observable_name = observable['observableId']
-    #             observable_dict[entry][observable_name] = obs
-    #             observable_dict[entry]['toutS'] = self.results_dict[entry]['toutS']
-    #             if 'xoutG' in self.results_dict[entry]:
-    #                 observable_dict[entry]['xoutG'] = self.results_dict[entry]['xoutG']
-
-    #     return observable_dict
 
     def _sum_unique_dict_entries(self):
         """Sum the unique entries in the results dictionary."""
@@ -116,7 +64,6 @@ class ObservableCalculator:
             unique_entries[f'{key}'] =  sum(unique_entries[f'{key}'])
         return unique_entries
     
-
     def _add_experimental_data(self, observable_dict: dict):
         """
         Returns a dictionary of experimental data for each observable and condition,
@@ -135,15 +82,12 @@ class ObservableCalculator:
                 self.measurement_df[self.measurement_df['simulationConditionId'] == self.measurement_df['preequilibrationConditionId']].index))
 
             # Group by observableId and simulationConditionId
-            grouped_data = no_preequilibrations_df.groupby(['observableId', 
-                                                            'simulationConditionId'])
+            grouped_data = no_preequilibrations_df.groupby(['observableId', 'simulationConditionId'])
         else:
-            grouped_data = self.measurement_df.groupby(['observableId', 
-                                                        'simulationConditionId'])
+            grouped_data = self.measurement_df.groupby(['observableId', 'simulationConditionId'])
             
-        # look for experimental data in the measurements file by exculding all
-        #  NaN values in measurement_df['measurement'] if all values are NaN, 
-        # then there is no experimental data to compare to
+        # look for experimental data in the measurements file by exculding all NaN values in measurement_df['measurement']
+        # if all values are NaN, then there is no experimental data to compare to
         if self.measurement_df['measurement'].isna().all():
             print('No experimental data to compare to')
             return observable_dict
@@ -156,37 +100,6 @@ class ObservableCalculator:
                 result_dict[condition][f'cell {i}'][f'experiment {observable}']['xoutS'] = condition_data['measurement'].values
         
         return result_dict
-
-
-    def reduce_timepoints(toutS: np.ndarray, 
-                          measurement_df: pd.DataFrame) -> np.ndarray:
-        """
-        Reduce the number of timepoints in the simulation results to match the
-        experimental data.
-
-        Parameters:
-        - toutS: Timepoints from the simulation results.
-        measurement_df (pd.DataFrame): DataFrame containing experimental data.
-
-        Returns:
-        - reduced_toutS (np.ndarray): Timepoints reduced to match the experimental data.
-        """
-
-        # If no experimental data is present; return entire timepoints array
-        if measurement_df['measurements'] is None:
-            return toutS
-
-        else:
-            observable_timepoints = measurement_df['time'].unique()
-
-            # Find the indices of the timepoints in the simulation results that match
-            # the experimental data
-            indices = np.where(np.isin(toutS, observable_timepoints))
-
-            # Reduce the timepoints to match the experimental data
-            reduced_toutS = toutS[indices]
-
-            return reduced_toutS
 
 
 class CellDeathMetrics:
@@ -257,5 +170,5 @@ class CellDeathMetrics:
             alive_ratio = [(1 - x)*100 for x in death_ratio.values()]
         else:
             alive_ratio = [(1 - x) for x in death_ratio.values()]
-
+        # alive_ratio = [(1 - x)*100 for x in death_ratio.values()]
         return alive_ratio 

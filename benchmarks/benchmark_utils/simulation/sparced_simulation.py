@@ -15,7 +15,7 @@ import math
 import libsbml
 import pandas as pd
 import numpy as np
-from benchmark_utils.utils import Utils as utils
+from benchmark_utils.simulation.utils import Utils as utils
 # Get the directory path
 wd = os.path.dirname(os.path.abspath(__file__))
 # Ensure the SPARCED root and bin directories are in the system path
