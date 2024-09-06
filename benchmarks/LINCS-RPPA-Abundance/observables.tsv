@@ -73,5 +73,6 @@ Rheb abundance	RhebD * 1.0 + RhebT * 1.0 + RhebT_TSC * 1.0	1
 Rictor abundance	Rictor	1
 CRaf abundance	pCRaf * 1.0 + CRaf * 1.0 + RasT_CRaf * 1.0 + RasT_CRaf_BRaf * 1.0 + RKIP_CRaf * 1.0 + CRaf_ppERK * 1.0 + MEK_RasT_CRaf_BRaf * 1.0 + pMEK_RasT_CRaf_BRaf * 1.0 + RasT_CRaf_CRaf * 1.0 + MEK_RasT_CRaf_CRaf * 1.0 + pMEK_RasT_CRaf_CRaf * 1.0	1
 RasT_CRaf abundance	RasT_CRaf * 1.0 + RasT_CRaf_BRaf * 1.0 + MEK_RasT_CRaf_BRaf * 1.0 + pMEK_RasT_CRaf_BRaf * 1.0 + RasT_CRaf_CRaf * 1.0 + MEK_RasT_CRaf_CRaf * 1.0 + pMEK_RasT_CRaf_CRaf * 1.0	1
-pRb abundance	pRB * 0.33333333333333337 + pRBp * 0.33333333333333337 + pRBpp * 0.33333333333333337 + pRBc1 * 0.33333333333333337 + pRBc2 * 0.33333333333333337	
-pRbp + pRbc2 abundance	pRBp * 0.33333333333333337 + pRBpp * 0.33333333333333337 + pRBc1 * 0.33333333333333337 + pRBc2 * 0.33333333333333337	
+pRb abundance	pRB * 0.33333333333333337 + pRBp * 0.33333333333333337 + pRBpp * 0.33333333333333337 + pRBc1 * 0.33333333333333337 + pRBc2 * 0.33333333333333337	1
+pRbp + pRbc2 abundance	pRBp * 0.33333333333333337 + pRBpp * 0.33333333333333337 + pRBc1 * 0.33333333333333337 + pRBc2 * 0.33333333333333337	1
+cJun abundance	cJun*0.333333333333337 + pcFos_cJun*0.333333333333337	1
