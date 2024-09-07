@@ -103,11 +103,23 @@ class Utils:
         results = {}
 
         for condition in filtered_conditions:
+
             condition_id = condition['conditionId']
-            results[condition_id] = {}
             num_cells = condition['num_cells'] if 'num_cells' in condition else 1
+
             for cell in range(num_cells):
-                results[condition_id][f'cell {cell}'] = {}
+                
+                identifier = Utils.identifier_generator()
+                results[identifier] = {
+                    'conditionId': condition_id,
+                    'cell': cell,
+                    'xoutS': None,
+                    'toutS': None,
+                    'xoutG': None,
+                    'observable': None,
+                    'experiment_data': None
+                }
+
         return results
 
 
@@ -453,31 +465,17 @@ class Utils:
 
         return omics_data
 
-
-    # @staticmethod
-    # def _reset_transcription_values(prior_values: dict, model_path: str) -> None:
-    #     """This function resets the values of the transcription factors
-    #     input:
-    #         prior_values: dict - the values to reset
-    #         model_path: str - the path to the model
-    #     output:
-    #         None
-    #     """
-
-    #     gene_reg, omics_data = Utils._extract_simulation_files(model_path)
+    @staticmethod
+    def identifier_generator():
+        """This function generates a unique identifier for the iterative
+            of each simulation process. 
+        output:
+            returns the unique identifier
+        """
+        import uuid
         
-    #     # Read the omics_data file into a DataFrame
-    #     omics_data_df = pd.read_csv(omics_data, sep='\t')
+        identifier = str(uuid.uuid4())
 
-    #     for gene, values in prior_values.items():
-    #         if values is not None and gene in omics_data_df['gene'].values:
-    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCleak'] = values['kTCleak']
-    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCmaxs'] = values['kTCmaxs']
-    #             omics_data_df.loc[omics_data_df['gene'] == gene, 'kTCd'] = values['kTCd']
+        del uuid
 
-    #     # Ensure scientific notation is lowercase before saving
-    #     omics_data_df.loc[:, omics_data_df.columns != 'gene'] = omics_data_df.loc[:, omics_data_df.columns != 'gene']\
-    #         .applymap(lambda x: str(x).replace('e', 'E') if isinstance(x, str) else x)
-        
-    #     # Write the updated DataFrame back to the file
-    #     omics_data_df.to_csv(omics_data, sep='\t', index=False)
+        return identifier

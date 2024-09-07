@@ -16,14 +16,14 @@ Output: dictionary containing the observables of interest
 import re
 import numpy as np
 import pandas as pd
-from typing import Optional
-
 
 class ObservableCalculator:
     def __init__(self, yaml_file:str, results_dict: dict, 
                  observable_df: pd.DataFrame, measurement_df: pd.DataFrame, 
                  model: str):
-        """This class is designed to calculate observable values from simulation results.
+        """This class is designed to calculate observable values from \
+            simulation results.
+            
         input:
             yaml_file: str - path to the YAML file
             results_dict: dict - dictionary containing the simulation results
@@ -38,82 +38,177 @@ class ObservableCalculator:
 
 
     def __call__(self):
-        """isolate only the observables of interest from the simulation data. Primary function is to cut down on data.
+        """isolate only the observables of interest from the simulation data. \
+        Primary function is to cut down on data saved.
 
-        output: dictionary containing the observables of interest"""
+        Returns: modified results dictionary containing only the observables of 
+        interest
+        """
+        observableIds = self.observable_df['observableId'].unique()
 
-        species_ids = list(self.model.getStateIds()) # assign species IDs to a list
+        observable_arrays = {}
 
-        observable_dict = {} # Instantiate the observable dictionary, dictionary structure will be condition -> cell -> observable -> xoutS, toutS, xoutG
-        for condition in self.results_dict:
-            observable_dict[condition] = {} # Instatiate the condition dictionary
-            for cell in self.results_dict[condition]:
-                observable_dict[condition][cell] = {} # Instantiate the cell dictionary
-                for _, observable in self.observable_df.iterrows():
-                    observable_formula = str(observable['observableFormula'])
-                        # Search the obs formula for species names
-                        # species = re.findall(r'\b\w+(?:\.\w+)?\*\w+(?:\.\w+)?\b', obs_formula)
-                    species = re.findall(r'\b[A-Za-z](?:[A-Za-z0-9_]*[A-Za-z0-9])?\b', observable_formula)
-                    for species_i in species:
-                        # Construct the regex pattern to match the species name exactly
-                        pattern = r'\b{}\b'.format(re.escape(species_i))
-        #                 # Replace only the exact matches of the species name in the formula
-                        observable_formula = re.sub(pattern, f'self.results_dict[condition]["{cell}"]["xoutS"][:, species_ids.index("{species_i}")]', observable_formula)
+        for item in self.results_dict:
 
-                    obs = eval(observable_formula)
+            conditionId = item['conditionId']
+            cell = item['cell']
+            xoutS = item['xoutS']
+            
+            # if the conditionId and observable are matched in the 
+            # measurement_df, add the observable to the interesting_observables 
+            # list
+            interesting_observables = []
+            for observableId in observableIds:
 
-                    observable_name = observable['observableId']
-                    observable_dict[condition][cell][observable_name] = {}
-                    observable_dict[condition][cell][observable_name]['xoutS'] = obs
-                    observable_dict[condition][cell][observable_name]['toutS'] = self.results_dict[condition][cell]['toutS']
-                    if 'xoutG' in self.results_dict[condition][cell]:
-                        observable_dict[condition][cell][observable_name]['xoutG'] = self.results_dict[condition][cell]['xoutG']
+                # calculate the observable values from the simulation results
+                observable_array = self.observable_caluculator(observableId, xoutS)
 
-        return observable_dict
+                # add the observable to the observable_arrays dictionary
+                observable_arrays[observableId] = observable_array
 
-    def _sum_unique_dict_entries(self):
-        """Sum the unique entries in the results dictionary."""
-        unique_entries = {}
-        for key, value in self.results_dict.items():
-            unique_entries[f'{key}'] = []
-            for sub_key, sub_value in value.items():
-                unique_entries[f'{key}'].append(1)
-            unique_entries[f'{key}'] =  sum(unique_entries[f'{key}'])
-        return unique_entries
+                # add the observable values to the results_dict if the 
+                # observable is associated with the conditionId in the measurement_df
+                if (
+                    (
+                        self.measurement_df['simulationConditionId']==conditionId
+                        ).any() 
+                        and (
+                            self.measurement_df['observableId'] == observableId
+                            ).any()
+                    ):
+                    
+                    interesting_observables.append(observableId)
+
+            # add the observable values to the results_dict
+            for observable in interesting_observables:
+                item[f'simulation {observable}'] = observable_arrays[observable]
+        
+            # remove the xoutS from the results_dict
+            del item['xoutS']
+
+        # add the experimental data to the results_dict
+        for item in self.results_dict:
+            item = self._add_experimental_data(item)
+
+        # reduce timepoints in the simulation results to match the experimental 
+        # data
+        for item in self.results_dict:
+            item['toutS'] = self._timepoint_reduction(item['toutS'])
+
+        return self.results_dict
+
+
+    def observable_caluculator(self, observable: str, 
+                               xoutS: np.array)-> np.array:
+        """Calculate the observable values from the simulation results.
+
+        Parameters:
+        - observable (str): The observable of interest. Should be a column in \
+            the observable dataframe.
+        - xoutS (np.array): The simulation results.
+        Returns:
+        - observable_array(np.array): Array containing the observable values.
+        """
+        try:
+            assert (observable in self.observable_df['observableId'].values, 
+            f'{observable} is not in the observable dataframe')
+
+            species_ids = list(self.model.getStateIds())
+
+            # replace species name strings in the observable_formula with the 
+            # corresponding species index in the results_dict
+            observable_formula = str(observable['observableFormula'])
+
+            # Search the observable formula for species names
+            species = re.findall(r'\b[A-Za-z](?:[A-Za-z0-9_]*[A-Za-z0-9])?\b', 
+                                 observable_formula)
+            
+            for species_i in species:
+                
+                # Construct the regex pattern to match the species name exactly
+                pattern = r'\b{}\b'.format(re.escape(species_i))
+
+                # Replace only the exact matches of the species name in the formula
+                observable_formula = (re.sub(pattern, 
+                                             xoutS[:, species_ids.index("{species_i}")], 
+                                             observable_formula))
+
+            observable_answer = eval(observable_formula)
+
+            return observable_answer
+
+        except AssertionError as e:
+            print(e)
+            pass
     
-    def _add_experimental_data(self, observable_dict: dict):
+
+    def _add_experimental_data(self, item: tuple)-> tuple:
         """
         Returns a dictionary of experimental data for each observable and condition,
         matching simulation results dictionary format.
 
         Parameters:
-        - yaml_file (str): Path to the yaml file.
+        - item (tuple): Tuple containing the simulation results for a \
+            single condition.
 
         Returns:
-        - result_dict (dict): Dictionary containing experimental data.
+        - item (tuple): Modified tuple containing the simulation results and \
+            experimental data.
         """
 
-        result_dict = observable_dict
-        if 'preequilibrationConditionId' in self.measurement_df.columns:
-            no_preequilibrations_df = (self.measurement_df.drop(
-                self.measurement_df[self.measurement_df['simulationConditionId'] == self.measurement_df['preequilibrationConditionId']].index))
+        # Account for the preequilibration condition
+        preequilibration_condition = (
+            self.measurement_df.loc[
+            self.measurement_df['simulationConditionId']==item['preequilibrationConditionId']
+            ]
+            )
 
-            # Group by observableId and simulationConditionId
-            grouped_data = no_preequilibrations_df.groupby(['observableId', 'simulationConditionId'])
+        if not preequilibration_condition.empty:
+            non_preequilibration_df = self.measurement_df.drop(preequilibration_condition.index)
+
         else:
-            grouped_data = self.measurement_df.groupby(['observableId', 'simulationConditionId'])
-            
-        # look for experimental data in the measurements file by exculding all NaN values in measurement_df['measurement']
-        # if all values are NaN, then there is no experimental data to compare to
+            non_preequilibration_df = self.measurement_df
+
+        # Group by observableId and simulationConditionId
+        grouped_data = non_preequilibration_df.groupby(['observableId', 'simulationConditionId'])
+
+        # look for experimental data in the measurements file by exculding all
+        #  NaN values in measurement_df['measurement']
         if self.measurement_df['measurement'].isna().all():
             print('No experimental data to compare to')
-            return observable_dict
-
-        for (observable, condition), condition_data in grouped_data:
-            for cell in result_dict[condition]:
-                result_dict[condition][cell][f'experiment {observable}'] = {}
-            for i in range(0, self._sum_unique_dict_entries()[condition]):
-                result_dict[condition][f'cell {i}'][f'experiment {observable}']['toutS'] = condition_data['time'].values
-                result_dict[condition][f'cell {i}'][f'experiment {observable}']['xoutS'] = condition_data['measurement'].values
+            return item
         
-        return result_dict
+        # Create a dictionary to store the experimental data
+        item['experiment_data'] = {}
+
+        # match the experimental data to the simulation results
+        for (observableId, conditionId), group in grouped_data:
+            
+            measurements = group['measurement'].values
+
+            item[f'experiment {observableId}'] = measurements
+
+        return item
+
+
+    def _timepoint_reduction(self, toutS: np.array)-> np.array:
+        """Reduce the number of timepoints in the simulation results. to match
+            the number of timepoints in the experimental data.
+            
+        Parameters:
+        - toutS (np.array): The timepoints from the simulation results.
+
+        Returns:
+        - toutS (np.array): The reduced timepoints.
+        """
+        # Ensure first that there is no experimental values in the measurement
+        # before reducing the timepoints, if none are found, return the original
+        if self.measurement_df['measurement'].isna().all():
+            return toutS
+
+        # Find the minimum number of timepoints in the measurement data
+        unique_timepoints = self.measurement_df['time'].unique()
+
+        toutS = np.delete(toutS, np.where(toutS != unique_timepoints))
+        
+        return toutS

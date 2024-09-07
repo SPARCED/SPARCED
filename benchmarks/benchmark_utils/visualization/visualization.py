@@ -30,6 +30,8 @@ class Visualizer:
         output: plots the simulation data according to the visualization dataframe
         """
 
+        # TODO exchange all data indexes with the new format: index[f'']
+
         results_dict = self.results_dict
         visualization_df = self.visualization_df
 
@@ -75,7 +77,9 @@ class Visualizer:
 
             if plot_type == 'ScatterPlot':
                 condition = visualization_df['datasetId'][i]
-                for cell in results_dict[condition]:
+
+                identifier = ([results_dict[identifier][results_dict[identifier]['conditionId']==condition]])
+                for entry in results_dict[identifier]:
                     yvals = results_dict[condition][cell][yValue]['xoutS']
                     if xValue == 'time':
                         xvals = results_dict[condition][cell][yValue]['toutS']/3600

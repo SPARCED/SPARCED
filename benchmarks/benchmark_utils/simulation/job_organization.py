@@ -138,7 +138,7 @@ class Organizer:
             rank_results: dict - the results dictionary for the rank
         """
         
-        rank_results = {'condition_name': condition_id,
+        rank_results = {'conditionId': condition_id,
                                 'cell': cell,
                                 'xoutS': xoutS,
                                 'toutS': toutS,
@@ -194,10 +194,18 @@ class Organizer:
         Output:
             results_dict: dict - the results dictionary"""
 
-        condition_id = results_catalogue['condition_name']
+        condition_id = results_catalogue['conditionId']
         cell = results_catalogue['cell']
-        results_dict[condition_id][f'cell {cell}']['xoutS'] = results_catalogue['xoutS']
-        results_dict[condition_id][f'cell {cell}']['toutS'] = results_catalogue['toutS']
-        results_dict[condition_id][f'cell {cell}']['xoutG'] = results_catalogue['xoutG']
 
+        try:
+            # Find the identifier with the matching condition and cell
+            for item in results_dict:
+                if item['conditionId'] == condition_id and item['cell'] == cell:
+                    item['xoutS'] = results_catalogue['xoutS']
+                    item['toutS'] = results_catalogue['toutS']
+                    item['xoutG'] = results_catalogue['xoutG']
+
+        except:
+            print('No matching condition and cell found in the results dictionary')
+        
         return results_dict
