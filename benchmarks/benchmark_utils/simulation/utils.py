@@ -84,7 +84,8 @@ class Utils:
         
         condition = ([
             condition for condition in filtered_conditions if 
-            condition['conditionId'] == condition_id][0]) 
+            condition['conditionId'] == condition_id][0]
+            ) 
     
         return condition, cell, condition_id
 
