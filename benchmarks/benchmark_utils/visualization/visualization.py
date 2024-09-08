@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 
 
 class Visualizer:
-    def __init__(self, yaml_file: str, results_dict: dict, visualization_df: pd.DataFrame, observable_df: pd.DataFrame, measurement_df: pd.DataFrame):
+    def __init__(self, yaml_file: str, results_dict: dict, 
+                 visualization_df: pd.DataFrame, observable_df: pd.DataFrame,
+                   measurement_df: pd.DataFrame):
         """This class is designed to plot and save the visualization data.
         input:
             yaml_file: str - path to the YAML file
@@ -29,13 +31,7 @@ class Visualizer:
 
         output: plots the simulation data according to the visualization dataframe
         """
-
-        # TODO exchange all data indexes with the new format: index[f'']
-
-        results_dict = self.results_dict
-        visualization_df = self.visualization_df
-
-        unique_plots = visualization_df['plotId'].unique()
+        unique_plots = self.visualization_df['plotId'].unique()
 
         num_rows, num_cols, plot_position_matrix = generate_position_matrix(len(unique_plots))
         unique_plt_positions = {}
@@ -62,65 +58,54 @@ class Visualizer:
         elif num_rows == 1 or num_cols == 1:
             axes = axes.reshape((max(num_rows, num_cols),1))
 
-        for i, plotId in enumerate(visualization_df['plotId']):
+        for i, plotId in enumerate(self.visualization_df['plotId']):
 
-            plot_type = visualization_df['plotTypeSimulation'][i]
-            yValue = visualization_df['yValues'][i]
-            xValue = visualization_df['xValues'][i]
+            plot_type = self.visualization_df['plotTypeSimulation'][i]
+            yValue = self.visualization_df['yValues'][i]
+            xValue = self.visualization_df['xValues'][i]
 
-            xScale, yScale = visualization_df['xScale'][i], visualization_df['yScale'][i]
-            xLabel, yLabel = visualization_df['xLabel'][i], visualization_df['yLabel'][i]
+            xScale, yScale = (self.visualization_df['xScale'][i], 
+                              self.visualization_df['yScale'][i])
             
-
+            xLabel, yLabel = (self.visualization_df['xLabel'][i], 
+                              self.visualization_df['yLabel'][i])
+            
             # Find the position from the matrix
             row, col = unique_plt_positions[plotId]
 
-            if plot_type == 'ScatterPlot':
-                condition = visualization_df['datasetId'][i]
+            condition = self.visualization_df['datasetId'][i]
 
-                identifier = ([results_dict[identifier][results_dict[identifier]['conditionId']==condition]])
-                for entry in results_dict[identifier]:
-                    yvals = results_dict[condition][cell][yValue]['xoutS']
-                    if xValue == 'time':
-                        xvals = results_dict[condition][cell][yValue]['toutS']/3600
-                    else:
-                        xvals = results_dict[condition][cell][xValue]['xoutS']
-                    axes[row, col].scatter(xvals, yvals, 
-                                           label=visualization_df['legendEntry'][i], 
-                                           color=visualization_df['Color'][i], 
-                                           linewidth=3)
+            identifier = ([self.results_dict[identifier][self.results_dict[identifier]
+                                                    ['conditionId']==condition]]
+                                                    )
+
+            if plot_type == 'ScatterPlot':
+
+                axes = Visualizer.scatter_plot(xValue, yValue,
+                                         self.visualization_df['legendEntry'][i],
+                                         self.visualization_df['Color'][i], 
+                                         identifier)  
 
             elif plot_type == 'LinePlot':
-                condition = visualization_df['datasetId'][i]
-                for cell in results_dict[condition]:
-                    yvals = results_dict[condition][cell][yValue]['xoutS']
-                    if xValue == 'time':
-                        xvals = results_dict[condition][cell][yValue]['toutS']/3600
-                    else:
-                        xvals = results_dict[condition][cell][xValue]['xoutS']
-                    axes[row, col].plot(xvals, yvals, 
-                                        label=visualization_df['legendEntry'][i], 
-                                        color=visualization_df['Color'][i], 
-                                        linewidth=3)
+
+                axes = Visualizer.line_plot(xValue, yValue,
+                                         self.visualization_df['legendEntry'][i],
+                                         self.visualization_df['Color'][i], 
+                                         identifier)  
 
             elif plot_type == 'BarPlot':
-                condition = visualization_df['datasetId'][i]
-                for cell in results_dict[condition]:
-                    yvals = results_dict[condition][cell][yValue]['xoutS']
-                    if xValue == 'time':
-                        xvals = results_dict[condition][cell][yValue]['toutS']/3600
-                    else:
-                        xvals = results_dict[condition][cell][xValue]['xoutS']
-                    axes[row, col].bar(xvals, yvals, 
-                                       label=visualization_df['legendEntry'][i], 
-                                       color=visualization_df['Color'][i], 
-                                       linewidth=3)
+
+                axes = Visualizer.bar_plot(xValue, yValue,
+                                         self.visualization_df['legendEntry'][i],
+                                         self.visualization_df['Color'][i], 
+                                         identifier)             
+
 
             axes[row, col].set_xlabel(xLabel, weight='bold')
             axes[row, col].set_ylabel(yLabel, weight='bold')
             axes[row, col].set_xscale(xScale)
             axes[row, col].set_yscale(yScale)
-            axes[row, col].set_title(visualization_df['plotName'][i], weight='bold')
+            axes[row, col].set_title(self.visualization_df['plotName'][i], weight='bold')
 
         # Remove unused subplots
         for i in range(len(unique_plots), num_rows * num_cols):
@@ -144,14 +129,156 @@ class Visualizer:
                         unique_lines[idx] = line
 
         # Create a legend using unique handles and labels
-        # fig.legend(unique_lines, unique_labels, loc='lower right', bbox_to_anchor=(1.05, 1), frameon=False)
         fig.legend(unique_lines, unique_labels, frameon=False)
-        
 
         # # Adjust layout
         plt.tight_layout()
 
         return fig
+
+
+    def replicate_plot_settings(ax, replicate: int)-> plt.axis:
+        """Provided a replicate, reassigns the specific attributes of the plot
+        to have a lower alpha value, and a smaller linewidth.
+        
+        Parameters:
+            ax: plt.axis - axis object
+            replicate: int - replicate number
+        
+        Returns:
+            ax: plt.axis - axis object with updated settings
+        """
+        ax.lines[replicate].set_alpha(0.5)
+        ax.lines[replicate].set_linewidth(1)
+    
+        return ax
+        
+
+    def scatter_plot(self, xValue: str, yValue: str, legendEntry: str, 
+                     Color: str, identifier: str):
+        """Generates a scatter plot based on the provided parameters
+        
+        Parameters:
+            xValue: str - x-axis value
+            yValue: str - y-axis value
+            legendEntry: str - legend entry
+            Color: str - color
+            identifier: str - identifier
+        
+        Returns:
+            ax: plt.axis - axis object
+        """
+        if len(identifier) > 1:
+            for replicate in range(len(identifier)):
+                yvals = self.results_dict[identifier][replicate][yValue]
+                if xValue == 'time':
+                    xvals = self.results_dict[identifier][replicate]['toutS']/3600
+                else:
+                    xvals = self.results_dict[identifier][replicate][xValue]
+                ax.scatter(xvals, yvals, 
+                                    label=legendEntry, 
+                                    color=Color, 
+                                    linewidth=3)
+                
+                ax = Visualizer.replicate_plot_settings(ax, replicate)
+
+        else:
+            yvals = self.results_dict[identifier][yValue]
+            if xValue == 'time':
+                xvals = self.results_dict[identifier]['toutS']/3600
+            else:
+                xvals = self.results_dict[identifier][xValue]
+            ax.scatter(xvals, yvals, 
+                                label=legendEntry, 
+                                color=Color, 
+                                linewidth=3)
+    
+        return ax
+
+    def line_plot(self, xValue: str, yValue: str, xScale: str, yScale: str,
+                     xLabel: str, yLabel: str, plotName: str, legendEntry: str, 
+                     Color: str, datasetId: str, plotId: str, identifier: str) -> plt.axis:
+        """Generates a line plot based on the provided parameters
+        
+        Parameters:
+            xValue: str - x-axis value
+            yValue: str - y-axis value
+            legendEntry: str - legend entry
+            Color: str - color
+            identifier: str - identifier
+        
+        Returns:
+            ax: plt.axis - axis object
+        """
+        if len(identifier) > 1:
+            for replicate in range(len(identifier)):
+                yvals = self.results_dict[identifier][replicate][yValue]['xoutS']
+                if xValue == 'time':
+                    xvals = self.results_dict[identifier][replicate][yValue]['toutS']/3600
+                else:
+                    xvals = self.results_dict[identifier][replicate][xValue]['xoutS']
+                ax.plot(xvals, yvals, 
+                                label=legendEntry, 
+                                color=Color, 
+                                linewidth=3)
+                
+                ax = Visualizer.replicate_plot_settings(ax, replicate)
+
+        else:
+            yvals = self.results_dict[identifier][yValue]['xoutS']
+            if xValue == 'time':
+                xvals = self.results_dict[identifier][yValue]['toutS']/3600
+            else:
+                xvals = self.results_dict[identifier][xValue]['xoutS']
+            ax.plot(xvals, yvals, 
+                            label=legendEntry, 
+                            color=Color, 
+                            linewidth=3)
+            
+        return ax
+
+    def bar_plot(self, xValue: str, yValue: str, xScale: str, yScale: str,
+                        xLabel: str, yLabel: str, plotName: str, legendEntry: str, 
+                        Color: str, datasetId: str, plotId: str, identifier: str) -> plt.axis:
+            """Generates a bar plot based on the provided parameters
+            
+            Parameters:
+            xValue: str - x-axis value
+            yValue: str - y-axis value
+            legendEntry: str - legend entry
+            Color: str - color
+            identifier: str - identifier
+            
+            Returns:
+                ax: plt.axis - axis object
+            """
+            if len(identifier) > 1:
+                for replicate in range(len(identifier)):
+                    yvals = self.results_dict[identifier][replicate][yValue]['xoutS']
+                    if xValue == 'time':
+                        xvals = self.results_dict[identifier][replicate][yValue]['toutS']/3600
+                    else:
+                        xvals = self.results_dict[identifier][replicate][xValue]['xoutS']
+                    ax.bar(xvals, yvals, 
+                                    label=legendEntry, 
+                                    color=Color, 
+                                    linewidth=3)
+                    
+                    ax = Visualizer.replicate_plot_settings(ax, replicate)
+    
+            else:
+                yvals = self.results_dict[identifier][yValue]['xoutS']
+                if xValue == 'time':
+                    xvals = self.results_dict[identifier][yValue]['toutS']/3600
+                else:
+                    xvals = self.results_dict[identifier][xValue]['xoutS']
+                ax.bar(xvals, yvals, 
+                                label=legendEntry, 
+                                color=Color, 
+                                linewidth=3)
+
+            return ax
+    
 
 @staticmethod
 def generate_position_matrix(num_plots):
@@ -162,9 +289,16 @@ def generate_position_matrix(num_plots):
     output:
         num_rows: int - number of rows in the plot grid
         num_cols: int - number of columns in the plot grid
-        position_matrix: np.array - matrix containing the position of each plot in the grid"""
+        position_matrix: np.array - matrix containing the position of each plot
+            in the grid
+    """
 
     side_length = int(np.ceil(np.sqrt(num_plots)))
-    position_matrix = np.arange(side_length ** 2).reshape((side_length, side_length)).T
+    
+    position_matrix = np.arange(side_length ** 2).reshape((side_length,
+                                                            side_length)).T
+    
     num_rows, num_cols = position_matrix.shape
+
     return num_rows, num_cols, position_matrix
+
