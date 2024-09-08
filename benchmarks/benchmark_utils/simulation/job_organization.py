@@ -204,6 +204,9 @@ class Organizer:
                     item['xoutS'] = results_catalogue['xoutS']
                     item['toutS'] = results_catalogue['toutS']
                     item['xoutG'] = results_catalogue['xoutG']
+                
+                else:
+                    continue
 
         except:
             print('No matching condition and cell found in the results dictionary')
