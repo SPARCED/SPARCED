@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+script name: job_organization.py
+Created on Fri Jan. 10th 12:00:00 2024
+Author: Jonah R. Huggins
+
+Description: Curates and handles the organization of tasks for the MPI processes
+
+Output: MPI tasks for each rank, MPI task assignment, and MPI results aggregation
+        results storage.
+
+"""
+#-----------------------Package Import & Defined Arguements-------------------#
+
 import mpi4py.MPI as MPI
 from benchmark_utils.simulation.petab_file_loader import PEtabFileLoader
 from benchmark_utils.simulation.utils import Utils
@@ -6,7 +21,8 @@ import numpy
 
 
 class Organizer:
-    """This class contains functions that organize the tasks for the MPI processes
+    """This class contains functions that organize the tasks for the MPI 
+    processes
     """
 
     def mpi_communicator():
@@ -139,7 +155,7 @@ class Organizer:
         """
         
         rank_results = {'conditionId': condition_id,
-                                'cell': cell,
+                                'cell': int(cell),
                                 'xoutS': xoutS,
                                 'toutS': toutS,
                                 'xoutG': xoutG
@@ -197,18 +213,14 @@ class Organizer:
         condition_id = results_catalogue['conditionId']
         cell = results_catalogue['cell']
 
-        try:
-            # Find the identifier with the matching condition and cell
-            for item in results_dict:
-                if item['conditionId'] == condition_id and item['cell'] == cell:
-                    item['xoutS'] = results_catalogue['xoutS']
-                    item['toutS'] = results_catalogue['toutS']
-                    item['xoutG'] = results_catalogue['xoutG']
-                
-                else:
-                    continue
-
-        except:
-            print('No matching condition and cell found in the results dictionary')
+        # Find the identifier with the matching condition and cell
+        for item in results_dict:
+            if results_dict[item]['conditionId'] == condition_id and results_dict[item]['cell'] == cell:
+                    results_dict[item]['xoutS'] = results_catalogue['xoutS']
+                    results_dict[item]['toutS'] = results_catalogue['toutS']
+                    results_dict[item]['xoutG'] = results_catalogue['xoutG']
+            
+            else:
+                continue
         
         return results_dict

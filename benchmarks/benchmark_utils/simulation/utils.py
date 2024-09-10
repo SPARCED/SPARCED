@@ -1,6 +1,18 @@
-#!/usr/bin/env python     
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# ----------------------------------------------------------------------------#
+"""
+script name: utils.py
+Created on Fri April 24 18:00:00 2024
+Author: Jonah R. Huggins
+
+Description: This script is designed to have several utility functions for the
+                benchmarks. Each function, while context-specific, is designed to
+                be used in multiple scripts.
+
+Output: Several utility functions for the benchmarks
+
+"""
+#-----------------------Package Import & Defined Arguements-------------------#
 import libsbml
 import importlib.util
 import numpy as np
@@ -116,9 +128,7 @@ class Utils:
                     'cell': cell,
                     'xoutS': None,
                     'toutS': None,
-                    'xoutG': None,
-                    'observable': None,
-                    'experiment_data': None
+                    'xoutG': None
                 }
 
         return results
