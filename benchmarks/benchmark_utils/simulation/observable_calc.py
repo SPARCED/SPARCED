@@ -18,9 +18,7 @@ import numpy as np
 import pandas as pd
 
 class ObservableCalculator:
-    def __init__(self, yaml_file:str, results_dict: dict, 
-                 observable_df: pd.DataFrame, measurement_df: pd.DataFrame, 
-                 model: str):
+    def __init__(self, parent):
         """This class is designed to calculate observable values from \
             simulation results.
             
@@ -30,11 +28,11 @@ class ObservableCalculator:
             observable_df: str - path to the observable dataframe
             model: libSBML model - the model used for the simulation
         """
-        self.yaml_file = yaml_file
-        self.results_dict = results_dict
-        self.observable_df = observable_df
-        self.measurement_df = measurement_df
-        self.model = model
+        self.yaml_file = parent.yaml_file
+        self.results_dict = parent.results_dictionary
+        self.observable_df = parent.observable_df
+        self.measurement_df = parent.measurement_df
+        self.model = parent.model
 
 
     def __call__(self):
@@ -48,52 +46,36 @@ class ObservableCalculator:
 
         observable_arrays = {}
 
-        for item in self.results_dict:
-
-            conditionId = item['conditionId']
-            cell = item['cell']
-            xoutS = item['xoutS']
+        for entry in self.results_dict:
             
             # if the conditionId and observable are matched in the 
             # measurement_df, add the observable to the interesting_observables 
             # list
-            interesting_observables = []
             for observableId in observableIds:
 
                 # calculate the observable values from the simulation results
-                observable_array = self.observable_caluculator(observableId, xoutS)
+                observable_array = self.observable_caluculator(observableId, 
+                                                               self.results_dict[entry]['xoutS'])
 
                 # add the observable to the observable_arrays dictionary
                 observable_arrays[observableId] = observable_array
 
-                # add the observable values to the results_dict if the 
-                # observable is associated with the conditionId in the measurement_df
-                if (
-                    (
-                        self.measurement_df['simulationConditionId']==conditionId
-                        ).any() 
-                        and (
-                            self.measurement_df['observableId'] == observableId
-                            ).any()
-                    ):
-                    
-                    interesting_observables.append(observableId)
+            # add the observable values to the results_dict if the 
+            # observable is associated with the conditionId in the measurement_df
+            grouped_identifiers = self.measurement_df.groupby(['simulationConditionId', 'observableId'])
 
-            # add the observable values to the results_dict
-            for observable in interesting_observables:
-                item[f'simulation {observable}'] = observable_arrays[observable]
-        
+            for (cond_id, obs_id), group in grouped_identifiers:
+                if cond_id == self.results_dict[entry]['conditionId']:
+            # Update the results_dict based on the observableId
+                    self.results_dict[entry][f'simulation {obs_id}'] = observable_arrays[obs_id]
+                    self.results_dict[entry][f'experiment {obs_id}'] = self._add_experimental_data(cond_id, obs_id)
+                    print(self.results_dict[entry][f'simulation {obs_id}'])
+
             # remove the xoutS from the results_dict
-            del item['xoutS']
+            del self.results_dict[entry]['xoutS']
 
-        # add the experimental data to the results_dict
-        for item in self.results_dict:
-            item = self._add_experimental_data(item)
-
-        # reduce timepoints in the simulation results to match the experimental 
-        # data
-        for item in self.results_dict:
-            item['toutS'] = self._timepoint_reduction(item['toutS'])
+        # reduce timepoints in the simulation to only experimental match
+            self.results_dict[entry]['toutS'] = self._timepoint_reduction(self.results_dict[entry]['toutS'])
 
         return self.results_dict
 
@@ -117,21 +99,20 @@ class ObservableCalculator:
 
             # replace species name strings in the observable_formula with the 
             # corresponding species index in the results_dict
-            observable_formula = str(observable['observableFormula'])
+            observable_formula = (self.observable_df['observableFormula'][self.observable_df['observableId']==observable])
 
+            observable_formula = observable_formula.iloc[0]
             # Search the observable formula for species names
             species = re.findall(r'\b[A-Za-z](?:[A-Za-z0-9_]*[A-Za-z0-9])?\b', 
                                  observable_formula)
-            
+
             for species_i in species:
                 
                 # Construct the regex pattern to match the species name exactly
                 pattern = r'\b{}\b'.format(re.escape(species_i))
-
+		
                 # Replace only the exact matches of the species name in the formula
-                observable_formula = (re.sub(pattern, 
-                                             xoutS[:, species_ids.index("{species_i}")], 
-                                             observable_formula))
+                observable_formula = (re.sub(pattern, f'xoutS[:, species_ids.index("{species_i}")]', observable_formula))
 
             observable_answer = eval(observable_formula)
 
@@ -142,29 +123,34 @@ class ObservableCalculator:
             pass
     
 
-    def _add_experimental_data(self, item: tuple)-> tuple:
+    def _add_experimental_data(self, conditionId: str, observableId:str)-> np.array:
         """
         Returns a dictionary of experimental data for each observable and condition,
         matching simulation results dictionary format.
 
         Parameters:
-        - item (tuple): Tuple containing the simulation results for a \
-            single condition.
+        - entry str: String of the identifier for a particular simulation \
+                     result for a single condition.
 
         Returns:
-        - item (tuple): Modified tuple containing the simulation results and \
-            experimental data.
+        - entry (tuple): Modified results_dict entry containing the simulation \
+                         results and experimental data.
         """
 
-        # Account for the preequilibration condition
-        preequilibration_condition = (
-            self.measurement_df.loc[
-            self.measurement_df['simulationConditionId']==item['preequilibrationConditionId']
-            ]
-            )
+        if 'preequilibrationConditionId' in self.measurement_df.columns:
 
-        if not preequilibration_condition.empty:
-            non_preequilibration_df = self.measurement_df.drop(preequilibration_condition.index)
+            # Account for the preequilibration condition
+            preequilibration_condition = (
+                self.measurement_df.loc[
+                self.measurement_df['simulationConditionId']==self.measurement_df['preequilibrationConditionId']
+                ]
+                )
+
+            if not preequilibration_condition.empty:
+                non_preequilibration_df = self.measurement_df.drop(preequilibration_condition.index)
+            
+            else:
+                non_preequilibration_df = self.measurement_df
 
         else:
             non_preequilibration_df = self.measurement_df
@@ -176,19 +162,15 @@ class ObservableCalculator:
         #  NaN values in measurement_df['measurement']
         if self.measurement_df['measurement'].isna().all():
             print('No experimental data to compare to')
-            return item
-        
-        # Create a dictionary to store the experimental data
-        item['experiment_data'] = {}
+            return self.results_dict
 
         # match the experimental data to the simulation results
-        for (observableId, conditionId), group in grouped_data:
-            
-            measurements = group['measurement'].values
+        measurements = self.measurement_df['measurement'][
+            (self.measurement_df['simulationConditionId']==conditionId) & 
+            (self.measurement_df['observableId']==observableId)
+            ]
 
-            item[f'experiment {observableId}'] = measurements
-
-        return item
+        return np.array(measurements)
 
 
     def _timepoint_reduction(self, toutS: np.array)-> np.array:
