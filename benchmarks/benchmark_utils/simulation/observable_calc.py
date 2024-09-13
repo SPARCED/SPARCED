@@ -44,9 +44,10 @@ class ObservableCalculator:
         """
         observableIds = self.observable_df['observableId'].unique()
 
-        observable_arrays = {}
-
         for entry in self.results_dict:
+
+            
+            observable_arrays = {}
             
             # if the conditionId and observable are matched in the 
             # measurement_df, add the observable to the interesting_observables 
@@ -55,10 +56,15 @@ class ObservableCalculator:
 
                 # calculate the observable values from the simulation results
                 observable_array = self.observable_caluculator(observableId, 
-                                                               self.results_dict[entry]['xoutS'])
+                                                                self.results_dict[entry]['xoutS'],
+                                                               self.results_dict[entry]['toutS'],
+                                                               self.results_dict[entry]['xoutG'])
 
                 # add the observable to the observable_arrays dictionary
                 observable_arrays[observableId] = observable_array
+
+            # reduce timepoints in the simulation to only experimental match
+            self.results_dict[entry]['toutS'] = self._timepoint_reduction(self.results_dict[entry]['toutS'])
 
             # add the observable values to the results_dict if the 
             # observable is associated with the conditionId in the measurement_df
@@ -69,19 +75,19 @@ class ObservableCalculator:
             # Update the results_dict based on the observableId
                     self.results_dict[entry][f'simulation {obs_id}'] = observable_arrays[obs_id]
                     self.results_dict[entry][f'experiment {obs_id}'] = self._add_experimental_data(cond_id, obs_id)
-                    print(self.results_dict[entry][f'simulation {obs_id}'])
 
             # remove the xoutS from the results_dict
             del self.results_dict[entry]['xoutS']
+            del self.results_dict[entry]['xoutG']
 
-        # reduce timepoints in the simulation to only experimental match
-            self.results_dict[entry]['toutS'] = self._timepoint_reduction(self.results_dict[entry]['toutS'])
 
         return self.results_dict
 
 
     def observable_caluculator(self, observable: str, 
-                               xoutS: np.array)-> np.array:
+                               xoutS: np.array,
+                               toutS: np.array,
+                               xoutG: np.array)-> np.array:
         """Calculate the observable values from the simulation results.
 
         Parameters:
@@ -115,6 +121,9 @@ class ObservableCalculator:
                 observable_formula = (re.sub(pattern, f'xoutS[:, species_ids.index("{species_i}")]', observable_formula))
 
             observable_answer = eval(observable_formula)
+
+            ### Place data reduction function here ###
+            observable_answer = self.data_reduction(observable_answer, toutS, xoutG)
 
             return observable_answer
 
@@ -191,6 +200,42 @@ class ObservableCalculator:
         # Find the minimum number of timepoints in the measurement data
         unique_timepoints = self.measurement_df['time'].unique()
 
-        toutS = np.delete(toutS, np.where(toutS != unique_timepoints))
+        toutS =  np.intersect1d(toutS, unique_timepoints)
         
+        print(f'Timepoints reduced to {toutS}')
+
         return toutS
+
+
+    def data_reduction(self, observable_answer: np.array,
+                        toutS: np.array, 
+                        xoutG: np.array)-> np.array:
+        """Reduce the data to only the timepoints in the experimental data.
+        
+        Parameters:
+        - observable_answer (np.array): The observable values from the simulation.
+        
+        Returns:
+        - observable_answer (np.array): The reduced observable values.
+        """
+        # Ensure first that there is no experimental values in the measurement
+        # before reducing the timepoints, if none are found, return the original
+        if self.measurement_df['measurement'].isna().all():
+            return observable_answer
+
+        # Find the minimum number of timepoints in the measurement data
+        unique_timepoints = self.measurement_df['time'].unique()
+        print(f'Unique timepoints: {unique_timepoints}')
+        # Ensure toutS only has timepoints present in unique_timepoints
+        filtered_toutS = np.intersect1d(toutS, unique_timepoints)
+
+        # Now find the indices of the filtered_toutS in toutS (if needed)
+        toutS_indices = np.where(np.isin(toutS, filtered_toutS))
+
+        # Reduce the observable_answer to only the timepoints in the experimental data
+        observable_answer = observable_answer[toutS_indices]
+
+        # Reduce gene trajectories to the same timepoints
+        xoutG = xoutG[toutS_indices]
+
+        return observable_answer
