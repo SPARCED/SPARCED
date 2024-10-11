@@ -34,44 +34,83 @@ class CellDeathMetrics:
         output: dictionary containing the times to death for each cell per condition"""
 
         time_of_death = {}
-        for condition in self.data:
-            time_of_death[condition] = []
-            for cell in self.data[condition]:
-                dead_simulation = np.array(self.data[condition][cell][self.observable_name]['toutS']\
-                                           [self.data[condition][cell][self.observable_name]['xoutS'] > 100.0])
-                if dead_simulation.size > 0:
-                    dead_simulation_times = dead_simulation[0]             
-                    time_of_death[condition].extend(dead_simulation_times.flatten().tolist())
-                else:
-                    time_of_death[condition].append(np.nan)
+        for entry in self.data:
+            time_of_death[entry] = {}
+            time_of_death[entry]['value'] = []
+
+            # Definition point for a dead cell
+            dead_simulation = np.array(self.data[entry]['toutS']\
+                                        [self.data[entry][f'{self.observable_name}'] > 100.0])
+            
+            if dead_simulation.size > 0:
+                dead_simulation_times = dead_simulation[0] # Grabs first instance of dead cell
+                # sends the time of death to the value list.
+                time_of_death[entry]['value'].extend(dead_simulation_times.flatten().tolist())
+                
+
+            else:
+                time_of_death[entry]['value'].append(np.nan)
+
+            time_of_death[entry]['conditionId'] = self.data[entry]['conditionId']
+            time_of_death[entry]['cell'] = self.data[entry]['cell']
+
+        # Final time of death variable contains len(data.keys()) matching entries
+        # each with the corresponding conditionId and cell number, as well as the 
+        # time in which they died. 
         return time_of_death
     
 
-    def average_time_to_death(self):   
-        """"Returns the time for the average simulated cell death for each condition in the results dictionary
+    def average_time_to_death(self):
+        """Returns the average time to death for each condition in the results dictionary
         
         output: dictionary containing the average time to death for each condition"""
 
         time_of_death = self.time_to_death()
-        for condition, cell_times in self.time_to_death().items():
-            time_of_death[condition] = np.mean([time for time in time_of_death[condition] if time is not None])
 
-        return time_of_death
+        condition_averaged_times = {}
+
+        for entry in time_of_death:
+            condition = entry['conditionId']
+            time = entry['value']
+            if condition not in condition_averaged_times:
+                condition_averaged_times[condition] = []
+            
+            condition_averaged_times[condition].append(time)
+
+        for condition, times in condition_averaged_times.items():
+            condition_averaged_times[condition] = np.mean(times)
+        
+        return condition_averaged_times
 
 
     def death_ratio(self, percent:Optional[bool] = False):
-        """Returns the ratio of dead cells, should be proceeded by collect_the_dead function
-        time_to_death: dictionary containing the times to death for each cell per condition from the time_to_death function
+        """ Returns the ratio of dead cells for each condition in the results\
+              dictionary
+        Parameters:
+        - time_to_death (dict): dictionary containing the times to death for \
+            each cell per condition from the time_to_death function
 
-        output: dictionary containing the ratio of dead cells for each condition"""
+        Returns:    
+        - dead_cells (dict): dictionary containing the ratio of dead cells for \
+            each condition"""
 
         dead_cells = {}
-        for condition, cell_times in self.time_to_death().items():
-            dead_cells[condition] = 0
-            total_cells = len(self.data[condition])
-            dead_cells[condition] += sum(1 for time in cell_times if time is not np.nan)
-            # dead_cells[condition] = [dead_cells[condition] * (1 / total_cells) if total_cells !=0 else None for condition in dead_cells]
-            dead_cells[condition] = dead_cells[condition] / total_cells if total_cells != 0 else None
+
+        cells_per_condition = {}
+        for entry, entry_info in self.time_to_death().items():
+            condition = entry_info['conditionId']
+            if condition not in dead_cells:
+                dead_cells[condition] = 0
+
+            if entry_info['value'][0] is not np.nan:
+                dead_cells[condition] += 1
+
+            if condition not in cells_per_condition:
+                cells_per_condition[condition] = 0
+            cells_per_condition[condition] += 1
+
+        for condition, dead_count in dead_cells.items():
+            dead_cells[condition] = dead_count / cells_per_condition[condition]
             if percent:
                 dead_cells[condition] = dead_cells[condition] * 100
 
@@ -88,5 +127,7 @@ class CellDeathMetrics:
             alive_ratio = [(1 - x)*100 for x in death_ratio.values()]
         else:
             alive_ratio = [(1 - x) for x in death_ratio.values()]
-        # alive_ratio = [(1 - x)*100 for x in death_ratio.values()]
+
         return alive_ratio 
+    
+

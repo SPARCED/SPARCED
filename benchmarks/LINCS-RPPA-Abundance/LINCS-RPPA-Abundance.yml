@@ -6,7 +6,7 @@ problems:
     model_specification_files:
     - model_specifications.tsv
     measurement_files:
-    - measurements_3.tsv
+    - measurements.tsv
     observable_files:
     - observables.tsv
     sbml_files:

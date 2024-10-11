@@ -67,6 +67,8 @@ class RunBenchmark:
         
         wd = os.path.dirname(os.path.abspath(__file__))
 
+
+        ### JRH: Find a better way to locate set the project path
         sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
                                               .index('SPARCED')+1]))
 
