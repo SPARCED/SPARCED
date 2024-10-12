@@ -225,7 +225,7 @@ class ObservableCalculator:
 
         # Find the minimum number of timepoints in the measurement data
         unique_timepoints = self.measurement_df['time'].unique()
-        print(f'Unique timepoints: {unique_timepoints}')
+
         # Ensure toutS only has timepoints present in unique_timepoints
         filtered_toutS = np.intersect1d(toutS, unique_timepoints)
 
