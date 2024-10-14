@@ -13,8 +13,9 @@ import os
 import sys
 import math
 import libsbml
-import pandas as pd
+import importlib
 import numpy as np
+import pandas as pd
 from benchmark_utils.simulation.utils import Utils as utils
 # Get the directory path
 wd = os.path.dirname(os.path.abspath(__file__))
@@ -24,10 +25,9 @@ sys.path.append(os.path.join(sparced_root, 'SPARCED/src/'))
 from simulation.modules.RunSPARCED import RunSPARCED
 
 class Simulation:
-    def __init__(self, model_path: str, yaml_file: str, model: str, 
+    def __init__(self, yaml_file: str,
                  conditions_df: pd.DataFrame, measurement_df: pd.DataFrame,
-                 parameters_df: pd.DataFrame, sbml_file: str, f_genereg: pd.DataFrame,
-                 f_omics: pd.DataFrame):
+                 parameters_df: pd.DataFrame, sbml_file: str):
         """This class is designed to simulate the experimental replicate model.
         input:
             yaml_file: str - path to the YAML file
@@ -38,15 +38,14 @@ class Simulation:
             sbml_file: str - path to the SBML file
             """
         
-        self.model = model.clone()
-        self.model_path = model_path
         self.yaml_file = yaml_file
         self.conditions_df = conditions_df
         self.measurement_df = measurement_df
         self.parameters_df = parameters_df
         self.sbml_file = sbml_file
-        self.f_genereg = f_genereg
-        self.f_omics = f_omics
+
+        # Load the SPARCED model
+        self.model, self.f_genereg, self.f_omics = self.load_sparced_model()
         
     def _run_condition_simulation(self, condition: pd.Series) -> np.ndarray:
         """This function runs the simulation for a single condition.
@@ -58,29 +57,14 @@ class Simulation:
 
         # Look for heterogenize parameters in the condition
         if 'heterogenize' in condition and not math.isnan(condition['heterogenize']):
-            
-            self.model = self._heterogenize(condition)
-            # self._heterogenize(condition)
+            self.model._heterogenize(condition)
 
         if 'preequilibrationConditionId' in condition and not math.isnan(
             condition['preequilibrationConditionId']):
-
-            self.model = self._preequilibrate(condition)
-            # self._preequilibrate(condition)
-
+            self.model._preequilibrate(condition)
 
         species_ids = list(self.model.getStateIds())
 
-        # Find out if starting cPARP is too high to start the simulation
-        cPARP_value = self.model.getInitialStates()[species_ids.index('cPARP')]
-        parp_value = self.model.getInitialStates()[species_ids.index('PARP')]
-
-        if parp_value < cPARP_value:
-            pass # need to find a new way to move to next loop after this. 
-            ### JRH 07/05/24 -> Do I even need to do this if the values being used are
-            # for heterogenization?
-
-        # print(condition)
         # # Set the perturbations for the simulation
         self.model, self.f_omics = self._set_perturbations(condition)
         # self._set_perturbations(condition)
@@ -157,7 +141,6 @@ class Simulation:
                                                         )
         
         species_initializations = np.array(self.model.getInitialStates())
-
 
         self.model.setTimepoints(np.linspace(0,30))
 
@@ -250,8 +233,36 @@ class Simulation:
                                      f_genereg=self.f_genereg,
                                      f_omics=self.f_omics)
 
-
         self.model.setInitialStates(xoutS_all[-1])
     
         return self.model
     
+
+    def load_sparced_model(self):
+        """
+        This function loads the SPARCED model.
+
+        Parameters:
+            None
+        
+        Returns:
+        - model (libsbml.Model): The SBML model
+        - genereg (pandas.DataFrame): The gene regulation pandas DataFrame 
+        - omicsdata (pandas.DataFrame): The OmicsData pandas DataFrame
+        """
+        # Create an instance of the AMICI model.
+        sys.path.append(self.sbml_file)
+        utils._add_amici_path(self.sbml_file) 
+
+        sparced = utils._swig_interface_path(self.sbml_file)
+        sys.path.append(sparced)
+        SPARCED = importlib.import_module(sparced.split('/')[-1].split('.')[0])
+        model = SPARCED.getModel()
+        solver = model.getSolver()
+        solver.setMaxSteps = 1e10
+
+        # Gene regulation and OmicsData files are used for stochastic gene
+        # expression. 
+        genereg, omicsdata = utils._extract_simulation_files(self.sbml_file)
+
+        return model, genereg, omicsdata

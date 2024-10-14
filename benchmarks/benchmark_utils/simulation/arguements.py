@@ -17,12 +17,15 @@ sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
                                               .index('SPARCED')+1]))
 
 benchmarks = [
-            "BIM-dependent-ERK-inhibition", "TRAIL-percent-death", "etoposide-induced-cell-death", 
-            "proliferation-growth", "DNA-repair", "TRAIL_time-to-death", 
-            "inhibition-of-stochastic-apoptosis", "receptor-ligand_cooperativity", 
-            "ERK-AKT-dose-response", "regulation-of-stochastic-proliferation", "IFNg-pulse-response",
-            "ribosome-doubling-rate", "LINCS-RPPA-Abundance", "stochastic-expression",
-            "cell_cycle", "p53-dynamics", "survival-signalling"
+            "BIM-dependent-ERK-inhibition.yml", "TRAIL-percent-death.yml", 
+            "etoposide-induced-cell-death.yml", "proliferation-growth.yml", 
+            "DNA-repair.yml", "TRAIL_time-to-death.yml", 
+            "inhibition-of-stochastic-apoptosis.yml", 
+            "receptor-ligand_cooperativity.yml", "ERK-AKT-dose-response.yml",
+            "regulation-of-stochastic-proliferation.yml",
+            "IFNg-pulse-response.yml", "ribosome-doubling-rate.yml",
+            "LINCS-RPPA-Abundance.yml", "stochastic-expression.yml",
+            "cell_cycle.yml", "p53-dynamics.yml", "survival-signalling.yml"
 ]
 
 def parse_args():
@@ -61,8 +64,8 @@ def parse_args():
     parser.add_argument('--benchmark', '-b', 
                         required = False, 
                         type=str,
-                        help=f'benchmark to evaluate the model against, \
-                            options are {benchmarks}',
+                        help=f'Path to yaml file of benchmark to be used. \
+                            Options include: {benchmarks}',
                         default='stochastic-expression')
     
     parser.add_argument('--cores', '-c', 

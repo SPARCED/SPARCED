@@ -10,9 +10,8 @@ class PEtabFileLoader:
     input:
         yaml_file: str - path to the YAML file"""
     
-    def __init__(self, yaml_file: str, model_path: str):
+    def __init__(self, yaml_file: str):
         self.yaml_file = yaml_file
-        self.model_path = model_path
 
     def __call__(self):
         """
@@ -32,7 +31,7 @@ class PEtabFileLoader:
             yaml_dict = yaml.safe_load(file)
 
         # Construct full paths to petab files based on the YAML file's directory
-        self.sbml_file = utils._assign_sbml_path(self.model_path)
+        self.sbml_file = os.path.join(yaml_directory, yaml_dict['problems'][0]['sbml_files'][0])
 
 
         self.parameter_df = pd.read_csv(os.path.join(yaml_directory, yaml_dict['parameter_file']), sep='\t')
