@@ -22,10 +22,8 @@ Output: The results of the SPARCED model unit test simulation, saved as a pickle
 #-----------------------Package Import & Defined Arguements-------------------#
 
 import os
-import sys
 import yaml
 import pickle
-import importlib
 from datetime import date
 from benchmark_utils.simulation.job_organization import Organizer as org
 from benchmark_utils.simulation.arguements import parse_args
@@ -56,36 +54,24 @@ class RunBenchmark:
 
 
     def __init__(self):
-        ### Commented out 10/12/2024
-        # wd = os.path.dirname(os.path.abspath(__file__))
+         ### JRH: Find a better way to locate set the project path
+        wd = os.path.dirname(os.path.abspath(__file__))
 
 
         ### JRH: Find a better way to locate set the project path
-        ### Commented out 10/12/2024
-        # sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
-        #                                       .index('SPARCED')+1]))
+        sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
+                                              .index('SPARCED')+1]))
 
-        root = os.path.abspath(__file__)
 
         try: 
-            args.benchmark = args.benchmark.split('/')[0]
             if args.benchmark != 'benchmark_utils':
-                yaml_path = os.path.join(root, args.benchmark)
+                yaml_path = os.path.join(sparced_root, 
+                        f'benchmarks/{args.benchmark}') 
                 
                 assert os.path.exists(yaml_path)
 
-                # Load contents of yaml file
-                with open(yaml_path, 'r') as f:
-                    yaml_contents = yaml.safe_load(f)
-
         except AssertionError:
             raise FileNotFoundError(f'{args.benchmark} is not a valid benchmark')
-        
-        
-        # try:
-        #     assert os.path.exists(args.model)
-        # except AssertionError:
-        #     raise FileNotFoundError(f'{args.model} is not a valid model path')
 
         self.yaml_file = yaml_path
         self.benchmark = args.benchmark
@@ -113,7 +99,7 @@ class RunBenchmark:
                                                      self.yaml_file
                                                      )
 
-        self.sbm_file = sbml_file # SBML file
+        self.sbml_file = sbml_file # SBML file
         self.conditions_df = c # Conditions dataframe
         self.measurement_df = m # Measurement dataframe
         self.observable_df = o # Observable dataframe
@@ -212,7 +198,7 @@ class RunBenchmark:
 
         # Benchmark results are stored within the specified model directory
 
-        results_directory = os.path.join(self.yaml_file, 'results')
+        results_directory = os.path.join(os.path.dirname(self.yaml_file), 'results')
             
         if not os.path.exists(results_directory): 
             os.makedirs(results_directory)
@@ -259,7 +245,9 @@ class RunBenchmark:
 
             print('Generating Benchmark Plot')
 
-            results_directory = os.path.join(self.yaml_file, 'results')
+            results_directory = os.path.join(
+                os.path.dirname(self.yaml_file), 'results'
+                )
 
             fig = Visualizer(yaml_file=self.yaml_file, 
                              results_dict=self.results_dictionary, 

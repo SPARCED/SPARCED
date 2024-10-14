@@ -12,10 +12,10 @@ Output: dictionary containing the observables of interest
 
 """
 #-----------------------Package Import & Defined Arguements-------------------#
-
 import re
 import numpy as np
 import pandas as pd
+import libsbml
 
 class ObservableCalculator:
     def __init__(self, parent):
@@ -32,7 +32,7 @@ class ObservableCalculator:
         self.results_dict = parent.results_dictionary
         self.observable_df = parent.observable_df
         self.measurement_df = parent.measurement_df
-        self.model = parent.model
+        self.model = libsbml.readSBMLFromFile(parent.sbml_file).getModel()
 
 
     def __call__(self):
@@ -101,7 +101,7 @@ class ObservableCalculator:
             assert (observable in self.observable_df['observableId'].values, 
             f'{observable} is not in the observable dataframe')
 
-            species_ids = list(self.model.getStateIds())
+            species_ids = [species.getId() for species in self.model.getListOfSpecies()]
 
             # replace species name strings in the observable_formula with the 
             # corresponding species index in the results_dict
@@ -202,8 +202,6 @@ class ObservableCalculator:
 
         toutS =  np.intersect1d(toutS, unique_timepoints)
         
-        print(f'Timepoints reduced to {toutS}')
-
         return toutS
 
 

@@ -334,6 +334,7 @@ class Utils:
             amici_module_path: str - the path to the AMICI module
         """
         # Get the directory contents
+        model_path = os.path.dirname(model_path)
         try:
             directory_contents = os.listdir(model_path)
         except FileNotFoundError:
@@ -416,6 +417,7 @@ class Utils:
         
         """
         # Filters for the data folder and config.yaml file within
+        model_path = os.path.dirname(model_path)
         try:
             directory_contents = os.listdir(model_path)
 
