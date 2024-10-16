@@ -19,7 +19,6 @@ The model_specifications.tsv file is a SPARCED-specific file needed for specifyi
 | condition1  | 0      | 20        | 86400        |
 | condition2  | 1      | 0         | 252400       |
 
-
 #### Detailed field description
 
 * `conditionId` [STRING, NOT NULL]
@@ -49,4 +48,4 @@ python model-benchmark-validation.py -c [CORES]
 
 If users operate on a high-performance computer, or any system running the SLURM job scheduler, they can instead choose to use the included BASH scripts located in the SPARCED/benchmarks directory: `batch_benchmark.sh `and `model-benchmarking.sh`
 
-To use the batch_benchmarking.sh script, vim or nano must be installed and an individual benchmark yaml path must be specified at line 18. To use the model-benchmarking.sh script,
+To use the either script, vim or nano must be installed. To use `batch_benchmark.sh`, an individual benchmark yaml path must be specified at line 18. The `model-benchmarking.sh` script will need custom tailoring to the user's system.
