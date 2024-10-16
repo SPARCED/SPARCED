@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thurs. 04/23/2024 9:00:00 - JRH
+script name: sparced_simulation.py
+Created on Thurs. 04/23/2024 9:00:00
+Author: Jonah R. Huggins
 
-This file conducts user defined, condition-specific simulations using 
+Description: This file conducts user defined, condition-specific simulations using 
 SPARCED and returns the results as nested NumPy arrays.
+
+Output:
+- xoutS_all (np.ndarray): The species concentrations at each timepoint
+- tout_all (np.ndarray): The timepoints at which the species concentrations were
+                        recorded
+- xoutG_all (np.ndarray): The gene expression values at each timepoint
 
 """
 
@@ -67,8 +75,7 @@ class Simulation:
 
         # # Set the perturbations for the simulation
         self.model, self.f_omics = self._set_perturbations(condition)
-        # self._set_perturbations(condition)
-        
+
         # Set the timepoints for the simulation
         simulation_timeframe = (
                                 self.measurement_df['time']

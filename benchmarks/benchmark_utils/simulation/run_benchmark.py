@@ -54,11 +54,10 @@ class RunBenchmark:
 
 
     def __init__(self):
-         ### JRH: Find a better way to locate set the project path
         wd = os.path.dirname(os.path.abspath(__file__))
 
 
-        ### JRH: Find a better way to locate set the project path
+        # TODO find a better way to specify project path
         sparced_root = ('/'.join(wd.split(os.path.sep)[:wd.split(os.path.sep)
                                               .index('SPARCED')+1]))
 

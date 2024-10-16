@@ -55,12 +55,10 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = f"mpiexec -n {args.cores} python __main__.py \
-                -m {model_path} -b {benchmark}"
+        Command = f"mpiexec -n {args.cores} python __main__.py -b {benchmark}"
 
         try: 
             result = subprocess.run(Command, shell=True, check=True, 
-                                    #stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                                     capture_output=True, text=True)
             print("Command output:", result.stdout)
             print("Command error:", result.stderr)
@@ -68,10 +66,7 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
         except subprocess.CalledProcessError as e:
             print("Command failed with exit status", e.returncode)
             print("Error output:", e.stderr)
-
-        #subprocess.run(Command, shell=True, check=True, 
-        #               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
+            sys.exit(1)
 
 def _get_list_of_benchmarks() -> list:
     """ Return a list of all benchmarks to be run. Users defining new 
