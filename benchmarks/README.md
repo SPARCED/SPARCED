@@ -1,10 +1,10 @@
 # SPARCED Benchmarking Pipeline
 
-This tool serves as a mechanism to rapidly and systematically compare SPARCED model predictions to experimental data. The curated directories listed here encompass 13 validated benchmarks (previously called 'unit tests') that can be used to continuously inspect whether changes to the SPARCED model change previously predicted responses.
+This tool serves as a mechanism to rapidly and systematically compare SPARCED model predictions to experimental data. The curated directories listed here encompass 13 validated benchmarks (previously called 'unit tests') that can be used to continuously inspect whether new implementations of the SPARCED model change previously predicted responses.
 
 ## Individual Benchmark Overview
 
-Each benchmark contains 7 files: 6 tab-separated value (tsv) files, an SBML file, and a yaml file (.yml) that specifies the path to each file. Each of these files are formated according to PEtab standards, [of which can be located here](https://petab.readthedocs.io/en/latest/). Note, that we include an additional file, known as the 'model_specifications.tsv' and an associated entry within the yaml file, for specifying attributes of the SPARCED model that would otherwise breach PEtab formatting standards. We treat this as an addition to the PEtab-curated benchmarks.
+Each benchmark contains 8 files: 6 tab-separated value (tsv) files, an SBML file, and a yaml file (.yml) that specifies the path to each file. Each of these files are formated according to PEtab standards, [of which can be located here](https://petab.readthedocs.io/en/latest/). Note, that we include an additional file, known as the 'model_specifications.tsv' and an associated entry within the yaml file, for specifying attributes of the SPARCED model that would otherwise breach PEtab formatting standards. We treat this as an addition to the PEtab-curated benchmarks.
 
 In brief, the code framework uses the paths specified to load in the corresponding PEtab files, as well as an instance of the SPARCED model at the SBML path specified in the corresponding yaml file, to simulate each individual simulation experiment. If a user creates a new benchmark or instance of the SPARCED model, paths to the corresponding PEtab files must be included within the yaml file.
 
