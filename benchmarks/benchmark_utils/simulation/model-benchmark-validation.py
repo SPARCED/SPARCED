@@ -46,7 +46,7 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
         within the model directory
     """
 
-    os.chdir('..')
+    os.chdir('../../')
 
     benchmarks = _get_list_of_benchmarks()
 

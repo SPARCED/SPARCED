@@ -2,7 +2,7 @@
 ###############################################################################
 # Script Name:  model-benchmarking.sh
 # Description:  Iterate over every prepared benchmark sequentially within the 
-#		within the benchmarks directory
+#	benchmarks directory
 # Author:       Jonah R. Huggins
 # Created:      2024-08-29
 # Version:      1.0
@@ -11,33 +11,34 @@
 #
 # Options:      
 #
-# Arguments:    -m | Model in question to be validated via the benchmarking 
-# 		     pipeline. Provide full path from current directory 
-#                    (Example: -m ../SPARCED/models/SPARCED_standard)
+# Arguments:    -c | Number of cores for the MPI job to use during every 
+#                    benchmark
+#                    (Example: -c 10)
 #
 # Requirements: anaconda3
 #               openmpi
 #
-# Notes:        Additional notes or references
+# Notes:        The use of this file is intended for use on systems using SLURM
+#               Job Scheduler. 
 ###############################################################################
 #SBATCH --job-name model_validation
-#SBATCH --output=mpi_job_output.txt  # Output file
-#SBATCH --error=mpi_job_error.txt    # Error file
-#SBATCH --nodes=6                    # Number of nodes
-#SBATCH --ntasks=60                  # Total number of MPI tasks (cores)
-#SBATCH --ntasks-per-node=10         # Number of MPI tasks per node, balancing load across nodes
-#SBATCH --cpus-per-task=1            # Number of CPUs per task (usually 1 for MPI)
-#SBATCH --mem-per-cpu=20gb           # Memory alloted to each node
-#SBATCH --time 47:59:00              # Time
+#SBATCH --output=benchmark_output.txt # Output file
+#SBATCH --error=benchmark_errors.txt  # Error file
+#SBATCH --nodes=6                     # Number of nodes
+#SBATCH --ntasks=60                   # Total number of MPI tasks (cores)
+#SBATCH --ntasks-per-node=10          # Number of MPI tasks per node, balancing load across nodes
+#SBATCH --cpus-per-task=1             # Number of CPUs per task (usually 1 for MPI)
+#SBATCH --mem-per-cpu=20gb            # Memory alloted to each node
+#SBATCH --time 47:59:00               # Time
 
 # Initialize variables
-model=""
+cores=""
 
 # Parse options
-while getopts "m:" opt; do
+while getopts "c:" opt; do
   case $opt in
-    m)
-      model="$OPTARG"
+    c)
+      cores="$OPTARG"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -54,7 +55,7 @@ done
 shift $((OPTIND-1))
 
 # List of directories to skip
-skip_dirs=("benchmark_utils" "LINCS-RPPA" "LINCS-RNAseq")
+skip_dirs=("benchmark_utils" "LINCS-RPPA-Abundance" "LINCS-RNAseq")
 
 # Function to check if a directory is in the skip list
 should_skip() {
@@ -81,6 +82,6 @@ for dir in */; do
     if [ -d "$dir" ]; then
         echo "Running Benchmark: $dir"
         
-        mpiexec -n 60 python __main__.py -m ${model} -b ${dir}
+        mpiexec -n ${cores} python __main__.py -b ${dir}/${dir}.yml
     fi
 done
