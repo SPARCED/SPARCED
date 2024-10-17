@@ -5,7 +5,7 @@ import os
 import sys
 
 import amici
-from antimony import *
+import amici as sb
 import libsbml
 
 from compilation.amici_scripts.model_compilation import compile_sbml_to_amici
@@ -44,7 +44,7 @@ def create_model(model_name: str, model_path: str | os.PathLike,
                                                  input_files, output_parameters,
                                                  is_SPARCED)
     try:
-        assert not loadFile(str(antimony_file_path)) == -1
+        assert not sb.loadFile(str(antimony_file_path)) == -1
     except:
         print("{name}: Failed to load Antimony file".format(name=model_name))
         sys.exit(0)
@@ -56,7 +56,7 @@ def create_model(model_name: str, model_path: str | os.PathLike,
     sbml_file_name = "sbml_" + model_name + ".xml"
     sbml_file_path = append_subfolder(model_path, sbml_file_name)
     try:
-        assert not writeSBMLFile(str(sbml_file_path), model_name) == 0
+        assert not sb.writeSBMLFile(str(sbml_file_path), model_name) == 0
     except:
         print("{name}: Failed to convert Antimony file to SBML"
              .format(name=model_name))
