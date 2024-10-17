@@ -23,7 +23,7 @@ class Organizer:
     processes
     """
 
-    def mpi_communicator():
+    def mpi_communicator() -> MPI.Comm:
         """This function initializes the MPI communicator
         Input:
             None
@@ -39,7 +39,7 @@ class Organizer:
 
 
     def broadcast_petab_files(rank: int, communicator: MPI.Comm, 
-                            yaml_file: str):
+                            yaml_file: str) -> pd.DataFrame:
 
         if rank == 0:
             petab_files = PEtabFileLoader(yaml_file).__call__()
@@ -57,7 +57,8 @@ class Organizer:
             observable_df = petab_files_data['observable_df']
             parameters_df = petab_files_data['parameter_df']
 
-            visualization_df = petab_files_data['visualization_df'] if 'visualization_df' in petab_files_data else None
+            visualization_df = petab_files_data['visualization_df'] \
+                if 'visualization_df' in petab_files_data else None
                 
         else:
             petab_files_data = None
@@ -71,13 +72,16 @@ class Organizer:
             observable_df = petab_files_data['observable_df']
             parameters_df = petab_files_data['parameter_df']
 
-            visualization_df = petab_files_data['visualization_df'] if 'visualization_df' in petab_files_data else None
+            visualization_df = petab_files_data['visualization_df'] \
+                if 'visualization_df' in petab_files_data else None
 
-        return sbml_file, conditions_df, measurement_df, observable_df, parameters_df, visualization_df
+        return sbml_file, conditions_df, measurement_df, observable_df, \
+            parameters_df, visualization_df
 
 
     def task_organization(rank: int, size: int, communicator: MPI.Comm, 
-                        conditions_df: pandas.DataFrame, measurement_df: pandas.DataFrame):
+                        conditions_df: pandas.DataFrame, 
+                        measurement_df: pandas.DataFrame) -> dict:
         """This function assigns tasks to each rank
         Input:
             rank: int - the rank of the MPI process
@@ -107,11 +111,15 @@ class Organizer:
 
     def task_assignment(rank: int, size: int, communicator: MPI.Comm,
                         rank_jobs_directory: dict, round_i: int, 
-                        conditions_df: pandas.DataFrame, measurement_df: pandas.DataFrame):
+                        conditions_df: pandas.DataFrame, 
+                        measurement_df: pandas.DataFrame) -> dict:
 
 
-        _, rank_jobs_directory = Organizer.task_organization(rank, size, communicator,
-                                                                conditions_df, measurement_df) 
+        _, rank_jobs_directory = Organizer.task_organization(rank, size, 
+                                                            communicator,
+                                                            conditions_df, 
+                                                            measurement_df
+                                                            ) 
         if rank == 0:
             # Assign each rank it's task for the round
             for i in range(size):
@@ -163,7 +171,8 @@ class Organizer:
 
 
     def results_aggregation(size: int, communicator,
-                            results_dict: dict, round_i: int, total_jobs: int):
+                            results_dict: dict, round_i: int, 
+                            total_jobs: int) -> dict:
         """This function aggregates the results from the ranks and
         stores them in the final simulation results dictionary
         

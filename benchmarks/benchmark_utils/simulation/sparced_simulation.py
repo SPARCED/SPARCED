@@ -5,13 +5,13 @@ script name: sparced_simulation.py
 Created on Thurs. 04/23/2024 9:00:00
 Author: Jonah R. Huggins
 
-Description: This file conducts user defined, condition-specific simulations using 
-SPARCED and returns the results as nested NumPy arrays.
+Description: This file conducts user defined, condition-specific simulations \
+using SPARCED and returns the results as nested NumPy arrays.
 
 Output:
 - xoutS_all (np.ndarray): The species concentrations at each timepoint
-- tout_all (np.ndarray): The timepoints at which the species concentrations were
-                        recorded
+- tout_all (np.ndarray): The timepoints at which the species concentrations \
+    were recorded
 - xoutG_all (np.ndarray): The gene expression values at each timepoint
 
 """
@@ -199,9 +199,9 @@ class Simulation:
             try:
                 # Change the OmicsData values and save the prior values
                 self.f_omics = utils._set_transcription_values(
-                                                                omics_data=self.f_omics, 
-                                                                gene=perturbant,
-                                                                value=condition[perturbant]
+                                                    omics_data=self.f_omics, 
+                                                    gene=perturbant,
+                                                    value=condition[perturbant]
                                                                 )
             except:
                 pass
@@ -226,7 +226,8 @@ class Simulation:
 
         self.model.setTimepoints(np.linspace(0,30))
 
-        growth_factors = ['E', 'H', 'HGF', 'P', 'F', 'I', 'INS'] # this needs to go.
+        # TODO: Find a better mechanism for setting signaling ligands to 0
+        growth_factors = ['E', 'H', 'HGF', 'P', 'F', 'I', 'INS'] 
         
         for species in growth_factors:
             self.model = utils._set_species_value(self.model, species, 0) 

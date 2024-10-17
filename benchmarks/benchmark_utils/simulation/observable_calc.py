@@ -118,7 +118,9 @@ class ObservableCalculator:
                 pattern = r'\b{}\b'.format(re.escape(species_i))
 		
                 # Replace only the exact matches of the species name in the formula
-                observable_formula = (re.sub(pattern, f'xoutS[:, species_ids.index("{species_i}")]', observable_formula))
+                observable_formula = (re.sub(pattern, 
+                                             f'xoutS[:, species_ids.index("{species_i}")]', 
+                                             observable_formula))
 
             observable_answer = eval(observable_formula)
 
