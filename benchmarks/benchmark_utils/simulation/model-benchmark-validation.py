@@ -45,26 +45,35 @@ def run_all_benchmarks() -> None:
 
     for benchmark in benchmarks:
         
-        assert os.path.exists(f"benchmarks/{benchmark}/{benchmark}.yaml"), \
+        assert os.path.exists(f"{benchmark}/{benchmark}.yml"), \
             f"Error: Benchmark {benchmark} does not exist. check the benchmark\
                   name"
 
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = (f"mpiexec -n {args.cores} python __main__.py -b
-                   {benchmark}/{benchmark}.yaml")
+        Command = (f"mpiexec -n {args.cores} python __main__.py -b\
+                   {benchmark}/{benchmark}.yml")
 
         try: 
             result = subprocess.run(Command, shell=True, check=True, 
                                     capture_output=True, text=True)
+
+            # Save error and output to a log file
+            if not os.path.exists(f"{benchmark}/results"):
+                os.makedirs(f"{benchmark}/results")
+            with open(f"{benchmark}/results/{benchmark}_log.txt", "w") as f:
+                f.write(result.stdout)
+                f.write(result.stderr)
+                
             print("Command output:", result.stdout)
             print("Command error:", result.stderr)
         
         except subprocess.CalledProcessError as e:
             print("Command failed with exit status", e.returncode)
             print("Error output:", e.stderr)
-            sys.exit(1)
+            # sys.exit(1)
+            continue
 
 def _get_list_of_benchmarks() -> list:
     """ Return a list of all benchmarks to be run. Users defining new 
