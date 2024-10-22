@@ -15,4 +15,4 @@ module load openmpi
 source activate sparced
 cd /home/jrhuggi/projects/SPARCED/benchmarks/
 
-mpiexec -n 100 python __main__.py -b stochastic-expression
+mpiexec -n 100 python __main__.py -b stochastic-expression/stochastic-expression.yml
