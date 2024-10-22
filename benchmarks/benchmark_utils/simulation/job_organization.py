@@ -13,7 +13,7 @@ Output: MPI tasks for each rank, MPI task assignment, and MPI results aggregatio
 """
 #-----------------------Package Import & Defined Arguements-------------------#
 import numpy
-import pandas 
+import pandas
 import mpi4py.MPI as MPI
 from benchmark_utils.simulation.petab_file_loader import PEtabFileLoader
 from benchmark_utils.simulation.utils import Utils
@@ -39,7 +39,7 @@ class Organizer:
 
 
     def broadcast_petab_files(rank: int, communicator: MPI.Comm, 
-                            yaml_file: str) -> pd.DataFrame:
+                            yaml_file: str) -> pandas.DataFrame:
 
         if rank == 0:
             petab_files = PEtabFileLoader(yaml_file).__call__()
