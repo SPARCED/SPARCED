@@ -22,20 +22,13 @@ import subprocess, sys
 # Parse the arguements
 args = parse_args()
 
-# Check if the model directory was provided
-try:
-    assert args.model is not None
-except:
-    print("Please provide a path to the model directory")
-    sys.exit(1)
-
 try:
     assert args.cores is not None
 except:
     print ("Number of cores is not assigned, defaulting to 1")
 
 #-----------------------Function to Run All Benchmarks-------------------------#
-def run_all_benchmarks(model_path: str | os.PathLike) -> None:
+def run_all_benchmarks() -> None:
     """
     Run all benchmarks in the benchmarks directory
     Input:
@@ -51,11 +44,16 @@ def run_all_benchmarks(model_path: str | os.PathLike) -> None:
     benchmarks = _get_list_of_benchmarks()
 
     for benchmark in benchmarks:
+        
+        assert os.path.exists(f"benchmarks/{benchmark}/{benchmark}.yaml"), \
+            f"Error: Benchmark {benchmark} does not exist. check the benchmark\
+                  name"
 
         # Run the benchmark
         print(f"Running benchmark {benchmark}")
 
-        Command = f"mpiexec -n {args.cores} python __main__.py -b {benchmark}"
+        Command = (f"mpiexec -n {args.cores} python __main__.py -b
+                   {benchmark}/{benchmark}.yaml")
 
         try: 
             result = subprocess.run(Command, shell=True, check=True, 
@@ -96,9 +94,8 @@ def _get_list_of_benchmarks() -> list:
             "ribosome-doubling-rate",
             "survival-signalling"]
 
-
 #-----------------------Run All Benchmarks------------------------------------#
 if __name__ == '__main__':
-    run_all_benchmarks(args.model)
+    run_all_benchmarks()
 
 
