@@ -65,8 +65,8 @@ class Simulation:
 
         # Look for heterogenize parameters in the condition
         if 'heterogenize' in condition and not math.isnan(condition['heterogenize']):
-            self.model._heterogenize(condition)
-
+            self.model = self._heterogenize(condition)
+            
         if 'preequilibrationConditionId' in condition and not math.isnan(
             condition['preequilibrationConditionId']):
             self.model._preequilibrate(condition)
