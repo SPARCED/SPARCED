@@ -2,5 +2,5 @@ conditionId	flagD	num_cells	heterogenize
 serum_fed_equilibrium	0	1	
 EGF	0	20	172800
 HGF only	0	20	172800
+IFNG_EGF	0	20	172800
 PBS only	0	20	172800
-EGF_IFNG	0	20	172800

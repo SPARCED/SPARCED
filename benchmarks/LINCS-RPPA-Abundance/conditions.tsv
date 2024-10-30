@@ -1,5 +1,6 @@
-conditionId	conditionName	E	HGF	I
-serum_fed_equilibrium	serum fed pre-condition	9.82E-17	2.47E-15	0.02
-EGF	EGF only treatment	1.5625	2.47E-15	0.02
-HGF only	HGF only treatment	9.82E-17	416.67	0.02
-PBS only	Phosphate Buffered Saline, only using 0.02nM IGF	9.82E-17	2.47E-15	0.02
+conditionId	conditionName	E	HGF	IFN	I
+serum_fed_equilibrium	serum fed pre-condition	9.82E-17	2.47E-15	0	0.02
+EGF	EGF only treatment	1.5625	2.47E-15	0	0.02
+HGF only	HGF only treatment	9.82E-17	416.67	0	0.02
+IFNG_EGF	IFNG, EGF, and IGF treated perturbations	1.5625	2.47E-15	1197.6047904191619	0.02
+PBS only	Phosphate Buffered Saline, only using 0.02nM IGF	9.82E-17	2.47E-15	0	0.02

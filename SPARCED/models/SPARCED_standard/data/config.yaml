@@ -1,14 +1,14 @@
 compilation:
     root: "model"
-    compartments: "legacy_Compartments.txt"
-    observables: "legacy_Observables.txt"
-    ratelaws: "legacy_Ratelaws.txt"
-    species: "legacy_Species.txt"
-    stoicmat: "legacy_StoicMat.txt"
+    compartments: "standard_Compartments.txt"
+    observables: "standard_Observables.txt"
+    ratelaws: "standard_Ratelaws.txt"
+    species: "standard_Species.txt"
+    stoicmat: "standard_StoicMat.txt"
 simulation:
     root: "simulation"
-    genereg: "legacy_GeneReg.txt"
-    omics: "legacy_OmicsData.txt"
+    genereg: "standard_GeneReg.txt"
+    omics: "standard_OmicsData.txt"
     perturbations:
         root: "perturbations"
         default: "default.txt"

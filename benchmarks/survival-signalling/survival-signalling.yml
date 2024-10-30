@@ -1,5 +1,5 @@
 format_version: 1 
-parameter_file: parameters.tsv
+parameter_file: ../../SPARCED/models/SPARCED_standard/out_Parameters.txt
 problems: 
   - condition_files: 
     - conditions.tsv
@@ -10,6 +10,7 @@ problems:
     observable_files:
     - observables.tsv
     sbml_files:
-    - SPARCEDo4a_v1.xml
+    - ../../SPARCED/models/SPARCED_standard/sbml_SPARCED_standard.xml
+
 
     

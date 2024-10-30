@@ -12,6 +12,7 @@ SPARCED/results/New-Simulation/*
 SPARCED/models/SPARCED_standard/results
 SPARCED/models/SPARCED_standard/data/simulation/legacy_OmicsData.txt
 benchmarks/test_benchmark
+benchmarks/*/results
 
 old*
 *.ipynb_check*
