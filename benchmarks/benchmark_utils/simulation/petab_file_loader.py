@@ -9,7 +9,7 @@ class PEtabFileLoader:
     """Load PEtab files from a given YAML file.
     input:
         yaml_file: str - path to the YAML file"""
-    
+
     def __init__(self, yaml_file: str):
         self.yaml_file = yaml_file
 
@@ -35,39 +35,56 @@ class PEtabFileLoader:
         """
 
         yaml_directory = os.path.join(os.path.dirname(self.yaml_file))
-        
-        with open(self.yaml_file, 'r') as file:
+
+        with open(self.yaml_file, "r") as file:
             yaml_dict = yaml.safe_load(file)
 
         # Construct full paths to petab files based on the YAML file's directory
-        self.sbml_file = os.path.join(yaml_directory, 
-                                      yaml_dict['problems'][0]['sbml_files'][0])
+        self.sbml_file = os.path.join(
+            yaml_directory, yaml_dict["problems"][0]["sbml_files"][0]
+        )
 
+        self.parameter_df = pd.read_csv(
+            os.path.join(yaml_directory, yaml_dict["parameter_file"]), sep="\t"
+        )
+        self.conditions_df = pd.read_csv(
+            os.path.join(
+                yaml_directory, yaml_dict["problems"][0]["condition_files"][0]
+            ),
+            sep="\t",
+        )
+        self.measurement_df = pd.read_csv(
+            os.path.join(
+                yaml_directory, yaml_dict["problems"][0]["measurement_files"][0]
+            ),
+            sep="\t",
+        )
+        self.observable_df = pd.read_csv(
+            os.path.join(
+                yaml_directory, yaml_dict["problems"][0]["observable_files"][0]
+            ),
+            sep="\t",
+        )
 
-        self.parameter_df = pd.read_csv(os.path.join(yaml_directory, 
-                                yaml_dict['parameter_file']), sep='\t')
-        self.conditions_df = pd.read_csv(os.path.join(yaml_directory, 
-                                yaml_dict['problems'][0]['condition_files'][0]),
-                                  sep='\t')
-        self.measurement_df = pd.read_csv(os.path.join(yaml_directory,
-                                yaml_dict['problems'][0]['measurement_files'][0]),
-                                  sep='\t')
-        self.observable_df = pd.read_csv(os.path.join(yaml_directory, 
-                                yaml_dict['problems'][0]['observable_files'][0]),
-                                  sep='\t')
+        # The model specification files detail
+        if "model_specification_files" in yaml_dict["problems"][0]:
+            model_specs = pd.read_csv(
+                os.path.join(
+                    yaml_directory,
+                    yaml_dict["problems"][0]["model_specification_files"][0],
+                ),
+                sep="\t",
+            )
+            self.conditions_df = pd.merge(
+                self.conditions_df, model_specs, on="conditionId"
+            )
 
-        # The model specification files detail 
-        if 'model_specification_files' in yaml_dict['problems'][0]:            
-            model_specs = pd.read_csv(os.path.join(yaml_directory, 
-                            yaml_dict['problems'][0]['model_specification_files'][0]), 
-                            sep='\t')
-            self.conditions_df = pd.merge(self.conditions_df, model_specs, 
-                                          on='conditionId')
+        if "visualization_files" in yaml_dict["problems"][0]:
+            self.visualization_df = pd.read_csv(
+                os.path.join(
+                    yaml_directory, yaml_dict["problems"][0]["visualization_files"][0]
+                ),
+                sep="\t",
+            )
 
-        if 'visualization_files' in yaml_dict['problems'][0]:
-            self.visualization_df = pd.read_csv(os.path.join(yaml_directory, 
-                                        yaml_dict['problems'][0]['visualization_files'][0]), 
-                                        sep='\t')
-        
         return self
-    

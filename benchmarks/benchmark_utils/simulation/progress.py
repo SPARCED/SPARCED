@@ -5,6 +5,7 @@ import sys
 try:
     # Import the tqdm module
     from tqdm import tqdm
+
     # Initialize the progress bar
     bar = tqdm(total=100, desc="Progress")  # Adjust the total as needed
 
@@ -15,6 +16,7 @@ except ImportError:
     # bypass the progress bar if tqdm is not installed
     bar = None
 
+
 # Define a custom print function
 def custom_print(*args, **kwargs):
     # Update the progress bar
@@ -22,5 +24,6 @@ def custom_print(*args, **kwargs):
     # Call the original print function
     original_print(*args, **kwargs)
 
+
 # Override the built-in print function
-sys.modules['builtins'].print = custom_print
+sys.modules["builtins"].print = custom_print
