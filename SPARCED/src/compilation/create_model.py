@@ -44,9 +44,10 @@ def create_model(model_name: str, model_path: str | os.PathLike,
                                                  input_files, output_parameters,
                                                  is_SPARCED)
     try:
-        assert not loadFile(str(antimony_file_path)) == -1
-    except:
+        loadFile(str(antimony_file_path)) != -1
+    except Exception as error:
         print("{name}: Failed to load Antimony file".format(name=model_name))
+        print(error)
         sys.exit(0)
     else:
          if verbose: print("{name}: Success loading Antimony file"
@@ -56,10 +57,11 @@ def create_model(model_name: str, model_path: str | os.PathLike,
     sbml_file_name = "sbml_" + model_name + ".xml"
     sbml_file_path = append_subfolder(model_path, sbml_file_name)
     try:
-        assert not writeSBMLFile(str(sbml_file_path), model_name) == 0
-    except:
+        writeSBMLFile(str(sbml_file_path), model_name) != 0
+    except Exception as error:
         print("{name}: Failed to convert Antimony file to SBML"
              .format(name=model_name))
+        print(error)
         sys.exit(0)
     else:
         if verbose: print("{name}: Success converting Antimony file to SBML"
