@@ -8,7 +8,7 @@ import importlib
 import numpy as np
 import pandas as pd
 
-from simulation.modules.RunSPARCED import RunSPARCED
+from simulation.modules.RunSPARCED import RunSPARCED, RunAMICI
 from simulation.utils.initial_conditions import *
 from simulation.utils.output import save_simulation_output
 
@@ -96,13 +96,20 @@ def run_single_simulation(model, simulation_name: str, output_sim: str, simulati
         
     
     # convert f_genereg and f_omics to pandas dataframes
-    f_genereg = pd.read_csv(f_genereg, header=0, index_col=0, sep="\t")
-    f_omics = pd.read_csv(f_omics, header=0, index_col=0, sep="\t")
+    if f_genereg is not None and f_omics is not None:
+        f_genereg = pd.read_csv(f_genereg, header=0, index_col=0, sep="\t")
+        f_omics = pd.read_csv(f_omics, header=0, index_col=0, sep="\t")
 
-    # Run the simulation
-    xoutS_all, xoutG_all, tout_all = RunSPARCED(is_deterministic, float(duration),
-                                                species_initial_conditions, [],
-                                                sbml_model, model, f_genereg, f_omics) 
+        # Run the simulation
+        xoutS_all, xoutG_all, tout_all = RunSPARCED(is_deterministic, float(duration),
+                                                    species_initial_conditions, [],
+                                                    sbml_model, model, f_genereg, f_omics)
+
+    else:
+        # Run the simulation
+        xoutS_all, tout_all = RunAMICI(float(duration), model)
+
+        xoutG_all = None 
     if verbose:
         print("{name} n°{number}: Simulation is over. Now saving results, \
                 please do not exit.\n".format(name=simulation_name,

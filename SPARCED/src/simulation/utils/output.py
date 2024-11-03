@@ -26,7 +26,8 @@ def save_simulation_output(model, simulation_name: str, simulation_number: int,
     resi = [sub.replace('m_', 'ig_') for sub in columnsG]
     columnsG2 = np.concatenate((resa, resi), axis=None)
     condsGDF = pd.DataFrame(data = xoutG_all, columns = columnsG2)
-    condsGDF.to_csv(output_sim + simulation_name + '_G_' + str(simulation_number) + '.txt', sep="\t")
+    if xoutG_all is not None:
+        condsGDF.to_csv(output_sim + simulation_name + '_G_' + str(simulation_number) + '.txt', sep="\t")
     condsGDF = None
     # Time
     np.savetxt(output_sim + simulation_name + '_T_' + str(simulation_number) + '.txt', tout_all, newline="\t", fmt="%s")

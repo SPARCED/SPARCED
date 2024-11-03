@@ -4,7 +4,7 @@ import pandas as pd
 def RunPrep(flagD,Vn,model, f_genereg, f_omics):
     # Read-in the omics data and assign concentrations of genes
     gExp_mpc = np.float64(f_omics.values[:,0])
-    mExp_mpc = np.float64(f_omics.values[:,1])
+    mExp_mpc = np.float64(f_omics.values[:,1]) # mRNA molecule copy number per cell (mpc)
     kGin = np.float64(f_omics.values[:,2])
     kGac = np.float64(f_omics.values[:,3])
     kTCleak = np.float64(f_omics.values[:,4])
@@ -12,7 +12,7 @@ def RunPrep(flagD,Vn,model, f_genereg, f_omics):
     kTCd = np.float64(f_omics.values[:,6])
 
     # Read-in the activators matrix and assign concentrations of activators
-    TARs0 = (f_genereg.values)
+    TARs0 = (f_genereg.astype(str).values) # Transcriptional Activator Regulator matrix
     numberofTARs = len(f_genereg.columns)
     spnames = [ele for ele in model.getStateIds()]
     spIDs = []
@@ -22,8 +22,8 @@ def RunPrep(flagD,Vn,model, f_genereg, f_omics):
     f_genereg = None
     
     numberofgenes = int(len(gExp_mpc))
-    indsDm = [5,6,7,8,12,13,14,15,16,17,18,19,20,21,22,23,24]
-    mExp_mpc[indsDm] = 17.0 # modify cell cycle gene mRNA numbers to 17
+
+    mExp_mpc = correctCellCycleGenes(f_omics, mExp_mpc)
 
     ss = int(sum(gExp_mpc))
     GenePositionMatrix = np.zeros((numberofgenes,ss))
@@ -80,3 +80,26 @@ def RunPrep(flagD,Vn,model, f_genereg, f_omics):
     tck50rs = tck50rs*(1/mpc2nmcf_Vn)
     
     return genedata, GenePositionMatrix, AllGenesVec, kTCmaxs, kTCleak, kGin_1, kGac_1, kTCd, TARs0, tcnas, tcnrs, tck50as, tck50rs, spIDs 
+
+
+def correctCellCycleGenes(f_omics: pd.DataFrame, mExp_mpc: np.array) -> np.array:
+    '''
+    Corrects specific cell cycle genes to display determinstic behavior. Eventual
+    updates to the cell cycle components will render this function obsolete.
+
+    Parameters
+    - f_omics (pd.DataFrame): The omics data
+    - mExp_mpc (np.array): The mRNA molecule copy number per cell
+    
+    Returns
+    - mExp_mpc (np.array): The mRNA molecule copy number per cell
+    '''
+    indsDm = ['RB1', 'E2F1', 'E2F2', 'E2F3', 'CCND1', 'CCNE2', 'SKP2',
+            'CDC25A', 'CDC25B', 'CDC25C', 'CCNA2', 'CDKN1B', 'CDH1',
+            'CCNB1', 'CDC20', 'WEE1', 'CHEK1']
+    for gene in indsDm:
+        if gene in f_omics.index:
+            gene_index = f_omics.index.get_loc(gene)
+            mExp_mpc[gene_index] = 17.0
+
+    return mExp_mpc

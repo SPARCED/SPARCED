@@ -86,12 +86,14 @@ def load_simulation_config(data_folder, f_config):
     simulation_files = load_input_data_config(data_folder, f_config)
     # Use only the portion related to simulation data
     simulation_files = simulation_files["simulation"]
+
     # Reconstruct full path for each input file listed
     simulation_files["root"] = append_subfolder(data_folder, simulation_files["root"], True)
     keys_to_exclude = ['root', 'perturbations', 'incubation']
     for input_file in simulation_files.keys():
         if input_file not in keys_to_exclude:
             simulation_files[input_file] = append_subfolder(simulation_files["root"], simulation_files[input_file], True)
+
     return(simulation_files) 
 
 

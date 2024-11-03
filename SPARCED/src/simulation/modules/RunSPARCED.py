@@ -21,8 +21,6 @@ def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: pd.DataFrame
     mpc2nM_Vc = (1E9/(Vc*6.023E+23))
     splist = list(model.getStateIds())
     if len(spdata)==0: # if no initial condition values are supplied, use the input file information
-        # spdata0 = pd.read_csv('Species.txt',header=0,index_col=0,sep="\t")
-        # spdata = np.float(spdata0.values[:,1])  
         spdata = model.getInitialStates()
     
     # calculate 
@@ -69,3 +67,37 @@ def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: pd.DataFrame
     tout_all = tout_all[0:len(xoutS_all)]
     
     return xoutS_all, xoutG_all, tout_all
+
+
+def RunAMICI(th, model) -> np.array:
+    '''
+    This function runs the SPARCED model without gene regulation or stochastic gene activation.
+
+    Parameters:
+        - th (float): The duration of the simulation.
+        - spdata (np.array): The initial species concentrations.
+        - genedata (np.array): The initial gene data.
+        - sbml_file (str): The SBML file.
+        - model (amici.Model): The AMICI model.
+
+    Returns:
+        - xoutS_all (np.array): The species concentrations.
+        - tout_all (np.array): The time points.
+    '''
+    ts = 30 # time-step to update mRNA numbers
+
+    tout_all = np.arange(0,th*3600+1,ts)
+
+    #Define solver, time points and initial conditions
+    solver = model.getSolver()
+    solver.setMaxSteps = 1e10
+
+    th = 72*3600
+    model.setTimepoints(np.linspace(0,th,1000))
+
+    rdata = amici.runAmiciSimulation(model,solver)
+
+    xoutS_all = rdata['x']
+    tout_all = rdata['t']
+
+    return xoutS_all, tout_all

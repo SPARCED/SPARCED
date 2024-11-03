@@ -23,6 +23,7 @@ def append_subfolder(folder: str | os.PathLike, subfolder: str,
     """
 
     folder = Path(folder)
+
     try:
         assert folder.exists()
     except:
@@ -32,15 +33,18 @@ def append_subfolder(folder: str | os.PathLike, subfolder: str,
             print("Aborting now.")
             sys.exit(0)
 
-    subfolder_path = folder / subfolder
-    try:
-        assert subfolder_path.exists()
-    except:
-        print("WARNING: Subfolder doesn't exist yet. This is normal if you are creating a new subfolder.\nSubfolder name: {name}."
-              .format(name=subfolder))
-        if abort_on_error:
-            print("Aborting now.")
-            sys.exit(0)
+    subfolder_path = (folder / subfolder) if subfolder is not None else None
+
+    if subfolder_path is not None:
+        try:
+            assert subfolder_path.exists()
+        except AssertionError:
+            print(f"WARNING: Subfolder doesn't exist yet. This is normal if you are creating a new subfolder.\nSubfolder name: {subfolder}.")
+            if abort_on_error:
+                print("Aborting now.")
+                sys.exit(0)
+    else:
+        print("Subfolder is None; skipping existence check.")
 
     return(subfolder_path)
 

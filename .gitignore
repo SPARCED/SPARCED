@@ -11,6 +11,7 @@ SPARCED/results/New-Simulation/*
 !SPARCED/results/New-Simulation/README.md
 SPARCED/models/SPARCED_standard/results
 SPARCED/models/SPARCED_standard/data/simulation/legacy_OmicsData.txt
+SPARCED/models/SPARCED_TGFb
 benchmarks/test_benchmark
 benchmarks/*/results
 
