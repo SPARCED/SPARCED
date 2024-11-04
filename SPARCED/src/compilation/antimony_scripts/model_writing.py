@@ -46,7 +46,9 @@ def antimony_write_model(model_name: str, f_antimony: str | os.PathLike,
         antimony_write_species_names(f, species)
         # Reactions
         param_names, param_vals = antimony_write_reactions(f, str(input_files["ratelaws"]),
-                                  str(input_files["stoicmat"]), f_output_parameters)
+                                                              str(input_files["compartments"]),
+                                                              str(input_files["stoicmat"]),
+                                                              f_output_parameters)
         # Initial conditions
         antimony_write_compartments_IC(f, compartments)
         antimony_write_species_IC(f, species)
