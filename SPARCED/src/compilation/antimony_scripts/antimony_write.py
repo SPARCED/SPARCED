@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 from typing import IO
 
 import numpy as np
@@ -46,7 +47,8 @@ def antimony_write_compartments_names(f_antimony: IO[str], compartments: np.ndar
         f_antimony.write("Compartment {name}; ".format(name=value[0]))
     f_antimony.write("\n")
 
-def antimony_write_reactions(f: IO[str], f_ratelaws: str, f_stoichmat: str, f_outp: str):
+def antimony_write_reactions(f: IO[str], f_ratelaws: str, f_compartments: str,
+                             f_stoichmat: str, f_outp: str):
     """Write reactions in the given Antimony file
 
     Warning:
@@ -129,14 +131,8 @@ def antimony_write_reactions(f: IO[str], f_ratelaws: str, f_stoichmat: str, f_ou
                     for ematch in matches1:
                         formula = formula.replace(ematch.group(),paramnames[-1])
                     j +=1
-        if ratelaw[0] == 'Cytoplasm':
-            valcomp = 5.25e-12
-        elif ratelaw[0] == 'Extracellular':
-            valcomp = 5.00e-5
-        elif ratelaw[0] == 'Nucleus':
-            valcomp = 1.75e-12
-        elif ratelaw[0] == 'Mitochondrion':
-            valcomp = 3.675e-13
+
+        valcomp = find_compartment_volume(ratelaw, f_compartments)
         #don't include reactions without products or reactants
         if products == [] and reactants == []:
             pass
@@ -191,3 +187,27 @@ def antimony_write_unit_definitions(f_antimony: IO[str]) -> None:
     f_antimony.write("  unit substance = 1e-9 mole;\n")
     f_antimony.write("  unit nM = 1e-9 mole / litre;\n\n")
 
+
+def find_compartment_volume(ratelaw: str, f_compartments) ->:
+    """Find the compartment volume of the compartment that the reaction takes\
+        place in. 
+        
+        Arguments:
+            ratelaw: The ratelaw.
+            f_compartments: The compartments file path.
+            
+        Returns:
+            valcomp: The compartment volume.
+            """
+    rxn_compartment = ratelaw[0]
+
+    with open(f_compartments, 'r') as f:
+        compartments = f.readlines()
+        for compartment in compartments:
+            if rxn_compartment in compartment:
+                valcomp = compartment[1]
+                return valcomp
+
+            else:
+                print("Compartment not found in compartments file")
+                sys.exit(0)

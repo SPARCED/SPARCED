@@ -92,7 +92,6 @@ def RunAMICI(th, model) -> np.array:
     solver = model.getSolver()
     solver.setMaxSteps = 1e10
 
-    th = 72*3600
     model.setTimepoints(np.linspace(0,th,1000))
 
     rdata = amici.runAmiciSimulation(model,solver)
