@@ -188,7 +188,7 @@ def antimony_write_unit_definitions(f_antimony: IO[str]) -> None:
     f_antimony.write("  unit nM = 1e-9 mole / litre;\n\n")
 
 
-def find_compartment_volume(ratelaw: str, f_compartments) ->:
+def find_compartment_volume(ratelaw: str, f_compartments) -> int:
     """Find the compartment volume of the compartment that the reaction takes\
         place in. 
         
