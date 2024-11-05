@@ -64,7 +64,7 @@ class Simulation:
         # Load the SPARCED model
         self.model, self.f_genereg, self.f_omics = self.load_sparced_model()
 
-    def _run_condition_simulation(self, condition: pd.Series) -> np.ndarray:
+    def run_single_simulation(self, condition: pd.Series) -> np.ndarray:
         """This function runs the simulation for a single condition.
         input:
             condition: pd.Series - the condition to simulate

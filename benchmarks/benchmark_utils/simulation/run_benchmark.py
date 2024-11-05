@@ -153,7 +153,7 @@ class RunBenchmark:
                 measurement_df=self.measurement_df,
                 parameters_df=self.parameters_df,
                 sbml_file=sbml_file,
-            )._run_condition_simulation(condition)
+            ).run_single_simulation(condition)
 
             # Results are packaged into a single object to reduce the number of items sent via MPI
             parcel = org.package_results(

@@ -61,8 +61,8 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--name",
-        "-n",
+        "--results",
+        "-r",
         required=False,
         type=str,
         help="the name of the file to save the results",
@@ -82,7 +82,7 @@ def parse_args():
     parser.add_argument(
         "--benchmark",
         "-b",
-        required=False,
+        required=False, # False enables SPARCED model to be easily tested against all
         type=str,
         help=f"Path to yaml file of benchmark to be used. \
                             Options include: {benchmarks}",
