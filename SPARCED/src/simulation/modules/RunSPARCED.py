@@ -74,20 +74,13 @@ def RunAMICI(th, model) -> np.array:
     This function runs the SPARCED model without gene regulation or stochastic gene activation.
 
     Parameters:
-        - th (float): The duration of the simulation.
-        - spdata (np.array): The initial species concentrations.
-        - genedata (np.array): The initial gene data.
-        - sbml_file (str): The SBML file.
+        - th (float): The duration of the simulation in seconds.
         - model (amici.Model): The AMICI model.
 
     Returns:
         - xoutS_all (np.array): The species concentrations.
         - tout_all (np.array): The time points.
     '''
-    ts = 30 # time-step to update mRNA numbers
-
-    tout_all = np.arange(0,th*3600+1,ts)
-
     #Define solver, time points and initial conditions
     solver = model.getSolver()
     solver.setMaxSteps = 1e10

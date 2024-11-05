@@ -200,12 +200,12 @@ def find_compartment_volume(ratelaw: str, f_compartments) -> int:
             valcomp: The compartment volume.
             """
     rxn_compartment = ratelaw[0]
-
     with open(f_compartments, 'r') as f:
         compartments = f.readlines()
-        for compartment in compartments:
+        compartments = [line.strip().split("\t") for line in compartments]
+        for compartment in compartments[1:]:
             if rxn_compartment in compartment:
-                valcomp = compartment[1]
+                valcomp = int(compartment[1])
                 return valcomp
 
             else:
