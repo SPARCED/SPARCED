@@ -41,6 +41,24 @@ class Organizer:
     def broadcast_petab_files(
         rank: int, communicator: MPI.Comm, yaml_file: str
     ) -> pandas.DataFrame:
+        """
+        Broadcasts the PEtab files to all ranks
+
+        Parameters
+        - rank (int): the rank of the MPI process
+        - communicator (MPI.Comm): the MPI communicator
+        - yaml_file (str): the path to the yaml file
+
+        Returns
+        - sbml_file (str): the path to the SBML file
+        - conditions_df (pandas.DataFrame): the conditions dataframe
+        - measurement_df (pandas.DataFrame): the measurement dataframe
+        - observable_df (pandas.DataFrame): the observable dataframe
+        - parameters_df (pandas.DataFrame): the parameters dataframe
+        - visualization_df (pandas.DataFrame): the visualization\
+        dataframe
+        """
+
 
         if rank == 0:
             petab_files = PEtabFileLoader(yaml_file).__call__()
@@ -159,9 +177,7 @@ class Organizer:
         return rank_task
 
     def package_results(
-        xoutS: numpy.array,
-        toutS: numpy.array,
-        xoutG: numpy.array,
+        results: tuple,
         condition_id: str,
         cell: str,
     ) -> None:
@@ -170,15 +186,19 @@ class Organizer:
         dictionary to simplify the process of sending the results to the root rank
 
         Input:
-            xoutS: numpy.array - the simulation results for the state variables
-            toutS: numpy.array - the time points for the state variables
-            xoutG: numpy.array - the simulation results for the gene expression variables
+            results: tuple - the results tuple, contains the simulation results
             condition_id: str - the condition identifier
             cell: str - the cell identifier
 
         Output:
             rank_results: dict - the results dictionary for the rank
         """
+        # Unpack the results tuple
+        if len(results) == 3:
+            xoutS, toutS, xoutG = results
+        else:
+            xoutS, toutS = results
+            xoutG = None
 
         rank_results = {
             "conditionId": condition_id,

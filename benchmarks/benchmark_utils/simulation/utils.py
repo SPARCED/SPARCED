@@ -232,9 +232,6 @@ class Utils:
         output:
             model: libsbml.Model - the updated SBML model
         """
-        # Get the list of compartments
-        compartment_ids = list(model.getCompartmentIds())
-
         # assign the compartment volume
         model.setCompartmentVolumeById(compartment, compartment_volume)
 
@@ -252,9 +249,6 @@ class Utils:
         output:
             model: libsbml.Model - the updated SBML model
         """
-        # Get the list of parameters
-        parameter_ids = list(model.getParameterIds())
-
         try:  # assign the parameter value
             model.setParameterById(parameter, parameter_value)
         except RuntimeError:

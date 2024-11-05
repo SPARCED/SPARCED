@@ -1,3 +1,4 @@
+# TODO: Rename Script to Simulation, instead of SparcedSimulation
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -33,10 +34,10 @@ sparced_root = "/".join(
     wd.split(os.path.sep)[: wd.split(os.path.sep).index("SPARCED") + 1]
 )
 sys.path.append(os.path.join(sparced_root, "SPARCED/src/"))
-from simulation.modules.RunSPARCED import RunSPARCED
+from simulation.modules.RunSPARCED import RunSPARCED, RunAMICI
 
-
-class Simulation:
+# TODO: Rename class to Simulator
+class Simulator:
     def __init__(
         self,
         yaml_file: str,
@@ -64,27 +65,49 @@ class Simulation:
         # Load the SPARCED model
         self.model, self.f_genereg, self.f_omics = self.load_sparced_model()
 
-    def run_single_simulation(self, condition: pd.Series) -> np.ndarray:
+
+    def run(self, condition: pd.Series) -> tuple:
+        """
+        This function A). runs a decision based on if gene regulation
+        and omics data are present in the model, and B). runs the simulation
+        for each condition in the conditions dataframe.
+
+        Parameters:
+            self (Simulation): The Simulation class
+            condition (pd.Series): The condition to simulate
+
+        Returns:
+            results (tuple): A tuple of the simulation results
+        """
+        if self.f_genereg is not None and self.f_omics is not None:
+            results = self.run_sparced_simulation(condition)
+
+        else:
+            results = self.run_amici_simulation(condition)
+
+        return results
+
+
+    def run_sparced_simulation(self, condition: pd.Series) -> np.ndarray:
         """This function runs the simulation for a single condition.
-        input:
+        Parameters:
+            self: Simulation - the Simulation class
             condition: pd.Series - the condition to simulate
-        output:
+
+        Returns:
             result: pd.DataFrame - the simulation results
         """
-
         # Look for heterogenize parameters in the condition
         if "heterogenize" in condition and not math.isnan(condition["heterogenize"]):
-            self.model = self._heterogenize(condition)
+            self.model = self.heterogenize(condition)
 
         if "preequilibrationConditionId" in condition and not math.isnan(
             condition["preequilibrationConditionId"]
         ):
-            self.model._preequilibrate(condition)
-
-        species_ids = list(self.model.getStateIds())
+            self.model.preequilibrate(condition)
 
         # # Set the perturbations for the simulation
-        self.model, self.f_omics = self._set_perturbations(condition)
+        self.model, self.f_omics = self.set_perturbations(condition)
 
         # Set the timepoints for the simulation
         simulation_timeframe = self.measurement_df["time"][
@@ -112,9 +135,37 @@ class Simulation:
             f_omics=self.f_omics,
         )
 
-        return xoutS_all, tout_all, xoutG_all
+        results = (xoutS_all, tout_all, xoutG_all)
 
-    def _preequilibrate(self, condition: pd.Series) -> pd.DataFrame:
+        return results
+    
+
+    def run_amici_simulation(self, condition: pd.Series) -> tuple:
+        """This function runs the AMICI simulation for a single condition.
+        Parameters:
+            self: Simulation - the Simulation class
+            condition: pd.Series - the condition to simulate
+
+        Returns:
+            result: tuple - the simulation results
+
+        """
+                # Set the timepoints for the simulation
+        simulation_timeframe = self.measurement_df["time"][
+            self.measurement_df["simulationConditionId"].isin(condition)
+        ].max()
+
+        # Set the perturbations for the simulation
+        self.model, _ = self.set_perturbations(condition)
+
+        xoutS_all, tout_all = RunAMICI(simulation_timeframe, self.model)
+
+        results = (xoutS_all, tout_all)
+
+        return results
+
+
+    def preequilibrate(self, condition: pd.Series) -> pd.DataFrame:
         """This function assigns a set of conditions that replicate
         prior experimental conditions before the primary stimulus of
         interest.
@@ -143,7 +194,7 @@ class Simulation:
             return self.model
 
         # set perturbations for the simulation
-        self.model, self.f_omics = self._set_perturbations(condition)
+        self.model, self.f_omics = self.set_perturbations(condition)
 
         # Find gene sampling method, flagD
         flagD = self.conditions_df.loc[
@@ -176,7 +227,7 @@ class Simulation:
 
         return self.model
 
-    def _set_perturbations(self, condition: pd.Series) -> libsbml.Model:
+    def set_perturbations(self, condition: pd.Series) -> libsbml.Model:
         """This function sets the perturbations for the simulation.
         input:
             condition: pd.Series - the condition to simulate
@@ -220,7 +271,7 @@ class Simulation:
 
         return self.model, self.f_omics
 
-    def _heterogenize(self, condition: pd.Series) -> libsbml.Model:
+    def heterogenize(self, condition: pd.Series) -> libsbml.Model:
         """This function runs the 'runSPARCED function and returns the final
         values, thus creating the simulated appearance of asynchrony among
         replicates.
@@ -258,6 +309,7 @@ class Simulation:
 
         return self.model
 
+
     def load_sparced_model(self):
         """
         This function loads the SPARCED model.
@@ -283,6 +335,11 @@ class Simulation:
 
         # Gene regulation and OmicsData files are used for stochastic gene
         # expression.
-        genereg, omicsdata = utils._extract_simulation_files(self.sbml_file)
+        try: # If this is a true SPARCED model, we should have these files
+            genereg, omicsdata = utils._extract_simulation_files(self.sbml_file)
+        
+        except: # If this is a non-SPARCED model, we will not have these files
+            genereg = None
+            omicsdata = None
 
         return model, genereg, omicsdata

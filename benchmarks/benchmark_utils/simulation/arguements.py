@@ -52,6 +52,7 @@ def parse_args():
     )
     parser.add_argument(
         "--observable",
+        "-o",
         required=False,
         type=int,
         help="only the observable in observables.tsv is \
@@ -61,22 +62,12 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--results",
-        "-r",
+        "--name",
+        "-n",
         required=False,
         type=str,
         help="the name of the file to save the results",
         default=None,
-    )
-
-    parser.add_argument(
-        "--model",
-        "-m",
-        required=False,
-        type=str,
-        help="path to the model dirctory \
-                        to be used for unit testing",
-        default=(os.path.join(sparced_root, "SPARCED/models/SPARCED_standard")),
     )
 
     parser.add_argument(

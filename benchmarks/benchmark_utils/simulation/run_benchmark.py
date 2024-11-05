@@ -28,12 +28,18 @@ from datetime import date
 from benchmark_utils.simulation.job_organization import Organizer as org
 from benchmark_utils.simulation.arguements import parse_args
 from benchmark_utils.simulation.utils import Utils
-from benchmark_utils.simulation.sparced_simulation import Simulation
+from benchmark_utils.simulation.single_simulation import Simulator
 from benchmark_utils.simulation.observable_calc import ObservableCalculator
 from benchmark_utils.visualization.visualization import Visualizer
 
 args = parse_args()
 
+wd = os.path.dirname(os.path.abspath(__file__))
+
+# TODO find a better way to specify project path
+sparced_root = "/".join(
+    wd.split(os.path.sep)[: wd.split(os.path.sep).index("SPARCED") + 1]
+)
 
 class RunBenchmark:
     """Input the PEtab files and broadcast them to all processes. Then, load
@@ -55,12 +61,6 @@ class RunBenchmark:
     """
 
     def __init__(self):
-        wd = os.path.dirname(os.path.abspath(__file__))
-
-        # TODO find a better way to specify project path
-        sparced_root = "/".join(
-            wd.split(os.path.sep)[: wd.split(os.path.sep).index("SPARCED") + 1]
-        )
 
         try:
             if args.benchmark != "benchmark_utils":
@@ -78,29 +78,14 @@ class RunBenchmark:
 
         self.communicator, self.rank, self.size = org.mpi_communicator()
 
-    def run(self):
-        """Run the SPARCED model unit test simulation
-
-        Arguements:
-            self: object - the RunBenchmark object
-
-        Returns:
-            results: dict - the results of the SPARCED model unit test simulation
-        """
-
-        # (s)bml_file, (c)onditions_df, (m)easurement_df,
-        # (o)bservable_df, (p)arameters_df, (v)isualization_df
-        # abbreviated notation for brevity
-        sbml_file, c, m, o, p, v = org.broadcast_petab_files(
+        (self.sbml_file,  # SBML file
+        self.conditions_df,  # Conditions dataframe
+        self.measurement_df,  # Measurement dataframe
+        self.observable_df, # Observable dataframe
+        self.parameters_df,   # Parameters dataframe
+        self.visualization_df) = org.broadcast_petab_files(
             self.rank, self.communicator, self.yaml_file
         )
-
-        self.sbml_file = sbml_file  # SBML file
-        self.conditions_df = c  # Conditions dataframe
-        self.measurement_df = m  # Measurement dataframe
-        self.observable_df = o  # Observable dataframe
-        self.parameters_df = p  # Parameters dataframe
-        self.visualization_df = v  # Visualization dataframe
 
         # Pause placement to ensure all ranks receive the broadcasted files:
         self.communicator.Barrier()
@@ -111,6 +96,16 @@ class RunBenchmark:
             self.results_dictionary = Utils._results_dictionary(
                 self.conditions_df, self.measurement_df
             )
+
+    def run(self):
+        """Run the SPARCED model unit test simulation
+
+        Arguements:
+            self: object - the RunBenchmark object
+
+        Returns:
+            results: dict - the results of the SPARCED model unit test simulation
+        """
 
         # Determine the number of rounds and the directory of tasks for each rank
         rounds_to_complete, rank_jobs_directory = org.task_organization(
@@ -147,19 +142,19 @@ class RunBenchmark:
             print(f"Rank {self.rank} is running {condition_id} for cell {cell}")
 
             # Run the simulation for the given condition
-            xoutS, toutS, xoutG = Simulation(
+            simulator = Simulator(
                 yaml_file=self.yaml_file,
                 conditions_df=self.conditions_df,
                 measurement_df=self.measurement_df,
                 parameters_df=self.parameters_df,
-                sbml_file=sbml_file,
-            ).run_single_simulation(condition)
+                sbml_file=self.sbml_file
+            )
+
+            results = simulator.run(condition)
 
             # Results are packaged into a single object to reduce the number of items sent via MPI
             parcel = org.package_results(
-                xoutS=xoutS,
-                toutS=toutS,
-                xoutG=xoutG,
+                results=results,
                 condition_id=condition_id,
                 cell=cell,
             )
@@ -167,6 +162,7 @@ class RunBenchmark:
             if self.rank == 0:
 
                 # Store rank 0's results prior to storing other ranks
+                # TODO: Update the results_storage method to accept the results object
                 self.results_dictionary = org.results_storage(
                     results_dict=self.results_dictionary, results_catalogue=parcel
                 )
@@ -227,6 +223,9 @@ class RunBenchmark:
 
             self.results_dictionary = ObservableCalculator(self).__call__()
 
+            RunBenchmark.save_results(self)
+
+        elif self.rank == 0 and self.observable == 0:
             RunBenchmark.save_results(self)
 
         elif self.rank != 0:
