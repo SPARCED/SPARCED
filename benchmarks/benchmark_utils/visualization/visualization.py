@@ -50,10 +50,18 @@ class Visualizer:
         Returns:
         - plot_information (dict): dictionary containing the plot information
         """
+
+        scale_dict = {'lin': 'linear', 'log10': 'log'}
+
         plot_information = {}
         # Turn the i'th row in the visualization dataframe into a dictionary
         for column in self.visualization_df.columns:
             plot_information[column] = self.visualization_df[column][ith_plotId]
+
+        # Swap the 'lin' attribute for 'linear'
+        plot_information['xScale'] = scale_dict[plot_information['xScale']]
+        plot_information['yScale'] = scale_dict[plot_information['yScale']]
+
 
         return plot_information
 
@@ -126,15 +134,15 @@ class Visualizer:
 
             if plot_info['plotTypeSimulation'] == 'ScatterPlot':
 
-                axes = self.scatter_plot(axes, plot_info, identifier)  
+                self.scatter_plot(axes, plot_info, row, col, identifier)  
 
             elif plot_info['plotTypeSimulation'] == 'LinePlot':
 
-                axes = self.line_plot(axes, plot_info, identifier)  
+                self.line_plot(axes, plot_info, row, col, identifier)  
 
             elif plot_info['plotTypeSimulation'] == 'BarPlot':
 
-                axes = self.bar_plot(axes, plot_info, identifier)             
+                self.bar_plot(axes, plot_info, row, col, identifier)             
 
 
             axes[row, col].set_xlabel(plot_info['xLabel'], weight='bold')
@@ -190,7 +198,8 @@ class Visualizer:
         # return ax
         
 
-    def scatter_plot(self, ax: plt.axis, plot_info: dict, identifier: str) -> plt.axis:
+    def scatter_plot(self, ax: plt.axis, row: int, col: int,
+                     plot_info: dict, identifier: str) -> plt.axis:
         """Generates a scatter plot based on the provided parameters
         
         Parameters:
@@ -201,15 +210,15 @@ class Visualizer:
         Returns:
         - ax (plt.axis) - axis object
         """
-        ax.scatter(plot_info['xValues'], plot_info['yValues'], 
-                   label=plot_info['legendEntry'], 
-                   color=plot_info['Color'], 
-                   linewidth=3)
+        ax[row, col].scatter(plot_info['xValues'], plot_info['yValues'], 
+                            label=plot_info['legendEntry'], 
+                            color=plot_info['Color'], 
+                            linewidth=3)
  
-        return ax
 
 
-    def line_plot(self, ax: plt.axis, plot_info: dict, identifier: str) -> plt.axis:
+    def line_plot(self, ax: plt.axis, plot_info: dict, row: int, col: int,
+                   identifier: str) -> plt.axis:
         """Generates a line plot based on the provided parameters
         
         Parameters:
@@ -220,14 +229,14 @@ class Visualizer:
         Returns:
         - ax (plt.axis) - axis object
         """
-        ax.plot(plot_info['xValues'], plot_info['yValues'],
-                label=plot_info['legendEntry'],
-                color=plot_info['Color'],
-                linewidth=3)
+        ax[row, col].plot(plot_info['xValues'], plot_info['yValues'],
+                          label=plot_info['legendEntry'],
+                          color=plot_info['Color'],
+                          linewidth=3)
 
-        return ax
 
-    def bar_plot(self, ax: plt.axis, plot_info: dict, identifier: str) -> plt.axis:
+    def bar_plot(self, ax: plt.axis, plot_info: dict, row: int, col: int,
+                 identifier: str) -> plt.axis:
         """Generates a bar plot based on the provided parameters
 
         Parameters:
@@ -238,11 +247,10 @@ class Visualizer:
         Returns:
         - ax (plt.axis) - axis object
         """
-        ax.bar(plot_info['xValues'], plot_info['yValues'],
-                label=plot_info['legendEntry'],
-                color=plot_info['Color'])
+        ax[row, col].bar(plot_info['xValues'], plot_info['yValues'],
+                         label=plot_info['legendEntry'],
+                         color=plot_info['Color'])
 
-        return ax
 
 
 @staticmethod

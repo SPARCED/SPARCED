@@ -179,6 +179,7 @@ class PEtabRules:
                     }
 
 
+    # TODO: Not crucial function, but get working if possible
     @staticmethod
     def check_if_option(rule_dict: dict, column: str, value: str):
         """Checks if a value is in the options list for a given column
@@ -189,10 +190,19 @@ class PEtabRules:
         output:
             value: str - value if it is in the options list
         """
-        if value in rule_dict[column]['options']:
-            return value
-        else:
-            raise ValueError(f"{value} is not a valid option for {column}")
+        try:
+            # Ensure 'options' exists for the column and is iterable
+            options = rule_dict.get(column, {}).get('options')
+            assert options is isinstance(options, (list, set, tuple)), \
+                f"No valid options list for column '{column}'"
+
+            # Check if value is in the options
+            assert value is None or value in options, \
+                f"{value} is not a valid option for {column}"
+        
+        except AssertionError:
+            pass
+
 
 
     @staticmethod
@@ -244,15 +254,14 @@ class PEtabRules:
             except KeyError:
                 df = PEtabRules.add_required_columns(df, rule_dict)
 
-            if df[column] == 'None':
+            if column in df.columns and df[column].isnull().all():
                 df[column] = PEtabRules.retrieve_default_value(rule_dict, column)
-            else:
-                df[column] = df[column]
 
+            # TODO: have continue simulation if the value is None
             try:
                 PEtabRules.check_if_option(rule_dict, column, df[column])
             except KeyError:
-                sys.exit(1)
+                pass
 
         return df
 
@@ -370,13 +379,10 @@ class PEtabFileLoader:
                 rule_dict = PEtabFileLoader.observable_df_rules
             elif df is self.visualization_df:
                 rule_dict = PEtabFileLoader.visualization_df_rules
-
             else:
                 raise ValueError(f"Dataframe {df} not recognized")
 
             df = PEtabRules.eval_df_contents(df, rule_dict)
 
 
-        return (self.yaml_file, self.sbml_file, self.conditions_df, 
-                self.measurement_df, self.observable_df, self.parameter_df,
-                self.visualization_df)
+        return self

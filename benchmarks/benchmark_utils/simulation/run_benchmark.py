@@ -253,4 +253,5 @@ class RunBenchmark:
                 measurement_df=self.measurement_df,
             ).dynamic_plot()
 
-            fig.savefig(os.path.join(results_directory, f"{self.name}.png"))
+            name = self.name if self.name is not None else date.today()
+            fig.savefig(os.path.join(results_directory, f"{name}.png"))
