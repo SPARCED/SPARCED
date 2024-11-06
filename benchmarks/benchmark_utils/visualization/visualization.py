@@ -83,6 +83,27 @@ class Visualizer:
         return data
 
 
+    def retrieve_identifier(self, datasetId: str, results_dict: dict) -> str:
+        """ Retrieves the identifier from the either the visualization dataframe\
+        or the results dictionary, dependent on if the identifier is in the\
+        results dictionary or not.
+        
+        Parameters:
+        - datasetId (str): datasetId
+        - results_dict (dict): results dictionary
+
+        Returns:
+        - identifier (str): identifier
+        """
+        if datasetId in results_dict.keys():
+            identifier = datasetId
+        else:
+            identifier = ([key for key in results_dict.keys() 
+            if results_dict[key]['conditionId'] == datasetId][0])
+
+        return identifier
+
+
     def dynamic_plot(self):
         """Parses the information within the visualization dataframe and 
         plots simulation data accordingly. Information within the 
@@ -126,8 +147,9 @@ class Visualizer:
             # Find the position from the matrix
             row, col = unique_plt_positions[plotId]
 
-            identifier = ([key for key in self.results_dict.keys() 
-            if self.results_dict[key]['conditionId'] == plot_info['datasetId']][0])
+            identifier = self.retrieve_identifier(plot_info['datasetId'], self.results_dict)
+            # identifier = ([key for key in self.results_dict.keys() 
+            # if self.results_dict[key]['conditionId'] == plot_info['datasetId']][0])
 
             plot_info['xValues'] = self.swap_attribute_for_data(identifier, plot_info['xValues'])
             plot_info['yValues'] = self.swap_attribute_for_data(identifier, plot_info['yValues'])
@@ -155,7 +177,7 @@ class Visualizer:
         for i in range(len(unique_plots), num_rows * num_cols):
             row, col = np.where(plot_position_matrix == i)
             row, col = row[0], col[0]
-                
+
             fig.delaxes(axes[row, col])
 
         # Get unique handles and labels for the legend

@@ -19,6 +19,8 @@ import libsbml
 
 
 class ObservableCalculator:
+    """This class is designed to calculate observable values from simulation results."""
+
     def __init__(self, parent):
         """This class is designed to calculate observable values from \
             simulation results.
@@ -34,6 +36,7 @@ class ObservableCalculator:
         self.observable_df = parent.observable_df
         self.measurement_df = parent.measurement_df
         self.model = libsbml.readSBMLFromFile(parent.sbml_file).getModel()
+
 
     def __call__(self):
         """isolate only the observables of interest from the simulation data. \
@@ -92,6 +95,7 @@ class ObservableCalculator:
 
         return self.results_dict
 
+
     def observable_caluculator(
         self, observable: str, xoutS: np.array, toutS: np.array, xoutG: np.array
     ) -> np.array:
@@ -138,7 +142,6 @@ class ObservableCalculator:
 
             observable_answer = eval(observable_formula)
 
-            ### Place data reduction function here ###
             observable_answer = self.data_reduction(observable_answer, toutS, xoutG)
 
             return observable_answer
@@ -146,6 +149,7 @@ class ObservableCalculator:
         except AssertionError as e:
             print(e)
             pass
+
 
     def _add_experimental_data(self, conditionId: str, observableId: str) -> np.array:
         """
@@ -199,6 +203,7 @@ class ObservableCalculator:
 
         return np.array(measurements)
 
+
     def _timepoint_reduction(self, toutS: np.array) -> np.array:
         """Reduce the number of timepoints in the simulation results. to match
             the number of timepoints in the experimental data.
@@ -220,6 +225,7 @@ class ObservableCalculator:
         toutS = np.intersect1d(toutS, unique_timepoints)
 
         return toutS
+
 
     def data_reduction(
         self, observable_answer: np.array, toutS: np.array, xoutG: np.array

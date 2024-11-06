@@ -122,7 +122,12 @@ class Utils:
 
             for cell in range(num_cells):
 
-                identifier = Utils.identifier_generator()
+                if "datasetId" in measurement_df.columns:
+                    identifier = measurement_df["datasetId"]\
+                        [measurement_df["simulationConditionId"] == condition_id].values[0]
+                else:
+                    identifier = Utils.identifier_generator()
+
                 results[identifier] = {
                     "conditionId": condition_id,
                     "cell": cell,
