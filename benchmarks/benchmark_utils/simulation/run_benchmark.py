@@ -59,7 +59,6 @@ class RunBenchmark:
     output:
         returns the results of the SPARCED model unit test simulation
     """
-
     def __init__(self):
 
         try:

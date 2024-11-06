@@ -70,6 +70,9 @@ class Organizer:
                 "parameter_df": petab_files.parameter_df,
             }
 
+            if "visualization_df" in petab_files.__dict__:
+                petab_files_data["visualization_df"] = petab_files.visualization_df
+
             sbml_file = petab_files_data["sbml_file"]
             conditions_df = petab_files_data["conditions_df"]
             measurement_df = petab_files_data["measurement_df"]

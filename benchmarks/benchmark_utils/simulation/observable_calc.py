@@ -65,7 +65,7 @@ class ObservableCalculator:
                 observable_arrays[observableId] = observable_array
 
             # reduce timepoints in the simulation to only experimental match
-            self.results_dict[entry]["toutS"] = self._timepoint_reduction(
+            self.results_dict[entry]["time"] = self._timepoint_reduction(
                 self.results_dict[entry]["toutS"]
             )
 
@@ -88,6 +88,7 @@ class ObservableCalculator:
             # remove the xoutS from the results_dict
             del self.results_dict[entry]["xoutS"]
             del self.results_dict[entry]["xoutG"]
+            del self.results_dict[entry]["toutS"]
 
         return self.results_dict
 
@@ -249,6 +250,7 @@ class ObservableCalculator:
         observable_answer = observable_answer[toutS_indices]
 
         # Reduce gene trajectories to the same timepoints
-        xoutG = xoutG[toutS_indices]
+        if xoutG is not None:
+            xoutG = xoutG[toutS_indices]
 
         return observable_answer
