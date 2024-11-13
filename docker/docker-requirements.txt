@@ -1,0 +1,8 @@
+amici==0.11.12
+antimony==2.12.0.1
+matplotlib==3.7.5
+numpy==1.24.4
+pandas==2.0.3
+python-libsbml==5.18.0
+pyYAML==6.0.1
+scipy==1.10.1
