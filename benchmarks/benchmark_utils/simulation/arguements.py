@@ -99,4 +99,13 @@ def parse_args():
         default=None,
     )
 
+    parser.add_argument(
+        "--return_sedml",
+        "-rs",
+        required=False,
+        type=bool,
+        help="Return the SED-ML file",
+        default=False
+    )
+
     return parser.parse_args()

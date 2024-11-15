@@ -8,17 +8,6 @@ Each benchmark contains 8 files: 6 tab-separated value (tsv) files, an SBML file
 
 In brief, the code framework uses the paths specified in the yaml file to load in the corresponding PEtab files, as well as an instance of the SPARCED model at the SBML path, to simulate each individual simulation experiment. If a user creates a new benchmark or instance of the SPARCED model, paths to the corresponding PEtab files must be included within the yaml file.
 
-### Creating The Measurements File
-
-The SPARCED-benchmarking pipeline uses this file in the following ways:
-
-* Setting the time limits of the experiment
-* Determining which (if any) conditionID's are to be considered a Preequilibration condition
-* Matching conditions to their respective observables
-* Detailing when simulation results should be saved to match experimental data
-  * If the Measurements column is left blank, all simulation timepoints will be saved
-* Pairing conditions and observables with a specific plot in the visualizations file
-
 ### Creating The Model Specifications File
 
 The model_specifications.tsv file is a SPARCED-specific file needed for specifying SPARCED capabilities outside of PEtab's scope, such as the solver setting (deterministic or stochastic), multiple stochastic cells per simulation, and, starting stochastic cells with heterogeneous values from one another. A formatting guide is provided below to aid in creating new benchmarks:
@@ -60,3 +49,7 @@ python model-benchmark-validation.py -c [CORES]
 If users operate on a high-performance computer, or any system running the SLURM job scheduler, they can instead choose to use the included BASH scripts located in the SPARCED/benchmarks directory: `batch_benchmark.sh `and `model-benchmarking.sh`
 
 To use the either script, vim or nano must be installed. To use `batch_benchmark.sh`, an individual benchmark yaml path must be specified at line 18. The `model-benchmarking.sh` script will need custom tailoring to the user's system.
+
+## Small Kinetic Models with SPARCED
+
+Any SBML model can be ran through this pipeline as long as it follows SPARCED compilation and simulation guidelines. Compiling a model is easily achie

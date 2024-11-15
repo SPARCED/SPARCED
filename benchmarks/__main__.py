@@ -26,3 +26,5 @@ rb.run()
 rb.observable_calculation()
 
 rb.run_visualizer()
+
+rb.return_sedml()

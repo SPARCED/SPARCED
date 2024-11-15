@@ -31,6 +31,7 @@ from benchmark_utils.simulation.utils import Utils
 from benchmark_utils.simulation.single_simulation import Simulator
 from benchmark_utils.simulation.observable_calc import ObservableCalculator
 from benchmark_utils.visualization.visualization import Visualizer
+from benchmark_utils.sedml import builders
 
 args = parse_args()
 
@@ -161,7 +162,6 @@ class RunBenchmark:
             if self.rank == 0:
 
                 # Store rank 0's results prior to storing other ranks
-                # TODO: Update the results_storage method to accept the results object
                 self.results_dictionary = org.results_storage(
                     results_dict=self.results_dictionary, results_catalogue=parcel
                 )
@@ -211,6 +211,7 @@ class RunBenchmark:
         with open(results_path, "wb") as f:
             pickle.dump(self.results_dictionary, f)
 
+
     def observable_calculation(self) -> dict:
         """Calculate the observables and compare to the experimental data.
         input:
@@ -229,6 +230,7 @@ class RunBenchmark:
 
         elif self.rank != 0:
             return None
+
 
     def run_visualizer(self):
         """Generate a unit test plot from the visualization dataframe
@@ -255,3 +257,18 @@ class RunBenchmark:
 
             name = self.name if self.name is not None else date.today()
             fig.savefig(os.path.join(results_directory, f"{name}.png"))
+
+
+    def return_sedml(self) -> None:
+        """
+        Uses SEDML-mapped functions to generate a SED-ML file from the\
+        PEtab files and SBML model. 
+
+        Parameters:
+        - args.return_sedml: bool - True if the SED-ML file is to be returned, False otherwise
+
+        Returns:
+        - None
+        """
+        if args.return_sedml:
+            builders.build_sedml_file(yaml_file=self.yaml_file)

@@ -121,7 +121,6 @@ class Utils:
             num_cells = condition["num_cells"] if "num_cells" in condition else 1
 
             for cell in range(num_cells):
-
                 if "datasetId" in measurement_df.columns:
                     identifier = measurement_df["datasetId"]\
                         [measurement_df["simulationConditionId"] == condition_id].values[0]

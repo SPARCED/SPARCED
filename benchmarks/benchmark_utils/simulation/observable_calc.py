@@ -51,9 +51,6 @@ class ObservableCalculator:
 
             observable_arrays = {}
 
-            # if the conditionId and observable are matched in the
-            # measurement_df, add the observable to the interesting_observables
-            # list
             for observableId in observableIds:
 
                 # calculate the observable values from the simulation results
@@ -184,11 +181,6 @@ class ObservableCalculator:
         else:
             non_preequilibration_df = self.measurement_df
 
-        # Group by observableId and simulationConditionId
-        grouped_data = non_preequilibration_df.groupby(
-            ["observableId", "simulationConditionId"]
-        )
-
         # look for experimental data in the measurements file by exculding all
         #  NaN values in measurement_df['measurement']
         if self.measurement_df["measurement"].isna().all():
@@ -222,9 +214,16 @@ class ObservableCalculator:
         # Find the minimum number of timepoints in the measurement data
         unique_timepoints = self.measurement_df["time"].unique()
 
-        toutS = np.intersect1d(toutS, unique_timepoints)
+        # Define an empty list to hold the reduced timepoints
+        reduced_toutS = []
 
-        return toutS
+        # For each unique experimental timepoint, find the closest time in toutS
+        for t in unique_timepoints:
+            closest_idx = np.argmin(np.abs(toutS - t))
+            reduced_toutS.append(toutS[closest_idx])
+
+        # Convert to np.array and remove duplicates if any
+        return np.unique(np.array(reduced_toutS))
 
 
     def data_reduction(
@@ -244,10 +243,7 @@ class ObservableCalculator:
             return observable_answer
 
         # Find the minimum number of timepoints in the measurement data
-        unique_timepoints = self.measurement_df["time"].unique()
-
-        # Ensure toutS only has timepoints present in unique_timepoints
-        filtered_toutS = np.intersect1d(toutS, unique_timepoints)
+        filtered_toutS = self._timepoint_reduction(toutS)
 
         # Now find the indices of the filtered_toutS in toutS (if needed)
         toutS_indices = np.where(np.isin(toutS, filtered_toutS))

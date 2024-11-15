@@ -37,71 +37,6 @@ class Visualizer:
         self.visualization_df = visualization_df
         self.observable_df = observable_df
         self.measurement_df = measurement_df
-        
-
-    def condense_plot_information(self, ith_plotId: pd.Series) -> dict:
-        """ Iterates over the eval_column_contents function to condense the
-        plot information into a dictionary. Dictionary is then sent to each 
-        plotting function to generate the plots.
-        
-        Parameters: 
-        - ith_plotId (pd.Series): series containing the plotId
-            
-        Returns:
-        - plot_information (dict): dictionary containing the plot information
-        """
-
-        scale_dict = {'lin': 'linear', 'log10': 'log'}
-
-        plot_information = {}
-        # Turn the i'th row in the visualization dataframe into a dictionary
-        for column in self.visualization_df.columns:
-            plot_information[column] = self.visualization_df[column][ith_plotId]
-
-        # Swap the 'lin' attribute for 'linear'
-        plot_information['xScale'] = scale_dict[plot_information['xScale']]
-        plot_information['yScale'] = scale_dict[plot_information['yScale']]
-
-
-        return plot_information
-
-
-    def swap_attribute_for_data(self, identifier: str, attribute: dict.items):
-        """Swaps the attribute in the plot_info dict for the actual data in the 
-        results_dict.
-        
-        Parameters:
-        - identifier (str): identifier
-        - attribute (dict.items): attribute
-
-        
-        Returns:
-            data: dict - data
-        """
-        data = self.results_dict[identifier][attribute]
-
-        return data
-
-
-    def retrieve_identifier(self, datasetId: str, results_dict: dict) -> str:
-        """ Retrieves the identifier from the either the visualization dataframe\
-        or the results dictionary, dependent on if the identifier is in the\
-        results dictionary or not.
-        
-        Parameters:
-        - datasetId (str): datasetId
-        - results_dict (dict): results dictionary
-
-        Returns:
-        - identifier (str): identifier
-        """
-        if datasetId in results_dict.keys():
-            identifier = datasetId
-        else:
-            identifier = ([key for key in results_dict.keys() 
-            if results_dict[key]['conditionId'] == datasetId][0])
-
-        return identifier
 
 
     def dynamic_plot(self):
@@ -148,24 +83,25 @@ class Visualizer:
             row, col = unique_plt_positions[plotId]
 
             identifier = self.retrieve_identifier(plot_info['datasetId'], self.results_dict)
-            # identifier = ([key for key in self.results_dict.keys() 
-            # if self.results_dict[key]['conditionId'] == plot_info['datasetId']][0])
+            attribute = plot_info['yValues'] # refers to PEtab observableId
 
+            # Add experimental data to the plot_info dictionary if it exists
+            plot_info = self.build_experiment_plot_information(plot_info, attribute, identifier)
+
+            # Swap the attribute for the actual data
             plot_info['xValues'] = self.swap_attribute_for_data(identifier, plot_info['xValues'])
-            plot_info['yValues'] = self.swap_attribute_for_data(identifier, plot_info['yValues'])
+            plot_info['yValues'] = self.swap_attribute_for_data(identifier, attribute)
+
+         
 
             if plot_info['plotTypeSimulation'] == 'ScatterPlot':
-
                 self.scatter_plot(axes, plot_info, row, col, identifier)  
 
             elif plot_info['plotTypeSimulation'] == 'LinePlot':
-
                 self.line_plot(axes, plot_info, row, col, identifier)  
 
             elif plot_info['plotTypeSimulation'] == 'BarPlot':
-
                 self.bar_plot(axes, plot_info, row, col, identifier)             
-
 
             axes[row, col].set_xlabel(plot_info['xLabel'], weight='bold')
             axes[row, col].set_ylabel(plot_info['yLabel'], weight='bold')
@@ -194,13 +130,103 @@ class Visualizer:
                     if unique_lines[idx] != line:
                         unique_lines[idx] = line
 
-        # Create a legend using unique handles and labels
-        fig.legend(unique_lines, unique_labels, frameon=False)
-
         # # Adjust layout
         plt.tight_layout()
 
         return fig
+
+
+    def condense_plot_information(self, ith_plotId: pd.Series) -> dict:
+        """ Iterates over the eval_column_contents function to condense the
+        plot information into a dictionary. Dictionary is then sent to each 
+        plotting function to generate the plots.
+        
+        Parameters: 
+        - ith_plotId (pd.Series): series containing the plotId
+            
+        Returns:
+        - plot_information (dict): dictionary containing the plot information
+        """
+
+        scale_dict = {'lin': 'linear', 'log10': 'log'}
+
+        plot_information = {}
+        # Turn the i'th row in the visualization dataframe into a dictionary
+        for column in self.visualization_df.columns:
+            plot_information[column] = self.visualization_df[column][ith_plotId]
+
+        # Swap the 'lin' attribute for 'linear'
+        plot_information['xScale'] = scale_dict[plot_information['xScale']]
+        plot_information['yScale'] = scale_dict[plot_information['yScale']]
+
+        return plot_information
+
+
+    def swap_attribute_for_data(self, identifier: str, attribute: dict.items):
+        """Swaps the attribute in the plot_info dict for the actual data in the 
+        results_dict.
+        
+        Parameters:
+        - identifier (str): identifier
+        - attribute (dict.items): attribute
+
+        Returns:
+            data: dict - data
+        """
+        if attribute == 'time':
+            data = self.results_dict[identifier][attribute]
+        else:
+            data = self.results_dict[identifier][f'simulation {attribute}']
+
+        return data
+
+
+    def retrieve_identifier(self, datasetId: str, results_dict: dict) -> str:
+        """ Retrieves the identifier from the either the visualization dataframe\
+        or the results dictionary, dependent on if the identifier is in the\
+        results dictionary or not.
+        
+        Parameters:
+        - datasetId (str): datasetId
+        - results_dict (dict): results dictionary
+
+        Returns:
+        - identifier (str): identifier
+        """
+        if datasetId in results_dict.keys():
+            identifier = datasetId
+        else:
+            identifier = ([key for key in results_dict.keys() if results_dict[key]['conditionId'] == datasetId][0])
+
+        return identifier
+
+
+    def build_experiment_plot_information(self, plot_info:dict,
+                                          attribute: dict.items,
+                                           identifier: str) -> dict:
+        """
+        The observable_calculator function pairs simulation observables with \
+        experimental data. Since it's not that intelligent, it differentiates via\
+        'simulation' and 'experiment' added onto the beginning of the observableId. \
+        This function will update a simulation's plot_info dictionary with the \
+        experimental data.
+        
+        Parameters:
+        - identifier (str): condition identifier
+        - attribute (dict.items): observableId attribute
+        - plot_info (dict): dictionary containing the plot information
+
+        Returns:
+        - plot_info (dict): dictionary containing the plot information
+        """
+
+        # conditional to check if the experiment data exists
+        if f'experiment {attribute}' in self.results_dict[identifier].keys():
+            plot_info['Exp yValues'] = self.results_dict[identifier][f'experiment {attribute}']
+            plot_info['Exp Color'] = 'black'
+            plot_info['Exp legendEntry'] = 'experiment'
+
+        return plot_info
 
 
     # def replicate_plot_settings(ax, replicate: int)-> plt.axis:
@@ -222,12 +248,14 @@ class Visualizer:
 
     def scatter_plot(self, ax: plt.axis, row: int, col: int,
                      plot_info: dict, identifier: str) -> plt.axis:
-        """Generates a scatter plot based on the provided parameters
+        """Generates a scatter plot based on the provided parameters. Inspects 
+        plot_info for experimental data and pairs it with the simulation data in 
+        the same plot.
         
         Parameters:
         - ax (plt.axis): axis object
         - plot_info (dict): dictionary containing the plot information
-        - identifier (str): identifier
+        - identifier (str): PEtab conditionId identifier
     
         Returns:
         - ax (plt.axis) - axis object
@@ -236,7 +264,14 @@ class Visualizer:
                             label=plot_info['legendEntry'], 
                             color=plot_info['Color'], 
                             linewidth=3)
- 
+
+        if 'Exp yValues' in plot_info.keys():
+            ax[row, col].scatter(plot_info['xValues'], plot_info['Exp yValues'], 
+                                label=plot_info['Exp legendEntry'], 
+                                color=plot_info['Exp Color'], 
+                                linewidth=3)
+            
+        ax[row, col].legend(loc='best', frameon=False)
 
 
     def line_plot(self, ax: plt.axis, plot_info: dict, row: int, col: int,
@@ -246,7 +281,7 @@ class Visualizer:
         Parameters:
         - ax (plt.axis): axis object
         - plot_info (dict): dictionary containing the plot information
-        - identifier (str): identifier
+        - identifier (str): PEtab conditionId identifier
         
         Returns:
         - ax (plt.axis) - axis object
@@ -255,6 +290,14 @@ class Visualizer:
                           label=plot_info['legendEntry'],
                           color=plot_info['Color'],
                           linewidth=3)
+        
+        if 'Exp yValues' in plot_info.keys():
+            ax[row, col].plot(plot_info['xValues'], plot_info['Exp yValues'], 
+                              label=plot_info['Exp legendEntry'], 
+                              color=plot_info['Exp Color'], 
+                              linewidth=3)
+            
+        ax[row, col].legend(loc='best', frameon=False)
 
 
     def bar_plot(self, ax: plt.axis, plot_info: dict, row: int, col: int,
@@ -264,7 +307,7 @@ class Visualizer:
         Parameters:
         - ax (plt.axis): axis object
         - plot_info (dict): dictionary containing the plot information
-        - identifier (str): identifier
+        - identifier (str): PEtab conditionId identifier
 
         Returns:
         - ax (plt.axis) - axis object
@@ -272,8 +315,14 @@ class Visualizer:
         ax[row, col].bar(plot_info['xValues'], plot_info['yValues'],
                          label=plot_info['legendEntry'],
                          color=plot_info['Color'])
+        
+        if 'Exp yValues' in plot_info.keys():
+            ax[row, col].bar(plot_info['xValues'], plot_info['Exp yValues'], 
+                             label=plot_info['Exp legendEntry'], 
+                             color=plot_info['Exp Color'],
+                                alpha=0.5)
 
-
+        ax[row, col].legend(loc='best', frameon=False)
 
 @staticmethod
 def generate_position_matrix(num_plots):
