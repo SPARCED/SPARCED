@@ -52,4 +52,11 @@ To use the either script, vim or nano must be installed. To use `batch_benchmark
 
 ## Small Kinetic Models with SPARCED
 
-Any SBML model can be ran through this pipeline as long as it follows SPARCED compilation and simulation guidelines. Compiling a model is easily achie
+Any SBML model can be ran through this pipeline as long as it follows SPARCED compilation and simulation guidelines. Compiling a model is easy, given SPARCED input files have been created previously. For more information on file creation, see computational methods [here](https://www.nature.com/articles/s41467-022-31138-1). If SPARCED input files are created, navigate to the `SPARCED/SPARCED/models` and store said files. To compile a non-SPARCED kinetic model with SPARCED-input files, navigate to SPARCED/SPARCED/src and excute the `__main__.py` script:
+
+```
+python __main__.py -n [MODEL NAME]
+
+```
+
+Alternatively, an AMICI model can be compiled from a standard SBML model:

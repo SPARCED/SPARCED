@@ -206,18 +206,15 @@ class ObservableCalculator:
         Returns:
         - toutS (np.array): The reduced timepoints.
         """
-        # Ensure first that there is no experimental values in the measurement
+        # Ensure experimental values in the measurement
         # before reducing the timepoints, if none are found, return the original
         if self.measurement_df["measurement"].isna().all():
             return toutS
 
-        # Find the minimum number of timepoints in the measurement data
         unique_timepoints = self.measurement_df["time"].unique()
 
-        # Define an empty list to hold the reduced timepoints
         reduced_toutS = []
 
-        # For each unique experimental timepoint, find the closest time in toutS
         for t in unique_timepoints:
             closest_idx = np.argmin(np.abs(toutS - t))
             reduced_toutS.append(toutS[closest_idx])
