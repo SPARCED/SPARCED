@@ -42,8 +42,8 @@ def antimony_write_compartments_names(f_antimony: IO[str], compartments: np.ndar
     """
 
     f_antimony.write("# Compartments:\n")
-    for i, value in enumerate(compartments[1:]):
-        f_antimony.write("Compartment {name}; ".format(name=value[0]))
+    for i in range(len(compartments)):
+        f_antimony.write("Compartment {name}; ".format(name=compartments[i]))
     f_antimony.write("\n")
 
 def antimony_write_reactions(f: IO[str], f_ratelaws: str, f_stoichmat: str, f_outp: str):
