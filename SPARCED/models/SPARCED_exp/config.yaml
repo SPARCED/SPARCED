@@ -1,0 +1,36 @@
+# SPARCED exp
+# Sandbox based on SPARCED standard
+# Last update: 11-18-2024
+
+# General infos
+name: SPARCED_exp
+running_wild: False
+location: "data"
+# Compilation
+compilation:
+    root: "model"
+    files:
+      compartments: "legacy_Compartments.txt"
+      observables: "legacy_Observables.txt"
+      omics: "legacy_OmicsData.txt"
+      output_parameters: "output_parameters.txt"  # This file is generated upon compilation
+      ratelaws: "legacy_noStoicMat_Ratelaws.txt"
+      species: "legacy_Species.txt"
+# Simulation
+simulation:
+    name: "Simulation"
+    deterministic: True
+    population_size: 1
+    exchange: 30
+    root: "simulation"    
+    files:
+      genereg: "legacy_GeneReg.txt"
+      omics: "legacy_OmicsData.txt"
+    protocol:
+      - incubation:
+        perturbations: "incubation.tsv"
+        duration: 0.0
+      - experiment:
+        perturbations: "perturbations.tsv"
+        duration: 24.0
+
