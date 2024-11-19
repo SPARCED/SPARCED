@@ -1,6 +1,6 @@
 # SPARCED exp
 # Sandbox based on SPARCED standard
-# Last update: 11-18-2024
+# Last update: 2024-11-19
 
 # General infos
 name: SPARCED_exp
@@ -18,19 +18,11 @@ compilation:
       species: "legacy_Species.txt"
 # Simulation
 simulation:
-    name: "Simulation"
-    deterministic: True
-    population_size: 1
-    exchange: 30
     root: "simulation"    
     files:
       genereg: "legacy_GeneReg.txt"
       omics: "legacy_OmicsData.txt"
-    protocol:
-      - incubation:
-        perturbations: "incubation.tsv"
-        duration: 0.0
-      - experiment:
-        perturbations: "perturbations.tsv"
-        duration: 24.0
+    experiment:
+      root: "experiment"
+      file: "experiment.yaml"
 
