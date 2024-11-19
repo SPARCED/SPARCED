@@ -30,32 +30,6 @@ def convert_excel_to_tsv(f_excel: str) -> None:
     data = pd.read_excel(f_excel, header=0, index_col=0)
     data.to_csv((f_excel.split("."))[0] + ".txt", sep="\t") 
 
-def load_input_data_config(data_path: str | os.PathLike, yaml_name: str) -> dict[str, str | os.PathLike]:
-    """Load input data files paths configuration
-
-    Note:
-        File structure is assumed to be organized as follow:
-        > model folder
-        > data subfolder containing a YAML configuration file describing input
-        data organization
-        > model compilation and simulation sub-subfolders containing the input
-        data files
-
-    Arguments:
-        data_path: The input data files folder path.
-        yaml_name: The YAML configuration file name.
-
-    Returns:
-        A dictionnary containing all the input data file paths.
-    """
-
-    # Load data and YAML paths
-    yaml_path = append_subfolder(data_path, yaml_name, True)
-    # Read input data files structure in YAML configuration file
-    with yaml_path.open() as f:
-        input_files_configuration = yaml.safe_load(f)
-    return(input_files_configuration)
-
 def load_input_data_file(f_input: str | os.PathLike) -> np.ndarray:
     """Load the given input data file
 

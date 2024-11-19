@@ -25,7 +25,7 @@ def append_subfolder(folder_path: str | os.PathLike, subfolder_name: str) -> str
     subfolder_path = folder / subfolder_name
     return(subfolder_path)
 
-def check_path_existence(path: str | os.Pathlike) -> None:
+def check_path_existence(path: str | os.PathLike) -> None:
     try:
         if not path.exists():
             raise FileNotFoundError(f"Path not found: {path}")
