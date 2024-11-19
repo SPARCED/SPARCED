@@ -33,7 +33,7 @@ class SparcedModel:
         self.name = self.set_name(name)
         self.path = append_subfolder(models_directory, self.name)
         self.configuration = self.load_configuration(self.path, config_name)
-        self.data_location = append_subfolder(self.path, configuration['location'])
+        self.data_location = append_subfolder(self.path, self.configuration['location'])
         check_path_existence(self.data_location)
         # Compilation
         self.compilation_files = self.load_compilation_files(self.data_location, self.configuration['compilation'])
@@ -41,11 +41,13 @@ class SparcedModel:
     def load_configuration(self, path: str | os.PathLike, config_name: str):
         config_path = append_subfolder(path, config_name)
         check_path_existence(config_path)
-        
-        configuration = safe_load(config_path)
+
+        # PyYAML cannot handle Path objects, needs String instead
+        config_path = config_path.as_posix()
+        configuration = safe_load(open(config_path))
         return(configuration)
 
-    def load_compilation_input_files(self, data_location: str | os.PathLike,
+    def load_compilation_files(self, data_location: str | os.PathLike,
                                      compilation_config) -> dict[str, str | os.PathLike]:
         """Load compilation input file paths
 
@@ -68,7 +70,9 @@ class SparcedModel:
         for file_type, file_name in compilation_config['files'].items():
             if file_name != None:
                 compilation_config['files'][file_type] = append_subfolder(compilation_data_location, file_name)
-                check_path_existence(compilation_config['files'][file_type])
+                # Do not check existence of files that will be created upon compilation
+                if file_type != "output_parameters":
+                    check_path_existence(compilation_config['files'][file_type])
 
         return(compilation_config['files'])
 
