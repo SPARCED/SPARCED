@@ -4,7 +4,7 @@
 import os
 import sys
 
-import model as sparced_model
+import sparced_model
 
 from utils.arguments import parse_args
 
