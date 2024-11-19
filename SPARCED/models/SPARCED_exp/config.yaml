@@ -12,7 +12,7 @@ compilation:
     files:
       compartments: "legacy_Compartments.txt"
       observables: "legacy_Observables.txt"
-      omics: "legacy_OmicsData.txt"
+      omics_data: "legacy_OmicsData.txt"
       output_parameters: "output_parameters.txt"  # This file is generated upon compilation
       ratelaws: "legacy_noStoicMat_Ratelaws.txt"
       species: "legacy_Species.txt"
@@ -20,8 +20,8 @@ compilation:
 simulation:
     root: "simulation"    
     files:
-      genereg: "legacy_GeneReg.txt"
-      omics: "legacy_OmicsData.txt"
+      gene_regulation: "legacy_GeneReg.txt"
+      omics_data: "legacy_OmicsData.txt"
     experiment:
       root: "experiment"
       file: "experiment.yaml"
