@@ -66,8 +66,9 @@ class SparcedModel:
         check_path_existence(compilation_data_location)
 
         for file_type, file_name in compilation_config['files'].items():
-            compilation_config['files'][file_type] = append_subfolder(compilation_data_location, file_name)
-            check_path_existence(compilation_config['files'][file_type])
+            if file_name != None:
+                compilation_config['files'][file_type] = append_subfolder(compilation_data_location, file_name)
+                check_path_existence(compilation_config['files'][file_type])
 
         return(compilation_config['files'])
 
