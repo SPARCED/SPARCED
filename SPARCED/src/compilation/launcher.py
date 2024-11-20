@@ -4,7 +4,7 @@
 import os
 import sys
 
-import sparced_model
+import SparcedModel
 
 from utils.arguments import parse_args
 
@@ -32,7 +32,7 @@ def launch_model_creation(model_name="SPARCED_standard", models_directory="./../
     if args.yaml:
         config_name = args.yaml
     # Create model
-    model = sparced_model.SparcedModel(model_name, model_path, config_name)
+    model = SparcedModel.Model(model_name, model_path, config_name)
     # Runtime booleans
     is_SPARCED = not args.wild # if it's not wild then it's SPARCED //  TODO: read YAML file?
     verbose = args.verbose

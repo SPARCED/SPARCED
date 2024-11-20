@@ -24,9 +24,9 @@ class EmptyModelName(InvalidModelName):
 
 
 
-# SPARCEDMODEL
+# MODEL
 
-class SparcedModel:
+class Model:
 
     def __init__(self, name="SPARCED_standard", models_directory="./../models/", config_name="config.yaml"):
         # General settings
@@ -41,10 +41,8 @@ class SparcedModel:
     def load_configuration(self, path: str | os.PathLike, config_name: str):
         config_path = append_subfolder(path, config_name)
         check_path_existence(config_path)
-
-        # PyYAML cannot handle Path objects, needs String instead
-        config_path = config_path.as_posix()
-        configuration = safe_load(open(config_path))
+        with config_path.open() as config_file:
+            configuration = safe_load(config_file)
         return(configuration)
 
     def load_compilation_files(self, data_location: str | os.PathLike,
@@ -67,6 +65,7 @@ class SparcedModel:
         compilation_data_location = append_subfolder(self.data_location, compilation_config['root'])
         check_path_existence(compilation_data_location)
 
+        # TODO: adjust for multiple files
         for file_type, file_name in compilation_config['files'].items():
             if file_name != None:
                 compilation_config['files'][file_type] = append_subfolder(compilation_data_location, file_name)
