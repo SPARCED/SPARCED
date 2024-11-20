@@ -7,7 +7,6 @@ import sys
 from pathlib import Path
 
 
-
 def append_subfolder(folder_path: str | os.PathLike, subfolder_name: str) -> str | os.PathLike:
     """Append a subfolder to a folder path
 
@@ -21,7 +20,6 @@ def append_subfolder(folder_path: str | os.PathLike, subfolder_name: str) -> str
 
     folder = Path(folder_path)
     check_path_existence(folder)
-
     subfolder_path = folder / subfolder_name
     return(subfolder_path)
 

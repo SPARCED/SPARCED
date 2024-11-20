@@ -9,19 +9,18 @@ from yaml import safe_load
 from utils.files_handling import *
 
 
-
 # CUSTOM ERRORS
 
 class InvalidModelName(ValueError):
     def __init__(self, message, model_name):
         self.message = message
         self.model_name = model_name
+
     def __str__(self):
         return(f"SPARCED ERROR: Invalid model name.\nName: {self.model_name}\nError: {self.message}\n")
 
 class EmptyModelName(InvalidModelName):
     pass
-
 
 
 # MODEL
@@ -64,7 +63,6 @@ class Model:
 
         compilation_data_location = append_subfolder(self.data_location, compilation_config['root'])
         check_path_existence(compilation_data_location)
-
         # TODO: adjust for multiple files
         for file_type, file_name in compilation_config['files'].items():
             if file_name != None:
@@ -72,7 +70,6 @@ class Model:
                 # Do not check existence of files that will be created upon compilation
                 if file_type != "output_parameters":
                     check_path_existence(compilation_config['files'][file_type])
-
         return(compilation_config['files'])
 
     def sanitize_name(self, name: str) -> str:
@@ -132,13 +129,11 @@ class Model:
         """
 
         is_valid = False
-
         if not name:
             raise EmptyModelName("No model name provided.", name)
         elif '-' in name:
             raise InvalidModelName("Dash '-' character not supported.", name)
         else:
             is_valid = True
-
         return(is_valid)
 
