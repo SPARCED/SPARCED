@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+
 import numpy as np
 import pandas as pd
+import petab
 
 
 def convert_excel_to_tsv(f_excel: str) -> None:
@@ -39,5 +42,32 @@ def load_input_data_file(f_input: str | os.PathLike) -> np.ndarray:
 
     data = np.array([np.array(line.strip().split("\t"))
                     for line in open(f_input)], dtype="object")
+    return(data)
+
+def load_petab_conditions_file(file: str | os.PathLike, condition_id: str) -> dict[str, str]:
+    """Load a PEtab conditions file for a specific condition
+
+    Arguments:
+        file: The path to the PEtab conditions file.
+        condition_id: The ConditionId of the row to load.
+
+    Returns:
+        A dictionnary structured as key: parameter / value: value.
+    """
+
+    # ConditionId is mandatory
+    if not condition_id:
+        raise ValueError("Missing ConditionId.")
+        return(None)
+    raw_data = petab.v1.get_condition_df(file)
+    try:
+        petab.v1.check_condition_df(raw_data)
+    except AssertionError as error:
+        print(error)
+        return(None)
+    data = {}
+    for k in raw_data.keys():
+        if k != "conditionName":
+            data[k] = data[k][condition_id]
     return(data)
 
