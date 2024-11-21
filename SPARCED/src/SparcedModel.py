@@ -6,6 +6,7 @@ import sys
 
 from yaml import safe_load
 
+from utils.data_handling import load_petab_conditions_file
 from utils.files_handling import *
 
 
@@ -37,56 +38,94 @@ class Model:
         self.configuration = self.load_configuration(self.path, config_name)
         self.data_location = append_subfolder(self.path,
                                               self.configuration['location'])
-        check_path_existence(self.data_location)
         # Compilation
+        self.compilation_config = self.configuration['compilation']
+        self.compilation_data_path = append_subfolder(self.data_location,
+                                     self.compilation_config['directory'])
+        check_path_existence(self.compilation_data_path)
         self.compilation_files = self.load_compilation_files(
-                                 self.data_location,
-                                 self.configuration['compilation'])
+                                    self.compilation_data_path,
+                                    self.compilation_config['files'])
+        self.compartments = self.load_compartments(
+                               self.compilation_data_path,
+                               self.compilation_config['compartments_volume'])
 
     def load_configuration(self, path: str | os.PathLike, config_name: str):
+        """Load configuration from a YAML file
+
+        Arguments:
+            path: The path towards the model folder.
+            config_name: The name of the configuration file.
+
+        Returns:
+            A dictionnary representing the content of the YAML file.
+        """
+
         config_path = append_subfolder(path, config_name)
         check_path_existence(config_path)
         with config_path.open() as config_file:
             configuration = safe_load(config_file)
         return(configuration)
 
-    def load_compilation_files(self, data_location: str | os.PathLike,
-                                     compilation_config
-                                     ) -> dict[str, str | os.PathLike]:
+    def load_compartments(self, path: str | os.PathLike,
+                          compartments_config) -> dict[str, str]:
+        """Load compartments from a PEtab file
+
+        Note:
+            Dictionnary structure is expected to contain the following
+            keys:
+            > 'file' -> the name of the compartments file
+            > 'id' -> the conditionId of the row to read (see PEtab
+                      documentation for further information)
+
+        Arguments:
+            path: The path towards the compilation data files.
+            compartments_config: The dictionnary representing the
+                                 compartments configuration structured
+                                 as specified in the __Note__.
+
+        Returns;
+            A dictionnary structured as key: compartment name / value:
+            compartment's volume.
+        """
+
+        compartments_path = append_subfolder(
+                                path, compartments_config['file'])
+        check_path_existence(compartments_path)
+        compartments = load_petab_conditions_file(
+                            compartments_path, compartments_config['id'])
+        return(compartments)
+
+    def load_compilation_files(self, path: str | os.PathLike,
+                               compilation_files
+                               ) -> dict[str, str | os.PathLike]:
         """Load compilation input file paths
 
         Note:
-            Dictionnary structure is expected to contain:
-            > a 'root' item indicating the location of the compilation
-              input files subfolder
-            > a 'files' item containing a dictionnary of file types and
-              their names
+            Dictionnary structure is expected to be key: file type /
+            value: file name
+            For example: species -> my_species.txt
 
         Arguments:
-            data_location: The path towards the location of the model's
-                           data.
-            compilation_config: A dictionnary structured as stated in
-                                the __Note__ section.
+            path: The path towards the compilation data files.
+            compilation_files: A dictionnary structured as stated in
+                               the __Note__ section.
 
         Returns:
-            A dictionnary structured as key: input file type / value:
-            input file path.
+            The same dictionnary structured as key: file type / value:
+            file path.
         """
 
-        compilation_data_location = append_subfolder(self.data_location,
-                                                     compilation_config['root'])
-        check_path_existence(compilation_data_location)
         # TODO: adjust for multiple files
-        for file_type, file_name in compilation_config['files'].items():
+        for file_type, file_name in compilation_files.items():
             if file_name != None:
-                compilation_config['files'][file_type] = append_subfolder(
-                                                         compilation_data_location,
-                                                         file_name)
+                compilation_files[file_type] = append_subfolder(path,
+                                                                file_name)
                 # Do not check existence of files that will be created upon
                 # compilation
                 if file_type != "output_parameters":
-                    check_path_existence(compilation_config['files'][file_type])
-        return(compilation_config['files'])
+                    check_path_existence(compilation_files[file_type])
+        return(compilation_files)
 
     def sanitize_name(self, name: str) -> str:
         """Sanitize a name
