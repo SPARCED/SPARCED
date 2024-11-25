@@ -68,6 +68,6 @@ def load_petab_conditions_file(file: str | os.PathLike, condition_id: str) -> di
     data = {}
     for k in raw_data.keys():
         if k != "conditionName":
-            data[k] = data[k][condition_id]
+            data[k] = raw_data[k][condition_id]
     return(data)
 
