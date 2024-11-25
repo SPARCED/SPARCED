@@ -26,12 +26,12 @@ def antimony_write_constant_variables(f_antimony: IO[str], constants: np.ndarray
         f_antimony.write("{name}, ".format(name=const_var))
     f_antimony.write("{last_name};\n\n".format(last_name=constants[-1]))
 
-def antimony_write_compartments_names(f_antimony: IO[str], compartments: np.ndarray) -> None:
+def antimony_write_compartments_names(f_antimony: IO[str], compartments: dict[str, str]) -> None:
     """Write compartments names in the given Antimony file
 
     Note:
-        The first row is considered as a header, and hence it is skipped.
-        Names should be located on the first column of the array.
+        The dictionnary is structured as key: compartment name / value:
+        compartment volume.
 
     Arguments:
         f_antimony: The open Antimony file.
@@ -42,8 +42,8 @@ def antimony_write_compartments_names(f_antimony: IO[str], compartments: np.ndar
     """
 
     f_antimony.write("# Compartments:\n")
-    for i in range(len(compartments)):
-        f_antimony.write("Compartment {name}; ".format(name=compartments[i]))
+    for k in compartments.keys():
+        f_antimony.write(f"Compartment {k}; ")
     f_antimony.write("\n")
 
 def antimony_write_reactions(f: IO[str], f_ratelaws: str, f_stoichmat: str, f_outp: str):
