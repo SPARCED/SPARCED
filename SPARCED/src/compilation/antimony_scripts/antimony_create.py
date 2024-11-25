@@ -4,12 +4,61 @@
 import os
 
 import antimony
-import numpy as np
 
 from utils.arguments import parse_args
-from utils.data_handling import load_input_data_file
-from compilation.antimony_scripts.antimony_write import *
 from compilation.antimony_scripts.antimony_write_IC import *
+
+
+import numpy as np
+
+import settings as spec
+import SparcedModel
+
+from compilation.antimony_script.antimony_write import *
+from utils.data_handling import load_input_data_file
+from utils.files_handling import append_subfolder
+
+
+def antimony_create_file(model: SparcedModel.Model, is_SPARCED: bool,
+                         verbose: bool): # TODO specify type returned
+    """Generate an Antimony file corresponding to a SparcedModel.Model
+    object
+
+    Arguments:
+        model: A SparcedModel.model object.
+        is_SPARCED: Use SPARCED hard-coded values/behaviors.
+        verbose: Verbose.
+
+    Returns:
+        Antimony_file_path & species.
+    """
+
+    antimony_file_name = spec.ANTIMONY_FILE_PREFIX + model.name \
+                         + spec.ANTIMONY_FILE_SUFFIX
+    antimony_file_path = append_subfolder(model.path, antimony_file_name)
+    species = antimony_write_file(model, antimony_file_path, is_SPARCED)
+    return(antimony_file_path, species)
+
+def antimony_write_file(model: SparcedModel.Model,
+                        antimony_file_path: str | os.PathLike,
+                        is_SPARCED: bool) -> tuple[np.ndarray, np.ndarray]:
+    with antimony_file_path.open(mode="w") as file:
+        # Header
+        file.write(f"# {spec.ANTIMONY_HEADER}\n")
+        file.write(f"model {model.name} ()\n")
+        # Compartments
+        antimony_write_compartments_names(file, model.compartments)
+        # Species TODO: handle several species files
+        species = load_input_data_file(model.compilation_files["species"])
+        antimony_write_species_names(f, species)
+        # Reactions
+        param_names, param_values = antimony_write_reactions(file, model)
+
+         # Reactions
+        param_names, param_vals = antimony_write_reactions(f, str(input_files["ratelaws"]),
+                                  str(input_files["stoicmat"]), f_output_parameters)
+
+
 
 def antimony_write_model(model_name: str, f_antimony: str | os.PathLike,
                          input_files: dict[str, str | os.PathLike],
@@ -34,10 +83,6 @@ def antimony_write_model(model_name: str, f_antimony: str | os.PathLike,
     """
 
     with f_antimony.open(mode='w') as f:
-        # Header
-        if (is_SPARCED):
-            f.write("# PanCancer Model by Birtwistle Lab\n")
-        f.write("model {name}()\n\n".format(name=model_name))
         # Compartments
         compartments = load_input_data_file(str(input_files["compartments"]))
         antimony_write_compartments_names(f, compartments)

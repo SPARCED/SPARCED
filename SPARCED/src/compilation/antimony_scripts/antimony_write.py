@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 import re
 
+import SparcedModel
+
 from utils.data_handling import load_input_data_file
 
 
@@ -46,61 +48,86 @@ def antimony_write_compartments_names(f_antimony: IO[str], compartments: dict[st
         f_antimony.write(f"Compartment {k}; ")
     f_antimony.write("\n")
 
-def antimony_write_reactions(f: IO[str], f_ratelaws: str, f_stoichmat: str, f_outp: str):
-    """Write reactions in the given Antimony file
-
-    Warning:
-        This function contains a massive copy/paste from some older code.
-        TODO Clean function and remove hard-coded values.
+def antimony_write_reaction(f_antimony: IO[str], model: SparcedModel.Model) -> None:
+    """Write SparcedModel.Model reactions into an Antimony file
 
     Arguments:
-        f: The open Antimony file.
-        f_ratelaws: The ratelaws file path.
-        f_stoichmat: The stoichiometric matrix file path.
-        f_outp: The output parameters file path.
+        f_antimony: The open Antimony file.
+        model: A SpacedModel.Model.
 
     Returns:
-        A typle with the parameters' names list and the parameters' values list.
+        A tuple with the parameters' names list and the parameters' values list.
     """
 
-    f.write("# Reactions:\n")
+    f_antimony.write("# Reactions:\n")
+    # Ratelaws
+    ratelaw_sheet = load_input_data_file(model.compilation_files['ratelaws'])
+    ratelaws = np.array([line[1:] for line in ratelaw_sheet[1:]], dtype="object")
+    ratelaws_ids = np.array([line[0] for line in ratelaw_sheet[1:]], dtype="object")
+    # Parameters
+    param_names = []
+    param_values = []
+    param_reaction_ids = []
+    param_nbs = []
+    for row_nb, reaction in enumerate(ratelaws):
+    # Read reaction's species (reactants and products)
+    all_reactants = []
+    all_products = []
+    formula = f"k{row_nb + 1}*"
+    if ';' in ratelaw[1]:
+        # Reaction is written under the format "reactants ; products"
+        raw_reaction = reaction[1].split(';')
+        if len(raw_reaction) > 2:
+            raise RuntimeError("Reaction has species that do not belong to reactants nor to products.")
+        # Reactants and products are written under the format "A + B + C..."
+        reactants = raw_reaction[0].split('+')
+        products = raw_reaction[1].split('+')
+        for r in reactants:
+            r = r.strip()
+            if r:
+                all_reactants.append(r)
+                formula += f"{r}*"
+        for p in products:
+            p = p.strip()
+            if p:
+                all_products.append(p)
+    # Read reaction's rate
+    # Mass-action formula
+    if 'k' not in reaction[2]:
+        formula = formula[:-1]
+        param_names.append(f'k{row_nb+1}')
+        param_values.append(np.double(reaction[2]))
+        param_reaction_ids(ratelaws_ids[row_nb])
+        param_nbs.append(int(0))
+    # Specified formula (non mass-action)
+    else:
+        formula = reaction[2]
 
-    stoic_sheet = load_input_data_file(f_stoichmat)
-    ratelaw_sheet = load_input_data_file(f_ratelaws)
-    ratelaw_data = np.array([line[1:] for line in ratelaw_sheet[1:]], dtype="object")
-    # ========== COPY/PASTE ==========
-    #gets first column minus blank space at the beginning, adds to stoic data list
-    stoic_columnnames = stoic_sheet[0]
-    stoic_rownames = [line[0] for line in stoic_sheet[1:]]
-    stoic_data = np.array([line[1:] for line in stoic_sheet[1:]])
-    # builds the important ratelaw+stoic lines into the txt file 
-    paramnames = []
-    paramvals = []
-    paramrxns = []
-    paramidxs = []
-    for rowNum, ratelaw in enumerate(ratelaw_data):
-        reactants = []
-        products = []
-        formula="k"+str(rowNum+1)+"*"
-    
-        for i, stoic_rowname in enumerate(stoic_rownames):
-            stoic_value = int(stoic_data[i][rowNum])
-            if stoic_value < 0:
-                for j in range(0,stoic_value*-1):
-                    reactants.append(stoic_rowname)
-                    formula=formula+stoic_rowname+"*"
-            elif stoic_value > 0:
-                for j in range(0,stoic_value):
-                    products.append(stoic_rowname)
-    
-        if "k" not in ratelaw[1]:
-            # the mass-action formula
-            formula=formula[:-1]
-            #the parameter
-            paramnames.append("k"+str(rowNum+1))
-            paramvals.append(np.double(ratelaw[1]))
+
+
+
+
+
+
+ else:
+        # specific formula (non-mass-action)
+        formula = ratelaw[2]
+        j = 1
+        params = np.genfromtxt(ratelaw[3:], float) # parameters
+        params = params[~np.isnan(params)]
+        if len(params) == 1:
+            paramnames.append("k"+str(rowNum+1)+"_"+str(j))
+            paramvals.append(float(ratelaw[j+2]))
             paramrxns.append(ratelaw_sheet[rowNum+1][0])
             paramidxs.append(int(0))
+            pattern = 'k\D*\d*'
+            compiled = re.compile(pattern)
+            matches = compiled.finditer(formula)
+            for ematch in matches:
+                formula = formula.replace(ematch.group(),paramnames[-1])
+
+
+
         else:
             # specific formula (non-mass-action)
             formula = ratelaw[1]
