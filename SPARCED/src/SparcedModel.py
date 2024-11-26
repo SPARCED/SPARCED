@@ -29,6 +29,33 @@ class EmptyModelName(InvalidModelName):
 # MODEL
 
 class Model:
+    """Systems biology mathematical model definition as an object
+
+    Attributes:
+        name: The name of the model.
+        path: The path to the folder containing the model definition.
+        configuration: A dictionnary representing the configuration
+                       of the model storage.
+        data_location: The location of the folder containing all the
+                       input data files.
+        compilation_config: A subset of the configuration dictionnary
+                            dedicated to compilation.
+        compilation_data_path: The location of the folder containing
+                               all the input data files required for
+                               compilation.
+        compilation_files: A dictionnary containing all the input files
+                           required for compilation.
+        compartments: A dictionnary containing the compartments names
+                      and their associated volumes.
+
+        Methods:
+            load_configuration()
+            load_compartments()
+            load_compilation_files()
+            sanitze_name()
+            set_name()
+            validate_name()
+    """
 
     def __init__(self, name="SPARCED_standard",
                  models_directory="./../models/", config_name="config.yaml"):
