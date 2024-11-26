@@ -28,7 +28,7 @@ def antimony_write_constant_variables(f_antimony: IO[str], constants: np.ndarray
         f_antimony.write("{name}, ".format(name=const_var))
     f_antimony.write("{last_name};\n\n".format(last_name=constants[-1]))
 
-def antimony_write_compartments_names(f_antimony: IO[str], compartments: dict[str, str]) -> None:
+def antimony_write_compartments_names(file: IO[str], compartments: dict[str, str]) -> None:
     """Write compartments names in the given Antimony file
 
     Note:
@@ -36,17 +36,19 @@ def antimony_write_compartments_names(f_antimony: IO[str], compartments: dict[st
         compartment volume.
 
     Arguments:
-        f_antimony: The open Antimony file.
-        compartments: Content of the input compartments file.
+        file: The open Antimony file.
+        compartments: Content of the input compartments file structured
+                      as a dictionnary. For further details, see the
+                      __Note__ section.
 
     Returns:
         Nothing.
     """
 
-    f_antimony.write("# Compartments:\n")
+    file.write("# Compartments:\n")
     for k in compartments.keys():
-        f_antimony.write(f"Compartment {k}; ")
-    f_antimony.write("\n")
+        file.write(f"Compartment {k}; ")
+    file.write("\n")
 
 def antimony_write_reaction(f_antimony: IO[str], model: SparcedModel.Model) -> None:
     """Write SparcedModel.Model reactions into an Antimony file
