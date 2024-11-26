@@ -19,7 +19,7 @@ from utils.files_handling import append_subfolder
 
 
 def antimony_create_file(model: SparcedModel.Model, verbose: bool
-                         ) -> tuple(str, np.ndarray):
+                         ) -> (str, np.ndarray):
     """Generate an Antimony file corresponding to a SparcedModel.Model
     object
 
@@ -72,8 +72,6 @@ def antimony_write_file(model: SparcedModel.Model,
         antimony_set_compartments_ic(file, model.compartments)
         antimony_set_species_ic(file, species)
         antimony_set_reactions_ic(file, param_names, param_values)
-        # Declare compartments as constant variables
-        antimony_define_constant_variables(file, compartments[:,0][1:])
         # Units definition
         antimony_define_units(file)
         file.write("\nend") 

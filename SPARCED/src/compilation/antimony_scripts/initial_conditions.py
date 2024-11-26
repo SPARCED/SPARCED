@@ -24,8 +24,8 @@ def antimony_set_compartments_ic(file: IO[str],
     """
 
     file.write("# Compartments initialization:\n")
-    for name, volume in compartments:
-        file.write(f"  {name} 0 {value:.6e};\n")
+    for name, volume in compartments.items():
+        file.write(f"  {name} 0 {volume:.6e};\n")
         file.write(f"  {name} has volume;\n")
 
 def antimony_set_reactions_ic(file: IO[str], p_names: np.ndarray,
@@ -48,7 +48,7 @@ def antimony_set_reactions_ic(file: IO[str], p_names: np.ndarray,
 
     file.write("# Parameters initialization:\n ")
     for count, name in enumerate(p_names):
-        f_antimony.write(f"{name} = {np.double(p_values[count]):.6e};\n")
+        file.write(f"{name} = {np.double(p_values[count]):.6e};\n")
 
 def antimony_set_species_ic(file: IO[str], species: np.ndarray) -> None:
     """Write species initial concentrations in the given Antimony file
@@ -66,7 +66,7 @@ def antimony_set_species_ic(file: IO[str], species: np.ndarray) -> None:
         Nothing.
     """
 
-    f_antimony.write("# Species initialization:\n")
+    file.write("# Species initialization:\n")
     for i, value in enumerate(species[1:]):
         file.write(f"{value[0]} = {np.double(value[2]):.6e};\n")
 

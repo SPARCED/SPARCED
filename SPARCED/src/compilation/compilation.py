@@ -6,6 +6,7 @@ import sys
 
 import SparcedModel
 
+from compilation.antimony_scripts.creation import antimony_create_file
 from utils.arguments import parse_args
 from utils.files_handling import append_subfolder
 
@@ -77,7 +78,7 @@ def compile_model(model: SparcedModel.Model, is_SPARCED: bool, verbose:bool
 
     if model == None:
         raise ValueError("No model provided.")
-    antimony_file_path, species = antimony_create_file(model, is_SPARCED, verbose)
+    antimony_file_path, species = antimony_create_file(model, verbose)
 
     try:
         assert not loadFile(str(antimony_file_path)) == -1

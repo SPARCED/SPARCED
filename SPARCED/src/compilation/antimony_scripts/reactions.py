@@ -42,7 +42,7 @@ def read_reactions_species(reaction, formula):
                 total_products.append(p)
     return(formula, total_reactants, total_products)
 
-def antimony_write_reaction(file: IO[str], f_ratelaws: str | os.PathLike, f_output_parameters: str | os.PathLike) -> None:
+def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike, f_output_parameters: str | os.PathLike) -> None:
     """Write SparcedModel.Model reactions into an Antimony file
 
     Arguments:
@@ -53,9 +53,9 @@ def antimony_write_reaction(file: IO[str], f_ratelaws: str | os.PathLike, f_outp
         A tuple with the parameters' names list and the parameters' values list.
     """
 
-    f_antimony.write("# Reactions:\n")
+    file.write("# Reactions:\n")
     # Ratelaws
-    ratelaw_sheet = load_input_data_file(model.compilation_files['ratelaws'])
+    ratelaw_sheet = load_input_data_file(f_ratelaws)
     ratelaws = np.array([line[1:] for line in ratelaw_sheet[1:]], dtype="object")
     ratelaws_ids = np.array([line[0] for line in ratelaw_sheet[1:]], dtype="object")
     # Parameters
@@ -68,15 +68,15 @@ def antimony_write_reaction(file: IO[str], f_ratelaws: str | os.PathLike, f_outp
         formula = f"k{row_nb + 1}*"
         formula, reactants, products = read_reactions_species(reaction[1], formula)
         # Read reaction's rate
-        param_reaction_ids.append(ratelaw_ids[row_nb])
         # Skip if no reactants nor products
         if reactants == [] and products == []:
             continue
         # Mass-action formula
-        elif 'k' not in reaction[2]:
+        if 'k' not in reaction[2]:
             formula = formula[:-1]
             param_names.append(f'k{row_nb+1}')
             param_values.append(np.double(reaction[2]))
+            param_reaction_ids.append(ratelaws_ids[row_nb])
             param_nbs.append(int(0))
         # Specified formula (non mass-action)
         else:
@@ -86,11 +86,12 @@ def antimony_write_reaction(file: IO[str], f_ratelaws: str | os.PathLike, f_outp
             # params = np.genfromtxt(reaction[3:], float)
             # params = params[~np.isnan(params)]
             params = pd.to_numeric(reaction[3:], errors='coerce')
-            params = params.dropna()
+            params = params[~np.isnan(params)]
             j = 1
             if len(params) == 1:
                 param_names.append(f"k{row_nb + 1}_{j}")
                 param_values.append(float(reaction[j + 2]))
+                param_reaction_ids.append(ratelaws_ids[row_nb])
                 param_nbs.append(int(0))
                 # Search for pattern matches
                 # k - non numerical character - numerical character
@@ -103,6 +104,7 @@ def antimony_write_reaction(file: IO[str], f_ratelaws: str | os.PathLike, f_outp
                 for q, p in enumerate(params):
                     param_names.append(f"k{row_nb + 1}_{j}")
                     param_values.append(float(reaction[j + 2]))
+                    param_reaction_ids.append(ratelaws_ids[row_nb])
                     param_nbs.append(q)
                     pattern = f"k(\D*)\d*_{j}"
                     compiled = re.compile(pattern)
@@ -110,10 +112,10 @@ def antimony_write_reaction(file: IO[str], f_ratelaws: str | os.PathLike, f_outp
                     for m in matches:
                         formula = formula.replace(m.group(),param_names[-1])
                     j +=1
-        file.write(f"  {ratelaw_ids[row_nb]}: {reactants} => {products}; ({formula})*{reactions[0]};\n")
+        file.write(f"  {ratelaws_ids[row_nb]}: {reactants} => {products}; ({formula})*{reaction[0]};\n")
     # Export parameters for each reaction, with corresponding order within the ratelaw and its value
-    params_all = pd.DataFrame({'value': param_values, 'rxn': param_reaction_ids, 'idx': param_ids}, index=param_names)
+    params_all = pd.DataFrame({'value': param_values, 'rxn': param_reaction_ids, 'idx': param_nbs}, index=param_names)
     params_all.to_csv(f_output_parameters, sep='\t', header=True, index=True)
-    f.write("\n")
+    file.write("\n")
     return(param_names, param_values)
 
