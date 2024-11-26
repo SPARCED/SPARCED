@@ -13,3 +13,8 @@ UNIT_SUBSTANCE = "1e-9 mole"
 UNIT_TIME = "second"
 UNIT_VOLUME = "litre"
 
+# YAML
+YAML_OUTPUT_PARAMETERS = "output_parameters"
+YAML_RATELAWS = "ratelaws"
+YAML_SPECIES = "species"
+
