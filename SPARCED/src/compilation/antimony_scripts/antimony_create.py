@@ -11,7 +11,7 @@ from compilation.antimony_scripts.antimony_write_IC import *
 
 import numpy as np
 
-import settings as spec
+import constants as const
 import SparcedModel
 
 from compilation.antimony_script.antimony_write import *
@@ -33,8 +33,8 @@ def antimony_create_file(model: SparcedModel.Model, is_SPARCED: bool,
         Antimony_file_path & species.
     """
 
-    antimony_file_name = spec.ANTIMONY_FILE_PREFIX + model.name \
-                         + spec.ANTIMONY_FILE_SUFFIX
+    antimony_file_name = const.ANTIMONY_FILE_PREFIX + model.name \
+                         + const.ANTIMONY_FILE_SUFFIX
     antimony_file_path = append_subfolder(model.path, antimony_file_name)
     species = antimony_write_file(model, antimony_file_path, is_SPARCED)
     return(antimony_file_path, species)
@@ -44,7 +44,7 @@ def antimony_write_file(model: SparcedModel.Model,
                         is_SPARCED: bool) -> tuple[np.ndarray, np.ndarray]:
     with antimony_file_path.open(mode="w") as file:
         # Header
-        file.write(f"# {spec.ANTIMONY_HEADER}\n")
+        file.write(f"# {const.ANTIMONY_HEADER}\n")
         file.write(f"model {model.name} ()\n")
         # Compartments
         antimony_write_compartments_names(file, model.compartments)
