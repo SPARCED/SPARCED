@@ -8,8 +8,8 @@ import numpy as np
 import constants as const
 
 
-def antimony_write_constant_variables(file: IO[str],
-                                      constants: np.ndarray) -> None:
+def antimony_define_constant_variables(file: IO[str],
+                                       constants: np.ndarray) -> None:
     """Write constant variables in the given Antimony file
 
     Arguments:
@@ -26,8 +26,8 @@ def antimony_write_constant_variables(file: IO[str],
     # Different format for the last constant to write
     file.write("{constants[-1]};\n\n")
 
-def antimony_write_compartments_names(file: IO[str],
-                                      compartments: dict[str, str]) -> None:
+def antimony_define_compartments(file: IO[str],
+                                 compartments: dict[str, str]) -> None:
     """Write compartments names in the given Antimony file
 
     Note:
@@ -48,7 +48,7 @@ def antimony_write_compartments_names(file: IO[str],
         file.write(f"Compartment {k}; ")
     file.write("\n")
 
-def antimony_write_species_names(file: IO[str], species: np.ndarray) -> None:
+def antimony_define_species(file: IO[str], species: np.ndarray) -> None:
     """Write species names and affiliated compartments in the given
        Antimony file
 
@@ -73,7 +73,7 @@ def antimony_write_species_names(file: IO[str], species: np.ndarray) -> None:
         file.write(f"Species {value[0]} in {value[1]};\n")
     file.write("\n")
 
-def antimony_write_unit_definitions(f_antimony: IO[str]) -> None:
+def antimony_define_units(f_antimony: IO[str]) -> None:
     """Write unit definitions in the given Antimony file
 
     Arguments:
