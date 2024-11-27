@@ -4,6 +4,9 @@
 import os
 import sys
 
+import antimony
+
+import constants as const
 import SparcedModel
 
 from compilation.antimony_scripts.creation import antimony_create_file
@@ -11,9 +14,9 @@ from utils.arguments import parse_args
 from utils.files_handling import append_subfolder
 
 
-def create_model(model_name="SPARCED_standard",
-                 models_directory="./../models/",
-                 config_name="config.yaml") -> SparcedModel.Model:
+def create_model(model_name=const.DEFAULT_MODEL_NAME,
+                 models_directory=const.DEFAULT_MODELS_DIRECTORY,
+                 config_name=const.DEFAULT_CONFIG_FILE) -> SparcedModel.Model:
     """Create a SparcedModel.Model object
 
     Arguments:
@@ -29,9 +32,10 @@ def create_model(model_name="SPARCED_standard",
     model = SparcedModel.Model(model_name, models_directory, config_name)
     return(model)
 
-def create_and_compile_model(model_name="SPARCED_standard",
-                             models_directory="./../models/",
-                             config_name="config.yaml") -> SparcedModel.Model:
+def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
+                             models_directory=const.DEFAULT_MODELS_DIRECTORY,
+                             config_name=const.DEFAULT_CONFIG_FILE
+                             ) -> SparcedModel.Model:
     """Create a SparcedModel.Model object and compile it
 
     Note:
@@ -78,17 +82,17 @@ def compile_model(model: SparcedModel.Model, is_SPARCED: bool, verbose:bool
 
     if model == None:
         raise ValueError("No model provided.")
-    antimony_file_path, species = antimony_create_file(model, verbose)
+    antimony_file_path, species = antimony_create_file(model)
 
     try:
-        assert not loadFile(str(antimony_file_path)) == -1
+        loadFile(str(antimony_file_path))
     except:
-        print("{name}: Failed to load Antimony file".format(name=model_name))
-        print(getLastError())
+        print("{name}: Failed to load Antimony file".format(name=model.name))
+        print(antimony.getLastError())
         sys.exit(0)
     else:
          if verbose: print("{name}: Success loading Antimony file"
-                         .format(name=model_name))
+                         .format(name=model.name))
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ location: "data"
 # Compilation
 compilation:
     directory: "model"
-    compartments_volume:
+    compartments:
       file: "compartments.tsv"
       id: "standard"
     files:

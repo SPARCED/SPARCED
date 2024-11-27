@@ -6,6 +6,8 @@ import sys
 
 from yaml import safe_load
 
+import constants as const
+
 from utils.data_handling import load_petab_conditions_file
 from utils.files_handling import *
 
@@ -57,25 +59,29 @@ class Model:
             validate_name()
     """
 
-    def __init__(self, name="SPARCED_standard",
-                 models_directory="./../models/", config_name="config.yaml"):
+    def __init__(self,
+                 name=const.DEFAULT_MODEL_NAME,
+                 models_directory=const.DEFAULT_MODELS_DIRECTORY,
+                 config_name=const.DEFAULT_CONFIG_FILE):
         # General settings
         self.name = self.set_name(name)
         self.path = append_subfolder(models_directory, self.name)
         self.configuration = self.load_configuration(self.path, config_name)
         self.data_location = append_subfolder(self.path,
-                                              self.configuration['location'])
+                                self.configuration[const.YAML_DATA_LOCATION])
         # Compilation
-        self.compilation_config = self.configuration['compilation']
-        self.compilation_data_path = append_subfolder(self.data_location,
-                                     self.compilation_config['directory'])
+        self.compilation_config = \
+                            self.configuration[const.YAML_COMPILATION_KEYWORD]
+        self.compilation_data_path = append_subfolder(
+                self.data_location,
+                self.compilation_config[const.YAML_COMPILATION_DATA_LOCATION])
         check_path_existence(self.compilation_data_path)
         self.compilation_files = self.load_compilation_files(
-                                    self.compilation_data_path,
-                                    self.compilation_config['files'])
+                    self.compilation_data_path,
+                    self.compilation_config[const.YAML_COMPILATION_FILES])
         self.compartments = self.load_compartments(
-                               self.compilation_data_path,
-                               self.compilation_config['compartments_volume'])
+                    self.compilation_data_path,
+                    self.compilation_config[const.YAML_COMPARTMENTS_KEYWORD])
 
     def load_configuration(self, path: str | os.PathLike, config_name: str):
         """Load configuration from a YAML file
@@ -117,10 +123,12 @@ class Model:
         """
 
         compartments_path = append_subfolder(
-                                path, compartments_config['file'])
+                        path,
+                        compartments_config[const.YAML_COMPARTMENTS_FILE])
         check_path_existence(compartments_path)
         compartments = load_petab_conditions_file(
-                            compartments_path, compartments_config['id'])
+                            compartments_path,
+                            compartments_config[const.YAML_COMPARTMENTS_ID])
         return(compartments)
 
     def load_compilation_files(self, path: str | os.PathLike,
@@ -149,8 +157,8 @@ class Model:
                 compilation_files[file_type] = append_subfolder(path,
                                                                 file_name)
                 # Do not check existence of files that will be created upon
-                # compilation
-                if file_type != "output_parameters":
+                # compilation TODO: change to a list to handle several files
+                if file_type != const.YAML_OUTPUT_PARAMETERS:
                     check_path_existence(compilation_files[file_type])
         return(compilation_files)
 
