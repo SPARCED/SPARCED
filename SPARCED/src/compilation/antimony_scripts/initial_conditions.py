@@ -6,8 +6,7 @@ from typing import IO
 import numpy as np
 
 
-def antimony_set_compartments_ic(file: IO[str],
-                                 compartments: dict[str, str]) -> None:
+def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
     """ Write compartments initial conditions in the given Antimony file
 
     Note:
@@ -28,8 +27,8 @@ def antimony_set_compartments_ic(file: IO[str],
         file.write(f"  {name} 0 {volume:.6e};\n")
         file.write(f"  {name} has volume;\n")
 
-def antimony_set_reactions_ic(file: IO[str], p_names: np.ndarray,
-                              p_values: np.ndarray) -> None:
+def set_reactions_ic(file: IO[str], p_names: np.ndarray,
+                     p_values: np.ndarray) -> None:
     """Write reactions parameters initial conditions in the given 
        Antimony file
 
@@ -50,7 +49,7 @@ def antimony_set_reactions_ic(file: IO[str], p_names: np.ndarray,
     for count, name in enumerate(p_names):
         file.write(f"{name} = {np.double(p_values[count]):.6e};\n")
 
-def antimony_set_species_ic(file: IO[str], species: np.ndarray) -> None:
+def set_species_ic(file: IO[str], species: np.ndarray) -> None:
     """Write species initial concentrations in the given Antimony file
 
     Note:

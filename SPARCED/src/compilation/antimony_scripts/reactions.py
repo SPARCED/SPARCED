@@ -11,7 +11,7 @@ import pandas as pd
 from utils.data_handling import load_input_data_file
 
 
-def read_reactions_species(reaction, formula):
+def _read_reactions_species(reaction, formula):
     """
     Arguments:
         reaction:   The reaction description.
@@ -42,8 +42,8 @@ def read_reactions_species(reaction, formula):
                 total_products.append(p)
     return(formula, total_reactants, total_products)
 
-def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike,
-                             f_output_parameters: str | os.PathLike) -> None:
+def write_reactions(file: IO[str], f_ratelaws: str | os.PathLike,
+                    f_output_parameters: str | os.PathLike) -> None:
     """Write SparcedModel.Model reactions into an Antimony file
 
     Arguments:
@@ -70,8 +70,8 @@ def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike,
     for row_nb, reaction in enumerate(ratelaws):
         # Read reaction's species (reactants and products)
         formula = f"k{row_nb + 1}*"
-        formula, reactants, products = read_reactions_species(reaction[1],
-                                                              formula)
+        formula, reactants, products = _read_reactions_species(reaction[1],
+                                                               formula)
         # Read reaction's rate
         # Skip if no reactants nor products
         if reactants == [] and products == []:

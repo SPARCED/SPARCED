@@ -8,8 +8,7 @@ import numpy as np
 import constants as const
 
 
-def antimony_define_compartments(file: IO[str],
-                                 compartments: dict[str, str]) -> None:
+def define_compartments(file: IO[str], compartments: dict[str, str]) -> None:
     """Write compartments names in the given Antimony file
 
     Note:
@@ -30,7 +29,7 @@ def antimony_define_compartments(file: IO[str],
         file.write(f"Compartment {k}; ")
     file.write("\n")
 
-def antimony_define_species(file: IO[str], species: np.ndarray) -> None:
+def define_species(file: IO[str], species: np.ndarray) -> None:
     """Write species names and affiliated compartments in the given
        Antimony file
 
@@ -55,7 +54,7 @@ def antimony_define_species(file: IO[str], species: np.ndarray) -> None:
         file.write(f"Species {value[0]} in {value[1]};\n")
     file.write("\n")
 
-def antimony_define_units(file: IO[str]) -> None:
+def define_units(file: IO[str]) -> None:
     """Write unit definitions in the given Antimony file
 
     Arguments:
