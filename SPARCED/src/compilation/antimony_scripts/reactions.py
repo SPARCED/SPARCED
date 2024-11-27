@@ -42,7 +42,8 @@ def read_reactions_species(reaction, formula):
                 total_products.append(p)
     return(formula, total_reactants, total_products)
 
-def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike, f_output_parameters: str | os.PathLike) -> None:
+def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike,
+                             f_output_parameters: str | os.PathLike) -> None:
     """Write SparcedModel.Model reactions into an Antimony file
 
     Arguments:
@@ -50,14 +51,17 @@ def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike, f_out
         model: A SpacedModel.Model.
 
     Returns:
-        A tuple with the parameters' names list and the parameters' values list.
+        A tuple with the parameters' names list and the parameters'
+        values list.
     """
 
     file.write("# Reactions:\n")
     # Ratelaws
     ratelaw_sheet = load_input_data_file(f_ratelaws)
-    ratelaws = np.array([line[1:] for line in ratelaw_sheet[1:]], dtype="object")
-    ratelaws_ids = np.array([line[0] for line in ratelaw_sheet[1:]], dtype="object")
+    ratelaws = np.array([line[1:] for line in ratelaw_sheet[1:]],
+                        dtype="object")
+    ratelaws_ids = np.array([line[0] for line in ratelaw_sheet[1:]],
+                            dtype="object")
     # Parameters
     param_names = []
     param_values = []
@@ -66,7 +70,8 @@ def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike, f_out
     for row_nb, reaction in enumerate(ratelaws):
         # Read reaction's species (reactants and products)
         formula = f"k{row_nb + 1}*"
-        formula, reactants, products = read_reactions_species(reaction[1], formula)
+        formula, reactants, products = read_reactions_species(reaction[1],
+                                                              formula)
         # Read reaction's rate
         # Skip if no reactants nor products
         if reactants == [] and products == []:
@@ -81,10 +86,6 @@ def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike, f_out
         # Specified formula (non mass-action)
         else:
             formula = reaction[2]
-            # TODO: Remove the original lines bellow if the pandas
-            # alternative works indeed
-            # params = np.genfromtxt(reaction[3:], float)
-            # params = params[~np.isnan(params)]
             params = pd.to_numeric(reaction[3:], errors='coerce')
             params = params[~np.isnan(params)]
             j = 1
@@ -112,9 +113,11 @@ def antimony_write_reactions(file: IO[str], f_ratelaws: str | os.PathLike, f_out
                     for m in matches:
                         formula = formula.replace(m.group(),param_names[-1])
                     j +=1
-        file.write(f"  {ratelaws_ids[row_nb]}: {reactants} => {products}; ({formula})*{reaction[0]};\n")
+        file.write(f"{ratelaws_ids[row_nb]}: {'+'.join(reactants)} => {'+'.join(products)}; ({formula})*{reaction[0]};\n")
     # Export parameters for each reaction, with corresponding order within the ratelaw and its value
-    params_all = pd.DataFrame({'value': param_values, 'rxn': param_reaction_ids, 'idx': param_nbs}, index=param_names)
+    params_all = pd.DataFrame({'value': param_values,
+                               'rxn': param_reaction_ids,
+                               'idx': param_nbs}, index=param_names)
     params_all.to_csv(f_output_parameters, sep='\t', header=True, index=True)
     file.write("\n")
     return(param_names, param_values)
