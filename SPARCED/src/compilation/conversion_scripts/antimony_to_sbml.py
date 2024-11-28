@@ -36,18 +36,18 @@ def convert_antimony_to_sbml(antimony_file_path: str | os.PathLike,
         if verbose:
             print(antimony.getLastError())
         raise RuntimeError(f"Failed to load Antimony file of model " +
-                            "{model_name}.\n")
+                           f"{model_name}.\n")
     elif verbose:
             print(f"SPARCED VERBOSE: Successfully loaded Antimony file of " +
-                   "model {model_name}.\n")
+                  f"model {model_name}.\n")
     # Convert the Antimony file into an SBML model
     if antimony.writeSBMLFile(str(sbml_file_path), model_name) == 0:
         if verbose:
             print(antimony.getLastError())
         raise RuntimeError(f"Failed to convert Antimony file of model " +
-                            "{model_name} to SBML format.\n")
+                           f"{model_name} to SBML format.\n")
     elif verbose:
         print(f"SPARCED VERBOSE: Successfully converted Antimony file of " +
-                "model {model_name} to SBML format.\n")
+              f"model {model_name} to SBML format.\n")
     return(sbml_file_path)
 
