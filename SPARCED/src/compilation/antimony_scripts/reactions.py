@@ -27,7 +27,8 @@ def _read_reactions_species(reaction, formula):
     if ';' in reaction:
         split_reaction = reaction.split(';')
         if len(split_reaction) > 2:
-            raise RuntimeError("Reaction has species that do not belong to reactants nor to products.")
+            raise RuntimeError("Reaction has species that do not belong to " +
+                               "reactants nor to products.")
         # Reactants and products are written under the format "A + B + C..."
         reactants = split_reaction[0].split('+')
         products = split_reaction[1].split('+')
