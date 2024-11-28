@@ -1,6 +1,6 @@
 Rxn_name	Comp_correction	Species	Ratelaw						
 vbR	Cytoplasm	  ; Ribosome	kbR_1+(kbR_2*((pS6K^kbR_3)/((kbR_4^kbR_3)+(pS6K^kbR_3))))	0.0042005	0.04	5	4.864145		
-vdR	Cytoplasm	 Ribosome ; 	2.22E-06						
+vdR	Cytoplasm	 Ribosome ; 	2.223190E-06						
 vTL1	Nucleus	  ; p53inac	kTL1_1*m_TP53*(EIF4E/(kTL1_2+EIF4E))	140.7475	100				
 vTL2	Nucleus	  ; MDM2	(kTL2_1+kTL2_2*MDM2pro)*m_MDM2*(EIF4E/(kTL2_3+EIF4E))	5.004356	0.0225196	100			
 vTL3	Nucleus	  ; Wip1	kTL3_1*Wip1pro*m_PPM1D*(EIF4E/(kTL3_2+EIF4E))	0.1563861	100				
@@ -79,7 +79,7 @@ vTL75	Cytoplasm	  ; PI3KC1	kTL75_1*m_PIK3CG*(EIF4E/(kTL75_2+EIF4E))	0.002549623	
 vTL76	Cytoplasm	  ; PI3KC1	kTL76_1*m_PIK3CD*(EIF4E/(kTL76_2+EIF4E))	0.002549623	100				
 vTL77	Cytoplasm	  ; PI3KR1	kTL77_1*m_PIK3R1*(EIF4E/(kTL77_2+EIF4E))	0.0974545	100				
 vTL78	Cytoplasm	  ; PI3KR1	kTL78_1*m_PIK3R2*(EIF4E/(kTL78_2+EIF4E))	0.00544119	100				
-vTL79	Cytoplasm	  ; PI3KR1	kTL79_1*m_PIK3R3*(EIF4E/(kTL79_2+EIF4E))	4.92E-05	100				
+vTL79	Cytoplasm	  ; PI3KR1	kTL79_1*m_PIK3R3*(EIF4E/(kTL79_2+EIF4E))	4.918333E-05	100				
 vTL80	Cytoplasm	  ; PI3KR1	kTL80_1*m_PIK3R4*(EIF4E/(kTL80_2+EIF4E))	0.02728923	100				
 vTL81	Cytoplasm	  ; PI3K2	kTL81_1*m_PIK3C2A*(EIF4E/(kTL81_2+EIF4E))	0.01395976	100				
 vTL82	Cytoplasm	  ; GRP	kTL82_1*m_RASGRP1*(EIF4E/(kTL82_2+EIF4E))	0.2953445	100				
@@ -92,17 +92,17 @@ vTL88	Cytoplasm	  ; CRaf	kTL88_1*m_RAF1*(EIF4E/(kTL88_2+EIF4E))	0.06589921	100
 vTL89	Cytoplasm	  ; BRaf	kTL89_1*m_BRAF*(EIF4E/(kTL89_2+EIF4E))	0.03871855	100				
 vTL90	Cytoplasm	  ; MEK	kTL90_1*m_MAP2K1*(EIF4E/(kTL90_2+EIF4E))	0.2384683	100				
 vTL91	Cytoplasm	  ; MEK	kTL91_1*m_MAP2K2*(EIF4E/(kTL91_2+EIF4E))	0.407612	100				
-vTL92	Cytoplasm	  ; MKP3	kTL92_1*m_DUSP6*(EIF4E/(kTL92_2+EIF4E))	0.000811183	100				
+vTL92	Cytoplasm	  ; MKP3	kTL92_1*m_DUSP6*(EIF4E/(kTL92_2+EIF4E))	0.0008111827	100				
 vTL93	Cytoplasm	  ; RSK	kTL93_1*m_RPS6KA1*(EIF4E/(kTL93_2+EIF4E))	0.1455156	100				
 vTL94	Cytoplasm	  ; RSK	kTL94_1*m_RPS6KA2*(EIF4E/(kTL94_2+EIF4E))	0.007642617	100				
 vTL95	Cytoplasm	  ; RSK	kTL95_1*m_RPS6KA3*(EIF4E/(kTL95_2+EIF4E))	0.02037869	100				
 vTL96	Cytoplasm	  ; RSK	kTL96_1*m_RPS6KA4*(EIF4E/(kTL96_2+EIF4E))	0.1264408	100				
-vTL97	Cytoplasm	  ; MKP1	kTL97_1*m_DUSP1*(EIF4E/(kTL97_2+EIF4E))	0.000684513	100				
+vTL97	Cytoplasm	  ; MKP1	kTL97_1*m_DUSP1*(EIF4E/(kTL97_2+EIF4E))	0.0006845126	100				
 vTL98	Cytoplasm	  ; cFos	kTL98_1*m_FOS*(EIF4E/(kTL98_2+EIF4E))	0.3941679	100				
 vTL99	Cytoplasm	  ; cJun	kTL99_1*m_JUN*(EIF4E/(kTL99_2+EIF4E))	0.1648827	100				
 vTL100	Cytoplasm	  ; cMyc	kTL100_1*m_MYC*(EIF4E/(kTL100_2+EIF4E))	39.40506	100				
 vTL101	Cytoplasm	  ; bCATENIN	kTL101_1*m_CTNNB1*(EIF4E/(kTL101_2+EIF4E))	5.20533	100				
-vTL102	Cytoplasm	  ; PTEN	kTL102_1*m_PTEN*(EIF4E/(kTL102_2+EIF4E))	0.000657728	100				
+vTL102	Cytoplasm	  ; PTEN	kTL102_1*m_PTEN*(EIF4E/(kTL102_2+EIF4E))	0.0006577276	100				
 vTL103	Cytoplasm	  ; AKT	kTL103_1*m_AKT1*(EIF4E/(kTL103_2+EIF4E))	0.7378095	100				
 vTL104	Cytoplasm	  ; AKT	kTL104_1*m_AKT2*(EIF4E/(kTL104_2+EIF4E))	0.180917	100				
 vTL105	Cytoplasm	  ; PDK1	kTL105_1*m_PDPK1*(EIF4E/(kTL105_2+EIF4E))	0.122997	100				
@@ -145,13 +145,13 @@ vTL141	Cytoplasm	  ; INS	kTL141_1*m_INS*(EIF4E/(kTL141_2+EIF4E))	0.07122388	100
 vTLCd1	Nucleus	 p53inac ; 	0						
 vTLCd2	Nucleus	 MDM2 ; 	0						
 vTLCd3	Nucleus	 Wip1 ; 	0						
-vTLCd4	Nucleus	 BRCA2 ; 	7.70E-05						
-vTLCd5	Nucleus	 MSH6 ; 	5.54E-06						
-vTLCd6	Nucleus	 MGMT ; 	5.60E-06						
+vTLCd4	Nucleus	 BRCA2 ; 	7.701635E-05						
+vTLCd5	Nucleus	 MSH6 ; 	5.543936E-06						
+vTLCd6	Nucleus	 MGMT ; 	5.603635E-06						
 vTLCd7	Nucleus	 ARF ; 	0						
-vTLCd8	Nucleus	 MDM4 ; 	0.00026019						
-vTLCd9	Nucleus	 ATMinac ; 	6.03E-06						
-vTLCd10	Nucleus	 ATRinac ; 	1.21E-05						
+vTLCd8	Nucleus	 MDM4 ; 	0.0002601904						
+vTLCd9	Nucleus	 ATMinac ; 	6.026319E-06						
+vTLCd10	Nucleus	 ATRinac ; 	1.208668E-05						
 vTLCd11	Nucleus	 pRB ; 	0						
 vTLCd12	Nucleus	 E2F ; 	0						
 vTLCd13	Nucleus	 Cd ; 	0						
@@ -169,25 +169,25 @@ vTLCd24	Nucleus	 Wee1 ; 	0
 vTLCd25	Nucleus	 Chk1 ; 	0						
 vTLCd26	Nucleus	 p21 ; 	0						
 vTLCd27	Cytoplasm	 L ; 	0						
-vTLCd28	Cytoplasm	 R ; 	2.69E-06						
-vTLCd29	Cytoplasm	 flip ; 	0.000192541						
-vTLCd30	Cytoplasm	 pC8 ; 	2.34E-06						
-vTLCd31	Cytoplasm	 Bar ; 	2.86E-05						
-vTLCd32	Cytoplasm	 pC3 ; 	2.33E-06						
-vTLCd33	Cytoplasm	 pC6 ; 	5.32E-07						
-vTLCd34	Cytoplasm	 XIAP ; 	2.86E-05						
-vTLCd35	Cytoplasm	 PARP ; 	2.50E-06						
-vTLCd36	Cytoplasm	 Bid ; 	2.83E-06						
-vTLCd37	Cytoplasm	 Bcl2c ; 	0.000121963						
-vTLCd38	Cytoplasm	 Bax ; 	2.47E-06						
-vTLCd39	Mitochondrion	 CytoCm ; 	1.32E-06						
-vTLCd40	Mitochondrion	 Smacm ; 	2.10E-06						
-vTLCd41	Cytoplasm	 Apaf ; 	6.06E-06						
-vTLCd42	Cytoplasm	 pC9 ; 	2.34E-06						
-vTLCd43	Cytoplasm	 BAD ; 	9.25E-06						
-vTLCd44	Cytoplasm	 PUMA ; 	2.75E-05						
-vTLCd45	Cytoplasm	 NOXA ; 	0.000128361						
-vTLCd46	Cytoplasm	 BIM ; 	6.42E-05						
+vTLCd28	Cytoplasm	 R ; 	2.688368E-06						
+vTLCd29	Cytoplasm	 flip ; 	0.0001925409						
+vTLCd30	Cytoplasm	 pC8 ; 	2.339785E-06						
+vTLCd31	Cytoplasm	 Bar ; 	2.856690E-05						
+vTLCd32	Cytoplasm	 pC3 ; 	2.327990E-06						
+vTLCd33	Cytoplasm	 pC6 ; 	5.321161E-07						
+vTLCd34	Cytoplasm	 XIAP ; 	2.856690E-05						
+vTLCd35	Cytoplasm	 PARP ; 	2.504434E-06						
+vTLCd36	Cytoplasm	 Bid ; 	2.832733E-06						
+vTLCd37	Cytoplasm	 Bcl2c ; 	0.0001219627						
+vTLCd38	Cytoplasm	 Bax ; 	2.471324E-06						
+vTLCd39	Mitochondrion	 CytoCm ; 	1.320401E-06						
+vTLCd40	Mitochondrion	 Smacm ; 	2.099911E-06						
+vTLCd41	Cytoplasm	 Apaf ; 	6.060462E-06						
+vTLCd42	Cytoplasm	 pC9 ; 	2.339785E-06						
+vTLCd43	Cytoplasm	 BAD ; 	9.247881E-06						
+vTLCd44	Cytoplasm	 PUMA ; 	2.750584E-05						
+vTLCd45	Cytoplasm	 NOXA ; 	0.0001283606						
+vTLCd46	Cytoplasm	 BIM ; 	6.418029E-05						
 vTLCd47	Cytoplasm	 E ; 	0						
 vTLCd48	Cytoplasm	 H ; 	0						
 vTLCd49	Cytoplasm	 HGF ; 	0						
