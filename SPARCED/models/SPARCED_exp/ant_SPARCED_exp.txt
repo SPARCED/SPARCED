@@ -1,5 +1,5 @@
 # Erdem et al., Nat Commun 2022
-model SPARCED_exp ()
+model SPARCED_exp()
 # Compartments:
 Compartment Cytoplasm; Compartment Extracellular; Compartment Nucleus; Compartment Mitochondrion; 
 # Species:
@@ -3363,6 +3363,7 @@ vPd89: AKTi_AKT => ; (k2434*AKTi_AKT)*Cytoplasm;
   Nucleus has volume;
   Mitochondrion 0 3.675000e-13;
   Mitochondrion has volume;
+
 # Species initialization:
 Ribosome = 1.900000e+03;
 p53inac = 2.970000e+02;
@@ -4278,6 +4279,7 @@ m_BRCA2 = 6.320000e-04;
 m_MGMT = 1.580000e-03;
 m_INSR = 1.900000e-03;
 m_INS = 0.000000e+00;
+
 # Parameters initialization:
  k1_1 = 4.200500e-03;
 k1_2 = 4.000000e-02;
@@ -6990,11 +6992,11 @@ k2431 = 9.620000e-06;
 k2432 = 4.150000e-06;
 k2433 = 2.220000e-06;
 k2434 = 5.750000e-06;
+
 # Unit definitions:
   unit time_unit = second;
   unit volume = litre;
   unit substance = 1e-9 mole;
   unit nM = 1e-9 mole / litre;
-
 
 end
