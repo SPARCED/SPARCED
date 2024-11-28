@@ -114,7 +114,7 @@ def write_reactions(file: IO[str], f_ratelaws: str | os.PathLike,
                     for m in matches:
                         formula = formula.replace(m.group(),param_names[-1])
                     j +=1
-        file.write(f"{ratelaws_ids[row_nb]}: {'+'.join(reactants)} => {'+'.join(products)}; ({formula})*{reaction[0]};\n")
+        file.write(f"{ratelaws_ids[row_nb]}: {' + '.join(reactants)} => {' + '.join(products)}; ({formula})*{reaction[0]};\n")
     # Export parameters for each reaction, with corresponding order within the ratelaw and its value
     params_all = pd.DataFrame({'value': param_values,
                                'rxn': param_reaction_ids,
