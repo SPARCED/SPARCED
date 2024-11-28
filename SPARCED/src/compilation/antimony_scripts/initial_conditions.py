@@ -26,6 +26,7 @@ def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
     for name, volume in compartments.items():
         file.write(f"  {name} 0 {volume:.6e};\n")
         file.write(f"  {name} has volume;\n")
+    file.write("\n")
 
 def set_reactions_ic(file: IO[str], p_names: np.ndarray,
                      p_values: np.ndarray) -> None:
@@ -48,6 +49,7 @@ def set_reactions_ic(file: IO[str], p_names: np.ndarray,
     file.write("# Parameters initialization:\n ")
     for count, name in enumerate(p_names):
         file.write(f"{name} = {np.double(p_values[count]):.6e};\n")
+    file.write("\n")
 
 def set_species_ic(file: IO[str], species: np.ndarray) -> None:
     """Write species initial concentrations in the given Antimony file
@@ -68,4 +70,5 @@ def set_species_ic(file: IO[str], species: np.ndarray) -> None:
     file.write("# Species initialization:\n")
     for i, value in enumerate(species[1:]):
         file.write(f"{value[0]} = {np.double(value[2]):.6e};\n")
+    file.write("\n")
 
