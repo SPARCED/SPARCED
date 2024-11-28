@@ -4,12 +4,11 @@
 import os
 import sys
 
-import antimony
-
 import constants as const
 import SparcedModel
 
 from compilation.antimony_scripts.creation import antimony_create_file
+from compilation.conversion_scripts.antimony_to_sbml import convert_antimony_to_sbml
 from utils.arguments import parse_args
 from utils.files_handling import append_subfolder
 
@@ -82,18 +81,13 @@ def compile_model(model: SparcedModel.Model, is_SPARCED: bool, verbose:bool
 
     if model == None:
         raise ValueError("No model provided.")
-    antimony_file_path, species = antimony_create_file(model)
-
     try:
-        loadFile(str(antimony_file_path))
-    except:
-        print("{name}: Failed to load Antimony file".format(name=model.name))
-        print(antimony.getLastError())
+        antimony_file_path, species = antimony_create_file(model)
+        convert_antimony_to_sbml(antimony_file_path, model.name, model.path,
+                                 verbose)
+    except RuntimeError as error:
+        print(f"SPARCED ERROR: {error}\n")
         sys.exit(0)
-    else:
-         if verbose: print("{name}: Success loading Antimony file"
-                         .format(name=model.name))
-
 
 if __name__ == '__main__':
     create_and_compile_model()
