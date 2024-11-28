@@ -9,6 +9,7 @@ import SparcedModel
 
 from compilation.antimony_scripts.creation import antimony_create_file
 from compilation.conversion_scripts.antimony_to_sbml import convert_antimony_to_sbml
+from compilation.sbml_scripts.annotations import sbml_annotate_model
 from utils.arguments import parse_args
 from utils.files_handling import append_subfolder
 
@@ -83,11 +84,15 @@ def compile_model(model: SparcedModel.Model, is_SPARCED: bool, verbose:bool
         raise ValueError("No model provided.")
     try:
         antimony_file_path, species = antimony_create_file(model)
-        convert_antimony_to_sbml(antimony_file_path, model.name, model.path,
-                                 verbose)
+        sbml_file_path = convert_antimony_to_sbml(antimony_file_path,
+                                                  model.name,
+                                                  model.path,
+                                                  verbose)
     except RuntimeError as error:
         print(f"SPARCED ERROR: {error}\n")
         sys.exit(0)
+    sbml_annotate_model(str(sbml_file_path), species)
+
 
 if __name__ == '__main__':
     create_and_compile_model()
