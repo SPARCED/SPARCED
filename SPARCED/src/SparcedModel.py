@@ -222,9 +222,9 @@ class Model:
 
         is_valid = False
         if not name:
-            raise EmptyModelName("No model name provided.", name)
+            raise EmptyModelName("No model name provided.\n", name)
         elif '-' in name:
-            raise InvalidModelName("Dash '-' character not supported.", name)
+            raise InvalidModelName("Dash '-' character not supported.\n", name)
         else:
             is_valid = True
         return(is_valid)
