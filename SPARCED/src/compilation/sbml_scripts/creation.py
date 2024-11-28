@@ -14,9 +14,11 @@ from utils.files_handling import append_subfolder
 #   1. Build the path towards an SBML file independently from a model,
 #      for example if you want to convert an Antimony file into the
 #      SBML format regardless of the SPARCED pipeline.
+#      This is the purpose of 'build_sbml_model_path()'.
 #   2. Build the path towards an SBML file that corresponds to a model,
 #      for example if you want to find where a model's SBML file should
 #      be located based on the informations passed into this model.
+#      This is the purpose of 'get_sbml_model_path()'.
 # Hence, despite the apparent redundancy of those two functions, please
 # do not remove them as they are complementary.
 # ---------------------------------------------------------------------
