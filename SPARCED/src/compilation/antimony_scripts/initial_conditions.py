@@ -24,7 +24,7 @@ def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
 
     file.write("# Compartments initialization:\n")
     for name, volume in compartments.items():
-        file.write(f"  {name} 0 {volume:.6e};\n")
+        file.write(f"  {name} = {volume:.6e};\n")
         file.write(f"  {name} has volume;\n")
     file.write("\n")
 
