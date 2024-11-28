@@ -178,7 +178,7 @@ vTLCd33	Cytoplasm	 pC6 ; 	5.321161E-07
 vTLCd34	Cytoplasm	 XIAP ; 	2.856690E-05						
 vTLCd35	Cytoplasm	 PARP ; 	2.504434E-06						
 vTLCd36	Cytoplasm	 Bid ; 	2.832733E-06						
-vTLCd37	Cytoplasm	 Bcl2c ; 	0.0001219627						
+vTLCd37	Cytoplasm	 Bcl2c ; 	1.219627E-04						
 vTLCd38	Cytoplasm	 Bax ; 	2.471324E-06						
 vTLCd39	Mitochondrion	 CytoCm ; 	1.320401E-06						
 vTLCd40	Mitochondrion	 Smacm ; 	2.099911E-06						
@@ -236,7 +236,7 @@ vTLCd91	Cytoplasm	 TSC1 ; 	3.68E-06
 vTLCd92	Cytoplasm	 TSC2 ; 	5.35E-06						
 vTLCd93	Cytoplasm	 PKC ; 	3.18E-06						
 vTLCd94	Cytoplasm	 RKIP ; 	5.93E-07						
-vTLCd95	Cytoplasm	 ERK ; 	3.43E-06						
+vTLCd95	Cytoplasm	 ERK ; 	3.43182E-06						
 vTLCd96	Cytoplasm	 FOXO ; 	4.15E-06						
 vTLCd97	Cytoplasm	 RhebD ; 	8.40E-06						
 vTLCd98	Cytoplasm	 Raptor ; 	2.55E-05						
@@ -805,9 +805,9 @@ vRP5_22	Cytoplasm	 pPPrPPr ; pPPrPPrint	(kRP522_1*(pPPrPPr/(kRP522_2+pPPrPPr))*C
 vRP5_23	Cytoplasm	 pPPrPr ; pPPrPrint	(kRP523_1*(pPPrPr/(kRP523_2+pPPrPr))*Cbl)+(kRP523_3*pPPrPr)	0.00016667	2	0.00016667			
 vRP5_24	Cytoplasm	 pFFrFFr ; pFFrFFrint	(kRP524_1*(pFFrFFr/(kRP524_2+pFFrFFr))*Cbl)+(kRP524_3*pFFrFFr)	0.00016667	2	0.00016667			
 vRP5_25	Cytoplasm	 pFFrFr ; pFFrFrint	(kRP525_1*(pFFrFr/(kRP525_2+pFFrFr))*Cbl)+(kRP525_3*pFFrFr)	0.00016667	2	0.00016667			
-vRP5_26	Cytoplasm	 pIIrIr ; pIIrIr_int	(kRP526_1*(pIIrIr/(kRP526_2+pIIrIr))*Cbl)+(kRP526_3*pIIrIr)	7.93E-05	2	0.00016667			
+vRP5_26	Cytoplasm	 pIIrIr ; pIIrIr_int	(kRP526_1*(pIIrIr/(kRP526_2+pIIrIr))*Cbl)+(kRP526_3*pIIrIr)	7.930900E-05	2	0.00016667			
 vRP5_27	Cytoplasm	 pINS_Isr_Isr ; pINS_Isr_Isr_int	(kRP527_1*(pINS_Isr_Isr/(kRP527_2+pINS_Isr_Isr))*Cbl)+(kRP527_3*pINS_Isr_Isr)	0.00016667	2	0.00016667			
-vRP5_28	Cytoplasm	 pIIrIrI ; pIIrIrI_int	(kRP528_1*(pIIrIrI/(kRP528_2+pIIrIrI))*Cbl)+(kRP528_3*pIIrIrI)	7.93E-05	2	0.00016667			
+vRP5_28	Cytoplasm	 pIIrIrI ; pIIrIrI_int	(kRP528_1*(pIIrIrI/(kRP528_2+pIIrIrI))*Cbl)+(kRP528_3*pIIrIrI)	7.930900E-05	2	0.00016667			
 vRP5_29	Cytoplasm	 pINS_Isr_Isr_INS ; pINS_Isr_Isr_INS_int	(kRP529_1*(pINS_Isr_Isr_INS/(kRP529_2+pINS_Isr_Isr_INS))*Cbl)+(kRP529_3*pINS_Isr_Isr_INS)	0.00016667	2	0.00016667			
 vRP6_1	Cytoplasm	 pEE1E2int ; EE1E2int	1						
 vRP6_2	Cytoplasm	 pEE1Ev3int ; EE1Ev3int	1						
@@ -893,9 +893,9 @@ vRP8_23	Cytoplasm	 PPrPrint ; PPrPr	0.0014
 vRP8_24	Cytoplasm	 FFrFFrint ; FFrFFr	0.0014						
 vRP8_25	Cytoplasm	 FFrFrint ; FFrFr	0.0014						
 vRP8_26	Cytoplasm	 IIrIr_int ; IIrIr	7.70E-07						
-vRP8_27	Cytoplasm	 INS_Isr_Isr_int ; INS_Isr_Isr	3.20E-05						
+vRP8_27	Cytoplasm	 INS_Isr_Isr_int ; INS_Isr_Isr	3.195500e-05						
 vRP8_28	Cytoplasm	 IIrIrI_int ; IIrIrI	7.70E-07						
-vRP8_29	Cytoplasm	 INS_Isr_Isr_INS_int ; INS_Isr_Isr_INS	3.20E-05						
+vRP8_29	Cytoplasm	 INS_Isr_Isr_INS_int ; INS_Isr_Isr_INS	3.195500e-05						
 vRP9_1	Cytoplasm	 pEE1E2int + G2_SOS ; pEE1E2int_G2_SOS	0.009						
 vRP9_2	Cytoplasm	 pEE1Ev3int + G2_SOS ; pEE1Ev3int_G2_SOS	0.01						
 vRP9_3	Cytoplasm	 pEE1E1int + G2_SOS ; pEE1E1int_G2_SOS	0.01						
@@ -1832,53 +1832,53 @@ vPA8	Cytoplasm	 BAD + ppERK ; ppERK_BAD	0.001
 vPA9	Cytoplasm	 ppERK_BAD ; BAD + ppERK	0.1						
 vPA10	Cytoplasm	 ppERK_BAD ; pBAD + ppERK	1						
 vPA11	Cytoplasm	 pBAD ; BAD	0.001						
-vAd1	Cytoplasm	 L_R ; 	2.69E-06						
+vAd1	Cytoplasm	 L_R ; 	2.688368E-06						
 vAd2	Cytoplasm	 Ractive ; 	0.002688368						
 vAd3	Cytoplasm	 Ractive_flip ; 	0.000192541						
-vAd4	Cytoplasm	 Ractive_pC8 ; 	2.69E-06						
+vAd4	Cytoplasm	 Ractive_pC8 ; 	2.688368E-06						
 vAd5	Cytoplasm	 C8 ; 	0.000233979						
 vAd6	Cytoplasm	 C8_Bar ; 	2.86E-05						
 vAd7	Cytoplasm	 C8_pC3 ; 	2.34E-06						
 vAd8	Cytoplasm	 C3 ; 	0.000232799						
-vAd9	Cytoplasm	 C3_pC6 ; 	2.33E-06						
+vAd9	Cytoplasm	 C3_pC6 ; 	2.327990E-06						
 vAd10	Cytoplasm	 C6 ; 	5.32E-05						
 vAd11	Cytoplasm	 C6_C8 ; 	2.34E-06						
 vAd12	Cytoplasm	 C3_XIAP ; 	2.86E-05						
-vAd13	Cytoplasm	 C3_PARP ; 	2.50E-06						
-vAd14	Cytoplasm	 cPARP ; 	2.50E-06						
-vAd15	Cytoplasm	 C8_Bid ; 	2.83E-06						
+vAd13	Cytoplasm	 C3_PARP ; 	2.504434E-06						
+vAd14	Cytoplasm	 cPARP ; 	2.504434E-06						
+vAd15	Cytoplasm	 C8_Bid ; 	2.832733E-06						
 vAd16	Cytoplasm	 tBid ; 	0.000283273						
-vAd17	Cytoplasm	 tBid_Bcl2c ; 	0.000121963						
-vAd18	Cytoplasm	 tBid_Bax ; 	2.83E-06						
+vAd17	Cytoplasm	 tBid_Bcl2c ; 	1.219627E-04						
+vAd18	Cytoplasm	 tBid_Bax ; 	2.832733E-06						
 vAd19	Cytoplasm	 Baxactive ; 	0.000247132						
-vAd20	Mitochondrion	 Baxm ; 	2.47E-06						
-vAd21	Mitochondrion	 Bcl2 ; 	0.000121963						
-vAd22	Mitochondrion	 Baxm_Bcl2 ; 	0.000121963						
-vAd23	Mitochondrion	 Bax2 ; 	2.47E-06						
-vAd24	Mitochondrion	 Bax2_Bcl2 ; 	0.000121963						
-vAd25	Mitochondrion	 Bax4 ; 	2.47E-06						
-vAd26	Mitochondrion	 Bax4_Bcl2 ; 	0.000121963						
-vAd27	Mitochondrion	 CytoCr ; 	1.32E-06						
-vAd28	Mitochondrion	 Smacr ; 	2.10E-06						
-vAd29	Cytoplasm	 CytoC ; 	1.32E-06						
+vAd20	Mitochondrion	 Baxm ; 	2.471324E-06						
+vAd21	Mitochondrion	 Bcl2 ; 	1.219627E-04						
+vAd22	Mitochondrion	 Baxm_Bcl2 ; 	1.219627E-04						
+vAd23	Mitochondrion	 Bax2 ; 	2.471324E-06						
+vAd24	Mitochondrion	 Bax2_Bcl2 ; 	1.219627E-04						
+vAd25	Mitochondrion	 Bax4 ; 	2.471324E-06						
+vAd26	Mitochondrion	 Bax4_Bcl2 ; 	1.219627E-04						
+vAd27	Mitochondrion	 CytoCr ; 	1.320401E-06						
+vAd28	Mitochondrion	 Smacr ; 	2.099911E-06						
+vAd29	Cytoplasm	 CytoC ; 	1.320401E-06						
 vAd30	Cytoplasm	 CytoC_Apaf ; 	6.060462E-06						
 vAd31	Cytoplasm	 Apafactive ; 	6.060462E-06						
 vAd32	Cytoplasm	 Apop ; 	6.060462E-06						
 vAd33	Cytoplasm	 Apop_C3 ; 	6.060462E-06						
-vAd34	Cytoplasm	 Smac ; 	2.10E-06						
+vAd34	Cytoplasm	 Smac ; 	2.099911E-06						
 vAd35	Cytoplasm	 Apop_XIAP ; 	2.86E-05						
 vAd36	Cytoplasm	 Smac_XIAP ; 	2.86E-05						
-vAd37	Cytoplasm	 C3_Ub ; 	2.33E-06						
-vAd38	Cytoplasm	 Bcl2c_BAD ; 	0.000121963						
-vAd39	Cytoplasm	 Bcl2c_PUMA ; 	0.000121963						
-vAd40	Cytoplasm	 Bcl2c_NOXA ; 	0.000128361						
+vAd37	Cytoplasm	 C3_Ub ; 	2.327990E-06						
+vAd38	Cytoplasm	 Bcl2c_BAD ; 	1.219627E-04						
+vAd39	Cytoplasm	 Bcl2c_PUMA ; 	1.219627E-04						
+vAd40	Cytoplasm	 Bcl2c_NOXA ; 	1.283606E-04						
 vAd41	Cytoplasm	 BIM_Bax ; 	6.418029E-05						
-vAd42	Cytoplasm	 Bcl2c_BIM ; 	0.000121963						
+vAd42	Cytoplasm	 Bcl2c_BIM ; 	1.219627E-04						
 vAd43	Cytoplasm	 ppERK_BIM ; 	6.418029E-05						
-vAd44	Cytoplasm	 pBIM ; 	0.000641803						
-vAd45	Cytoplasm	 ppAKT_BAD ; 	9.25E-06						
+vAd44	Cytoplasm	 pBIM ; 	6.418029E-04						
+vAd45	Cytoplasm	 ppAKT_BAD ; 	9.247881E-06						
 vAd46	Cytoplasm	 pBAD ; 	9.25E-05						
-vAd47	Cytoplasm	 ppERK_BAD ; 	9.25E-06						
+vAd47	Cytoplasm	 ppERK_BAD ; 	9.247881E-06						
 vRd1	Cytoplasm	 pE1 ; 	1.514877E-05						
 vRd2	Cytoplasm	 pE2 ; 	1.039638E-05						
 vRd3	Cytoplasm	 pE4 ; 	0						
@@ -1934,7 +1934,7 @@ vRd52	Cytoplasm	 IIrIrI ; 	6.546783E-06
 vRd53	Cytoplasm	 INS_Isr_Isr_INS ; 	2.873745e-05						
 vRd54	Cytoplasm	 E1_ppERK ; 	1.514877E-05						
 vRd55	Cytoplasm	 E2_ppERK ; 	1.039638E-05						
-vRd56	Cytoplasm	 E4_ppERK ; 	3.43E-06						
+vRd56	Cytoplasm	 E4_ppERK ; 	3.43182E-06						
 vRPd1_1	Cytoplasm	 pEE1E2 ; 	1.514877E-05						
 vRPd1_2	Cytoplasm	 pEE1Ev3 ; 	1.514877E-05						
 vRPd1_3	Cytoplasm	 pEE1E1 ; 	1.514877E-05						
