@@ -26,7 +26,11 @@ vTL22	Nucleus	  ; Cb	kTL22*m_CCNB1	4.3918
 vTL23	Nucleus	  ; Cdc20i	kTL23*m_CDC20	8.7835					
 vTL24	Nucleus	  ; Wee1	kTL24*m_WEE1	5.2701					
 vTL25	Cytoplasm	  ; Chk1	kTL25*m_CHEK1	0.008744					
-vTL26	Cytoplasm	  ; p21	kTL26*m_CDKN1A	0.5312					
+vTL26	Cytoplasm	  ; p21	kTL26*m_CDKN1A	0.5312				
+vTL27	Cytoplasm	  ;	kTL27*m_CDK1    0.2635
+vTL28	Cytoplasm	  ;	kTL28*m_CDK2    0.1792
+vTL29	Cytoplasm	  ;	kTL29*m_CDK4    0.0082295
+vTL30	Cytoplasm	  ;	kTL30*m_CDK6    0.296215
 vTL31	Cytoplasm	  ; L	kTL31_1*m_TNFSF10*(EIF4E/(kTL31_2+EIF4E))	0	100				
 vTL32	Cytoplasm	  ; R	kTL32_1*m_TNFRSF10A*(EIF4E/(kTL32_2+EIF4E))	0.006701184	100				
 vTL33	Cytoplasm	  ; R	kTL33_1*m_TNFRSF10B*(EIF4E/(kTL33_2+EIF4E))	0.006964813	100				
