@@ -68,5 +68,5 @@ def define_units(file: IO[str]) -> None:
     file.write(f"  unit time_unit = {const.UNIT_TIME};\n")
     file.write(f"  unit volume = {const.UNIT_VOLUME};\n")
     file.write(f"  unit substance = {const.UNIT_SUBSTANCE};\n")
-    file.write(f"  unit nM = {const.UNIT_DEF_NM};\n\n")
+    file.write(f"  unit nM = {const.UNIT_DEF_NM};\n")
 
