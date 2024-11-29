@@ -38,7 +38,7 @@
     <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference Documentation" href="summary.html"/>
         <link rel="next" title="Future developments" href="../future-dev.html"/>
-        <link rel="prev" title="Model Creation" href="compilation.html"/>
+        <link rel="prev" title="Model Compilation" href="compilation.html"/>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="public" />
@@ -170,13 +170,13 @@
 	  </dark-mode-toggle>
 	</div>
   <section id="model-simulation">
-<h1>Model Simulation<a class="headerlink" href="#model-simulation" title="Permalink to this heading">¶</a></h1>
+<h1>Model Simulation<a class="headerlink" href="#model-simulation" title="Link to this heading">¶</a></h1>
 <section id="general">
-<h2>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h2>
+<h2>General<a class="headerlink" href="#general" title="Link to this heading">¶</a></h2>
 <p>Main functions to run a model simulation</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="run_model.run_experiment">
-<span class="sig-prename descclassname"><span class="pre">run_model.</span></span><span class="sig-name descname"><span class="pre">run_experiment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/run_model.html#run_experiment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_model.run_experiment" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">run_model.</span></span><span class="sig-name descname"><span class="pre">run_experiment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/run_model.html#run_experiment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_model.run_experiment" title="Link to this definition">¶</a></dt>
 <dd><p>Run an experiment</p>
 <p>Run an experiment consisting of one or several cells within the same
 initial conditions.</p>
@@ -206,19 +206,19 @@ initial conditions.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="run_model.run_single_simulation">
-<span class="sig-prename descclassname"><span class="pre">run_model.</span></span><span class="sig-name descname"><span class="pre">run_single_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/run_model.html#run_single_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_model.run_single_simulation" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">run_model.</span></span><span class="sig-name descname"><span class="pre">run_single_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/run_model.html#run_single_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_model.run_single_simulation" title="Link to this definition">¶</a></dt>
 <dd><p>Run a single simulation of SPARCED</p>
 </dd></dl>
 
 <p>Launchers</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="launchers.launch_experiment_simulation">
-<span class="sig-prename descclassname"><span class="pre">launchers.</span></span><span class="sig-name descname"><span class="pre">launch_experiment_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launchers.html#launch_experiment_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launchers.launch_experiment_simulation" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">launchers.</span></span><span class="sig-name descname"><span class="pre">launch_experiment_simulation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launchers.html#launch_experiment_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launchers.launch_experiment_simulation" title="Link to this definition">¶</a></dt>
 <dd><p>Launch experiment simulation function</p>
 <p>Small routine to process the parsed arguments and call run_model()</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>perturbations</strong> – The array specifying initial conditions perturbations.</p>
+<dd class="field-odd"><p><strong>None.</strong> – </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Nothing.</p>
@@ -228,7 +228,7 @@ initial conditions.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="launchers.load_perturbations">
-<span class="sig-prename descclassname"><span class="pre">launchers.</span></span><span class="sig-name descname"><span class="pre">load_perturbations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launchers.html#load_perturbations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launchers.load_perturbations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">launchers.</span></span><span class="sig-name descname"><span class="pre">load_perturbations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launchers.html#load_perturbations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launchers.load_perturbations" title="Link to this definition">¶</a></dt>
 <dd><p>Load perturbations</p>
 <p>Load an input perturbations file structured as tab separated, and remove
 the first column (human-readable) to keep only the second (SPARCED symbol)
@@ -247,31 +247,13 @@ and the third (concentration in nM) columns.</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="launchers.load_simulation_input_files">
-<span class="sig-prename descclassname"><span class="pre">launchers.</span></span><span class="sig-name descname"><span class="pre">load_simulation_input_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launchers.html#load_simulation_input_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launchers.load_simulation_input_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load simulation input data files paths dictionnary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_path</strong> – The model folder path.</p></li>
-<li><p><strong>data_folder</strong> – The input data files folder name.</p></li>
-<li><p><strong>yaml_name</strong> – The YAML configuration file name.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionnary containing all the input data file paths.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 <section id="utilities">
-<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this heading">¶</a></h2>
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">¶</a></h2>
 <p>Initial conditions</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="initial_conditions.load_species_initial_conditions">
-<span class="sig-prename descclassname"><span class="pre">initial_conditions.</span></span><span class="sig-name descname"><span class="pre">load_species_initial_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/initial_conditions.html#load_species_initial_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#initial_conditions.load_species_initial_conditions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">initial_conditions.</span></span><span class="sig-name descname"><span class="pre">load_species_initial_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/initial_conditions.html#load_species_initial_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#initial_conditions.load_species_initial_conditions" title="Link to this definition">¶</a></dt>
 <dd><p>Create species initial conditions array</p>
 <p>Load initial conditions from the SBML model and update according to
 perturbations.</p>
@@ -283,7 +265,8 @@ perturbations.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The initial conditions array.</p>
+<dd class="field-even"><p>The initial conditions array.
+The species names array.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -291,13 +274,13 @@ perturbations.</p>
 <p>Output</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="output.save_simulation_output">
-<span class="sig-prename descclassname"><span class="pre">output.</span></span><span class="sig-name descname"><span class="pre">save_simulation_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/output.html#save_simulation_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#output.save_simulation_output" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">output.</span></span><span class="sig-name descname"><span class="pre">save_simulation_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/output.html#save_simulation_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#output.save_simulation_output" title="Link to this definition">¶</a></dt>
 <dd><p>Save simulation results in three files: species, genes and time</p>
 </dd></dl>
 
 </section>
 <section id="modules">
-<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading">¶</a></h2>
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
 <p>Documentation for those files is not available yet.</p>
 </section>
 </section>
@@ -311,7 +294,7 @@ perturbations.</p>
         <a href="../future-dev.html" class="btn btn-neutral float-right" title="Future developments">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="compilation.html" class="btn btn-neutral" title="Model Creation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="compilation.html" class="btn btn-neutral" title="Model Compilation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -320,7 +303,7 @@ perturbations.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -343,16 +326,10 @@ perturbations.</p>
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

@@ -177,7 +177,28 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
-<div class="viewcode-block" id="load_species_initial_conditions"><a class="viewcode-back" href="../reference/simulation.html#initial_conditions.load_species_initial_conditions">[docs]</a><span class="k">def</span> <span class="nf">load_species_initial_conditions</span><span class="p">(</span><span class="n">sbml_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> 
+<span class="k">def</span> <span class="nf">apply_perturbations</span><span class="p">(</span><span class="n">species_initial_conditions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                        <span class="n">species_names</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                        <span class="n">perturbations</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update species initial conditions according to a perturbation array</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        species_initial_conditions: The array containing the initial concentrations.</span>
+<span class="sd">        species_names: The array containing the names of the species.</span>
+<span class="sd">        perturbations: An array containing the perturbations to apply.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The updated initial conditions array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">perturbations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">perturbations</span><span class="p">:</span>
+            <span class="n">species_initial_conditions</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">species_names</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">species_initial_conditions</span><span class="p">)</span>
+
+<div class="viewcode-block" id="load_species_initial_conditions">
+<a class="viewcode-back" href="../reference/simulation.html#initial_conditions.load_species_initial_conditions">[docs]</a>
+<span class="k">def</span> <span class="nf">load_species_initial_conditions</span><span class="p">(</span><span class="n">sbml_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> 
                                     <span class="n">perturbations</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create species initial conditions array</span>
 
@@ -190,6 +211,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The initial conditions array.</span>
+<span class="sd">        The species names array.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Load SBML model</span>
@@ -209,10 +231,10 @@
     <span class="c1"># Any concentration bellow 1e-6 is considered as zero (0)</span>
     <span class="n">species_initial_conditions</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">species_initial_conditions</span> <span class="o">&lt;=</span> <span class="mf">1e-6</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="c1"># Apply perturbations</span>
-    <span class="k">if</span> <span class="n">perturbations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">perturbations</span><span class="p">:</span>
-            <span class="n">species_initial_conditions</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">species_names</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">species_initial_conditions</span><span class="p">)</span></div>
+    <span class="n">species_initial_conditions</span> <span class="o">=</span> <span class="n">apply_perturbations</span><span class="p">(</span><span class="n">species_initial_conditions</span><span class="p">,</span>
+                                                     <span class="n">species_names</span><span class="p">,</span> <span class="n">perturbations</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">species_initial_conditions</span><span class="p">,</span> <span class="n">species_names</span><span class="p">)</span></div>
+
 
 </pre></div>
 
@@ -224,7 +246,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -247,16 +269,10 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

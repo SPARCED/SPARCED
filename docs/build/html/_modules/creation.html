@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>launcher &mdash; SPARCED 2.0.0 documentation</title>
+  <title>creation &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -167,73 +167,68 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <h1>Source code for launcher</h1><div class="highlight"><pre>
+  <h1>Source code for creation</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="kn">from</span> <span class="nn">compilation.create_model</span> <span class="kn">import</span> <span class="n">create_model</span>
-<span class="kn">from</span> <span class="nn">utils.arguments</span> <span class="kn">import</span> <span class="n">parse_args</span>
-<span class="kn">from</span> <span class="nn">utils.data_handling</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">utils.sanitize</span> <span class="kn">import</span> <span class="n">sanitize_model_name</span>
+<span class="kn">import</span> <span class="nn">constants</span> <span class="k">as</span> <span class="nn">const</span>
+<span class="kn">import</span> <span class="nn">SparcedModel</span>
+
+<span class="kn">from</span> <span class="nn">utils.files_handling</span> <span class="kn">import</span> <span class="n">append_subfolder</span>
+
+<span class="c1"># EXPLANATIONS --------------------------------------------------------</span>
+<span class="c1"># The existence of two functions is on purpose and intends to cover</span>
+<span class="c1"># several usecases:</span>
+<span class="c1">#   1. Build the path towards an SBML file independently from a model,</span>
+<span class="c1">#      for example if you want to convert an Antimony file into the</span>
+<span class="c1">#      SBML format regardless of the SPARCED pipeline.</span>
+<span class="c1">#      This is the purpose of &#39;build_sbml_model_path()&#39;.</span>
+<span class="c1">#   2. Build the path towards an SBML file that corresponds to a model,</span>
+<span class="c1">#      for example if you want to find where a model&#39;s SBML file should</span>
+<span class="c1">#      be located based on the informations passed into this model.</span>
+<span class="c1">#      This is the purpose of &#39;get_sbml_model_path()&#39;.</span>
+<span class="c1"># Hence, despite the apparent redundancy of those two functions, please</span>
+<span class="c1"># do not remove them as they are complementary.</span>
+<span class="c1"># ---------------------------------------------------------------------</span>
 
 
-<div class="viewcode-block" id="launch_model_creation"><a class="viewcode-back" href="../reference/compilation.html#launcher.launch_model_creation">[docs]</a><span class="k">def</span> <span class="nf">launch_model_creation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Launch model creation function</span>
-
-<span class="sd">    Small routine to process the parsed arguments and call create_model()</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        None.</span>
-<span class="sd">    </span>
-<span class="sd">    Returns:</span>
-<span class="sd">        Nothing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
-    <span class="c1"># Model</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="n">sanitize_model_name</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">model_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># Input data files</span>
-    <span class="n">input_folder</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">input_data</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">input_files</span> <span class="o">=</span> <span class="n">load_compilation_input_files</span><span class="p">(</span><span class="n">input_folder</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">yaml</span><span class="p">)</span>
-    <span class="c1"># Output parameters</span>
-    <span class="n">output_parameters_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output_parameters</span><span class="p">)</span>
-    <span class="c1"># Runtime booleans</span>
-    <span class="n">is_SPARCED</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">wild</span>  <span class="c1"># if it&#39;s not wild then it&#39;s SPARCED</span>
-    <span class="n">verbose</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span>
-    <span class="c1"># Call create_model</span>
-    <span class="n">create_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">input_files</span><span class="p">,</span> <span class="n">output_parameters_path</span><span class="p">,</span>
-                 <span class="n">verbose</span><span class="p">,</span> <span class="n">is_SPARCED</span><span class="p">)</span></div>
-
-<span class="k">def</span> <span class="nf">load_compilation_input_files</span><span class="p">(</span><span class="n">data_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">yaml_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load compilation input data files paths dictionnary</span>
+<div class="viewcode-block" id="build_sbml_model_path">
+<a class="viewcode-back" href="../reference/compilation.html#creation.build_sbml_model_path">[docs]</a>
+<span class="k">def</span> <span class="nf">build_sbml_model_path</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reconstruct the path towards an SBML file</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        model_path: The model folder path.</span>
-<span class="sd">        data_folder: The input data files folder name.</span>
-<span class="sd">        yaml_name: The YAML configuration file name.</span>
+<span class="sd">        model_name: The name of the SBML model.</span>
+<span class="sd">        model-path: The path towards the SBML model&#39;s directory.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A dictionnary containing all the input data file paths.</span>
+<span class="sd">        The path of the corresponding SBML file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">input_files_configuration</span> <span class="o">=</span> <span class="n">load_input_data_config</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">yaml_name</span><span class="p">)</span>
-    <span class="n">compilation_files</span> <span class="o">=</span> <span class="n">input_files_configuration</span><span class="p">[</span><span class="s2">&quot;compilation&quot;</span><span class="p">]</span>
-    <span class="c1"># Load root of compilation input data files</span>
-    <span class="n">compilation_root</span> <span class="o">=</span> <span class="n">compilation_files</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">compilation_data_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">compilation_root</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># Reconstruct full path for each input file listed in the dictionnary</span>
-    <span class="k">for</span> <span class="n">input_file</span> <span class="ow">in</span> <span class="n">compilation_files</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">compilation_files</span><span class="p">[</span><span class="n">input_file</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">compilation_files</span><span class="p">[</span><span class="n">input_file</span><span class="p">]</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">compilation_data_path</span><span class="p">,</span> <span class="n">compilation_files</span><span class="p">[</span><span class="n">input_file</span><span class="p">])</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">compilation_files</span><span class="p">)</span>
+    <span class="n">sbml_file_name</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">SBML_FILE_PREFIX</span> <span class="o">+</span> <span class="n">model_name</span> \
+                   <span class="o">+</span> <span class="n">const</span><span class="o">.</span><span class="n">SBML_FILE_SUFFIX</span>
+    <span class="n">sbml_file_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">sbml_file_name</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">sbml_file_path</span><span class="p">)</span></div>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">launch_model_creation</span><span class="p">()</span>
+<div class="viewcode-block" id="get_sbml_model_path">
+<a class="viewcode-back" href="../reference/compilation.html#creation.get_sbml_model_path">[docs]</a>
+<span class="k">def</span> <span class="nf">get_sbml_model_path</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">SparcedModel</span><span class="o">.</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="o">|</span><span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the path for an SBML file corresponding to a</span>
+<span class="sd">    SparcedModel.Model object</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        model: A SparcedModel.Model object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The path of the corresponding SBML file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">build_sbml_model_path</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="p">))</span></div>
+
 
 </pre></div>
 
@@ -245,7 +240,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -268,16 +263,10 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

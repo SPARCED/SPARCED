@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>antimony_write_IC &mdash; SPARCED 2.0.0 documentation</title>
+  <title>annotations &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -167,82 +167,66 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <h1>Source code for antimony_write_IC</h1><div class="highlight"><pre>
+  <h1>Source code for annotations</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">IO</span>
-
+<span class="kn">import</span> <span class="nn">libsbml</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">re</span>
 
 
-<div class="viewcode-block" id="antimony_write_compartments_IC"><a class="viewcode-back" href="../reference/compilation.html#antimony_write_IC.antimony_write_compartments_IC">[docs]</a><span class="k">def</span> <span class="nf">antimony_write_compartments_IC</span><span class="p">(</span><span class="n">f_antimony</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">compartments</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Write compartments initial conditions in the given Antimony file</span>
+<div class="viewcode-block" id="sbml_annotate_model">
+<a class="viewcode-back" href="../reference/compilation.html#annotations.sbml_annotate_model">[docs]</a>
+<span class="k">def</span> <span class="nf">sbml_annotate_model</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">species</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Annotate species and compartments of the given SBML model</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        file_path: The path towards the SBML file.</span>
+<span class="sd">        species: Content of the species input file.</span>
+<span class="sd">        compartments: Content of the compartments input file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Import SBML file</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">libsbml</span><span class="o">.</span><span class="n">SBMLReader</span><span class="p">()</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">readSBML</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="n">sbml_model</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">getModel</span><span class="p">()</span>
+    <span class="c1"># Set annotations</span>
+    <span class="n">write_species_annotations</span><span class="p">(</span><span class="n">sbml_model</span><span class="p">,</span> <span class="n">species</span><span class="p">)</span>
+    <span class="c1"># TODO: if necessary annotate compartments</span>
+    <span class="c1"># Export the annotated SBML file</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">libsbml</span><span class="o">.</span><span class="n">SBMLWriter</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writeSBML</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="write_species_annotations">
+<a class="viewcode-back" href="../reference/compilation.html#annotations.write_species_annotations">[docs]</a>
+<span class="k">def</span> <span class="nf">write_species_annotations</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">species</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set species annotations in the given SBML file</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        The first row is considered as a header, and hence it is skipped.</span>
-<span class="sd">        Names should be located on the first column of the array.</span>
-<span class="sd">        Volumes should be located on the second column of the array.</span>
+<span class="sd">        First row should be the header and will be skipped.</span>
+<span class="sd">        Annotations are expected to be located between the 4th and the</span>
+<span class="sd">        last column of the array.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        f_antimony: The open Antimony file.</span>
-<span class="sd">        compartments: The content of the input compartments file.</span>
+<span class="sd">        file: The loaded SBML file.</span>
+<span class="sd">        species: Content of the species input file.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Compartments initialization:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">compartments</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-        <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2"> = </span><span class="si">{volume:.6e}</span><span class="s2">;</span><span class="se">\n</span><span class="si">{name}</span><span class="s2"> has volume;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">volume</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-    <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+        <span class="n">all_annotations</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
+            <span class="n">annotation</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">annotation</span><span class="p">:</span>
+                <span class="n">all_annotations</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">getSpecies</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">setAnnotation</span><span class="p">(</span><span class="n">all_annotations</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="antimony_write_reactions_IC"><a class="viewcode-back" href="../reference/compilation.html#antimony_write_IC.antimony_write_reactions_IC">[docs]</a><span class="k">def</span> <span class="nf">antimony_write_reactions_IC</span><span class="p">(</span><span class="n">f_antimony</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">p_names</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">p_vals</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write reactions parameters initial conditions in the given Antimony file</span>
-
-<span class="sd">    Warning:</span>
-<span class="sd">        TODO use only one array for the parameters instead of taking the risk to</span>
-<span class="sd">        separate names from values.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        f_antimony: The open Antimony file.</span>
-<span class="sd">        p_names: The parameters names.</span>
-<span class="sd">        p_values: The parameters values.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Nothing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Parameters initialization:</span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_names</span><span class="p">):</span>
-        <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2"> = </span><span class="si">{value:.6e}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">val</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">p_vals</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
-    <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="antimony_write_species_IC"><a class="viewcode-back" href="../reference/compilation.html#antimony_write_IC.antimony_write_species_IC">[docs]</a><span class="k">def</span> <span class="nf">antimony_write_species_IC</span><span class="p">(</span><span class="n">f_antimony</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">species</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write species initial concentrations in the given Antimony file</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        The first row is considered as a header, and hence it is skipped.</span>
-<span class="sd">        Species names should be located on the first column of the array.</span>
-<span class="sd">        Species concentrations should be located on the third column of the array.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        f_antimony: The open Antimony file.</span>
-<span class="sd">        species: Content of the input species file.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Nothing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Species initialization:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-        <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2"> = </span><span class="si">{concentration:.6e}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span>
-                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">concentration</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
-    <span class="n">f_antimony</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -254,7 +238,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -277,16 +261,10 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 
