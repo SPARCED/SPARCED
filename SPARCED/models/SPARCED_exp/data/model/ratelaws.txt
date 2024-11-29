@@ -345,7 +345,7 @@ vC27	Nucleus	  ; Ce	0
 vC28	Nucleus	 Ce ; Mei	kC28_1*Ce*(kC28_2-(Mei+Me+Mep27+Mep21+Mai+Ma+Map27+Map21))	9.444444e-06	200				
 vC29	Nucleus	 Mei ; Ce	4.722222E-04						
 vC30	Nucleus	 Ce ; 	kC30_1*(Skp2/(kC30_2+Skp2))*(Ce/(kC30_3+Ce))	1.416667	200	10			
-vC31	Nucleus	 Me ; Mei	kC31_1*(Wee1+kC31_2)*(Me/(kC31_3+Me))	6.611111E-04	50	10			
+vC31	Nucleus	 Me ; Mei	kC31_1*(Wee1+kC31_2)*(Me/(kC31_3+Me))	6.611111E-03	50	10			
 vC32	Nucleus	 Mei ; Me	kC32_1*Pe*(Mei/(kC32_2+Mei))	9.444444E-03	10				
 vC33	Nucleus	 Me + p27 ; Mep27	9.444444e-06						
 vC34	Nucleus	 Mep27 ; Me + p27	4.722222E-04						
@@ -392,7 +392,7 @@ vC74	Nucleus	 Mbp27 ; p27 + Mb	9.444444E-04
 vC75	Nucleus	  ; Cdc20i	0						
 vC76	Nucleus	 Cdc20i ; Cdc20a	kC76_1*Mb*(Cdc20i/(kC76_2+Cdc20i))	0.03777778	10				
 vC77	Nucleus	 Cdc20a ; Cdc20i	kC77_1*(Cdc20a/(kC77_2+Cdc20a))	0.3305556	10				
-vC78	Nucleus	 Cdc20i ; 	0.000661111						
+vC78	Nucleus	 Cdc20i ; 	6.611111E-04						
 vC79	Nucleus	 Cdc20a ; 	2.361111E-04						
 vC80	Nucleus	  ; Pbi	0						
 vC81	Nucleus	 Pb ; Pbi	kC81_1*(kC81_2+(kC81_3*Chk1))*(Pb/(kC81_4+Pb))	0.4722222	1	0.01	10		
@@ -410,13 +410,13 @@ vC92	Nucleus	 Ce ; 	2.361111E-05
 vC93	Nucleus	  ; p27	0						
 vC94	Nucleus	  ; p27	0						
 vC95	Nucleus	 p27 ; 	2.833333E-04						
-vC96	Nucleus	 Md + p21 ; Mdp21	1.42E-06						
+vC96	Nucleus	 Md + p21 ; Mdp21	1.416667E-06						
 vC97	Nucleus	 Mdp21 ; Md + p21	2.361111E-04						
-vC98	Nucleus	 Me + p21 ; Mep21	1.89E-06						
+vC98	Nucleus	 Me + p21 ; Mep21	1.888889E-06						
 vC99	Nucleus	 Mep21 ; Me + p21	4.722222E-04						
-vC100	Nucleus	 Ma + p21 ; Map21	1.42E-06						
+vC100	Nucleus	 Ma + p21 ; Map21	1.416667E-06						
 vC101	Nucleus	 Map21 ; Ma + p21	5.902778E-04						
-vC102	Nucleus	 Mb + p21 ; Mbp21	1.13E-06						
+vC102	Nucleus	 Mb + p21 ; Mbp21	1.133333E-06						
 vC103	Nucleus	 Mbp21 ; Mb + p21	9.444444E-04						
 vC104	Nucleus	 p21 ; 	0.000289731						
 vA1	Cytoplasm	 L + R ; L_R	0.00126483						
