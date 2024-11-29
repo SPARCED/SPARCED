@@ -3224,7 +3224,7 @@
       <parameter id="k347_1" value="0.006611111" constant="true"/>
       <parameter id="k347_2" value="50" constant="true"/>
       <parameter id="k347_3" value="10" constant="true"/>
-      <parameter id="k348_1" value="0.0009444444" constant="true"/>
+      <parameter id="k348_1" value="0.009444444" constant="true"/>
       <parameter id="k348_2" value="10" constant="true"/>
       <parameter id="k349" value="9.444444e-06" constant="true"/>
       <parameter id="k350" value="0.0004722222" constant="true"/>
@@ -3254,7 +3254,7 @@
       <parameter id="k364_1" value="0.008736111" constant="true"/>
       <parameter id="k364_2" value="50" constant="true"/>
       <parameter id="k364_3" value="10" constant="true"/>
-      <parameter id="k365_1" value="0.0009444444" constant="true"/>
+      <parameter id="k365_1" value="0.009444444" constant="true"/>
       <parameter id="k365_2" value="10" constant="true"/>
       <parameter id="k366" value="7.083333e-06" constant="true"/>
       <parameter id="k367" value="0.0005902778" constant="true"/>
@@ -3270,7 +3270,7 @@
       <parameter id="k372_2" value="1" constant="true"/>
       <parameter id="k373_1" value="0.5902778" constant="true"/>
       <parameter id="k373_2" value="1" constant="true"/>
-      <parameter id="k374" value="0.000944444" constant="true"/>
+      <parameter id="k374" value="0.0009444444" constant="true"/>
       <parameter id="k375" value="0" constant="true"/>
       <parameter id="k376" value="0.0004722222" constant="true"/>
       <parameter id="k377" value="0" constant="true"/>
@@ -3297,15 +3297,15 @@
       <parameter id="k387_3" value="10" constant="true"/>
       <parameter id="k388_1" value="0.01841667" constant="true"/>
       <parameter id="k388_2" value="10" constant="true"/>
-      <parameter id="k389" value="5.67e-06" constant="true"/>
-      <parameter id="k390" value="0.000944444" constant="true"/>
+      <parameter id="k389" value="5.666667e-06" constant="true"/>
+      <parameter id="k390" value="0.0009444444" constant="true"/>
       <parameter id="k391" value="0" constant="true"/>
       <parameter id="k392_1" value="0.03777778" constant="true"/>
       <parameter id="k392_2" value="10" constant="true"/>
       <parameter id="k393_1" value="0.3305556" constant="true"/>
       <parameter id="k393_2" value="10" constant="true"/>
-      <parameter id="k394" value="0.000661111" constant="true"/>
-      <parameter id="k395" value="0.000236111" constant="true"/>
+      <parameter id="k394" value="0.0006611111" constant="true"/>
+      <parameter id="k395" value="0.0002361111" constant="true"/>
       <parameter id="k396" value="0" constant="true"/>
       <parameter id="k397_1" value="0.4722222" constant="true"/>
       <parameter id="k397_2" value="1" constant="true"/>
@@ -3314,7 +3314,7 @@
       <parameter id="k398_1" value="0.02361111" constant="true"/>
       <parameter id="k398_2" value="11" constant="true"/>
       <parameter id="k398_3" value="10" constant="true"/>
-      <parameter id="k399" value="0.000944444" constant="true"/>
+      <parameter id="k399" value="0.0009444444" constant="true"/>
       <parameter id="k400" value="0.0004722222" constant="true"/>
       <parameter id="k401" value="0" constant="true"/>
       <parameter id="k402_1" value="0.005666667" constant="true"/>
@@ -3323,7 +3323,7 @@
       <parameter id="k403_1" value="0.4722222" constant="true"/>
       <parameter id="k403_2" value="10" constant="true"/>
       <parameter id="k404" value="0.0004722222" constant="true"/>
-      <parameter id="k405" value="0.000944444" constant="true"/>
+      <parameter id="k405" value="0.0009444444" constant="true"/>
       <parameter id="k406_1" value="0.01888889" constant="true"/>
       <parameter id="k406_2" value="50" constant="true"/>
       <parameter id="k406_3" value="50" constant="true"/>
@@ -3333,14 +3333,14 @@
       <parameter id="k409" value="0" constant="true"/>
       <parameter id="k410" value="0" constant="true"/>
       <parameter id="k411" value="0.0002833333" constant="true"/>
-      <parameter id="k412" value="1.42e-06" constant="true"/>
-      <parameter id="k413" value="0.000236111" constant="true"/>
-      <parameter id="k414" value="1.89e-06" constant="true"/>
+      <parameter id="k412" value="1.416667e-06" constant="true"/>
+      <parameter id="k413" value="0.0002361111" constant="true"/>
+      <parameter id="k414" value="1.888889e-06" constant="true"/>
       <parameter id="k415" value="0.0004722222" constant="true"/>
-      <parameter id="k416" value="1.42e-06" constant="true"/>
+      <parameter id="k416" value="1.416667e-06" constant="true"/>
       <parameter id="k417" value="0.0005902778" constant="true"/>
-      <parameter id="k418" value="1.13e-06" constant="true"/>
-      <parameter id="k419" value="0.000944444" constant="true"/>
+      <parameter id="k418" value="1.133333e-06" constant="true"/>
+      <parameter id="k419" value="0.0009444444" constant="true"/>
       <parameter id="k420" value="0.000289731" constant="true"/>
       <parameter id="k421" value="0.00126483" constant="true"/>
       <parameter id="k422" value="0.001" constant="true"/>
@@ -3352,27 +3352,27 @@
       <parameter id="k428" value="1" constant="true"/>
       <parameter id="k429" value="0.003162075" constant="true"/>
       <parameter id="k430" value="0.001" constant="true"/>
-      <parameter id="k431" value="0.000316208" constant="true"/>
+      <parameter id="k431" value="0.0003162075" constant="true"/>
       <parameter id="k432" value="0.001" constant="true"/>
       <parameter id="k433" value="0.001" constant="true"/>
-      <parameter id="k434" value="3.16e-06" constant="true"/>
+      <parameter id="k434" value="3.162075e-06" constant="true"/>
       <parameter id="k435" value="0.001" constant="true"/>
       <parameter id="k436" value="1" constant="true"/>
-      <parameter id="k437" value="9.49e-06" constant="true"/>
+      <parameter id="k437" value="9.486225e-06" constant="true"/>
       <parameter id="k438" value="0.001" constant="true"/>
       <parameter id="k439" value="1" constant="true"/>
       <parameter id="k440" value="0.00632415" constant="true"/>
       <parameter id="k441" value="0.001" constant="true"/>
       <parameter id="k442" value="0.1" constant="true"/>
-      <parameter id="k443" value="3.16e-05" constant="true"/>
+      <parameter id="k443" value="3.162075e-05" constant="true"/>
       <parameter id="k444" value="0.01" constant="true"/>
       <parameter id="k445" value="1" constant="true"/>
-      <parameter id="k446" value="3.16e-06" constant="true"/>
+      <parameter id="k446" value="3.162075e-06" constant="true"/>
       <parameter id="k447" value="0.001" constant="true"/>
       <parameter id="k448" value="0.0001" constant="true"/>
       <parameter id="k449" value="0.003162075" constant="true"/>
       <parameter id="k450" value="0.001" constant="true"/>
-      <parameter id="k451" value="0.000316208" constant="true"/>
+      <parameter id="k451" value="0.0003162075" constant="true"/>
       <parameter id="k452" value="0.001" constant="true"/>
       <parameter id="k453" value="1" constant="true"/>
       <parameter id="k454" value="0.01" constant="true"/>
@@ -3401,7 +3401,7 @@
       <parameter id="k477" value="0.001581038" constant="true"/>
       <parameter id="k478" value="0.001" constant="true"/>
       <parameter id="k479" value="1" constant="true"/>
-      <parameter id="k480" value="0.000158104" constant="true"/>
+      <parameter id="k480" value="0.0001581038" constant="true"/>
       <parameter id="k481" value="0.001" constant="true"/>
       <parameter id="k482" value="1.581038e-05" constant="true"/>
       <parameter id="k483" value="0.001" constant="true"/>
@@ -5712,9 +5712,9 @@
           <speciesReference species="Cd" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="EIF4E"/>
           <modifierSpeciesReference species="m_CCND1"/>
         </listOfModifiers>
@@ -5769,9 +5769,9 @@
           <speciesReference species="Cd" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="EIF4E"/>
           <modifierSpeciesReference species="m_CCND2"/>
         </listOfModifiers>
@@ -5826,9 +5826,9 @@
           <speciesReference species="Cd" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="EIF4E"/>
           <modifierSpeciesReference species="m_CCND3"/>
         </listOfModifiers>
@@ -5883,9 +5883,9 @@
           <speciesReference species="Ce" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="m_CCNE1"/>
         </listOfModifiers>
         <kineticLaw>
@@ -5923,9 +5923,9 @@
           <speciesReference species="Ce" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="m_CCNE2"/>
         </listOfModifiers>
         <kineticLaw>
@@ -6035,9 +6035,9 @@
           <speciesReference species="Ca" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="m_CCNA2"/>
         </listOfModifiers>
         <kineticLaw>
@@ -6075,9 +6075,9 @@
           <speciesReference species="p27" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="pRB"/>
           <modifierSpeciesReference species="pRBp"/>
-          <modifierSpeciesReference species="E2F"/>
           <modifierSpeciesReference species="m_CDKN1B"/>
         </listOfModifiers>
         <kineticLaw>
@@ -12405,8 +12405,8 @@
           <speciesReference species="pRBp" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
-          <modifierSpeciesReference species="Mdp27"/>
           <modifierSpeciesReference species="Md"/>
+          <modifierSpeciesReference species="Mdp27"/>
         </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -12720,8 +12720,8 @@
           <speciesReference species="Mdi" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
-          <modifierSpeciesReference species="Mdp27"/>
           <modifierSpeciesReference species="Md"/>
+          <modifierSpeciesReference species="Mdp27"/>
           <modifierSpeciesReference species="Mdp21"/>
         </listOfModifiers>
         <kineticLaw>
@@ -13307,11 +13307,11 @@
           <speciesReference species="Mai" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
-          <modifierSpeciesReference species="Mei"/>
           <modifierSpeciesReference species="Me"/>
           <modifierSpeciesReference species="Mep27"/>
           <modifierSpeciesReference species="Ma"/>
           <modifierSpeciesReference species="Map27"/>
+          <modifierSpeciesReference species="Mei"/>
           <modifierSpeciesReference species="Mep21"/>
           <modifierSpeciesReference species="Map21"/>
         </listOfModifiers>
@@ -13861,9 +13861,9 @@
           <speciesReference species="Mbi" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <listOfModifiers>
+          <modifierSpeciesReference species="Mbp21"/>
           <modifierSpeciesReference species="Mb"/>
           <modifierSpeciesReference species="Mbp27"/>
-          <modifierSpeciesReference species="Mbp21"/>
         </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">

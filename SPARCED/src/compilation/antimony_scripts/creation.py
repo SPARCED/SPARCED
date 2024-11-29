@@ -51,6 +51,7 @@ def antimony_write_file(model: SparcedModel.Model,
         # Header
         file.write(f"# {const.ANTIMONY_HEADER}\n")
         file.write(f"model {model.name}()\n")
+        file.write("\n")
         # Compartments
         antimony_script.define_compartments(file, model.compartments)
         # Species
