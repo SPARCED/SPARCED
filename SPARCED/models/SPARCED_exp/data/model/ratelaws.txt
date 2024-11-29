@@ -345,8 +345,8 @@ vC27	Nucleus	  ; Ce	0
 vC28	Nucleus	 Ce ; Mei	kC28_1*Ce*(kC28_2-(Mei+Me+Mep27+Mep21+Mai+Ma+Map27+Map21))	9.444444e-06	200				
 vC29	Nucleus	 Mei ; Ce	4.722222E-04						
 vC30	Nucleus	 Ce ; 	kC30_1*(Skp2/(kC30_2+Skp2))*(Ce/(kC30_3+Ce))	1.416667	200	10			
-vC31	Nucleus	 Me ; Mei	kC31_1*(Wee1+kC31_2)*(Me/(kC31_3+Me))	0.006611111	50	10			
-vC32	Nucleus	 Mei ; Me	kC32_1*Pe*(Mei/(kC32_2+Mei))	9.444444E-04	10				
+vC31	Nucleus	 Me ; Mei	kC31_1*(Wee1+kC31_2)*(Me/(kC31_3+Me))	6.611111E-04	50	10			
+vC32	Nucleus	 Mei ; Me	kC32_1*Pe*(Mei/(kC32_2+Mei))	9.444444E-03	10				
 vC33	Nucleus	 Me + p27 ; Mep27	9.444444e-06						
 vC34	Nucleus	 Mep27 ; Me + p27	4.722222E-04						
 vC35	Nucleus	  ; Skp2	0						
@@ -363,7 +363,7 @@ vC45	Nucleus	 Mai ; Ca	4.722222E-04
 vC46	Nucleus	 Ca ; 	kC46_1*(Ca/(kC46_2+Ca))*(Cdc20a/(kC46_3+Cdc20a))	1.180556	110	200			
 vC47	Nucleus	 Ca ; 	2.361111E-05						
 vC48	Nucleus	 Ma ; Mai	kC48_1*(Wee1+kC48_2)*(Ma/(kC48_3+Ma))	0.008736111	50	10			
-vC49	Nucleus	 Mai ; Ma	kC49_1*Pa*(Mai/(kC49_2+Mai))	9.444444E-04	10				
+vC49	Nucleus	 Mai ; Ma	kC49_1*Pa*(Mai/(kC49_2+Mai))	9.444444E-03	10				
 vC50	Nucleus	 Ma + p27 ; Map27	7.083333E-06						
 vC51	Nucleus	 Map27 ; Ma + p27	5.902778E-04						
 vC52	Nucleus	 p27 ; p27p	kC52_1*Me*(p27/(p27+kC52_2))	0.4722222	50				
@@ -372,7 +372,7 @@ vC54	Nucleus	 p27p ; 	kC54_1*(Skp2/(Skp2+kC54_2))*(p27p/(p27p+kC54_3))	2.361111	
 vC55	Nucleus	 p27p ; 	4.722222E-05						
 vC56	Nucleus	 Cdh1a ; Cdh1i	kC56_1*(Cdh1a/(kC56_2+Cdh1a))*(Ma+Mb)	0.03777778	1				
 vC57	Nucleus	 Cdh1i ; Cdh1a	kC57_1*(Cdh1i/(kC57_2+Cdh1i))	0.5902778	1				
-vC58	Nucleus	 Cdh1i ; 	0.000944444						
+vC58	Nucleus	 Cdh1i ; 	9.444444E-04						
 vC59	Nucleus	  ; Cdh1a	0						
 vC60	Nucleus	 Cdh1a ; 	4.722222E-04						
 vC61	Nucleus	  ; Pai	0						
@@ -387,23 +387,23 @@ vC69	Nucleus	 Cb ; 	kC69_1*(Cb/(kC69_2+Cb))*((Cdc20a/(kC69_3+Cdc20a))+(Cdh1a/(kC
 vC70	Nucleus	 Cb ; 	2.361111E-05						
 vC71	Nucleus	 Mb ; Mbi	kC71_1*(Wee1+kC71_2)*(Mb/(kC71_3+Mb))	0.009916667	50	10			
 vC72	Nucleus	 Mbi ; Mb	kC72_1*Pb*(Mbi/(kC72_2+Mbi))	0.01841667	10				
-vC73	Nucleus	 p27 + Mb ; Mbp27	5.67E-06						
-vC74	Nucleus	 Mbp27 ; p27 + Mb	0.000944444						
+vC73	Nucleus	 p27 + Mb ; Mbp27	5.666667E-06						
+vC74	Nucleus	 Mbp27 ; p27 + Mb	9.444444E-04						
 vC75	Nucleus	  ; Cdc20i	0						
 vC76	Nucleus	 Cdc20i ; Cdc20a	kC76_1*Mb*(Cdc20i/(kC76_2+Cdc20i))	0.03777778	10				
 vC77	Nucleus	 Cdc20a ; Cdc20i	kC77_1*(Cdc20a/(kC77_2+Cdc20a))	0.3305556	10				
 vC78	Nucleus	 Cdc20i ; 	0.000661111						
-vC79	Nucleus	 Cdc20a ; 	0.000236111						
+vC79	Nucleus	 Cdc20a ; 	2.361111E-04						
 vC80	Nucleus	  ; Pbi	0						
 vC81	Nucleus	 Pb ; Pbi	kC81_1*(kC81_2+(kC81_3*Chk1))*(Pb/(kC81_4+Pb))	0.4722222	1	0.01	10		
 vC82	Nucleus	 Pbi ; Pb	kC82_1*(Mb+kC82_2)*(Pbi/(kC82_3+Pbi))	0.02361111	11	10			
-vC83	Nucleus	 Pbi ; 	0.000944444						
+vC83	Nucleus	 Pbi ; 	9.444444E-04						
 vC84	Nucleus	 Pb ; 	4.722222E-04						
 vC85	Nucleus	  ; Wee1	0						
 vC86	Nucleus	 Wee1 ; Wee1p	kC86_1*(Mb+kC86_2)*(Wee1/(kC86_3+Wee1))	0.005666667	75	10			
 vC87	Nucleus	 Wee1p ; Wee1	kC87_1*(Wee1p/(kC87_2+Wee1p))	0.4722222	10				
 vC88	Nucleus	 Wee1 ; 	4.722222E-04						
-vC89	Nucleus	 Wee1p ; 	0.000944444						
+vC89	Nucleus	 Wee1p ; 	9.444444E-04						
 vC90	Nucleus	  ; Chk1	kC90_1*ATRac*((kC90_2-Chk1)/(kC90_3+(kC90_2-Chk1)))	0.01888889	50	50			
 vC91	Nucleus	 Chk1 ; 	kC91_1*(Chk1/(kC91_2+Chk1))	0.04722222	50				
 vC92	Nucleus	 Ce ; 	2.361111E-05						
@@ -411,13 +411,13 @@ vC93	Nucleus	  ; p27	0
 vC94	Nucleus	  ; p27	0						
 vC95	Nucleus	 p27 ; 	2.833333E-04						
 vC96	Nucleus	 Md + p21 ; Mdp21	1.42E-06						
-vC97	Nucleus	 Mdp21 ; Md + p21	0.000236111						
+vC97	Nucleus	 Mdp21 ; Md + p21	2.361111E-04						
 vC98	Nucleus	 Me + p21 ; Mep21	1.89E-06						
 vC99	Nucleus	 Mep21 ; Me + p21	4.722222E-04						
 vC100	Nucleus	 Ma + p21 ; Map21	1.42E-06						
 vC101	Nucleus	 Map21 ; Ma + p21	5.902778E-04						
 vC102	Nucleus	 Mb + p21 ; Mbp21	1.13E-06						
-vC103	Nucleus	 Mbp21 ; Mb + p21	0.000944444						
+vC103	Nucleus	 Mbp21 ; Mb + p21	9.444444E-04						
 vC104	Nucleus	 p21 ; 	0.000289731						
 vA1	Cytoplasm	 L + R ; L_R	0.00126483						
 vA2	Cytoplasm	 L_R ; L + R	0.001						
@@ -429,27 +429,27 @@ vA7	Cytoplasm	 Ractive_pC8 ; Ractive + pC8	0.001
 vA8	Cytoplasm	 Ractive_pC8 ; Ractive + C8	1						
 vA9	Cytoplasm	 C8 + Bar ; C8_Bar	0.003162075						
 vA10	Cytoplasm	 C8_Bar ; C8 + Bar	0.001						
-vA11	Cytoplasm	 C8 + pC3 ; C8_pC3	0.000316208						
+vA11	Cytoplasm	 C8 + pC3 ; C8_pC3	3.162075E-04						
 vA12	Cytoplasm	 C8_pC3 ; C8 + pC3	0.001						
 vA13	Cytoplasm	 C8_pC3 ; C8 + C3	0.001						
-vA14	Cytoplasm	 C3 + pC6 ; C3_pC6	3.16E-06						
+vA14	Cytoplasm	 C3 + pC6 ; C3_pC6	3.162075E-06						
 vA15	Cytoplasm	 C3_pC6 ; C3 + pC6	0.001						
 vA16	Cytoplasm	 C3_pC6 ; C3 + C6	1						
-vA17	Cytoplasm	 pC8 + C6 ; C6_C8	9.49E-06						
+vA17	Cytoplasm	 pC8 + C6 ; C6_C8	9.486225E-06						
 vA18	Cytoplasm	 C6_C8 ; pC8 + C6	0.001						
 vA19	Cytoplasm	 C6_C8 ; C8 + C6	1						
 vA20	Cytoplasm	 C3 + XIAP ; C3_XIAP	0.00632415						
 vA21	Cytoplasm	 C3_XIAP ; C3 + XIAP	0.001						
 vA22	Cytoplasm	 C3_XIAP ; XIAP + C3_Ub	0.1						
-vA23	Cytoplasm	 C3 + PARP ; C3_PARP	3.16E-05						
+vA23	Cytoplasm	 C3 + PARP ; C3_PARP	3.162075E-05						
 vA24	Cytoplasm	 C3_PARP ; C3 + PARP	0.01						
 vA25	Cytoplasm	 C3_PARP ; C3 + cPARP	1						
-vA26	Cytoplasm	 C8 + Bid ; C8_Bid	3.16E-06						
+vA26	Cytoplasm	 C8 + Bid ; C8_Bid	3.162075E-06						
 vA27	Cytoplasm	 C8_Bid ; C8 + Bid	0.001						
 vA28	Cytoplasm	 C8_Bid ; C8 + tBid	0.0001						
 vA29	Cytoplasm	 tBid + Bcl2c ; tBid_Bcl2c	0.003162075						
 vA30	Cytoplasm	 tBid_Bcl2c ; tBid + Bcl2c	0.001						
-vA31	Cytoplasm	 tBid + Bax ; tBid_Bax	0.000316208						
+vA31	Cytoplasm	 tBid + Bax ; tBid_Bax	3.162075E-04						
 vA32	Cytoplasm	 tBid_Bax ; tBid + Bax	0.001						
 vA33	Cytoplasm	 tBid_Bax ; tBid + Baxactive	1						
 vA34	Cytoplasm	 Baxactive ; Baxm	0.01						
@@ -478,7 +478,7 @@ vA56	Cytoplasm	 CytoC ; CytoCr	0.01
 vA57	Cytoplasm	 CytoC + Apaf ; CytoC_Apaf	0.001581038						
 vA58	Cytoplasm	 CytoC_Apaf ; CytoC + Apaf	0.001						
 vA59	Cytoplasm	 CytoC_Apaf ; CytoC + Apafactive	1						
-vA60	Cytoplasm	 Apafactive + pC9 ; Apop	0.000158104						
+vA60	Cytoplasm	 Apafactive + pC9 ; Apop	1.581038E-04						
 vA61	Cytoplasm	 Apop ; Apafactive + pC9	0.001						
 vA62	Cytoplasm	 pC3 + Apop ; Apop_C3	1.581038E-05						
 vA63	Cytoplasm	 Apop_C3 ; pC3 + Apop	0.001						
