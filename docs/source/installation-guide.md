@@ -1,53 +1,164 @@
 # The SPARCED Installation Guide for Absolute Beginners
 
-_Written by Aurore Amrit_ and Jonah R. Huggins
+_Written by Aurore Amrit_ *and Jonah R. Huggins*
 
 Hi! 🌄
 
-If you are new to SPARCED and wish to get a working environment setup on
-Ubuntu, then you are at the right place!
-This is document was started by Aurore while she was a summer intern at the Birtwistle lab to make the
-process easier for newcomers like you 🙂
+If you are new to SPARCED and wish to get a working environment setup on Ubuntu, then you are at the right place! This document was started by Aurore while she was a summer intern at the Birtwistle lab to make the process easier for newcomers like you 🙂
 
 ## Environment
 
-SPARCED runs on **Ubuntu 22.04 LTS** , either as virtual machine on **VirtualBox**, a container (Singularity or Dockerfile), or on Windows-Subsystem for Linux. 
-This guide should work even if you are using another hypervisor than VirtualBox
-or that you are running Ubuntu directly on your computer.
-With a few arrangements, the described steps should also work for other
-versions of Ubuntu or any Debian-based Linux distribution.
+Kinetic models are often reliant on Ordinary Differential Equation solvers to perform the simulated 'heavy-lifting'. Given the Large-scale nature of the SPARCED model, we use [AMICI (v0.11.12)](https://amici.readthedocs.io/en/v0.11.12/), an ODE solver specifically made for large-scale kinetic modeling. However, AMICI's reliance on C/C++ solvers as well as BLAS, complicate straightforward installation outside of Ubuntu. Therefore, we have tried to be as accomodating as possible to the broad community in enabling cross-platform support.
+
+SPARCED runs seamlessly on **Ubuntu 22.04 LTS** , either as a virtual machine (i.e. **VirtualBox**), a container (**Singularity** or **Dockerfile**), or on **Windows-Subsystem for Linux.** This guide should work even if you are using another hypervisor than VirtualBox or that you are running Ubuntu directly on your computer. With a few arrangements, the described steps should also work for other versions of Ubuntu or any Debian-based Linux distribution.
 
 ⚠️ Make sure you have enough disk space (30 GB is a minimum) ⚠️
 
-Before starting, open a terminal and run the following commands to make sure
-everything is up to date:
-
-```bash
-sudo apt-get update
-sudo apt-get upgrade
-```
-
-:coin: **Tip:** Ubuntu's terminal has autocompletion, so if you don't know the
-end of the name of a file (for example because of version numbers) while
-entering a command in your terminal, just press ``[tab]`` and see if it
-fills in correctly.
-
 ## Command Line Interface Installation
 
-The requirements file provided in the root directory of this project should have
-all of the required materials to install SPARCED dependencies in Ubuntu 22.04.
-To execute the script, execute the following commands:
+The ` requirements.txt` file provided in the project root directory is an executable BASH script designed to install SPARCED dependencies in Ubuntu 22.04. For cross-platform compatibility on Linux, MacOS, Windows, and Linux-based High-Performance Computing (HPC), instructions have been provided (including Docker and Singularity).
+
+Links to [Docker](https://docs.docker.com/get-started/get-docker/), [Singularity](https://docs.sylabs.io/guides/3.0/user-guide/installation.html), and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) installations are provided below for convenience.
+
+### Ubuntu 22.04 and Windows-Subsystem for Linux (WSL2)
+
+Installation is seamless when using the BASH-executable `requirements.txt` file, which is reliant on a [PEP 621 - adherent](https://peps.python.org/pep-0621/) `pyproject.toml` file located adjacently in the project root directory.
+
+To install, execute the following commands within the SPARCED root directory:
 
 ```bash
-chmod +x ./requirements.txt
-./requirements.txt
+chmod +x ./requirements.txt # provides authorized installation access
+./requirements.txt # Installation command
 ```
 
-After installation is complete, restart your shell and test the installation via:
+After installation is complete, restart your shell for the changes to take effect.
+
+### MacOS, Windows, HPC, and Non-Root Users: Installation via Containers
+
+#### Docker
+
+For MacOS and Windows, we strongly recommend installing the Docker container.
+
+```
+# If you haven't done so already:
+docker login 
+# Pull the container:
+docker pull jonahrileyhuggins/sparced-tools:latest
+```
+
+Alternatively, the Docker container can be built locally:
+
+```
+docker buildx build -t sparced-tools -f /path/to/SPARCED/container/Dockerfile .
+```
+
+Operating inside of the container enables the use of the SPARCED toolset without having to install the python dependencies.
+
+```
+docker run sparced-tools
+```
+
+Further, users are able to bind their local SPARCED directory with the container's SPARCED directory, allowing for native, local modifications on the host system:
+
+```
+docker run -it --rm -v C:\Users\<username>\path\to\SPARCED:/SPARCED sparced-tools
+```
+
+**Flags:**
+
+**`--rm`**
+
+* **Stands for:** *Remove*
+* **Function:** Automatically removes the container when it stops
+* **Why use it**
+  * Prevents the accumulation of stopped containers that would otherwise take up system resources.
+  * Useful for temporary containers where you don't need to persist the container itself after it has run.
+
+**`-i`**
+
+* **Stands for:** *Interactive*
+* **Function:** Keeps the standard input (`stdin`) open, even if not attached to a terminal.
+* **Why use it?**
+  * Allows the container to accept input from the user during runtime.
+  * Especially useful when paired with `-t` for running an interactive shell session.
+
+**`-t`**
+
+* **Stands for:** *TTY (teletypewriter)*
+* **Function:** Allocates a pseudo-terminal for the container.
+* **Why use it?**
+  * Allows for better interactivity, like being able to run `bash` or `sh` inside the container and see a command prompt.
+  * Often paired with `-i` for fully interactive sessions.
+
+#### **Singularity**
+
+Singularity is a containerization platform designed specifically for high-performance computing (HPC) and research environments. It allows users to create, distribute, and execute portable, reproducible containers across different systems. Unlike Docker, Singularity focuses on usability in environments where users don't have root access, such as shared HPC clusters.
+
+**Key Features:**
+
+1. **Rootless Execution:** Users don't need root privileges to run containers, enhancing security.
+2. **File System Binding:** Provides seamless integration with the host system by binding directories into the container.
+3. **Portability:** Containers can be moved and executed across different platforms without modification.
+4. **Support for MPI:** Well-suited for parallel computing environments, allowing easy integration with MPI libraries.
+
+---
+
+##### **Building the Singularity Container from a Definition File**
+
+To build a container using the `sparced.def` file, execute the following command from the project root directory:
+
+```bash
+singularity build --fakeroot container/sparced.sif container/sparced.def
+```
+
+* **`sparced.sif`:** The output file, a Singularity Image File (SIF).
+* **`sparced.def`:** The definition file that specifies the container's environment and setup.
+* **`--fakeroot`:** Flag for building the singularity container without root access
+
+To verify that the container is successfully built, execute the following:
+
+```bash
+singularity inspect container/sparced.sif
+```
+
+---
+
+##### **How to Shell into and Interact with the Singularity Container While Binding the Host SPARCED Directory**
+
+1. **Bind the Host Directory:**
+   Use the `--bind` option to link a host directory into the container.
+2. **Run the Container:**
+   To open a shell inside the container with the `SPARCED` directory bound:
+
+   ```bash
+   singularity shell --bind /path/to/host/SPARCED:/SPARCED container/sparced.sif
+   ```
+
+   * **`/path/to/host/SPARCED`:** Replace this with the absolute path to your host's SPARCED directory.
+   * **`/SPARCED`:** This is the directory inside the container where the host directory will be accessible.
+3. **Operate Within the Container:**
+   Once inside the container, you’ll see a prompt. Run commands as if you’re working on a standalone system:
+
+   ```bash
+   sparced compile -n Basic_model
+   ```
+4. **Exit the Container:**
+   Type `exit` to leave the container.
+
+---
+
+
+If successful, the below configurations are not necessary. This is a conda-free installation.
+
+### Installation verification
+
+After installation is complete, test the installation via:
 
 ```bash
 sparced -h
 ```
+
+⚠️ Note: Ubuntu users might have to restart their shell session for the changes to take effect. ⚠️
 
 Correct installation should output the following help information:
 
@@ -67,26 +178,7 @@ options:
   -h, --help            show this help message and exit
 ```
 
-If successful, the below configurations are not necessary. This is a conda-free
-installation.
-
-## VirtualBox Guest Additions
-
-_If you are not using VirtualBox, skip this section._
-
-In the menu at the top of the virtual machine you are running, go to
-_Devices_>_Insert Guest Additions CD image_, then in your terminal run:
-
-```bash
-sudo apt install build-essential dkms linux-headers-generic # Necessary if you chose the minimal installation of Ubuntu
-lsblk | grep "rom"
-cd /media/{username}/VBox_GAs_{version number} # with {username} being your username and {version number} the version number
-sudo ./VBoxLinuxAdditions.run
-```
-
-You will need to restart the VM after that. Don't forget to eject the CD! 😉
-
-## OpenMPI
+## OpenMPI on Windows
 
 _If you are not going to use parallel computation on your computer,
 skip this section._
@@ -248,11 +340,6 @@ conda install -c forge mpi4py # if you encounter any dependency version failure,
 conda install -c conda-forge compilers
 python -m pip install gmx_MMPBSA
 ```
-
-## TODO: Docker
-
-_If you are not going to run SPARCED inside the official Jupyter Notebook
-container, skip this section._
 
 ## SPARCED 🎆
 
