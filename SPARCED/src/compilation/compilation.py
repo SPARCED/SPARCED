@@ -95,8 +95,6 @@ def compile_model(model: SparcedModel.Model, verbose:bool
                                               model.name,
                                               model.path,
                                               verbose)
-    if verbose: print("{name}: Sucess compiling the model"
-                     .format(name=model_name))
     return(amici_folder_path)
 
 

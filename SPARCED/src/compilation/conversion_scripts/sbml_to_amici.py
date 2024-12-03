@@ -41,6 +41,10 @@ def convert_sbml_to_amici(sbml_file_path: str, model_name: str, model_path: str 
     constant_parameters = [parameters.getId() \
                            for parameters in sbml_model.getListOfParameters()]
     # Compilation
-    sbml_imprter.sbml2amici(model_name, amici_folder_path, verbose=verbose)
+    sbml_importer.sbml2amici(model_name, amici_folder_path, verbose=verbose)
+    if verbose:
+        print(f"SPARCED VERBOSE: Finished to convert SBML file of model " +
+              f"{model_name} to AMICI folder.\n")
+
     return(amici_folder_path)
 
