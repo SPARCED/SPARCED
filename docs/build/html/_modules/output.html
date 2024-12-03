@@ -175,9 +175,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<div class="viewcode-block" id="save_simulation_output">
-<a class="viewcode-back" href="../reference/simulation.html#output.save_simulation_output">[docs]</a>
-<span class="k">def</span> <span class="nf">save_simulation_output</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">simulation_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">simulation_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<div class="viewcode-block" id="save_simulation_output"><a class="viewcode-back" href="../reference/simulation.html#output.save_simulation_output">[docs]</a><span class="k">def</span> <span class="nf">save_simulation_output</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">simulation_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">simulation_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                            <span class="n">output_sim</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">xoutS_all</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
                            <span class="n">xoutG_all</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tout_all</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -203,7 +201,6 @@
     <span class="c1"># Time</span>
     <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">output_sim</span> <span class="o">+</span> <span class="n">simulation_name</span> <span class="o">+</span> <span class="s1">&#39;_T_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulation_number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="n">tout_all</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
-
 </pre></div>
 
 	    </div>
@@ -214,7 +211,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
+        &copy; Copyright 2024, The Birtwistle Lab.
     </p>
   </div>
 
@@ -237,10 +234,16 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/doctools.js">
+    <script type="text/javascript" src="../_static/jquery.js">
 
     </script>
-    <script type="text/javascript" src="../_static/sphinx_highlight.js">
+    <script type="text/javascript" src="../_static/underscore.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
 
     </script>
 

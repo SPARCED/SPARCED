@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>sanitize &mdash; SPARCED 2.0.0 documentation</title>
+  <title>create_model &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -167,60 +167,84 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <h1>Source code for sanitize</h1><div class="highlight"><pre>
+  <h1>Source code for create_model</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
+<span class="kn">import</span> <span class="nn">amici</span>
+<span class="kn">from</span> <span class="nn">antimony</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">libsbml</span>
 
-<div class="viewcode-block" id="sanitize_model_name"><a class="viewcode-back" href="../reference/utils.html#sanitize.sanitize_model_name">[docs]</a><span class="k">def</span> <span class="nf">sanitize_model_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure conformity of model name</span>
+<span class="kn">from</span> <span class="nn">compilation.amici_scripts.model_compilation</span> <span class="kn">import</span> <span class="n">compile_sbml_to_amici</span>
+<span class="kn">from</span> <span class="nn">compilation.antimony_scripts.model_writing</span> <span class="kn">import</span> <span class="n">antimony_write_model</span>
+<span class="kn">from</span> <span class="nn">compilation.sbml_scripts.model_annotation</span> <span class="kn">import</span> <span class="n">sbml_annotate_model</span>
+<span class="kn">from</span> <span class="nn">utils.data_handling</span> <span class="kn">import</span> <span class="n">append_subfolder</span>
 
-<span class="sd">    Note:</span>
-<span class="sd">        As Antimony cannot handle the dash (&#39;-&#39;) character in a model name, any</span>
-<span class="sd">        occurence of this character is replaced with an underscore (&#39;_&#39;).</span>
+<div class="viewcode-block" id="create_model"><a class="viewcode-back" href="../reference/compilation.html#create_model.create_model">[docs]</a><span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>
+                 <span class="n">input_files</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
+                 <span class="n">output_parameters</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                 <span class="n">is_SPARCED</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate Antimony, SBML and AMICI models based on given input data files.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        The model name should not contain any dash (&#39;-&#39;) characters as those</span>
+<span class="sd">        are not supported by Antimony.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        name: The model name.</span>
+<span class="sd">        model_name: The name of the model.</span>
+<span class="sd">        model_path: The path to the model folder.</span>
+<span class="sd">        input_files: A dictionnary containing paths towards input data file.</span>
+<span class="sd">        output_parameters: The desired name for the output parameters file.</span>
+<span class="sd">        verbose: Verbose.</span>
+<span class="sd">        is_SPARCED: Use SPARCED hard-coded values/behaviors.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The corresponding conform model name.</span>
+<span class="sd">        Nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Ensure that a name is specified</span>
+    
+    <span class="c1"># ------------------------------- ANTIMONY --------------------------------</span>
+    <span class="c1"># Create and load an Antimony model</span>
+    <span class="n">antimony_model_name</span> <span class="o">=</span> <span class="s2">&quot;ant_&quot;</span> <span class="o">+</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span>
+    <span class="n">antimony_file_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">antimony_model_name</span><span class="p">)</span>
+    <span class="n">compartments</span><span class="p">,</span> <span class="n">species</span> <span class="o">=</span> <span class="n">antimony_write_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">antimony_file_path</span><span class="p">,</span>
+                                                 <span class="n">input_files</span><span class="p">,</span> <span class="n">output_parameters</span><span class="p">,</span>
+                                                 <span class="n">is_SPARCED</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="ow">not</span> <span class="n">name</span> <span class="o">==</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">loadFile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">antimony_file_path</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: Please specify a model name. Aborting now.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">: Failed to load Antimony file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">))</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># Sanitize name</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="sanitize_popsize"><a class="viewcode-back" href="../reference/utils.html#sanitize.sanitize_popsize">[docs]</a><span class="k">def</span> <span class="nf">sanitize_popsize</span><span class="p">(</span><span class="n">popsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">abort_on_error</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Ensure validity of population size</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        popsize: The population size.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The population size if valid.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="k">else</span><span class="p">:</span>
+         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">: Success loading Antimony file&quot;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">))</span>
+    <span class="c1"># --------------------------------- SBML ----------------------------------</span>
+    <span class="c1"># Convert the newly created Antimony model into an SBML model</span>
+    <span class="n">sbml_file_name</span> <span class="o">=</span> <span class="s2">&quot;sbml_&quot;</span> <span class="o">+</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s2">&quot;.xml&quot;</span>
+    <span class="n">sbml_file_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">sbml_file_name</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="n">popsize</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">writeSBMLFile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sbml_file_path</span><span class="p">),</span> <span class="n">model_name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: Cell population size should be superior to zero (0). </span><span class="se">\</span>
-<span class="s2">                Current population size is: </span><span class="si">{size}</span><span class="s2">.&quot;</span>
-              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">popsize</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">abort_on_error</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aborting now.&quot;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting automatically population size to one (1).&quot;</span><span class="p">)</span>
-            <span class="n">popsize</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">popsize</span><span class="p">)</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">: Failed to convert Antimony file to SBML&quot;</span>
+             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">: Success converting Antimony file to SBML&quot;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">))</span>
+    <span class="c1"># Annotate the SBML model</span>
+    <span class="k">if</span> <span class="n">is_SPARCED</span><span class="p">:</span>
+        <span class="n">sbml_annotate_model</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sbml_file_path</span><span class="p">),</span> <span class="n">species</span><span class="p">,</span> <span class="n">compartments</span><span class="p">)</span>
+    <span class="c1"># --------------------------------- AMICI ---------------------------------</span>
+    <span class="c1"># Compile the SBML model into an AMICI model</span>
+    <span class="n">amici_folder_name</span> <span class="o">=</span> <span class="s2">&quot;amici_&quot;</span> <span class="o">+</span> <span class="n">model_name</span>
+    <span class="n">amici_folder_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">amici_folder_name</span><span class="p">)</span>
+    <span class="n">compile_sbml_to_amici</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sbml_file_path</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">amici_folder_path</span><span class="p">),</span>
+                          <span class="n">input_files</span><span class="p">[</span><span class="s2">&quot;observables&quot;</span><span class="p">],</span> <span class="n">compartments</span><span class="p">,</span> <span class="n">species</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2">: Sucess compiling the model&quot;</span>
+                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">))</span></div>
 
 </pre></div>
 

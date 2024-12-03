@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>definitions &mdash; SPARCED 2.0.0 documentation</title>
+  <title>sbml_utils &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -167,84 +167,55 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <h1>Source code for definitions</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/env python</span>
+  <h1>Source code for sbml_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1">#/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">IO</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="kn">import</span> <span class="nn">constants</span> <span class="k">as</span> <span class="nn">const</span>
+<span class="kn">import</span> <span class="nn">libsbml</span>
 
 
-<div class="viewcode-block" id="define_compartments">
-<a class="viewcode-back" href="../reference/compilation.html#definitions.define_compartments">[docs]</a>
-<span class="k">def</span> <span class="nf">define_compartments</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">compartments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write compartments names in the given Antimony file</span>
+<div class="viewcode-block" id="write_compartments_annotations"><a class="viewcode-back" href="../reference/compilation.html#sbml_utils.write_compartments_annotations">[docs]</a><span class="k">def</span> <span class="nf">write_compartments_annotations</span><span class="p">(</span><span class="n">f_sbml</span><span class="p">,</span> <span class="n">compartments</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set compartments annotations in the given SBML file</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        The dictionnary is structured as key: compartment name / value:</span>
-<span class="sd">        compartment volume.</span>
+<span class="sd">        The first row is considered as a header, and hence it is skipped.</span>
+<span class="sd">        Compartment names should be located on the first column of the array.</span>
+<span class="sd">        Annotations should be located on the third column of the array.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        file: The open Antimony file.</span>
-<span class="sd">        compartments: Content of the input compartments file structured</span>
-<span class="sd">                      as specified in the __Note__ section.</span>
+<span class="sd">        f_sbml: The loaded SBML file.</span>
+<span class="sd">        compartments: Content of the compartments input file.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Compartments:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">compartments</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compartment </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">; &quot;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">compartments</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">f_sbml</span><span class="o">.</span><span class="n">getCompartment</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">setAnnotation</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
 
-
-<div class="viewcode-block" id="define_species">
-<a class="viewcode-back" href="../reference/compilation.html#definitions.define_species">[docs]</a>
-<span class="k">def</span> <span class="nf">define_species</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">species</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write species names and affiliated compartments in the given</span>
-<span class="sd">       Antimony file</span>
+<div class="viewcode-block" id="write_species_annotations"><a class="viewcode-back" href="../reference/compilation.html#sbml_utils.write_species_annotations">[docs]</a><span class="k">def</span> <span class="nf">write_species_annotations</span><span class="p">(</span><span class="n">f_sbml</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set species annotations in the given SBML file</span>
 
 <span class="sd">    Note:</span>
-<span class="sd">        First row is considered as a header, and hence it is skipped.</span>
-<span class="sd">        First column of the array should contain species names.</span>
-<span class="sd">        Second column of the array should contain species compartments.</span>
-
-<span class="sd">    Argurments:</span>
-<span class="sd">        file: The open Antimony file.</span>
-<span class="sd">        species: Content of the input species file structured as</span>
-<span class="sd">                 specified in the __Note__ section.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Nothing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Species:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-        <span class="c1"># Name is stored in value[0]</span>
-        <span class="c1"># Compartment is stored in value[1]</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Species </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
-
-
-<span class="k">def</span> <span class="nf">define_units</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write unit definitions in the given Antimony file</span>
+<span class="sd">        The first row is considered as a header, and hence it is skipped.</span>
+<span class="sd">        Annotations should be located between the 4th and the last column of</span>
+<span class="sd">        the array.</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        f_antimony: The open Antimony file.</span>
+<span class="sd">        f_sbml: The loaded SBML file.</span>
+<span class="sd">        species: Content of the species input file.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Unit definitions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  unit time_unit = </span><span class="si">{</span><span class="n">const</span><span class="o">.</span><span class="n">UNIT_TIME</span><span class="si">}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  unit volume = </span><span class="si">{</span><span class="n">const</span><span class="o">.</span><span class="n">UNIT_VOLUME</span><span class="si">}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  unit substance = </span><span class="si">{</span><span class="n">const</span><span class="o">.</span><span class="n">UNIT_SUBSTANCE</span><span class="si">}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  unit nM = </span><span class="si">{</span><span class="n">const</span><span class="o">.</span><span class="n">UNIT_DEF_NM</span><span class="si">}</span><span class="s2">;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+        <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
+            <span class="n">specie_annotation</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">specie_annotation</span> <span class="o">==</span> <span class="s2">&quot;nan&quot;</span> <span class="ow">or</span> <span class="n">specie_annotation</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+                <span class="n">annotation</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+        <span class="n">f_sbml</span><span class="o">.</span><span class="n">getSpecies</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">setAnnotation</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -256,7 +227,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
+        &copy; Copyright 2024, The Birtwistle Lab.
     </p>
   </div>
 
@@ -279,10 +250,16 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/doctools.js">
+    <script type="text/javascript" src="../_static/jquery.js">
 
     </script>
-    <script type="text/javascript" src="../_static/sphinx_highlight.js">
+    <script type="text/javascript" src="../_static/underscore.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
 
     </script>
 

@@ -1,20 +1,19 @@
 ===============================================================================
-Model Compilation
+Model Creation
 ===============================================================================
 
 General
 -------------------------------------------------------------------------------
 
-Main function to generate a SPARCED model
+Main function for model creation
 
-.. autofunction:: compilation.create_and_compile_model()
+.. autofunction:: create_model.create_model()
 
-Additional functions for model creation and compilation
+Launcher
 
-.. autofunction:: compilation.compile_model()
+.. autofunction:: launcher.launch_model_creation()
 
-.. autofunction:: compilation.create_model()
-
+.. autofunction:: launcher.load_compilation_input_files() 
 
 AMICI
 -------------------------------------------------------------------------------
@@ -33,53 +32,42 @@ Utilities
 Antimony
 -------------------------------------------------------------------------------
 
-Main functions to generate an Antimony file
+Model writing
 
-.. autofunction:: creation.antimony_create_file()
-
-.. autofunction:: creation.antimony_write_file()
-
-Define basic elements into an Antimony file
-
-.. autofunction:: definitions.define_compartments()
-
-.. autofunction:: definitions.define_species()
-
-.. autofunction:: define_units()
-
-Set initial conditions of an Antimony file
-
-.. autofunction:: initial_conditions.set_compartments_ic()
-
-.. autofunction:: initial_conditions.set_reactions_ic()
-
-.. autofunction:: intiial_conditions.set_species_ic()
-
-Write reactions into an Antimony file
-
-.. autofunction:: reactions._read_reactions_species()
-
-.. autofunction:: reactions.write_reactions()
+.. autofunction:: model_writing.antimony_write_model()
 
 
-Conversion
--------------------------------------------------------------------------------
+Writing Utilities
 
-.. autofunction:: antimony_to_sbml.convert_antimony_to_sbml()
+.. autofunction:: antimony_write.antimony_write_constant_variables()
+
+.. autofunction:: antimony_write.antimony_write_compartments_names()
+
+.. autofunction:: antimony_write.antimony_write_reactions()
+
+.. autofunction:: antimony_write.antimony_write_species_names()
+
+.. autofunction:: antimony_write.antimony_write_unit_definitions()
+
+Writing Initial Conditions Utilities
+
+.. autofunction:: antimony_write_IC.antimony_write_compartments_IC()
+
+.. autofunction:: antimony_write_IC.antimony_write_reactions_IC()
+
+.. autofunction:: antimony_write_IC.antimony_write_species_IC()
 
 
 SBML
 -------------------------------------------------------------------------------
 
-Find location of the SBML file
+Model annotation
 
-.. autofunction:: creation.build_sbml_model_path()
+.. autofunction:: model_annotation.sbml_annotate_model()
 
-.. autofunction:: creation.get_sbml_model_path()
+Utilities
 
-Annotate an SBML model
+.. autofunction:: sbml_utils.write_compartments_annotations()
 
-.. autofunction:: annotations.sbml_annotate_model()
-
-.. autofunction:: annotations.write_species_annotations()
+.. autofunction:: sbml_utils.write_species_annotations()
 

@@ -16,7 +16,6 @@ sys.path.insert(0, os.path.abspath('../../SPARCED/src'))
 sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation'))
 sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/amici_scripts'))
 sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/antimony_scripts'))
-sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/conversion_scripts'))
 sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/sbml_scripts'))
 sys.path.insert(0, os.path.abspath('../../SPARCED/src/simulation'))
 sys.path.insert(0, os.path.abspath('../../SPARCED/src/simulation/utils'))
@@ -26,8 +25,8 @@ sys.path.insert(0, os.path.abspath('../../SPARCED/src/utils'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'SPARCED'
-copyright = '2024, The Birtwistle & Erdem Labs'
-author = 'The Birtwistle & Erdem Labs'
+copyright = '2024, The Birtwistle Lab'
+author = 'The Birtwistle Lab'
 release = '2.0.0'
 
 # -- General configuration ---------------------------------------------------

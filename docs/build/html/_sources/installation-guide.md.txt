@@ -131,7 +131,7 @@ conda list
 ```
 To make sure Anaconda is up to date, run:
 ```bash
-conda update --all
+conda update -all
 ```
 
 ### Environment

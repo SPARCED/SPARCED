@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>Jupyter Notebook &mdash; SPARCED 2.0.0 documentation</title>
+  <title>model_compilation &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -36,9 +36,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
-        <link rel="up" title="Tutorials" href="summary.html"/>
-        <link rel="next" title="SPARCED Hands-On Primer Tutorial" href="hands-on.html"/>
-        <link rel="prev" title="Tutorials" href="summary.html"/>
+        <link rel="up" title="Module code" href="index.html"/>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="public" />
@@ -76,7 +74,7 @@
 	
           
           
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../about.html#instructions-beginners">Instructions &amp; Beginners</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../about.html#replicate-our-results">Replicate our results</a></li>
@@ -85,10 +83,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../contents.html">Contents Table</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contents.html">Contents Table</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="summary.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
@@ -107,9 +105,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="summary.html">Tutorials</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Jupyter Notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -169,23 +167,56 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <section id="jupyter-notebook">
-<h1>Jupyter Notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this heading">¶</a></h1>
-<p>How to run SPARCED in a Jupyter Notebook and what we provide</p>
-</section>
+  <h1>Source code for model_compilation</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
 
+<span class="kn">import</span> <span class="nn">amici</span>
+<span class="kn">import</span> <span class="nn">libsbml</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">compilation.amici_scripts.amici_utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="compile_sbml_to_amici"><a class="viewcode-back" href="../reference/compilation.html#model_compilation.compile_sbml_to_amici">[docs]</a><span class="k">def</span> <span class="nf">compile_sbml_to_amici</span><span class="p">(</span><span class="n">sbml_file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">f_observables</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">compartments</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                          <span class="n">species</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compile the given SBML model into an AMICI model</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        Passing observables and constant parameters to the importer is</span>
+<span class="sd">        currently broken, in the original script too.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        sbml_file_name: The SBML file path.</span>
+<span class="sd">        model_output_dir: Output directory path for the generated AMICI model.</span>
+<span class="sd">        f_observables: The observables input file path.</span>
+<span class="sd">        compartments: Content of the compartments input file.</span>
+<span class="sd">        species: Content of the species input file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Import SBML file</span>
+    <span class="n">sbml_reader</span> <span class="o">=</span> <span class="n">libsbml</span><span class="o">.</span><span class="n">SBMLReader</span><span class="p">()</span>
+    <span class="n">sbml_doc</span> <span class="o">=</span> <span class="n">sbml_reader</span><span class="o">.</span><span class="n">readSBML</span><span class="p">(</span><span class="n">sbml_file_name</span><span class="p">)</span>
+    <span class="n">sbml_model</span> <span class="o">=</span> <span class="n">sbml_doc</span><span class="o">.</span><span class="n">getModel</span><span class="p">()</span>
+    <span class="n">sbml_importer</span> <span class="o">=</span> <span class="n">amici</span><span class="o">.</span><span class="n">SbmlImporter</span><span class="p">(</span><span class="n">sbml_file_name</span><span class="p">)</span>
+    <span class="c1"># Set all the rate parameters as constant (faster compilation)</span>
+    <span class="n">constant_parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">parameters</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span> \
+                           <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">sbml_model</span><span class="o">.</span><span class="n">getListOfParameters</span><span class="p">()]</span>
+    <span class="c1"># Create observables</span>
+    <span class="c1"># observables = define_observables(f_observables, compartments, species)</span>
+    <span class="c1"># Compile</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">extract_amici_model_name</span><span class="p">(</span><span class="n">model_output_dir</span><span class="p">)</span>
+    <span class="n">sbml_importer</span><span class="o">.</span><span class="n">sbml2amici</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">model_output_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+            <span class="c1"># observables=observables, constantParameters=constant_parameters)</span>
+
+</pre></div>
 
 	    </div>
             <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="hands-on.html" class="btn btn-neutral float-right" title="SPARCED Hands-On Primer Tutorial">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="summary.html" class="btn btn-neutral" title="Tutorials"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
