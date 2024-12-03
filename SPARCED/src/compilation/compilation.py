@@ -8,7 +8,7 @@ import constants as const
 import SparcedModel
 
 from compilation.antimony_scripts.creation import antimony_create_file
-from compilation.conversion_scripts.antimony_to_sbml import convert_antimony_to_sbml
+from compilation.conversion_scripts import *
 from compilation.sbml_scripts.annotations import sbml_annotate_model
 from utils.arguments import parse_args
 from utils.files_handling import append_subfolder
@@ -35,7 +35,7 @@ def create_model(model_name=const.DEFAULT_MODEL_NAME,
 def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
                              models_directory=const.DEFAULT_MODELS_DIRECTORY,
                              config_name=const.DEFAULT_CONFIG_FILE
-                             ) -> SparcedModel.Model:
+                             ) -> (SparcedModel.Model, str | os.PathLike):
     """Create a SparcedModel.Model object and compile it
 
     Note:
@@ -48,7 +48,9 @@ def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
         config_name: The name of the model's configuration file.
 
     Returns:
-        A SparcedModel.Model object.
+        A tuple representing:
+            - A SparcedModel.Model object.
+            - A path towards the compiled model's folder.
     """
 
     args = parse_args()
@@ -60,20 +62,17 @@ def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
     if args.yaml:
         config_name = args.yaml
     model = create_model(model_name, models_directory, config_name)
-    # If it is not wild then it's SPARCED
-    is_SPARCED = not args.wild # TODO: read YAML file?
     verbose = args.verbose
-    compile_model(model, is_SPARCED, verbose)
-    return(model)
+    compiled_model_path = compile_model(model, verbose)
+    return(model, compiled_model_path)
 
-def compile_model(model: SparcedModel.Model, is_SPARCED: bool, verbose:bool
-                  ) -> None: 
+def compile_model(model: SparcedModel.Model, verbose:bool
+                  ) -> str | os.PathLike: 
     """Generate Antimony, SBML and AMICI models corresponding to a
     SparcedModel.Model object
 
     Arguments:
         model: A SparcedModel.model object.
-        is_SPARCED: Use SPARCED hard-coded values/behaviors.
         verbose: Verbose.
 
     Returns:
@@ -92,6 +91,13 @@ def compile_model(model: SparcedModel.Model, is_SPARCED: bool, verbose:bool
         print(f"SPARCED ERROR: {error}\n")
         sys.exit(0)
     sbml_annotate_model(str(sbml_file_path), species)
+    amici_folder_path = convert_sbml_to_amici(sbml_file_path,
+                                              model.name,
+                                              model.path,
+                                              verbose)
+    if verbose: print("{name}: Sucess compiling the model"
+                     .format(name=model_name))
+    return(amici_folder_path)
 
 
 if __name__ == '__main__':
