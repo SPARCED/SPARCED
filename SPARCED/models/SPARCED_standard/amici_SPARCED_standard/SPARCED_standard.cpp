@@ -5,7 +5,7 @@ namespace amici {
 
 namespace model_SPARCED_standard {
 
-std::array<const char*, 2715> parameterNames = {
+std::array<const char*, 2711> parameterNames = {
     "k1_1",
 "k1_2",
 "k1_3",
@@ -2717,10 +2717,6 @@ std::array<const char*, 2715> parameterNames = {
 "k2436",
 "k2437",
 "k2438",
-"k29_1",
-"k30_1",
-"k31_1",
-"k32_1",
 };
 
 std::array<const char*, 0> fixedParameterNames = {
@@ -7143,7 +7139,7 @@ std::array<const char*, 2575> expressionNames = {
 "flux_r2433",
 };
 
-std::array<const char*, 2715> parameterIds = {
+std::array<const char*, 2711> parameterIds = {
     "k1_1",
 "k1_2",
 "k1_3",
@@ -9855,10 +9851,6 @@ std::array<const char*, 2715> parameterIds = {
 "k2436",
 "k2437",
 "k2438",
-"k29_1",
-"k30_1",
-"k31_1",
-"k32_1",
 };
 
 std::array<const char*, 0> fixedParameterIds = {
