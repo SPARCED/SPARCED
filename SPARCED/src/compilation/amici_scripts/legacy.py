@@ -47,28 +47,3 @@ def define_observables(f_observables, compartments, species):
     
     return(observables)
 
-def extract_amici_model_name(output_dir_path: str) -> str:
-    """Extract the model name from the given AMICI output directory path
-
-    Note:
-        The model name is considered to be preceded by the last "amici_" prefix
-        found in the file path string.
-
-    Arguments:
-        output_dir_path: The AMICI output directory path.
-
-    Returns:
-        The extracted model name.
-    """
-
-    sub_file_name = output_dir_path.split("amici_")
-    try:
-        assert len(sub_file_name) > 0
-    except:
-        print("ERROR: AMICI model name could not be extracted.\n Please make \
-               sure you passed all the required arguments. Current value for \
-               the output directory name is: {name}.\n".format(name=output_dir_path))
-        sys.exit(0)
-    model_name = sub_file_name[len(sub_file_name)-1]
-    return(model_name)
-
