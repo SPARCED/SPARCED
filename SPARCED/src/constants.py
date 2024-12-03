@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
+# AMICI
+AMICI_FOLDER_PREFIX = "amici_"
+
 # ANTIMONY
 ANTIMONY_FILE_PREFIX = "ant_"
 ANTIMONY_FILE_SUFFIX = ".txt"
