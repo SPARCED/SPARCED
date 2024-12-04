@@ -6,8 +6,6 @@ import os
 import amici
 import libsbml
 
-import SparcedModel
-
 from compilation.amici_scripts.creation import amici_create_folder
 
 
