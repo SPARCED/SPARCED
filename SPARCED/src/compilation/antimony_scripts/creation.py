@@ -7,14 +7,14 @@ import antimony
 import numpy as np
 
 import constants as const
-import SparcedModel
+from Sparced import Model as SparcedModel
 
 import compilation.antimony_scripts as antimony_script
 from utils.data_handling import load_input_data_file
 from utils.files_handling import append_subfolder
 
 
-def antimony_create_file(model: SparcedModel.Model) -> (str, np.ndarray):
+def antimony_create_file(model: SparcedModel) -> (str, np.ndarray):
     """Generate an Antimony file corresponding to a SparcedModel.Model
     object
 
@@ -31,7 +31,7 @@ def antimony_create_file(model: SparcedModel.Model) -> (str, np.ndarray):
     species = antimony_write_file(model, antimony_file_path)
     return(antimony_file_path, species)
 
-def antimony_write_file(model: SparcedModel.Model,
+def antimony_write_file(model: SparcedModel,
                         antimony_file_path: str | os.PathLike
                         ) -> np.ndarray:
     """Generate an Antimony file

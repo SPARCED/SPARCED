@@ -5,7 +5,7 @@ import os
 import sys
 
 import constants as const
-import SparcedModel
+from Sparced import Model as SparcedModel
 
 from compilation.antimony_scripts.creation import antimony_create_file
 from compilation.conversion_scripts import *
@@ -16,7 +16,7 @@ from utils.files_handling import append_subfolder
 
 def create_model(model_name=const.DEFAULT_MODEL_NAME,
                  models_directory=const.DEFAULT_MODELS_DIRECTORY,
-                 config_name=const.DEFAULT_CONFIG_FILE) -> SparcedModel.Model:
+                 config_name=const.DEFAULT_CONFIG_FILE) -> SparcedModel:
     """Create a SparcedModel.Model object
 
     Arguments:
@@ -29,13 +29,13 @@ def create_model(model_name=const.DEFAULT_MODEL_NAME,
         A SparcedModel.Model object.
     """
 
-    model = SparcedModel.Model(model_name, models_directory, config_name)
+    model = SparcedModel(model_name, models_directory, config_name)
     return(model)
 
 def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
                              models_directory=const.DEFAULT_MODELS_DIRECTORY,
                              config_name=const.DEFAULT_CONFIG_FILE
-                             ) -> (SparcedModel.Model, str | os.PathLike):
+                             ) -> (SparcedModel, str | os.PathLike):
     """Create a SparcedModel.Model object and compile it
 
     Note:
@@ -66,7 +66,7 @@ def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
     compiled_model_path = compile_model(model, verbose)
     return(model, compiled_model_path)
 
-def compile_model(model: SparcedModel.Model, verbose:bool
+def compile_model(model: SparcedModel, verbose:bool
                   ) -> str | os.PathLike: 
     """Generate Antimony, SBML and AMICI models corresponding to a
     SparcedModel.Model object
