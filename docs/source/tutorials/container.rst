@@ -31,9 +31,9 @@ To build the SPARCED Singularity container, follow these steps:
 ---------------------------------------------------------------------------
    Use the following command to build the container from the provided definition file:  
    ```bash
-   singularity build dist/sparced.sif container/sparced.def
+   singularity build --fakeroot container/sparced.sif container/sparced.def
    ```  
-   This will create the `sparced.sif` file in the `dist/` directory.
+   This will create the `sparced.sif` file in the `container/` directory.
 
    **Note:** Ensure the `SPARCED/` directory does not include unnecessary files (e.g., `.git`) by excluding them in the definition file or using a cleanup process.
 
@@ -45,7 +45,7 @@ To build the SPARCED Singularity container, follow these steps:
 ---------------------------------------------------------------------------
    To access an interactive shell within the container:  
    ```bash
-   singularity shell dist/sparced.sif
+   singularity shell container/sparced.sif
    ```  
    This drops you into the container environment where you can navigate and run commands.
 
@@ -58,14 +58,14 @@ To build the SPARCED Singularity container, follow these steps:
 ----------------------------------------------------------------
    To execute the default command defined in the container (e.g., running `sparced`):  
    ```bash
-   singularity run dist/sparced.sif
+   singularity run container/sparced.sif
    ```  
 
 3. **Bind Directories (Optional)**  
 ----------------------------------------------------------------
    To ensure the container can read/write files on your host system, use the `--bind` flag:  
    ```bash
-   singularity shell --bind /path/to/SPARCED:/SPARCED dist/sparced.sif
+   singularity shell --bind /path/to/SPARCED:/SPARCED container/sparced.sif
    ```  
    This binds the `SPARCED` directory on your host to the container, allowing full access during execution.
 
@@ -73,7 +73,7 @@ To build the SPARCED Singularity container, follow these steps:
 ----------------------------------------------------------------
    Use the `exec` command to run specific commands in the container:  
    ```bash
-   singularity exec dist/sparced.sif sparced compile -n Basic_model
+   singularity exec container/sparced.sif sparced compile -n Basic_model
    ```  
 
    This runs the `sparced` tool directly inside the container.
