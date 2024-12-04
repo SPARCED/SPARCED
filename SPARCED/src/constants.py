@@ -31,11 +31,8 @@ YAML_DATA_LOCATION = "location"
 YAML_COMPILATION_DATA_LOCATION = "directory"
 YAML_COMPILATION_FILES = "files"
 YAML_COMPILATION_KEYWORD = "compilation"
-# -- Compartments keywords
-YAML_COMPARTMENTS_FILE = "file"
-YAML_COMPARTMENTS_ID = "id"
-YAML_COMPARTMENTS_KEYWORD = "compartments"
 # -- Input files keywords
+YAML_COMPARTMENTS = "compartments"
 YAML_OUTPUT_PARAMETERS = "output_parameters"
 YAML_RATELAWS = "ratelaws"
 YAML_SPECIES = "species"

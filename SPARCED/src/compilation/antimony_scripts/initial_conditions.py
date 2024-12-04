@@ -10,8 +10,9 @@ def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
     """ Write compartments initial conditions in the given Antimony file
 
     Note:
-        The dictionnary is structured as key: compartment name / value:
-        compartment volume.
+        First row is considered as a header, and hence it is skipped.
+        First column of the array should contain compartments name.
+        Second column of the array should contain compartments concentrations.
 
     Arguments:
         file: The open Antimony file.
@@ -23,9 +24,10 @@ def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
     """
 
     file.write("# Compartments initialization:\n")
-    for name, volume in compartments.items():
-        file.write(f"  {name} = {volume:.6e};\n")
-        file.write(f"  {name} has volume;\n")
+    for i, value in enumerate(compartments[1:]):
+        file.write(f"{value[0]} = {np.double(value[1]):.6e};\n")
+        file.write(f"{value[0]} has volume;\n")
+
     file.write("\n")
 
 def set_reactions_ic(file: IO[str], p_names: np.ndarray,

@@ -8,13 +8,13 @@ import numpy as np
 import constants as const
 
 
-def define_compartments(file: IO[str], compartments: dict[str, str]) -> None:
+def define_compartments(file: IO[str], compartments: np.ndarray) -> None:
     """Write compartments names in the given Antimony file
 
     Note:
-        The dictionnary is structured as key: compartment name / value:
-        compartment volume.
-
+        First row is considered as a header, and hence it is skipped.
+        First column of the array should contain the compartments names.
+        Second column of the array should contain the compartments volumes.
     Arguments:
         file: The open Antimony file.
         compartments: Content of the input compartments file structured
@@ -25,8 +25,8 @@ def define_compartments(file: IO[str], compartments: dict[str, str]) -> None:
     """
 
     file.write("# Compartments:\n")
-    for k in compartments.keys():
-        file.write(f"Compartment {k}; ")
+    for c in range(1, len(compartments)):
+        file.write(f"Compartment {compartments[c][0]}; ")
     file.write("\n")
 
 def define_species(file: IO[str], species: np.ndarray) -> None:

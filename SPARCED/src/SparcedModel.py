@@ -4,11 +4,12 @@
 import os
 import sys
 
+import numpy as np
 from yaml import safe_load
 
 import constants as const
 
-from utils.data_handling import load_petab_conditions_file
+from utils.data_handling import load_input_data_file
 from utils.files_handling import *
 
 
@@ -47,8 +48,8 @@ class Model:
                                compilation.
         compilation_files: A dictionnary containing all the input files
                            required for compilation.
-        compartments: A dictionnary containing the compartments names
-                      and their associated volumes.
+        compartments: An array containing the compartments names,
+                      volumes and annotations.
 
         Methods:
             load_configuration()
@@ -80,8 +81,7 @@ class Model:
                     self.compilation_data_path,
                     self.compilation_config[const.YAML_COMPILATION_FILES])
         self.compartments = self.load_compartments(
-                    self.compilation_data_path,
-                    self.compilation_config[const.YAML_COMPARTMENTS_KEYWORD])
+                            self.compilation_files[const.YAML_COMPARTMENTS])
 
     def load_configuration(self, path: str | os.PathLike, config_name: str):
         """Load configuration from a YAML file
@@ -100,35 +100,27 @@ class Model:
             configuration = safe_load(config_file)
         return(configuration)
 
-    def load_compartments(self, path: str | os.PathLike,
-                          compartments_config) -> dict[str, str]:
+    def load_compartments(self, path: str | os.PathLike) -> np.ndarray:
         """Load compartments from a PEtab file
 
         Note:
-            Dictionnary structure is expected to contain the following
-            keys:
-            > 'file' -> the name of the compartments file
-            > 'id' -> the conditionId of the row to read (see PEtab
-                      documentation for further information)
+            Compartments' file structure is expected to be as follow:
+            > First row: header
+            > First column: compartments names.
+            > Second column: compartments volumes.
+            > Third column: compartments annotation.
 
         Arguments:
-            path: The path towards the compilation data files.
-            compartments_config: The dictionnary representing the
-                                 compartments configuration structured
-                                 as specified in the __Note__.
+            path: The path towards the compartments input file,
+                  structured as specified in the __Note__.
 
         Returns;
-            A dictionnary structured as key: compartment name / value:
-            compartment's volume.
+            An array representing contents of the input compartments
+            file.
         """
 
-        compartments_path = append_subfolder(
-                        path,
-                        compartments_config[const.YAML_COMPARTMENTS_FILE])
-        check_path_existence(compartments_path)
-        compartments = load_petab_conditions_file(
-                            compartments_path,
-                            compartments_config[const.YAML_COMPARTMENTS_ID])
+        check_path_existence(path)
+        compartments = load_input_data_file(path)
         return(compartments)
 
     def load_compilation_files(self, path: str | os.PathLike,

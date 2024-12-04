@@ -3356,14 +3356,14 @@ vPd88: MEKi_ppMEK => ; (k2437*MEKi_ppMEK)*Cytoplasm;
 vPd89: AKTi_AKT => ; (k2438*AKTi_AKT)*Cytoplasm;
 
 # Compartments initialization:
-  Cytoplasm = 5.250000e-12;
-  Cytoplasm has volume;
-  Extracellular = 5.000000e-05;
-  Extracellular has volume;
-  Nucleus = 1.750000e-12;
-  Nucleus has volume;
-  Mitochondrion = 3.675000e-13;
-  Mitochondrion has volume;
+Cytoplasm = 5.250000e-12;
+Cytoplasm has volume;
+Extracellular = 5.000000e-05;
+Extracellular has volume;
+Nucleus = 1.750000e-12;
+Nucleus has volume;
+Mitochondrion = 3.675000e-13;
+Mitochondrion has volume;
 
 # Species initialization:
 Ribosome = 1.900000e+03;

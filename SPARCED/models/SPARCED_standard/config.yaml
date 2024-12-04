@@ -9,11 +9,8 @@ location: "data"
 # Compilation
 compilation:
     directory: "model"
-    compartments:
-      file: "compartments.tsv"
-      id: "standard"
     files:
-      observables: "legacy_Observables.txt"
+      compartments: "legacy_Compartments.txt"
       output_parameters: "output_parameters.txt"  # This file is generated upon compilation
       ratelaws: "ratelaws.txt"
       species: "legacy_Species.txt"
