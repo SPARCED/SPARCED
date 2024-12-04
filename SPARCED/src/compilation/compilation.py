@@ -90,7 +90,7 @@ def compile_model(model: SparcedModel.Model, verbose:bool
     except RuntimeError as error:
         print(f"SPARCED ERROR: {error}\n")
         sys.exit(0)
-    sbml_annotate_model(str(sbml_file_path), species)
+    sbml_annotate_model(str(sbml_file_path), model.compartments, species)
     amici_folder_path = convert_sbml_to_amici(sbml_file_path,
                                               model.name,
                                               model.path,
