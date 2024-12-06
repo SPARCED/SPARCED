@@ -8,7 +8,7 @@ AMICI_FOLDER_PREFIX = "amici_"
 # ANTIMONY
 ANTIMONY_FILE_PREFIX = "ant_"
 ANTIMONY_FILE_SUFFIX = ".txt"
-ANTIMONY_HEADER = "Erdem et al., Nat Commun 2022"
+ANTIMONY_HEADER = "Erdem et al., Nat Commun 2022" #TODO: Move to YAML
 
 # DEFAULT GENERAL VALUES
 DEFAULT_CONFIG_FILE = "config.yaml"
@@ -27,7 +27,7 @@ UNIT_VOLUME = "litre"
 
 # YAML
 YAML_DATA_LOCATION = "location"
-# -- Compilation keywords
+# Compilation keywords
 YAML_COMPILATION_DATA_LOCATION = "directory"
 YAML_COMPILATION_FILES = "files"
 YAML_COMPILATION_KEYWORD = "compilation"
@@ -36,4 +36,14 @@ YAML_COMPARTMENTS = "compartments"
 YAML_OUTPUT_PARAMETERS = "output_parameters"
 YAML_RATELAWS = "ratelaws"
 YAML_SPECIES = "species"
+# Experiment keywords
+YAML_EXPERIMENT_DATA_LOCATION = "experiments"
+YAML_EXPERIMENT_NAME = "name"
+# Simulation keywords
+YAML_SIMULATION_DATA_LOCATION = "directory"
+YAML_SIMULATION_FILES = "files"
+YAML_SIMULATION_KEYWORD = "simulation"
+# -- Input files keywords
+YAML_GENES_REGULATION = "genes_regulation"
+YAML_OMICS_DATA = "omics"
 

@@ -1,11 +1,12 @@
-# SPARCED exp
-# Sandbox based on SPARCED standard
-# Last update: 2024-11-21
+# SPARCED Standard
+# Last update: 2024-12-06
+
 
 # General infos
-name: SPARCED_exp
-running_wild: False
+name: "SPARCED_standard"
+header: "Erdem et al., Nat Commun 2022"
 location: "data"
+
 # Compilation
 compilation:
     directory: "model"
@@ -14,13 +15,16 @@ compilation:
       output_parameters: "output_parameters.txt"  # This file is generated upon compilation
       ratelaws: "ratelaws.txt"
       species: "legacy_Species.txt"
+
 # Simulation
 simulation:
     directory: "simulation"    
     files:
-      gene_regulation: "legacy_GeneReg.txt"
-      omics_data: "legacy_OmicsData.txt"
-    experiment:
-      directory: "experiment"
-      file: "experiment.yaml"
+      genes_regulation: "legacy_GeneReg.txt"
+      omics: "legacy_OmicsData.txt"
+
+# Experiment
+experiments:
+    directory: "experiments"
+    name: "exp_1.yaml"  # Optional
 
