@@ -80,38 +80,4 @@ def run_experiment(model_name: str, simulation_name: str,
                               input_files["genereg"], input_files["omics"])
         cell_number += 1
 
-def run_single_simulation(model, simulation_name: str, output_sim: str, simulation_number: int,
-                          sbml_model: str, is_deterministic: bool,
-                          exchange: int, duration: float,
-                          species_initial_conditions: np.ndarray,
-                          verbose: bool, f_genereg: str, f_omics: str) -> None:
-    """
-    Run a single simulation of SPARCED
-    """
-    # Set initial conditions
-    model.setInitialStates(species_initial_conditions)
-    if verbose:
-        print("{name} n°{number}: Now ready to run\n"
-              .format(name=simulation_name, number=simulation_number))
-        
-    
-    # convert f_genereg and f_omics to pandas dataframes
-    f_genereg = pd.read_csv(f_genereg, header=0, index_col=0, sep="\t")
-    f_omics = pd.read_csv(f_omics, header=0, index_col=0, sep="\t")
-
-    # Run the simulation
-    xoutS_all, xoutG_all, tout_all = RunSPARCED(is_deterministic, float(duration),
-                                                species_initial_conditions, [],
-                                                sbml_model, model, f_genereg, f_omics) 
-    if verbose:
-        print("{name} n°{number}: Simulation is over. Now saving results, \
-                please do not exit.\n".format(name=simulation_name,
-                                              number=simulation_number))
-    # Save output
-    save_simulation_output(model, simulation_name, simulation_number, output_sim,
-                           xoutS_all, xoutG_all, tout_all)
-    if verbose:
-        print("{name} n°{number}: Simulation saved.\n"
-              .format(name=simulation_name, number=simulation_number))
-    return(xoutS_all)
 
