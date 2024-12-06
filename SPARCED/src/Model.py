@@ -29,11 +29,6 @@ class EmptyModelName(InvalidModelName):
     pass
 
 
-# EXPERIMENT
-
-class Experiment:
-    pass
-
 # MODEL
 
 class Model:
@@ -226,15 +221,3 @@ class Model:
             is_valid = True
         return(is_valid)
 
-# SIMULATION
-
-class Simulation:
-    pass
-
-
-def __init__(self,
-                 name=const.DEFAULT_MODEL_NAME,
-                 models_directory=const.DEFAULT_MODELS_DIRECTORY,
-                 config_name=const.DEFAULT_CONFIG_FILE):
-        # General settings
-        self.name = self.set_name(name)
