@@ -1,0 +1,357 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>Tutorials &mdash; SPARCED 2.0.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="../_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="../_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
+        <link rel="next" title="Jupyter Notebook" href="notebook.html"/>
+        <link rel="prev" title="The SPARCED-tools Installation Guide for Absolute Beginners" href="../installation-guide.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="../index.html" class="fa fa-home"> SPARCED </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="../search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#instructions-beginners">Instructions &amp; Beginners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#replicate-our-results">Replicate our results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#further-information">Further information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED-tools Installation Guide for Absolute Beginners</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#modeler-s-installation-guide">Modeler’s Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#developer-s-installation-guide">Developer’s Installation Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="container.html">Container Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/bouhaddou2018.html">Bouhaddou 2018 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/erdem2022.html">Erdem 2022 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/mutsuddy2023.html">Mutsuddy 2023 model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">SPARCED </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <section id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">¶</a></h1>
+<p>Documentation for SPARCED</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hands-on.html">SPARCED Hands-On Primer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html#running-python-scripts">Running Python Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hands-on.html#model-compilation">Model Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hands-on.html#simulation-execution">Simulation Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hands-on.html#benchmark-generation">Benchmark Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hands-on.html#benchmark-validation">Benchmark Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hands-on.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html#key-examples">Key Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html#additional-resources">Additional Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html#questions-or-issues">Questions or Issues?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="container.html">Container Operation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="container.html#docker">Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="container.html#logging-in">Logging In</a></li>
+<li class="toctree-l3"><a class="reference internal" href="container.html#exiting">Exiting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="container.html#singularity">Singularity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="container.html#building-the-container">Building the Container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="container.html#prerequisites">1. Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="container.html#clone-the-sparced-repository">2. Clone the SPARCED Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="container.html#build-the-container">3. Build the Container</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="container.html#running-the-container">Running The Container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="container.html#shell-into-the-container">1. Shell into the Container</a></li>
+<li class="toctree-l4"><a class="reference internal" href="container.html#run-the-container-directly">2. Run the Container Directly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="container.html#bind-directories-optional">3. Bind Directories (Optional)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="container.html#execute-specific-commands">4. Execute Specific Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="container.html#tips">Tips</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html">Command Line Interface (CLI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#container-operation">Container Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#general-usage">General Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#available-commands-and-flags">Available Commands and Flags</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#compile-command">1. <code class="docutils literal notranslate"><span class="pre">compile</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#simulate-command">2. <code class="docutils literal notranslate"><span class="pre">simulate</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#validate-command">3. <code class="docutils literal notranslate"><span class="pre">validate</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#visualize-command">4. <code class="docutils literal notranslate"><span class="pre">visualize</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#shared-flags">Shared Flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#compile-a-model">Compile a Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#run-a-simulation">Run a Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#benchmark-a-model">Benchmark a Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command-line.html#visualize-data">Visualize Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#general-principles">General Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#file-organization">File Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#species-table">Species table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#detailed-field-descriptions">Detailed field descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#ratelaws-table">Ratelaws Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id1">Detailed Field Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#notes-for-users">Notes for Users</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#compartments-table">Compartments Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id2">Detailed Field Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id3">Notes for Users</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#observables-table">Observables table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id4">Detailed field descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#omicsdata-table">OmicsData Table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id5">Detailed field descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id6">Notes for Users</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#genereg-table">GeneReg table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id7">Detailed field descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id8">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#guidelines-for-extension">Guidelines for Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#initializer-file-optional">Initializer file (Optional)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id9">Detailed field descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html#id10">Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#general-principles">General Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#naming-structure">Naming Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#where">Where:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#prefixes">Prefixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#suffixes">Suffixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#guidelines-for-complexes">Guidelines for Complexes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#id1"><strong>Examples</strong>:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#potential-pitfalls">Potential Pitfalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#regex-validation">Regex Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html#automating-naming">Automating Naming</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+	    </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="notebook.html" class="btn btn-neutral float-right" title="Jupyter Notebook">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../installation-guide.html" class="btn btn-neutral" title="The SPARCED-tools Installation Guide for Absolute Beginners"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2024, The Birtwistle Lab.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="../_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="../_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>

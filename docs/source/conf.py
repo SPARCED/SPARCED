@@ -20,11 +20,13 @@ sys.path.insert(0, os.path.abspath('../../src/compilation/sbml_scripts'))
 sys.path.insert(0, os.path.abspath('../../src/simulation'))
 sys.path.insert(0, os.path.abspath('../../src/simulation/utils'))
 sys.path.insert(0, os.path.abspath('../../src/utils'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/simulation'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/visualization'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/creation'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/sedml'))
+sys.path.insert(0, os.path.abspath('../../src/validation'))
+sys.path.insert(0, os.path.abspath('../../src/validation/simulation'))
+sys.path.insert(0, os.path.abspath('../../src/validation/visualization'))
+sys.path.insert(0, os.path.abspath('../../src/validation/creation'))
+sys.path.insert(0, os.path.abspath('../../src/validation/sedml'))
+sys.path.insert(0, os.path.abspath('../../src/visualization'))
+sys.path.insert(0, os.path.abspath('../../src/visualization/visualizer'))
 
 
 # -- Project information -----------------------------------------------------

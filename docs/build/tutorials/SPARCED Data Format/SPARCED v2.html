@@ -1,0 +1,773 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>SPARCED input file format specification &mdash; SPARCED 2.0.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="../../_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="SPARCED 2.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Tutorials" href="../summary.html"/>
+        <link rel="next" title="Species Naming Conventions" href="Species-Nomenclature.html"/>
+        <link rel="prev" title="Container Operation" href="../container.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="../../index.html" class="fa fa-home"> SPARCED </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="../../search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#instructions-beginners">Instructions &amp; Beginners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#replicate-our-results">Replicate our results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#further-information">Further information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation-guide.html">The SPARCED-tools Installation Guide for Absolute Beginners</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#modeler-s-installation-guide">Modeler’s Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#developer-s-installation-guide">Developer’s Installation Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../summary.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../command-line.html">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../container.html">Container Operation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Species-Nomenclature.html">Species Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../papers/summary.html">Replicate Published Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/bouhaddou2018.html">Bouhaddou 2018 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/erdem2022.html">Erdem 2022 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/mutsuddy2023.html">Mutsuddy 2023 model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/summary.html">Reference Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/summary.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/summary.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/summary.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../future-dev.html">Future developments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">SPARCED </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <section id="sparced-input-file-format-specification">
+<h1>SPARCED input file format specification<a class="headerlink" href="#sparced-input-file-format-specification" title="Link to this heading">¶</a></h1>
+<p>This page explains the SPARCED data format, which is a standardized format for
+encoding biological models in a machine-readable format. SPARCED is designed to
+be compatible with PEtab, SBML, and PCRE2, and is intended to facilitate the
+exchange of biological models between different software tools.</p>
+<p>The SPARCED file format is not trying to re-invent an already well defined and
+established format (i.e. SBML), we simply want to provide systems biologists
+with a standardized format with the goal of merging various desparate
+pathway models into a single kinetic model. Constructing the SPARCED model includes
+the use of such tools, including conversion from the tabular format sepcified here
+to Antimony, then to SBML, and finally to AMICI in order for the model to be simulated.</p>
+<section id="general-principles">
+<h2>General Principles<a class="headerlink" href="#general-principles" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Model-Merging</strong>: SPARCED files are intended to be easily merged with other SPARCED files, allowing users to combine models from different sources.</p></li>
+<li><p><strong>Compatibility</strong>: SPARCED is designed to be converted from the tabular format specified here (inspired by PEtab) to Antimony, SBML, and AMICI models.</p></li>
+<li><p><strong>Human-Readable</strong>: SPARCED files are designed to be human-readable, with clear and concise syntax that is easy to understand.</p></li>
+<li><p><strong>Machine-Readable</strong>: SPARCED files are also machine-readable, with a well-defined structure that can be parsed by software tools.</p></li>
+</ol>
+</section>
+<section id="file-organization">
+<h2>File Organization<a class="headerlink" href="#file-organization" title="Link to this heading">¶</a></h2>
+<p>SPARCED files are organized into 7 tabular files, each of which contains a specific type of information critical towards building systems biology models:</p>
+<ol class="arabic simple">
+<li><p><strong>Species</strong>: Defines the species in the model, including their names, initial concentrations, compartment locations, and UniProt annotations.</p></li>
+<li><p><strong>RateLaws</strong>: Defines the rate laws for the model, including the reaction names, home compartments, equations, kinetic parameters, and references.</p></li>
+<li><p><strong>Compartments</strong>: Defines the compartments in the model, including their names, sizes, and GO annotations.</p></li>
+<li><p><strong>Observables</strong>: Defines the model observables; the compartment-corrected summations of all formats of a protein.</p></li>
+<li><p><strong>OmicsData</strong> (optional): Defines the omics data used to constrain the model, including the data type, values, and references.</p></li>
+<li><p><strong>GeneReg</strong> (optional): Defines transcriptional activation and inhibition relationships between genes and transcription factors.</p></li>
+<li><p><strong>Initializer</strong> (optional): Defines information for model initialization.</p></li>
+</ol>
+<p><strong>Remarks</strong>
+- all model entities, column names, and row names are case-sensitive.</p>
+</section>
+<section id="species-table">
+<h2>Species table<a class="headerlink" href="#species-table" title="Link to this heading">¶</a></h2>
+<p>The <cite>Species</cite> table defines the species in the model, including their names,
+initial concentrations, compartment locations, and UniProt annotations. Further,
+contains information about the species in the deterministic module.
+Each row corresponds to one species (protein, protein complex, post-transcriptionally
+modified species). Transcripts (in nM) are also included in this file because
+they are regarded as species with updated concentrations in the stochastic
+module every 30(s) and are used in translation rate laws.</p>
+<table class="species-table docutils align-default" id="id11">
+<caption><span class="caption-text">Species Table</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><cite>speciesId</cite></p></th>
+<th class="head"><p><cite>compartment</cite></p></th>
+<th class="head"><p><cite>initialConcentration</cite></p></th>
+<th class="head"><p><cite>UniProt</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>STRING</p></td>
+<td><p>STRING</p></td>
+<td><p>FLOAT</p></td>
+<td><p>STRING</p></td>
+</tr>
+<tr class="row-odd"><td><p>e.g.</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><cite>Cd__Cdk4__p27</cite></p></td>
+<td><p><cite>cytoplasm</cite></p></td>
+<td><p>0.787522147</p></td>
+<td><p>P24385,P30279, P30281, P11802, Q00534, P46527</p></td>
+</tr>
+</tbody>
+</table>
+<section id="detailed-field-descriptions">
+<h3>Detailed field descriptions<a class="headerlink" href="#detailed-field-descriptions" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><cite>speciesId</cite> [STRING, NOT NULL]: The unique identifier for the species, following</p></li>
+</ul>
+<p>the SPARCED species naming convention. Strict adherence to the naming convention
+is required for compatibility with PEtab, SBML, and PCRE2.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>see <cite>Species-Nomenclature &lt;https://sparced.readthedocs.io/en/latest/tutorials/Building-SPARCED-Input-Files/Species-Nomenclature.html&gt;_.</cite></p></li>
+</ul>
+<blockquote>
+<div><p>for more information.</p>
+</div></blockquote>
+</div></blockquote>
+<ul>
+<li><dl class="simple">
+<dt><cite>compartment</cite> [STRING, NOT NULL]: The compartment in which the species resides.</dt><dd><ul class="simple">
+<li><p>Must be one of the compartments defined in the <cite>Compartments</cite> table.</p></li>
+<li><p>Must be consistent with the compartment specified in the species name.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>initialConcentration</cite> [FLOAT, NOT NULL]: The initial concentration of the species.</dt><dd><ul class="simple">
+<li><p>Must be a non-negative number.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><cite>UniProt</cite> [STRING, OPTIONAL]: The UniProt identifiers for the species.</dt><dd><ul class="simple">
+<li><p>Multiple UniProt identifiers should be separated by commas.</p></li>
+<li><p>Must be consistent with the species name.</p></li>
+<li><p>Preferably, in the same order as the species name.</p></li>
+<li><p>For species identifiers representing multiple proteins (i.e. <cite>Cd</cite> represents in</p></li>
+</ul>
+<p>this case CyclinD1, CyclinD2, and CyclinD3), the UniProt identifiers should be
+separated by commas in alpha-numeric order.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="ratelaws-table">
+<h2>Ratelaws Table<a class="headerlink" href="#ratelaws-table" title="Link to this heading">¶</a></h2>
+<p>The <cite>Ratelaws</cite> table defines the reactions in the deterministic module,
+including reaction names, home compartments, rate laws, and parameters.
+Each row corresponds to a single reaction, and the order of rows must align with</p>
+<blockquote>
+<div><p>the columns in the <cite>StoichiometricMatrix</cite> input file. Reactions can follow
+either a simple mass-action law or a complex rate law formula with parameters
+defined explicitly.</p>
+</div></blockquote>
+<table class="ratelaws-table docutils align-default" id="id12">
+<caption><span class="caption-text">Ratelaws Table</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 25.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>reactionId</cite></p></td>
+<td><p>STRING</p></td>
+<td><p><cite>vC23</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>compartment</cite></p></td>
+<td><p>STRING</p></td>
+<td><p><cite>Nucleus</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>rateLaw</cite></p></td>
+<td><p>STRING or FLOAT</p></td>
+<td><p><cite>kC23_1*(Cd__Cdk4/(kC23_2+Cd__Cdk4))</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>parameter_1</cite></p></td>
+<td><p>FLOAT (OPTIONAL)</p></td>
+<td><p><cite>0.09444444</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>parameter_2</cite></p></td>
+<td><p>FLOAT (OPTIONAL)</p></td>
+<td><p><cite>10</cite></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h2>Detailed Field Descriptions<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>`reactionId`</strong> [STRING, NOT NULL]: The unique identifier for the reaction.
+- Must be unique in the file and typically follows a naming convention indicating
+the sub-module (e.g., <cite>vA1</cite> for Apoptosis, <cite>vC1</cite> for Cell Cycle).</p></li>
+<li><p><strong>`compartment`</strong> [STRING, NOT NULL]: The home compartment where the reaction occurs.
+- Must match a defined compartment in the <cite>Compartments</cite> table.
+- Defines the effective search volume for reactants and products, and volumetric
+corrections may apply for species in different compartments.</p></li>
+<li><p><strong>`rateLaw`</strong> [STRING or FLOAT, NOT NULL]: Specifies the rate law for the reaction.
+- If a FLOAT is provided, the reaction follows a mass-action law, and the value
+is the rate constant (units: nM/s).
+- If a STRING is provided, the reaction follows the specified formula, which
+must include species names and parameter names consistent with the model.</p></li>
+<li><p><strong>`parameter_n`</strong> [FLOAT, OPTIONAL]: Parameters used in the rate law formula.
+- Parameter names must start with <cite>k</cite> and be unique within the formula (e.g., <cite>k1</cite>, <cite>k2</cite>).
+- Values are provided in appropriate units (e.g., nM or seconds).
+- Parameters are automatically renamed during model generation for consistency.</p></li>
+</ul>
+<section id="notes-for-users">
+<h3>Notes for Users<a class="headerlink" href="#notes-for-users" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The compartments for reactions must be defined in the <cite>Compartments</cite> table and</p></li>
+</ul>
+<p>are used to rescale concentrations when reactants and products reside in different volumes.
+- Parameters in rate law formulas are extracted and renamed in the <cite>ParamsAll</cite> output file for reference.
+- Ensure the number and order of rows in this file match the columns in the <cite>StoichiometricMatrix</cite>.</p>
+</section>
+</section>
+<section id="compartments-table">
+<h2>Compartments Table<a class="headerlink" href="#compartments-table" title="Link to this heading">¶</a></h2>
+<p>The <cite>Compartments</cite> table specifies the cellular compartments in the model,
+including their names, volumes, and corresponding Gene Ontology (GO) terms.
+These compartments define the spatial context for species and reactions,
+ensuring consistency across the model’s input files.</p>
+<table class="compartments-table docutils align-default" id="id13">
+<caption><span class="caption-text">Compartments Table</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>compartmentId</cite></p></td>
+<td><p>STRING</p></td>
+<td><p><cite>cytoplasm</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>volume</cite></p></td>
+<td><p>FLOAT (LITERS)</p></td>
+<td><p><cite>2.1e-12</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>goTerm</cite></p></td>
+<td><p>STRING</p></td>
+<td><p><cite>GO:0005737</cite></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<h2>Detailed Field Descriptions<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>`compartmentId`</strong> [STRING, NOT NULL]: The unique identifier for the compartment.
+- Must match the compartment names listed in the <cite>Species</cite> and <cite>Ratelaws</cite> input files.</p></li>
+<li><p><strong>`volume`</strong> [FLOAT, NOT NULL]: The volume of the compartment in liters.
+- Must be a non-negative value.
+- Defines the physical size of the compartment for scaling concentrations and reactions.</p></li>
+<li><p><strong>`goTerm`</strong> [STRING, OPTIONAL]: The Gene Ontology (GO) term associated with the compartment.
+- Provides a standardized identifier for the compartment’s biological context.
+- Example: <cite>GO:0005737</cite> for cytoplasm.</p></li>
+</ul>
+<section id="id3">
+<h3>Notes for Users<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The compartment names must be consistent across all input files, including <cite>Species</cite> and <cite>Ratelaws</cite>.</p></li>
+<li><p>Volumes are used to calculate concentration-based scaling factors when species</p></li>
+</ul>
+<p>and reactions involve multiple compartments.
+- GO terms are optional but recommended for better integration with external
+databases and annotation tools.</p>
+</section>
+</section>
+<section id="observables-table">
+<h2>Observables table<a class="headerlink" href="#observables-table" title="Link to this heading">¶</a></h2>
+<p>The <cite>Observables</cite> table defines the mapping of model species to the measurable
+quantities (observables) used for simulations and analysis.
+Each observable corresponds to the compartmental-volume-corrected summation of</p>
+<blockquote>
+<div><p>all formats of a protein. Entries in this table indicate whether a specific
+species contributes to a given observable.</p>
+</div></blockquote>
+<table class="observables-table docutils align-default" id="id14">
+<caption><span class="caption-text">Observables Table</span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>observableId</cite></p></td>
+<td><p>STRING: The unique identifier for each observable.</p></td>
+<td><p><cite>pEGFR</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>speciesId</cite></p></td>
+<td><p>STRING: The unique identifier for each species, following SPARCED species naming conventions.</p></td>
+<td><p><cite>EGFR_Y1068</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>compartment</cite></p></td>
+<td><p>STRING: The compartment associated with the species.
+Must align with the compartments listed in the <cite>Compartments</cite> table.</p></td>
+<td><p><cite>cytoplasm</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>inObservable</cite></p></td>
+<td><p>INTEGER: Binary indicator (1 if the species contributes to the observable, 0 otherwise).</p></td>
+<td><p><cite>1</cite></p></td>
+</tr>
+</tbody>
+</table>
+<section id="id4">
+<h3>Detailed field descriptions<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><cite>observableId</cite> [STRING, NOT NULL]: The unique identifier for each observable,</p></li>
+</ul>
+<p>which typically corresponds to a measurable feature of interest, such as the
+total phosphorylation of a receptor.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Observables are defined based on experimental data and model requirements.</p></li>
+<li><p>Ensure unique naming conventions to prevent conflicts during model generation.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt><cite>speciesId</cite> [STRING, NOT NULL]: The unique identifier for the species that may contribute to the observable.</dt><dd><ul>
+<li><p>Matches species defined in the <cite>Species</cite> table.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>compartment</cite> [STRING, OPTIONAL]: The compartment in which the species resides.</dt><dd><ul>
+<li><p>Should match the compartment associated with the species in the <cite>Species</cite> and <cite>Compartments</cite> tables.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>inObservable</cite> [INTEGER, NOT NULL]: Indicates whether the species contributes to the observable.</dt><dd><ul>
+<li><p>Must be either <cite>1</cite> (species contributes) or <cite>0</cite> (species does not contribute).</p></li>
+<li><p>This binary mapping allows summation of species concentrations to compute observable values.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h3>
+<p>The <cite>Observables</cite> table is used as input to the AMICI model compiler during the
+simulation process. It defines how species concentrations are aggregated into</p>
+<blockquote>
+<div><dl class="simple">
+<dt>observables, enabling the calculation of measurable outputs for model validation</dt><dd><p>and comparison with experimental data.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</section>
+<section id="omicsdata-table">
+<h2>OmicsData Table<a class="headerlink" href="#omicsdata-table" title="Link to this heading">¶</a></h2>
+<p>The <cite>OmicsData</cite> table contains information about gene-level parameters, mRNA levels,
+and protein levels used in the model. It serves as a central repository for
+integrating gene copy numbers, mRNA molecule counts, and protein abundance with</p>
+<blockquote>
+<div><dl class="simple">
+<dt>rate constants for transcription, translation, and degradation. Each row</dt><dd><p>corresponds to one gene, identified by its HGNC name, and includes various
+ebiological and kinetic parameters essential for the deterministic and stochastic modules.</p>
+</dd>
+</dl>
+</div></blockquote>
+<section id="id5">
+<h3>Detailed field descriptions<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>`geneId`</strong> [STRING, NOT NULL]: The HGNC identifier of the gene.
+- Must be unique in the file.</p></li>
+<li><p><strong>`geneCopyNumber`</strong> [INTEGER, NOT NULL]: The number of copies of the gene present in the cell.
+- Represents genomic-level data.</p></li>
+<li><p><strong>`mRNA_copyNumber`</strong> [FLOAT, NOT NULL]: The number of mRNA molecules per cell (mpc).
+- Represents transcript-level abundance.</p></li>
+<li><p><strong>`rateConstant_inactivation`</strong> [FLOAT (s⁻¹), NOT NULL]: The rate constant for gene inactivation.</p></li>
+<li><p><strong>`rateConstant_activation`</strong> [FLOAT (s⁻¹), NOT NULL]: The rate constant for gene activation.</p></li>
+<li><p><strong>`constitutiveTranscription`</strong> [FLOAT (molecules/s), OPTIONAL]: Baseline transcription rate for the gene.</p></li>
+<li><p><strong>`maximalTranscription`</strong> [FLOAT (molecules/s), OPTIONAL]: Maximal transcription rate for the gene under activation conditions.</p></li>
+<li><p><strong>`mRNA_degradation`</strong> [FLOAT (s⁻¹), NOT NULL]: The degradation rate constant of the mRNA.</p></li>
+<li><p><strong>`protein_copyNumber`</strong> [INTEGER, OPTIONAL]: The number of protein molecules per cell (mpc).
+- Represents proteomic-level abundance.</p></li>
+<li><p><strong>`protein_halfLife`</strong> [FLOAT (s), OPTIONAL]: The half-life of the protein in seconds.</p></li>
+<li><p><strong>`translationRate`</strong> [FLOAT (s⁻¹), OPTIONAL]: The rate constant for mRNA translation.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Notes for Users<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>All rate constants are based on data from the Bouhaddou2018 model and literature.</p></li>
+<li><p>Users can add new genes (rows) using RNA-seq data for mRNA estimation.</p></li>
+</ul>
+<p>For missing rate constants, median values from the existing dataset can provide a reasonable starting point.</p>
+</section>
+</section>
+<section id="genereg-table">
+<h2>GeneReg table<a class="headerlink" href="#genereg-table" title="Link to this heading">¶</a></h2>
+<p>The <cite>GeneReg</cite> table defines transcriptional activation and inhibition interactions
+in the SPARCED model. Each row corresponds to a gene, and each column corresponds</p>
+<blockquote>
+<div><p>to a species that acts as an activator or repressor of transcriptional activity.</p>
+</div></blockquote>
+<section id="id7">
+<h3>Detailed field descriptions<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><cite>geneId</cite> [STRING, NOT NULL]: The name of the gene being regulated, written in HGNC format.</dt><dd><ul>
+<li><p>Gene names must match the names in the <cite>Species</cite> table for consistency.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>speciesId_*</cite> [STRING, OPTIONAL]: The species acting as regulators of the gene.</dt><dd><ul>
+<li><p>Defined in columns corresponding to regulatory species.</p></li>
+<li><p>Regulatory species must exist in the <cite>Species</cite> table and can act as activators or repressors.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>regulation</cite> [STRING, OPTIONAL]: Describes the regulatory effect of a species on gene transcription.</dt><dd><ul>
+<li><p>Format: <cite>A; B</cite>, where:
+- <cite>A</cite> is the Hill coefficient, with positive values for activation and negative values for repression.
+- <cite>B</cite> is the half-maximal concentration of the regulatory effect.</p></li>
+<li><p>If no regulation exists, this field is set to <cite>0</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h3>Usage<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>The <cite>GeneReg</cite> table is utilized by the stochastic module of the SPARCED model to</dt><dd><dl class="simple">
+<dt>update mRNA levels during simulations. Non-zero entries define the quantitative</dt><dd><dl class="simple">
+<dt>parameters of transcriptional regulation, which determine how species influence</dt><dd><p>gene expression.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+<section id="guidelines-for-extension">
+<h3>Guidelines for Extension<a class="headerlink" href="#guidelines-for-extension" title="Link to this heading">¶</a></h3>
+<p>To include additional transcriptional regulators in the SPARCED model:
+1. Add new columns for each additional regulatory species.
+2. Populate the columns with the appropriate rate constants in the <cite>A; B</cite> format.
+3. Ensure consistency with the <cite>Species</cite> and <cite>Genes</cite> tables for naming and structure.</p>
+</section>
+</section>
+<section id="initializer-file-optional">
+<h2>Initializer file (Optional)<a class="headerlink" href="#initializer-file-optional" title="Link to this heading">¶</a></h2>
+<dl>
+<dt>The <cite>Initializer</cite> file provides optional information for model initialization.</dt><dd><dl>
+<dt>It defines species concentrations, mRNA level adjustments, parameter values,</dt><dd><p>observable exclusions, and parameter scan ranges. This file is used to
+establish a starting point for deterministic simulations, such as serum-starved</p>
+<blockquote>
+<div><p>MCF10A cells under specific experimental conditions.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
+<table class="initializer-table docutils align-default" id="id15">
+<caption><span class="caption-text">Initializer File</span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 45.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column(s)</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>speciesId</cite>, <cite>initialConcentration</cite></p></td>
+<td><p>STRING, FLOAT: Specifies species and their starting concentrations.
+This information initializes species concentrations.</p></td>
+<td><p><cite>EGFR</cite>, <cite>0.5</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>mRNAId</cite>, <cite>initialLevel</cite></p></td>
+<td><p>STRING, FLOAT: Defines adjustments to mRNA levels for specific genes.</p></td>
+<td><p><cite>CDKN1A</cite>, <cite>2.0</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>parameterId</cite>, <cite>initialValue</cite>, <cite>units</cite></p></td>
+<td><p>STRING, FLOAT, STRING: Specifies parameter names, their initial values, and associated units.
+Used for initializing specific model parameters.</p></td>
+<td><p><cite>k_deg</cite>, <cite>0.01</cite>, <cite>1/s</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>observableId_excluded</cite></p></td>
+<td><p>STRING: Defines observables excluded from translation rate adjustments.
+Ensures these observables are not modified during initialization.</p></td>
+<td><p><cite>Cyclin_D1</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>parameterId</cite>, <cite>minValue</cite>, <cite>maxValue</cite></p></td>
+<td><p>STRING, FLOAT, FLOAT: Describes the parameter scan range for a single parameter.
+Used for sensitivity analysis or optimization during initialization.</p></td>
+<td><p><cite>k_on</cite>, <cite>0.1</cite>, <cite>10.0</cite></p></td>
+</tr>
+</tbody>
+</table>
+<section id="id9">
+<h3>Detailed field descriptions<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p><strong>Species Concentrations</strong>
+- <cite>speciesId</cite> [STRING, OPTIONAL]: Name of the species being initialized.</p>
+<blockquote>
+<div><p>Must match species names in the <cite>Species</cite> table.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>initialConcentration</cite> [FLOAT, OPTIONAL]: Initial concentration of the species (in model-defined units).</p></li>
+</ul>
+</li>
+<li><p><strong>mRNA Level Adjustments</strong>
+- <cite>mRNAId</cite> [STRING, OPTIONAL]: Name of the mRNA species being adjusted.
+- <cite>initialLevel</cite> [FLOAT, OPTIONAL]: Initial mRNA level for the species.</p></li>
+<li><p><strong>Parameter Values</strong>
+- <cite>parameterId</cite> [STRING, OPTIONAL]: Name of the parameter being initialized.</p>
+<blockquote>
+<div><p>Parameter names should match those defined in the <cite>ParamsAll</cite> or <cite>Ratelaws</cite> file.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>initialValue</cite> [FLOAT, OPTIONAL]: Starting value of the parameter.</p></li>
+<li><p><cite>units</cite> [STRING, OPTIONAL]: Units of the parameter, consistent with the model specification.</p></li>
+</ul>
+</li>
+<li><p><strong>Observable Exclusions</strong>
+- <cite>observableId_excluded</cite> [STRING, OPTIONAL]: Name of the observable excluded from translation rate adjustments.</p></li>
+<li><p><strong>Parameter Scan Range</strong>
+- <cite>parameterId</cite> [STRING, OPTIONAL]: Name of the parameter for single-parameter scans.
+- <cite>minValue</cite> [FLOAT, OPTIONAL]: Minimum value in the scan range.
+- <cite>maxValue</cite> [FLOAT, OPTIONAL]: Maximum value in the scan range.</p></li>
+</ol>
+</section>
+<section id="id10">
+<h3>Usage<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>The <cite>Initializer</cite> file is especially useful for setting up simulations where
+specific biological conditions must be reflected, such as:
+- Serum-starved MCF10A cells that remain quiescent without external growth factor stimulation.
+- Customizing initial species levels or parameter values to match experimental data.
+- Running sensitivity analyses by scanning parameter ranges.</p>
+</section>
+</section>
+</section>
+
+
+	    </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Species-Nomenclature.html" class="btn btn-neutral float-right" title="Species Naming Conventions">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../container.html" class="btn btn-neutral" title="Container Operation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2024, The Birtwistle Lab.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="../../_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="../../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../../_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="../../_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="../../_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>

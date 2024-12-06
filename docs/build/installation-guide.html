@@ -1,0 +1,419 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>SPARCED-tools Installation Guide &mdash; SPARCED 2.0.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="author" title="About these documents"
+              href="about.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="SPARCED 2.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Tutorials" href="tutorials/summary.html"/>
+        <link rel="prev" title="About" href="about.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="index.html" class="fa fa-home"> SPARCED </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#instructions-beginners">Instructions &amp; Beginners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#replicate-our-results">Replicate our results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#further-information">Further information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SPARCED-tools Installation Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modeler-s-installation-guide">Modeler’s Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developer-s-installation-guide">Developer’s Installation Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/summary.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/container.html">Container Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/command-line.html">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="papers/summary.html">Replicate Published Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="papers/bouhaddou2018.html">Bouhaddou 2018 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="papers/erdem2022.html">Erdem 2022 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="papers/mutsuddy2023.html">Mutsuddy 2023 model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/summary.html">Reference Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/summary.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/summary.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/summary.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="future-dev.html">Future developments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">SPARCED </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <section id="sparced-tools-installation-guide">
+<h1>SPARCED-tools Installation Guide<a class="headerlink" href="#sparced-tools-installation-guide" title="Link to this heading">¶</a></h1>
+<p><em>Written by Aurore Amrit</em> <em>and Jonah R. Huggins</em></p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Kinetic models are often reliant on Ordinary Differential Equation solvers to perform the simulated ‘heavy-lifting’. Given the Large-scale nature of the SPARCED model, we use <a class="reference external" href="https://amici.readthedocs.io/en/v0.11.12/">AMICI (v0.11.12)</a>, an ODE solver specifically made for large-scale kinetic modeling. However, AMICI’s reliance on C/C++ solvers as well as BLAS, complicate straightforward installation outside of Ubuntu. Therefore, we have tried to be as accomodating as possible to the broad community in enabling cross-platform support.</p>
+<p>SPARCED runs seamlessly on <strong>Ubuntu 22.04 LTS</strong> , either as a virtual machine (i.e. <strong>VirtualBox</strong>), a container (<strong>Singularity</strong> or <strong>Dockerfile</strong>), or on <strong>Windows-Subsystem for Linux.</strong> This guide should work even if you are using another hypervisor than VirtualBox or that you are running Ubuntu directly on your computer. With a few arrangements, the described steps should also work for other versions of Ubuntu or any Debian-based Linux distribution.</p>
+<p>⚠️ Make sure you have enough disk space (30 GB is a minimum) ⚠️</p>
+</section>
+<section id="modeler-s-installation-guide">
+<h2>Modeler’s Installation Guide<a class="headerlink" href="#modeler-s-installation-guide" title="Link to this heading">¶</a></h2>
+<p>For most users, operation through a docker container will be sufficient. This provides an OS-agnostic approach for users to interact with SPARCED simulation tools without having to hassle with the SPARCED package dependencies. For HPC use, see Singularity Installation.</p>
+<section id="docker-installation">
+<h3>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading">¶</a></h3>
+<p>For users with administrator access, (i.e. Linux, MacOS and Windows), we strongly recommend installing the Docker container. <a class="reference internal" href="#*%5BDocker%5D(https://docs.docker.com/get-started/get-docker/)"><span class="xref myst">Docker (the software) can be installed here</span></a>.</p>
+<p>Preferred installation: Download from <a class="reference external" href="https://hub.docker.com/">DockerHub</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">jonahrileyhuggins</span><span class="o">/</span><span class="n">sparced</span><span class="o">-</span><span class="n">tools</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+<p>Alternatively, the Docker container can be built locally:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">buildx</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">sparced</span><span class="o">-</span><span class="n">tools</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">SPARCED</span><span class="o">/</span><span class="n">container</span><span class="o">/</span><span class="n">Dockerfile</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Operating inside of the container enables the use of the SPARCED toolset without having to install the python dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="n">sparced</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+</div>
+<p>Further, users are able to bind their local SPARCED directory with the container’s SPARCED directory, allowing for native, local modifications on the host system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">-</span><span class="n">v</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>\<span class="n">path</span>\<span class="n">to</span>\<span class="n">SPARCED</span><span class="p">:</span><span class="o">/</span><span class="n">SPARCED</span> <span class="n">sparced</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+</div>
+<p><strong>Flags:</strong></p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">--rm</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Stands for:</strong> <em>Remove</em></p></li>
+<li><p><strong>Function:</strong> Automatically removes the container when it stops</p></li>
+<li><p><strong>Why use it</strong></p>
+<ul>
+<li><p>Prevents the accumulation of stopped containers that would otherwise take up system resources.</p></li>
+<li><p>Useful for temporary containers where you don’t need to persist the container itself after it has run.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><code class="docutils literal notranslate"><span class="pre">-i</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Stands for:</strong> <em>Interactive</em></p></li>
+<li><p><strong>Function:</strong> Keeps the standard input (<code class="docutils literal notranslate"><span class="pre">stdin</span></code>) open, even if not attached to a terminal.</p></li>
+<li><p><strong>Why use it?</strong></p>
+<ul>
+<li><p>Allows the container to accept input from the user during runtime.</p></li>
+<li><p>Especially useful when paired with <code class="docutils literal notranslate"><span class="pre">-t</span></code> for running an interactive shell session.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><code class="docutils literal notranslate"><span class="pre">-t</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Stands for:</strong> <em>TTY (teletypewriter)</em></p></li>
+<li><p><strong>Function:</strong> Allocates a pseudo-terminal for the container.</p></li>
+<li><p><strong>Why use it?</strong></p>
+<ul>
+<li><p>Allows for better interactivity, like being able to run <code class="docutils literal notranslate"><span class="pre">bash</span></code> or <code class="docutils literal notranslate"><span class="pre">sh</span></code> inside the container and see a command prompt.</p></li>
+<li><p>Often paired with <code class="docutils literal notranslate"><span class="pre">-i</span></code> for fully interactive sessions.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><code class="docutils literal notranslate"><span class="pre">-v</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>stands for:</strong> Volume</p></li>
+<li><p><strong>Function:</strong> Binds a directory to the container volume. In simpler terms, it allows users to link a local directory to a container directory, enabling files to be shared between.</p></li>
+<li><p><strong>Why use it?</strong></p>
+<ul>
+<li><p>Allows for seamless operation of the SPARCED tools on a users personal device with full file sharing as if the tool was installed locally.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="singularity-installation">
+<h3>Singularity Installation<a class="headerlink" href="#singularity-installation" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://docs.sylabs.io/guides/3.0/user-guide/installation.html">Singularity</a> is a containerization platform designed specifically for high-performance computing (HPC) and research environments. It allows users to create, distribute, and execute portable, reproducible containers across different systems. Unlike Docker, Singularity focuses on usability in environments where users don’t have root access, such as shared HPC clusters.</p>
+<p><strong>Key Features:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Rootless Execution:</strong> Users don’t need root privileges to run containers, enhancing security.</p></li>
+<li><p><strong>File System Binding:</strong> Provides seamless integration with the host system by binding directories into the container.</p></li>
+<li><p><strong>Portability:</strong> Containers can be moved and executed across different platforms without modification.</p></li>
+<li><p><strong>Support for MPI:</strong> Well-suited for parallel computing environments, allowing easy integration with MPI libraries.</p></li>
+</ol>
+<hr class="docutils" />
+<section id="building-the-singularity-container-from-a-definition-file">
+<h4>Building the Singularity Container from a Definition File<a class="headerlink" href="#building-the-singularity-container-from-a-definition-file" title="Link to this heading">¶</a></h4>
+<p>To build a container using the <code class="docutils literal notranslate"><span class="pre">sparced.def</span></code> file, execute the following command from the project root directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>build<span class="w"> </span>--fakeroot<span class="w"> </span>container/sparced.sif<span class="w"> </span>container/sparced.def
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sparced.sif</span></code>:</strong> The output file, a Singularity Image File (SIF).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sparced.def</span></code>:</strong> The definition file that specifies the container’s environment and setup.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>:</strong> Flag for building the singularity container without root access</p></li>
+</ul>
+<p>To verify that the container is successfully built, execute the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>inspect<span class="w"> </span>container/sparced.sif
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="how-to-shell-into-and-interact-with-the-singularity-container-while-binding-the-host-sparced-directory">
+<h4>How to Shell into and Interact with the Singularity Container While Binding the Host SPARCED Directory<a class="headerlink" href="#how-to-shell-into-and-interact-with-the-singularity-container-while-binding-the-host-sparced-directory" title="Link to this heading">¶</a></h4>
+<ol class="arabic">
+<li><p><strong>Bind the Host Directory:</strong>
+Use the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option to link a host directory into the container.</p></li>
+<li><p><strong>Run the Container:</strong>
+To open a shell inside the container with the <code class="docutils literal notranslate"><span class="pre">SPARCED</span></code> directory bound:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>shell<span class="w"> </span>--bind<span class="w"> </span>/path/to/host/SPARCED:/SPARCED<span class="w"> </span>container/sparced.sif
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">/path/to/host/SPARCED</span></code>:</strong> Replace this with the absolute path to your host’s SPARCED directory.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">/SPARCED</span></code>:</strong> This is the directory inside the container where the host directory will be accessible.</p></li>
+</ul>
+</li>
+<li><p><strong>Operate Within the Container:</strong>
+Once inside the container, you’ll see a prompt. Run commands as if you’re working on a standalone system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>compile<span class="w"> </span>-n<span class="w"> </span>Basic_model
+</pre></div>
+</div>
+</li>
+<li><p><strong>Exit the Container:</strong>
+Type <code class="docutils literal notranslate"><span class="pre">exit</span></code> to leave the container.</p></li>
+</ol>
+<hr class="docutils" />
+<p>If successful, the below configurations are not necessary. This is a conda-free installation.</p>
+</section>
+</section>
+</section>
+<section id="developer-s-installation-guide">
+<h2>Developer’s Installation Guide<a class="headerlink" href="#developer-s-installation-guide" title="Link to this heading">¶</a></h2>
+<section id="ubuntu-based-installation">
+<h3>Ubuntu-based Installation<a class="headerlink" href="#ubuntu-based-installation" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"> <span class="pre">requirements.txt</span></code> file provided in the project root directory is an executable BASH script designed to install SPARCED dependencies in Ubuntu 22.04. Installation is seamless when using the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file, which is reliant on a <a class="reference external" href="https://peps.python.org/pep-0621/">PEP 621 - adherent</a> <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file located adjacently in the project root directory.</p>
+<p>To install, execute the following commands within the SPARCED root directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>./requirements.txt<span class="w"> </span><span class="c1"># provides authorized installation access</span>
+./requirements.txt<span class="w"> </span><span class="c1"># Installation command</span>
+</pre></div>
+</div>
+<p>After installation is complete, restart your shell for the changes to take effect.</p>
+<section id="installation-verification">
+<h4>Installation verification<a class="headerlink" href="#installation-verification" title="Link to this heading">¶</a></h4>
+<p>After installation is complete, test the installation via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>-h
+</pre></div>
+</div>
+<p>⚠️ Note: Ubuntu users might have to restart their shell session for the changes to take effect. ⚠️</p>
+<p>Correct installation should output the following help information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">SPARCED</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">{</span><span class="nb">compile</span><span class="p">,</span><span class="n">simulate</span><span class="p">,</span><span class="n">validate</span><span class="p">}</span> <span class="o">...</span>
+
+<span class="n">SPARCED</span> <span class="n">CLI</span> <span class="n">tool</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="nb">compile</span><span class="p">,</span><span class="n">simulate</span><span class="p">,</span><span class="n">validate</span><span class="p">}</span>
+                        <span class="n">Subcommands</span><span class="p">:</span> <span class="nb">compile</span><span class="p">,</span> <span class="n">simulate</span><span class="p">,</span> <span class="n">validate</span><span class="p">,</span> <span class="n">visualize</span>
+    <span class="nb">compile</span>             <span class="n">Compile</span> <span class="n">a</span> <span class="n">model</span><span class="o">.</span>
+    <span class="n">simulate</span>            <span class="n">Run</span> <span class="n">a</span> <span class="n">simulation</span><span class="o">.</span>
+    <span class="n">validate</span>            <span class="n">Benchmark</span> <span class="n">a</span> <span class="n">model</span><span class="o">.</span>
+    <span class="n">visualize</span>           <span class="n">Visualize</span> <span class="n">a</span> <span class="n">dataset</span><span class="o">.</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="anaconda-based-installation">
+<h3>Anaconda-based Installation<a class="headerlink" href="#anaconda-based-installation" title="Link to this heading">¶</a></h3>
+<p>For further support, an Anaconda <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> is provided. Note, installation via Anaconda inhibits the use of the command line functionality. Individual scripts are still executable, an example is provided below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send critical install variables to the .bashrc file:</span>
+<span class="n">export</span> <span class="n">BLAS_LIBS</span><span class="o">=-</span><span class="n">lopenblas</span>
+
+<span class="c1"># Install necessary SPARCED dependencies</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">openmpi</span><span class="o">-</span><span class="nb">bin</span> <span class="n">openmpi</span><span class="o">-</span><span class="n">common</span> <span class="n">libopenmpi</span><span class="o">-</span><span class="n">dev</span> \
+		<span class="n">gcc</span> <span class="n">libopenblas</span><span class="o">-</span><span class="n">dev</span> <span class="n">g</span><span class="o">++</span> <span class="n">cmake</span> <span class="n">make</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">pipx</span> \
+		<span class="n">libgfortran5</span> <span class="n">libatomic1</span> <span class="n">swig</span> <span class="n">libhdf5</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsbml</span><span class="o">-</span><span class="n">dev</span>
+
+<span class="c1"># Installs python dependencies to run the SPARCED-tools </span>
+<span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+
+<span class="c1"># Activate the conda environment</span>
+<span class="n">source</span> <span class="n">activate</span> <span class="n">sparced</span>
+
+</pre></div>
+</div>
+<p>Congratulations! You now have a full setup of SPARCED! 🦠</p>
+</section>
+</section>
+</section>
+
+
+	    </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorials/summary.html" class="btn btn-neutral float-right" title="Tutorials">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="about.html" class="btn btn-neutral" title="About"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2024, The Birtwistle Lab.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>

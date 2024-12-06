@@ -1,0 +1,378 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>Command Line Interface (CLI) &mdash; SPARCED 2.0.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="../_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="../_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="author" title="About these documents"
+              href="../about.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="summary.html"/>
+        <link rel="next" title="Container Operation" href="container.html"/>
+        <link rel="prev" title="SPARCED Hands-On Primer Tutorial" href="hands-on.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="../index.html" class="fa fa-home"> SPARCED </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="../search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#instructions-beginners">Instructions &amp; Beginners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#replicate-our-results">Replicate our results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#further-information">Further information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED-tools Installation Guide for Absolute Beginners</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#modeler-s-installation-guide">Modeler’s Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#developer-s-installation-guide">Developer’s Installation Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="summary.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="container.html">Container Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../papers/bouhaddou2018.html">Bouhaddou 2018 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/erdem2022.html">Erdem 2022 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../papers/mutsuddy2023.html">Mutsuddy 2023 model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">SPARCED </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <section id="command-line-interface-cli">
+<h1>Command Line Interface (CLI)<a class="headerlink" href="#command-line-interface-cli" title="Link to this heading">¶</a></h1>
+<p>The SPARCED package provides a convenient CLI tool to manage common tasks like compiling models, running simulations, benchmarking, and visualizing results.</p>
+<p>This guide explains how to use the <code class="docutils literal notranslate"><span class="pre">sparced</span></code> CLI tool to streamline your workflows.</p>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
+<p>Before using the CLI, ensure the following:</p>
+<section id="container-operation">
+<h3>Container Operation<a class="headerlink" href="#container-operation" title="Link to this heading">¶</a></h3>
+<p>Before running command line prompts, ensure the container is working by inspecting that the shell prompt, displayed within the terminal window, has changed from the default to the following:</p>
+<p><strong>Docker:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">@</span><span class="mi">1607</span><span class="n">f217fffb</span><span class="p">:</span><span class="o">/</span><span class="n">SPARCED</span><span class="c1">#</span>
+</pre></div>
+</div>
+<p><strong>Singularity:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[user@hostname:/SPARCED]$
+</pre></div>
+</div>
+</section>
+<section id="verify-installation">
+<h3>Verify Installation<a class="headerlink" href="#verify-installation" title="Link to this heading">¶</a></h3>
+<p>Run the following command to verify:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>If installed correctly, this will display the help menu for the CLI.</p>
+</section>
+</section>
+<section id="general-usage">
+<h2>General Usage<a class="headerlink" href="#general-usage" title="Link to this heading">¶</a></h2>
+<p>Use the following syntax:</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>&lt;command&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="available-commands-and-flags">
+<h2>Available Commands and Flags<a class="headerlink" href="#available-commands-and-flags" title="Link to this heading">¶</a></h2>
+<section id="compile-command">
+<h3>1. <code class="docutils literal notranslate"><span class="pre">compile</span></code> Command<a class="headerlink" href="#compile-command" title="Link to this heading">¶</a></h3>
+<p>Compile a model.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>compile<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Available Flags:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--output_parameters</span></code>: Desired name for the output parameters file. (Default: <code class="docutils literal notranslate"><span class="pre">out_Parameters.txt</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--name</span></code>: Desired name for the generated model.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="simulate-command">
+<h3>2. <code class="docutils literal notranslate"><span class="pre">simulate</span></code> Command<a class="headerlink" href="#simulate-command" title="Link to this heading">¶</a></h3>
+<p>Run a simulation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>simulate<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Available Flags:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--name</span></code>: Name of the input model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p,</span> <span class="pre">--population_size</span></code>: Desired cell population size for the simulation. (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t,</span> <span class="pre">--time</span></code>: Desired virtual duration of the simulation in hours. (Default: <code class="docutils literal notranslate"><span class="pre">1.0</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--results</span></code>: Directory where simulation results will be saved. (Default: <code class="docutils literal notranslate"><span class="pre">./results/New-Simulation/</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">--simulation</span></code>: Desired name for the simulation output files. (Default: <code class="docutils literal notranslate"><span class="pre">GrowthStim</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x,</span> <span class="pre">--exchange</span></code>: Timeframe between modules for information exchange during the simulation. (Default: <code class="docutils literal notranslate"><span class="pre">30</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-D,</span> <span class="pre">--deterministic</span></code>: Run the simulation in deterministic mode (default). Use the flag to disable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-P,</span> <span class="pre">--perturbations</span></code>: Name of the perturbations file to use. Overrides the default.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="validate-command">
+<h3>3. <code class="docutils literal notranslate"><span class="pre">validate</span></code> Command<a class="headerlink" href="#validate-command" title="Link to this heading">¶</a></h3>
+<p>Benchmark a model.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>validate<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Available Flags:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-rs,</span> <span class="pre">--return_sedml</span></code>: Return the SED-ML file. (Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--results</span></code>: Directory where benchmark results will be saved. (Default: <code class="docutils literal notranslate"><span class="pre">./../results/New-Benchmark/</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--name</span></code>: Name to save the benchmark results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b,</span> <span class="pre">--benchmark</span></code>: Name of the benchmark to be used. (Optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--cores</span></code>: Number of cores to use for a parallel process. (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-bd,</span> <span class="pre">--benchmark_description</span></code>: Description of the benchmark. (Optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-a,</span> <span class="pre">--run_all</span></code>: Run all benchmarks in the benchmarks directory. Overrides the <code class="docutils literal notranslate"><span class="pre">-b</span></code> flag. (Optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-O,</span> <span class="pre">--Observable</span></code>: Whether only the observable in <code class="docutils literal notranslate"><span class="pre">observables.tsv</span></code> is calculated (<code class="docutils literal notranslate"><span class="pre">1</span></code>) or the entire simulation is saved (<code class="docutils literal notranslate"><span class="pre">0</span></code>). (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="visualize-command">
+<h3>4. <code class="docutils literal notranslate"><span class="pre">visualize</span></code> Command<a class="headerlink" href="#visualize-command" title="Link to this heading">¶</a></h3>
+<p>Visualize a dataset.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>visualize<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+<p><strong>Available Flags:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--output</span></code>: Output path to save the visualization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n,</span> <span class="pre">--name</span></code>: Name of the output file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f,</span> <span class="pre">--from_script</span></code>: Flag to indicate that the visualization is being run from a custom script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--catchall,</span> <span class="pre">-c</span></code>: A JSON string containing additional arguments to pass to the custom script.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="shared-flags">
+<h3>Shared Flags<a class="headerlink" href="#shared-flags" title="Link to this heading">¶</a></h3>
+<p>These flags can be used with any of the commands:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code>: Enable verbose output.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y,</span> <span class="pre">--yaml</span></code>: YAML file with input configuration. (Default: <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--input_data</span></code>: Name of the subfolder containing SPARCED-formatted input files. (Default: <code class="docutils literal notranslate"><span class="pre">data/</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--model</span></code>: Relative path to the directory containing the model folders. (Default: <code class="docutils literal notranslate"><span class="pre">./models/</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-w,</span> <span class="pre">--wild</span></code>: Running wild (without SPARCED hard-coded values/behaviors). <em>(Under Construction)</em></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<section id="compile-a-model">
+<h3>Compile a Model<a class="headerlink" href="#compile-a-model" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>compile<span class="w"> </span>-n<span class="w"> </span>MyModel<span class="w"> </span>-o<span class="w"> </span>parameters.txt
+</pre></div>
+</div>
+</section>
+<section id="run-a-simulation">
+<h3>Run a Simulation<a class="headerlink" href="#run-a-simulation" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>simulate<span class="w"> </span>-n<span class="w"> </span>SPARCED_standard<span class="w"> </span>-p<span class="w"> </span><span class="m">500</span><span class="w"> </span>-t<span class="w"> </span><span class="m">48</span>
+</pre></div>
+</div>
+</section>
+<section id="benchmark-a-model">
+<h3>Benchmark a Model<a class="headerlink" href="#benchmark-a-model" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>validate<span class="w"> </span>-b<span class="w"> </span>benchmark_file.yml<span class="w"> </span>-c<span class="w"> </span><span class="m">4</span>
+</pre></div>
+</div>
+</section>
+<section id="visualize-data">
+<h3>Visualize Data<a class="headerlink" href="#visualize-data" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>visualize<span class="w"> </span>-n<span class="w"> </span>visualization_output<span class="w"> </span>-o<span class="w"> </span>./visualizations/
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>For more information on specific commands and flags, use the <code class="docutils literal notranslate"><span class="pre">--help</span></code> flag with any command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>&lt;command&gt;<span class="w"> </span>--help
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+	    </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="container.html" class="btn btn-neutral float-right" title="Container Operation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="hands-on.html" class="btn btn-neutral" title="SPARCED Hands-On Primer Tutorial"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2024, The Birtwistle Lab.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="../_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="../_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>
