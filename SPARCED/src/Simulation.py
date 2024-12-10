@@ -8,14 +8,13 @@ import pandas as pd
 
 import constants as const
 
-# TODO
-import RunSPARCED
+from simulation.modules.RunSPARCED import RunSPARCED
 from utils.files_handling import *
 
 # SIMULATION
 
 class Simulation:
-    def __init__(self, name: int, number: int, is_deterministic: bool,
+    def __init__(self, name: str, number: int, is_deterministic: bool,
                  duration: float, output_directory: str | os.PathLike,
                  verbose: bool) -> None:
         self.name = name
