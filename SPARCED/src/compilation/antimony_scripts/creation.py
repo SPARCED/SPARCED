@@ -7,7 +7,7 @@ import antimony
 import numpy as np
 
 import constants as const
-from Sparced import Model as SparcedModel
+from Model import Model as SparcedModel
 
 import compilation.antimony_scripts as antimony_script
 from utils.data_handling import load_input_data_file

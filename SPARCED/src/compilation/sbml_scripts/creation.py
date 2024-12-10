@@ -4,7 +4,7 @@
 import os
 
 import constants as const
-from Sparced import Model as SparcedModel
+from Model import Model as SparcedModel
 
 from utils.files_handling import append_subfolder
 

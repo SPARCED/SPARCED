@@ -5,7 +5,7 @@ import os
 import sys
 
 import constants as const
-from Sparced import Model as SparcedModel
+from Model import Model as SparcedModel
 
 from compilation.antimony_scripts.creation import antimony_create_file
 from compilation.conversion_scripts import *
