@@ -36,9 +36,8 @@ class Simulation:
         if self.verbose:
             print(f"SPARCED VERBOSE: {self.name} n°{self.number}" +
                    " is now ready to run.\n")
-        # TODO: use constants
-        genes_file = pd.read_csv(simulation_files['genereg'], header=0, index_col=0, sep='\t')
-        omics_file = pd.read_csv(simulation_files['omics'], header=0, index_col=0, sep='\t')
+        genes_file = pd.read_csv(simulation_files[YAML_GENES_REGULATION], header=0, index_col=0, sep='\t')
+        omics_file = pd.read_csv(simulation_files[YAML_OMICS_DATA], header=0, index_col=0, sep='\t')
         species_levels, genes_levels, time = RunSPARCED(self.is_deterministic,
                                                         self.duration,
                                                         self.initial_conditions,
