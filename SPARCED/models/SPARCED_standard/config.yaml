@@ -26,5 +26,5 @@ simulation:
 # Experiment
 experiments:
     directory: "experiments"
-    name: "exp_1.yaml"  # Optional
+    name: "experiment_1"  # Optional
 
