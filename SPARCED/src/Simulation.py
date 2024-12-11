@@ -3,6 +3,7 @@
 
 import os
 
+from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
@@ -11,19 +12,17 @@ import constants as const
 from simulation.modules.RunSPARCED import RunSPARCED
 from utils.files_handling import *
 
+
 # SIMULATION
 
+@dataclass
 class Simulation:
-    def __init__(self, name: str, number: int, is_deterministic: bool,
-                 duration: float, output_directory: str | os.PathLike,
-                 verbose: bool) -> None:
-        self.name = name
-        self.number = str(number)
-        self.is_deterministic = is_deterministic
-        self.duration = duration
-        self.output_directory = output_directory
-        self.verbose = verbose
-        self.initial_conditions # np.ndarray probably set during runtime
+    name: str
+    output_directory: str | os.PathLike
+    duration: float
+    is_deterministic: bool = True
+    number: int = 0
+    verbose: bool = False
 
     def run(self, model, sbml_file: str, simulation_files: dict[str, str]
             ) -> np.ndarray:
@@ -35,6 +34,7 @@ class Simulation:
         if self.verbose:
             print(f"SPARCED VERBOSE: {self.name} n°{self.number}" +
                    " is now ready to run.\n")
+        # TODO: handle the case when no simulation files are provided
         genes_file = pd.read_csv(simulation_files[YAML_GENES_REGULATION], header=0, index_col=0, sep='\t')
         omics_file = pd.read_csv(simulation_files[YAML_OMICS_DATA], header=0, index_col=0, sep='\t')
         species_levels, genes_levels, time = RunSPARCED(self.is_deterministic,
@@ -124,6 +124,7 @@ class Simulation:
             file_extension = const.TIME_FILE_EXTENSION
         case _:
             raise ValueError("Unknown content type.")
+    # TODO: handle no number
     file_name = self.name + file_indicator + str(self.number) + file_extension
     file_path = append_subfolder(self.output_directory, file_name)
     if content_type == "TIME": # np.ndarray
