@@ -77,7 +77,7 @@ class Model:
                 self.data_location,
                 self.compilation_config[const.YAML_COMPILATION_DATA_LOCATION])
         check_path_existence(self.compilation_data_path)
-        self.compilation_files = self.load_compilation_files(
+        self.compilation_files = self.load_files_path(
                     self.compilation_data_path,
                     self.compilation_config[const.YAML_COMPILATION_FILES])
         self.compartments = self.load_compartments(
@@ -90,7 +90,7 @@ class Model:
                 self.data_location,
                 self.simulation_config[const.YAML_SIMULATION_DATA_LOCATION])
             check_path_existence(self.simulation_data_path)
-            self.simulation_files = self.load_simulation_files(
+            self.simulation_files = self.load_files_path(
                         self.simulation_data_path,
                         self.simulation_config[const.YAML_SIMULATION_FILES])
         # Experiments (Optional)
@@ -146,10 +146,9 @@ class Model:
         compartments = load_input_data_file(path)
         return(compartments)
 
-    def load_compilation_files(self, path: str | os.PathLike,
-                               compilation_files
-                               ) -> dict[str, str | os.PathLike]:
-        """Load compilation input file paths
+    def load_files_path(self, path: str | os.PathLike, files: dict[str, str]
+                        ) -> dict[str, str | os.PathLike]:
+        """Load input file paths
 
         Note:
             Dictionnary structure is expected to be key: file type /
@@ -157,9 +156,9 @@ class Model:
             For example: species -> my_species.txt
 
         Arguments:
-            path: The path towards the compilation data files.
-            compilation_files: A dictionnary structured as stated in
-                               the __Note__ section.
+            path: The path towards the input data files.
+            files: A dictionnary structured as stated in the __Note__
+                   section.
 
         Returns:
             The same dictionnary structured as key: file type / value:
@@ -167,15 +166,14 @@ class Model:
         """
 
         # TODO: adjust for multiple files
-        for file_type, file_name in compilation_files.items():
+        for file_type, file_name in files.items():
             if file_name != None:
-                compilation_files[file_type] = append_subfolder(path,
-                                                                file_name)
+                files[file_type] = append_subfolder(path, file_name)
                 # Do not check existence of files that will be created upon
                 # compilation TODO: change to a list to handle several files
                 if file_type != const.YAML_OUTPUT_PARAMETERS:
-                    check_path_existence(compilation_files[file_type])
-        return(compilation_files)
+                    check_path_existence(files[file_type])
+        return(files)
 
     def sanitize_name(self, name: str) -> str:
         """Sanitize a name
