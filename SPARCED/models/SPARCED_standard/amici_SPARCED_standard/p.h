@@ -2709,7 +2709,3 @@
 #define k2436 p[2708]
 #define k2437 p[2709]
 #define k2438 p[2710]
-#define k29_1 p[2711]
-#define k30_1 p[2712]
-#define k31_1 p[2713]
-#define k32_1 p[2714]

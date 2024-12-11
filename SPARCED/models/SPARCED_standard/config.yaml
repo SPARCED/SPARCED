@@ -1,0 +1,30 @@
+# SPARCED Standard
+# Last update: 2024-12-06
+
+
+# General infos
+name: "SPARCED_standard"
+header: "Erdem et al., Nat Commun 2022"
+location: "data"
+
+# Compilation
+compilation:
+    directory: "model"
+    files:
+      compartments: "legacy_Compartments.txt"
+      output_parameters: "output_parameters.txt"  # This file is generated upon compilation
+      ratelaws: "ratelaws.txt"
+      species: "legacy_Species.txt"
+
+# Simulation
+simulation:
+    directory: "simulation"    
+    files:
+      genes_regulation: "legacy_GeneReg.txt"
+      omics: "legacy_OmicsData.txt"
+
+# Experiment
+experiments:
+    directory: "experiments"
+    name: "experiment_1"  # Optional
+
