@@ -82,6 +82,29 @@ class Model:
                     self.compilation_config[const.YAML_COMPILATION_FILES])
         self.compartments = self.load_compartments(
                             self.compilation_files[const.YAML_COMPARTMENTS])
+        # Simulation (Optional)
+        if const.YAML_SIMULATION_KEYWORD in self.configuration:
+            self.simulation_config = \
+                            self.configuration[const.YAML_SIMULATION_KEYWORD]
+            self.simulation_data_path = append_subfolder(
+                self.data_location,
+                self.simulation_config[const.YAML_SIMULATION_DATA_LOCATION])
+            check_path_existence(self.simulation_data_path)
+            self.simulation_files = self.load_simulation_files(
+                        self.simulation_data_path,
+                        self.simulation_config[const.YAML_SIMULATION_FILES])
+        # Experiments (Optional)
+        if const.YAML_EXPERIMENTS_KEYWORD in self.configuration:
+            self.experiments_config = \
+                            self.configuration[const.YAML_EXPERIMENTS_KEYWORD]
+            self.experiments_data_path = append_subfolder(
+                self.data_location,
+                self.experiments_config[const.YAML_EXPERIMENTS_DATA_LOCATION])
+            check_path_existence(self.experiments_data_path)
+            # Experiment name (Optional)
+            if const.YAML_EXPERIMENT_NAME in self.experiments_config:
+                self.experiment_name = \
+                    self.experiments_config[const.YAML_EXPERIMENT_NAME]
 
     def load_configuration(self, path: str | os.PathLike, config_name: str):
         """Load configuration from a YAML file
