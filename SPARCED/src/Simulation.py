@@ -31,11 +31,12 @@ class Simulation:
         Run the simulation
         """
 
-        model.setInitialStates(self.initial_conditions)
+        model.setInitialStates(initial_conditions)i # TODO add in arguments
         if self.verbose:
             print(f"SPARCED VERBOSE: {self.name} n°{self.number}" +
                    " is now ready to run.\n")
         # TODO: handle the case when no simulation files are provided
+        # TODO: pass content of those simulation files, we could load this only once
         genes_file = pd.read_csv(simulation_files[YAML_GENES_REGULATION], header=0, index_col=0, sep='\t')
         omics_file = pd.read_csv(simulation_files[YAML_OMICS_DATA], header=0, index_col=0, sep='\t')
         species_levels, genes_levels, time = RunSPARCED(self.is_deterministic,
@@ -55,26 +56,24 @@ class Simulation:
                    "is successfully saved.\n")
         return(species_level)
 
-    def save(self,
-             model,
-             species_levels: np.ndarray,
-             genes_levels: np.ndarray,
-             time: np.ndarray) -> None:
-    """
-    Save simulation output to a csv file
+    def save(self, model, species_levels: np.ndarray,
+             genes_levels: np.ndarray, time: np.ndarray) -> None:
+        """
+        Save simulation output to a csv file
 
-    Arguments:
-        model: The open model file.
-        species_levels: The species concentrations to save.
-        genes_levels: The genes concentrations to save.
-        time: The timepoints corresponding to the measures.
+        Arguments:
+            model: The open model file.
+            species_levels: The species concentrations to save.
+            genes_levels: The genes concentrations to save.
+            time: The timepoints corresponding to the measures.
 
-    Returns:
-        Nothing.
-    """
+        Returns:
+            Nothing.
+        """
 
-    file_name = self.name + '_' + str(self.number) + const.OUTPUT_FILE_EXTENSION
-    file_path = append_subfolder(self.output_directory, file_name)
-    simulation_results = combine_results(model, species_level, genes_level, time)
-    simulation_results.to_csv(file_path, sep="\t")
+        file_name = self.name + '_' + str(self.number) + const.OUTPUT_FILE_EXTENSION # TODO
+        file_path = append_subfolder(self.output_directory, file_name)
+        simulation_results = combine_results(model,
+                                             species_level, genes_level, time)
+        simulation_results.to_csv(file_path, sep='\t')
 
