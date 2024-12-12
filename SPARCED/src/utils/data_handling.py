@@ -3,33 +3,13 @@
 
 import os
 
+import libsbml
 import numpy as np
-import pandas as pd
 import petab
 from yaml import safe_load
 
 from utils.files_handling import *
 
-
-def convert_excel_to_tsv(f_excel: str) -> None:
-    """Convert an Excel file to TSV (SPARCED's standard input format)           
-
-    This function creates a new .txt file at the same location than the
-    passed Excel file.
-
-    Warning:
-        This is some old code written four years ago, it hasn't been
-        tested since.
-
-    Arguments:
-        f_excel: The Excel sheet path.
-
-    Returns:
-        Nothing.
-    """
-
-    data = pd.read_excel(f_excel, header=0, index_col=0)
-    data.to_csv((f_excel.split("."))[0] + ".txt", sep="\t")
 
 def load_configuration_file(self, path: str | os.PathLike, config_name: str):
         """Load configuration from a YAML file
@@ -91,4 +71,35 @@ def load_petab_conditions_file(file: str | os.PathLike, condition_id: str) -> di
         if k != "conditionName":
             data[k] = raw_data[k][condition_id]
     return(data)
+
+def load_species_from_sbml(sbml_path: str | os.PathLike
+                           ) -> dict[str, float]:
+    """Load species initial concentrations from an SBML file
+
+    Load species names and initial concentrations from the given SBML
+    file.
+
+    Arguments:
+        sbml_path:  The path to the SBML model.
+
+    Returns:
+        A dictionnary structured as key: name / value: initial
+        concentration.
+    """
+
+    # Load the SBML model
+    reader = libsbml.SBMLReader()
+    document = reader.readSBML(sbml_path)
+    model = document.getModel()
+    # Read species
+    species = {}
+    for specie_id in range(0, model.getNumSpecies()):
+        specie = model.getSpecies(specie_id)
+        name = specie.getId()
+        initial_concentration = specie.getInitialConcentration()
+        if name:
+            species[name] = float(initial_concentration)
+    # Any concentration bellow 1e-6 is considered as zero (0)
+    # species_initial_conditions[np.argwhere(species_initial_conditions <= 1e-6)] = 0.0
+    return(species)
 
