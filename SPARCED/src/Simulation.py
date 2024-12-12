@@ -10,6 +10,7 @@ import pandas as pd
 import constants as const
 
 from simulation.modules.RunSPARCED import RunSPARCED
+from utils.combine_results import combine_results
 from utils.files_handling import *
 
 
@@ -54,10 +55,13 @@ class Simulation:
                    "is successfully saved.\n")
         return(species_level)
 
-    def save(self, model, species_levels: np.ndarray,
-             genes_levels: np.ndarray, time: np.ndarray) -> None:
+    def save(self,
+             model,
+             species_levels: np.ndarray,
+             genes_levels: np.ndarray,
+             time: np.ndarray) -> None:
     """
-    Save results
+    Save simulation output to a csv file
 
     Arguments:
         model: The open model file.
@@ -69,67 +73,8 @@ class Simulation:
         Nothing.
     """
 
-    # Time
-    self._write_data_to_csv("TIME", time)
-    # Species
-    species_columns = [specie_id for specie_id in model.getStateIds()]
-    species_dataframe = pd.DataFrame(data=species_levels,
-                                     columms=species_columns)
-    self._write_data_to_csv("SPECIES", species_dataframe)
-    # Genes
-    genes_columns = [specie for _, specie in enumerate(species_columns) \
-                    if 'm_' in specie]
-    genes_colums = genes_colums[1:] # Skip header
-    activated = [gene.replace('m_', 'ag_') for gene in genes_columns]
-    inactivated = [gene.replace('m_', 'ig_') for gene in genes_columns]
-    genes_columns  np.concatenate((activated, inactivated), axis=None)
-    genes_dataframe = pd.DataFrance(data=genes_levels, columns=genes_columns)
-    self._write_data_to_csv("GENES", genes_dataframe)
-
-    def _write_data_to_csv(self, content_type: str, data) -> None:
-    """
-    Write data in CSV format
-
-    Warning:
-        This function's purpose is highly targeted for some specific
-        cases. Using it beyond the scope it was designed for may result
-        in unexpected behabior.
-        In case of modifications, please make sure to remain fully
-        compatible with the save() function of this class.
-
-    Note:
-        Supported `content_type` values are: "GENES", "SPECIES", and
-        "TIME". Any other value will result in an error.
-
-    Arguments:
-        content_type: The type of the data. See the __Note__ section
-                      for the supported strings.
-        data: The data to save.
-
-    Returns:
-        Nothing.
-    """
-
-    file_indicator = ""
-    file_extension = ""
-    match content_type:
-        case "GENES":
-            file_indicator = const.GENES_FILE_INDICATOR
-            file_extension = const.GENES_FILE_EXTENSION
-        case "SPECIES":
-            file_indicator = const.SPECIES_FILE_INDICATOR
-            file_extension = const.SPECIES_FILE_EXTENSION
-        case "TIME":
-            file_indicator = const.TIME_FILE_INDICATOR
-            file_extension = const.TIME_FILE_EXTENSION
-        case _:
-            raise ValueError("Unknown content type.")
-    # TODO: handle no number
-    file_name = self.name + file_indicator + str(self.number) + file_extension
+    file_name = self.name + '_' + str(self.number) + const.OUTPUT_FILE_EXTENSION
     file_path = append_subfolder(self.output_directory, file_name)
-    if content_type == "TIME": # np.ndarray
-        np.savetxt(file_path, data, newline='\t', fmt='%s')
-    else: # pd.DataFrame
-        data.to_csv(file_path, sep='\t')
-    check_path_existence(file_path)
+    simulation_results = combine_results(model, species_level, genes_level, time)
+    simulation_results.to_csv(file_path, sep="\t")
 
