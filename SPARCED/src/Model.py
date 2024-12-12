@@ -9,7 +9,7 @@ from yaml import safe_load
 
 import constants as const
 
-from utils.data_handling import load_input_data_file
+from utils.data_handling import load_input_data_file, load_configuration_file
 from utils.files_handling import *
 
 
@@ -105,23 +105,6 @@ class Model:
             if const.YAML_EXPERIMENT_NAME in self.experiments_config:
                 self.experiment_name = \
                     self.experiments_config[const.YAML_EXPERIMENT_NAME]
-
-    def load_configuration(self, path: str | os.PathLike, config_name: str):
-        """Load configuration from a YAML file
-
-        Arguments:
-            path: The path towards the model folder.
-            config_name: The name of the configuration file.
-
-        Returns:
-            A dictionnary representing the content of the YAML file.
-        """
-
-        config_path = append_subfolder(path, config_name)
-        check_path_existence(config_path)
-        with config_path.open() as config_file:
-            configuration = safe_load(config_file)
-        return(configuration)
 
     def load_compartments(self, path: str | os.PathLike) -> np.ndarray:
         """Load compartments from a PEtab file

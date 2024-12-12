@@ -6,6 +6,9 @@ import os
 import numpy as np
 import pandas as pd
 import petab
+from yaml import safe_load
+
+from utils.files_handling import *
 
 
 def convert_excel_to_tsv(f_excel: str) -> None:
@@ -27,6 +30,24 @@ def convert_excel_to_tsv(f_excel: str) -> None:
 
     data = pd.read_excel(f_excel, header=0, index_col=0)
     data.to_csv((f_excel.split("."))[0] + ".txt", sep="\t")
+
+def load_configuration_file(self, path: str | os.PathLike, config_name: str):
+        """Load configuration from a YAML file
+
+        Arguments:
+            path: The path towards the folder with the configuration..
+            config_name: The name of the configuration file.
+
+        Returns:
+            A dictionnary representing the content of the YAML
+            configuration file.
+        """
+
+        config_path = append_subfolder(path, config_name)
+        check_path_existence(config_path)
+        with config_path.open() as config_file:
+            configuration = safe_load(config_file)
+        return(configuration)
 
 def load_input_data_file(f_input: str | os.PathLike) -> np.ndarray:
     """Load the given input data file
