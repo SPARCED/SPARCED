@@ -4,8 +4,8 @@ import amici
 import numpy as np
 import pandas as pd
 
-from simulation.modules.SGEmodule import SGEmodule
-from simulation.modules.RunPrep import RunPrep
+from simulation.SGEmodule import SGEmodule
+from simulation.RunPrep import RunPrep
 
 def RunSPARCED(flagD,th,spdata,genedata,sbml_file,model, f_genereg: pd.DataFrame, f_omics: pd.DataFrame):
     ts = 30 # time-step to update mRNA numbers
