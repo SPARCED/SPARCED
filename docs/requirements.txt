@@ -1,5 +1,13 @@
 # Build the docs
+amici==0.11.12
+antimony==2.12.0.1
 myst-parser==2.0.0
+numpy==1.26.4
+pandas==2.2.1
+petab==0.5.0
+python-libsbml==5.20.4
+PyYAML==6.0.1
+rpds-py==0.21.0
 Sphinx==7.2.6
 sphinx-pdj-theme==0.4.0
 sphinxcontrib-serializinghtml==2.0.0
