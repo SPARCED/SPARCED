@@ -11,7 +11,7 @@ from yaml import safe_load
 from utils.files_handling import *
 
 
-def load_configuration_file(self, path: str | os.PathLike, config_name: str):
+def load_configuration_file(path: str | os.PathLike, config_name: str):
         """Load configuration from a YAML file
 
         Arguments:

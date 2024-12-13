@@ -39,6 +39,7 @@ YAML_RATELAWS = "ratelaws"
 YAML_SPECIES = "species"
 # Experiment keywords
 YAML_EXPERIMENT_DATA_LOCATION = "experiments"
+YAML_EXPERIMENT_KEYWORD = "experiment"
 YAML_EXPERIMENT_NAME = "name"
 # Simulation keywords
 YAML_SIMULATION_DATA_LOCATION = "directory"

@@ -65,9 +65,9 @@ class Model:
                  models_directory=const.DEFAULT_MODELS_DIRECTORY,
                  config_name=const.DEFAULT_CONFIG_FILE):
         # General settings
-        self.name = self.set_name(name)
+        self.name = self.sanitize_name(name)
         self.path = append_subfolder(models_directory, self.name)
-        self.configuration = self.load_configuration(self.path, config_name)
+        self.configuration = load_configuration_file(self.path, config_name)
         self.data_location = append_subfolder(self.path,
                                 self.configuration[const.YAML_DATA_LOCATION])
         # Compilation
@@ -94,9 +94,9 @@ class Model:
                         self.simulation_data_path,
                         self.simulation_config[const.YAML_SIMULATION_FILES])
         # Experiments (Optional)
-        if const.YAML_EXPERIMENTS_KEYWORD in self.configuration:
+        if const.YAML_EXPERIMENT_KEYWORD in self.configuration:
             self.experiments_config = \
-                            self.configuration[const.YAML_EXPERIMENTS_KEYWORD]
+                            self.configuration[const.YAML_EXPERIMENT_KEYWORD]
             self.experiments_data_path = append_subfolder(
                 self.data_location,
                 self.experiments_config[const.YAML_EXPERIMENTS_DATA_LOCATION])
