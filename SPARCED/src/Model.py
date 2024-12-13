@@ -16,14 +16,14 @@ from utils.files_handling import *
 # CUSTOM ERRORS
 
 class InvalidModelName(ValueError):
-    def __init__(self, message, model_name):
+    def __init__(self, messagei: str, model_name: str):
         self.message = message
         self.model_name = model_name
 
     def __str__(self):
-        return(f"SPARCED ERROR: Invalid model name.\n \
-                 Name: {self.model_name}\n \
-                 Error: {self.message}\n")
+        return(f"SPARCED ERROR: Invalid model name.\n"
+             + f"Name: {self.model_name}\n"
+             + f"Error: {self.message}\n")
 
 class EmptyModelName(InvalidModelName):
     pass
@@ -159,15 +159,16 @@ class Model:
         return(files)
 
     def sanitize_name(self, name: str) -> str:
-        """Sanitize a name
+        """ Sanitize model name
 
         Note:
-            As Antimony cannot handle the dash ('-') character as a
-            model name, any occurence of this character is replaced by
-            an underscore ('_').
+            Model name cannot be empty.
+            Model name should not contain a dash '-' character. This is
+            because Antimony cannot handle this character.
 
         Warning:
-            This might result into the breakage of some further
+            The replacement of dash '-' characters by underscore '_'
+            characters might result into breakage of some further
             functionalities.
 
         Arguments:
@@ -177,51 +178,16 @@ class Model:
             The corresponding sanitized name.
         """
 
-        name = name.replace('-', '_')
-        return(name)
-
-    def set_name(self, name: str) -> str:
-        """Set a name
-
-        Run validation and sanitization on the name if necessary.
-
-        Arguments:
-            name: The name.
-
-        Returns:
-            The name or a corresponding sanitized name.
-        """
-
         try:
-            self.validate_name(name)
-        except EmptyModelNamei as error:
+            if not name:
+                raise EmptyModelName("No model name provided.\n", name)
+            elif '-' in name:
+                raise InvalidModelName("Dash '-' character not supported.\n", name)
+        except EmptyModelName as error:
             print(error)
             sys.exit(0)
         except InvalidModelName as error:
             print(error)
-            name = self.sanitize_name(name)
+            name = name.replace('-', '_')
         return(name)
-
-    def validate_name(self, name: str) -> bool:
-        """Validate a naöe
-
-        Note:
-            Name cannot be empty.
-            Name should not contain a dash '-' character.
-
-        Argurments:
-            name: The name.
-
-        Returns:
-            A boolean representing the validity of the name.
-        """
-
-        is_valid = False
-        if not name:
-            raise EmptyModelName("No model name provided.\n", name)
-        elif '-' in name:
-            raise InvalidModelName("Dash '-' character not supported.\n", name)
-        else:
-            is_valid = True
-        return(is_valid)
 
