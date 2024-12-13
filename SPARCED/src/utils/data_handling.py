@@ -99,7 +99,7 @@ def load_species_from_sbml(sbml_path: str | os.PathLike
         initial_concentration = specie.getInitialConcentration()
         if name:
             species[name] = float(initial_concentration)
-    # Any concentration bellow 1e-6 is considered as zero (0)
+    # TODO: CHECK VALIDITY - Any concentration bellow 1e-6 is considered as zero (0)
     # species_initial_conditions[np.argwhere(species_initial_conditions <= 1e-6)] = 0.0
     return(species)
 

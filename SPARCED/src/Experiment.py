@@ -6,7 +6,6 @@ import sys
 
 import importlib
 import numpy as np
-import pandas as pd
 
 import constants as const
 from Simulation import Simulation as SparcedSimulation
@@ -50,38 +49,75 @@ class Experiment:
         self.simulation_files = simulation_files
         # Configuration unpacking
         self.exchange = self.configuration[const.YAML_EXPERIMENT_EXCHANGE]
-        self.nb_replica = self.sanitize_nb_replicates(int(
+        self.nb_replicates = self.sanitize_nb_replicates(int(
                     self.configuration[const.YAML_EXPERIMENT_NB_REPLICATES]))
         # TODO: Add stamp to output_directory name if necessary
-        # TODO TODO TODO TODO TODO
         self.output_directory = append_subfolder(self.configuration[
-                                    const.YAML_EXPERIMENT_OUTPUT_DIRECTORY,
-                                    self.name])
+                                    const.YAML_EXPERIMENT_OUTPUT_DIRECTORY],
+                                    self.name)
         self.verbose = self.configuration[const.YAML_EXPERIMENT_VERBOSE]
 
-    def run(self):
-        sys.path.insert(0, os.path.abspath(self.amici_path))
-        # TODO: fix the import on the next line to avoid messing up with paths
-        model_module = importlib.import_module(experiment.model_name)
-        model = model_module.getModel()
-        if self.verbose:
-            print(f"SPARCED VERBOSE: Success loading model {model_name}.\n")
-        model.setTimepoints(np.linspace(0, self.exchange, 2))
-        species_initial_conditions = load_species_from_sbml(self.sbml)
-        cell_number = 1
-        while cell_number <= self.nb_replica:
-            for step in self.configuration[const.YAML_EXPERIMENT_PROTOCOL]:
-                protocol = step[1] # Skip name
-                print(protocol)
-                #simulation = SparcedSimulation(NAME, self.output_directory, DURATION, IS_DETERMINISTIC, cell_number, self.verbose)
+    def apply_perturbations(self,
+                            species,
+                            perturbations_file,
+                            perturbations_id) -> dict[str, float]:
+        perturbations = load_petab_conditions_file(perturbations_file,
+                                                   perturbations_id)
+        for p_name, p_value in perturbations.items():
+            species[p_name] = p_value
+        return(species)
 
-            
-            # Apply perturbations
-            # Create a Simulation that matches
-            # Run that simulation
-            # Store concentrations levels
-        #del simulation
-        cell_number += 1
+    def extract_species_initial_conditions(self, species: dict[str, float]
+                                            ) -> np.ndarray:
+        initial_conditions = []
+        for value in species.values():
+            initial_conditions.append(value)
+        return(initial_conditions)
+
+    def load_model_module(self, model_name, amici_path, verbose):
+        sys.path.insert(0, os.path.abspath(amici_path))
+        # TODO: fix the import on the next line to avoid messing up with paths
+        model_module = importlib.import_module(model_name)
+        model = model_module.getModel()
+        if verbose:
+            print(f"SPARCED VERBOSE: Success loading model "
+                + f"{self.model_name}.\n")
+        return(model)
+
+    def run(self):
+        model = self.load_model_module(self.model_name,
+                                       self.amici_path,
+                                       self.verbose)
+        model.setTimepoints(np.linspace(0, self.exchange, 2))
+        species = load_species_from_sbml(self.sbml_path)
+        cell_number = 1
+        while cell_number <= self.nb_replicates:
+            for step in self.configuration[const.YAML_EXPERIMENT_PROTOCOL]:
+                protocol = step[1] # Skip step name
+                simulation = SparcedSimulation(
+                                protocol[const.YAML_PROTOCOL_NAME],
+                                self.output_directory,
+                                protocol[const.YAML_PROTOCOL_DURATION],
+                                protocol[const.YAML_PROTOCOL_IS_DETERMINISTIC],
+                                cell_number,
+                                self.verbose)
+                perturbations_file = append_subfolder(
+                                self.path,
+                                protocol[const.YAML_PROTOCOL_PERTURBATIONS])
+                species = self.apply_perturbations(
+                                species,
+                                perturbations_file,
+                                protocol[const.YAML_PROTOCOL_PERTURBATIONS_ID])
+                initial_conditions = self.extract_species_initial_conditions(species)
+                model.setInitialStates(initial_conditions)
+                if self.verbose:
+                    print(f"SPARCED VERBOSE: "
+                        + f"{protocol[const.YAML_PROTOCOL_NAME]} "
+                        + f"n°{cell_number} is now ready to run.\n")
+                print(simulation)
+                species = simulation.run(model, self.sbml_path, initial_conditions, self.simulation_files)
+                del simulation
+            cell_number += 1
 
     def sanitize_nb_replicates(self, nb_replicates: int) -> int:
         """Sanitize number of replicates
