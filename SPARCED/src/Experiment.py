@@ -11,6 +11,8 @@ import pandas as pd
 import constants as const
 from Simulation import Simulation as SparcedSimulation
 
+from compilation.amici_scripts.create import amici_create_folder
+from compilation.sbml_scripts.create import build_sbml_model_path
 from utils.data_handling import *
 from utils.files_handling import *
 
@@ -31,8 +33,8 @@ class Experiment:
                             self.name + const.DEFAULT_CONFIG_FILES_EXTENSION)
         # External data
         self.model_name = model_name
-        self.amici_path = amici_path
-        self.sbml_path = sbml_path
+        self.amici_path = amici_create_folder(model_name, model_path)
+        self.sbml_path = build_sbml_model_path(model_name, model_path)
         self.simulation_files = simulation_files
         # Configuration unpacking
         self.exchange
