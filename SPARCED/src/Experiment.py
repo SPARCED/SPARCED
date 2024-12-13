@@ -11,8 +11,8 @@ import pandas as pd
 import constants as const
 from Simulation import Simulation as SparcedSimulation
 
-from compilation.amici_scripts.create import amici_create_folder
-from compilation.sbml_scripts.create import build_sbml_model_path
+from compilation.amici_scripts.creation import amici_create_folder
+from compilation.sbml_scripts.creation import build_sbml_model_path
 from utils.data_handling import *
 from utils.files_handling import *
 
@@ -34,25 +34,26 @@ class NegativeNumberOfReplicates(ValueError):
 class Experiment:
     def __init__(self,
                  name: str,
-                 experiements_directory: str | os.PathLike,
+                 experiments_directory: str | os.PathLike,
                  model_name: str,
                  model_path: str | os.PathLike,
                  simulation_files: dict[str, str]):
         # General settings
         self.name = name
         self.path = append_subfolder(experiments_directory, self.name)
-        self.configuration = self.load_configuration_file(self.path,
-                            self.name + const.DEFAULT_CONFIG_FILES_EXTENSION)
+        self.configuration = load_configuration_file(self.path,
+                        self.name + const.DEFAULT_CONFIG_FILES_EXTENSION)
         # External data
         self.model_name = model_name
         self.amici_path = amici_create_folder(model_name, model_path)
         self.sbml_path = build_sbml_model_path(model_name, model_path)
         self.simulation_files = simulation_files
         # Configuration unpacking
-        self.exchange
+        self.exchange = self.configuration[const.YAML_EXPERIMENT_EXCHANGE]
         self.nb_replica = self.sanitize_nb_replicates(int(
-                    self.configuration[const.YAML_EXPERIMENT_NB_REPLICATES])
+                    self.configuration[const.YAML_EXPERIMENT_NB_REPLICATES]))
         # TODO: Add stamp to output_directory name if necessary
+        # TODO TODO TODO TODO TODO
         self.output_directory = append_subfolder(self.configuration[
                                     const.YAML_EXPERIMENT_OUTPUT_DIRECTORY,
                                     self.name])

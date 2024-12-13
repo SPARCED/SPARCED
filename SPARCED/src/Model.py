@@ -99,7 +99,7 @@ class Model:
                             self.configuration[const.YAML_EXPERIMENT_KEYWORD]
             self.experiments_data_path = append_subfolder(
                 self.data_location,
-                self.experiments_config[const.YAML_EXPERIMENTS_DATA_LOCATION])
+                self.experiments_config[const.YAML_EXPERIMENT_DATA_LOCATION])
             check_path_existence(self.experiments_data_path)
             # Experiment name (Optional)
             if const.YAML_EXPERIMENT_NAME in self.experiments_config:

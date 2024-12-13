@@ -14,7 +14,7 @@ ANTIMONY_HEADER = "Erdem et al., Nat Commun 2022" #TODO: Move to YAML
 DEFAULT_CONFIG_FILE = "config.yaml"
 DEFAULT_CONFIG_FILES_EXTENSION = ".yaml"
 DEFAULT_MODEL_NAME = "SPARCED_standard"
-DEFAULT_MODELS_DIRECTORY = "../../models/"
+DEFAULT_MODELS_DIRECTORY = "./../models/"
 
 # SBML
 SBML_FILE_PREFIX = "sbml_"
@@ -38,8 +38,8 @@ YAML_OUTPUT_PARAMETERS = "output_parameters"
 YAML_RATELAWS = "ratelaws"
 YAML_SPECIES = "species"
 # Experiment keywords
-YAML_EXPERIMENT_DATA_LOCATION = "experiments"
-YAML_EXPERIMENT_KEYWORD = "experiment"
+YAML_EXPERIMENT_DATA_LOCATION = "directory"
+YAML_EXPERIMENT_KEYWORD = "experiments"
 YAML_EXPERIMENT_NAME = "name"
 # Simulation keywords
 YAML_SIMULATION_DATA_LOCATION = "directory"

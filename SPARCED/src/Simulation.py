@@ -31,7 +31,7 @@ class Simulation:
         Run the simulation
         """
 
-        model.setInitialStates(initial_conditions)i # TODO add in arguments
+        model.setInitialStates(initial_conditions) # TODO add in arguments
         if self.verbose:
             print(f"SPARCED VERBOSE: {self.name} n°{self.number}" +
                    " is now ready to run.\n")
