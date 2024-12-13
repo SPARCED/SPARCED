@@ -1,5 +1,4 @@
 # Build the docs
-amici==0.11.12
 antimony==2.12.0.1
 myst-parser==2.0.0
 numpy==1.26.4
