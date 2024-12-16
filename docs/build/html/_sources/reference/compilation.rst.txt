@@ -1,73 +1,77 @@
 ===============================================================================
-Model Creation
+Compilation
 ===============================================================================
 
 General
 -------------------------------------------------------------------------------
 
-Main function for model creation
+.. autofunction:: compilation.create_model()
 
-.. autofunction:: create_model.create_model()
+.. autofunction:: compilation.create_and_compile()
 
-Launcher
-
-.. autofunction:: launcher.launch_model_creation()
-
-.. autofunction:: launcher.load_compilation_input_files() 
+.. autofunction:: compilation.compile_model() 
 
 AMICI
 -------------------------------------------------------------------------------
 
-Model compilation
+Creation
 
-.. autofunction:: model_compilation.compile_sbml_to_amici()
+.. autofunction:: creation.create_folder()
 
-Utilities
+Legacy
 
-.. autofunction:: amici_utils.define_observables()
-
-.. autofunction:: amici_utils.extract_amici_model_name()
-
+.. autofunction:: legacy.define_observables()
 
 Antimony
 -------------------------------------------------------------------------------
 
-Model writing
+Creation
 
-.. autofunction:: model_writing.antimony_write_model()
+.. autofunction:: creation.antimony_create_file()
 
+.. autofunction:: creation.antimony_write_file()
 
-Writing Utilities
+Definitions
 
-.. autofunction:: antimony_write.antimony_write_constant_variables()
+.. autofunction:: definitions.define_compartments()
 
-.. autofunction:: antimony_write.antimony_write_compartments_names()
+.. autofunction:: definitions.define_species()
 
-.. autofunction:: antimony_write.antimony_write_reactions()
+.. autofunction:: definitions.define_units()
 
-.. autofunction:: antimony_write.antimony_write_species_names()
+Initial Conditions
 
-.. autofunction:: antimony_write.antimony_write_unit_definitions()
+.. autofunction:: initial_conditions.set_compartments_ic()
 
-Writing Initial Conditions Utilities
+.. autofunction:: initial_conditions.set_reactions_ic()
 
-.. autofunction:: antimony_write_IC.antimony_write_compartments_IC()
+.. autofunction:: initial_conditions.set_species_ic()
 
-.. autofunction:: antimony_write_IC.antimony_write_reactions_IC()
+.. autofunction:: reactions._read_reactions_species()
 
-.. autofunction:: antimony_write_IC.antimony_write_species_IC()
+.. autofunction:: reactions.write_reactions()
 
+Conversion scripts
+-------------------------------------------------------------------------------
+
+.. autofunction:: antimony_to_sbml.convert_antimony_to_sbml()
+
+.. autofunction:: sbml_to_amici.sbml_convert_to_amici()
 
 SBML
 -------------------------------------------------------------------------------
 
-Model annotation
+Annotations
 
-.. autofunction:: model_annotation.sbml_annotate_model()
+.. autofunction:: annotations.sbml_annotate_model()
 
-Utilities
+.. autofunction:: annotations.write_compartments_annotations()
 
-.. autofunction:: sbml_utils.write_compartments_annotations()
+.. autofunction:: annotations.write_species_annotations()
 
-.. autofunction:: sbml_utils.write_species_annotations()
+Creation
+
+.. autofunction:: creation.build_sbml_model_path()
+
+.. autofunction:: creation.get_sbml_model_path()
 

@@ -1,6 +1,4 @@
 # Configuration file for the Sphinx documentation builder.
-#
-# For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 import pathlib
@@ -12,27 +10,23 @@ import sphinx_pdj_theme
 # -- Path setup --------------------------------------------------------------
 sys.path.insert(0, pathlib.Path(__file__).parents[1].resolve().as_posix())
 sys.path.insert(0, os.path.abspath('../../'))
-sys.path.insert(0, os.path.abspath('../../src'))
-sys.path.insert(0, os.path.abspath('../../src/compilation'))
-sys.path.insert(0, os.path.abspath('../../src/compilation/amici_scripts'))
-sys.path.insert(0, os.path.abspath('../../src/compilation/antimony_scripts'))
-sys.path.insert(0, os.path.abspath('../../src/compilation/sbml_scripts'))
-sys.path.insert(0, os.path.abspath('../../src/simulation'))
-sys.path.insert(0, os.path.abspath('../../src/simulation/utils'))
-sys.path.insert(0, os.path.abspath('../../src/utils'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/simulation'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/visualization'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/creation'))
-sys.path.insert(0, os.path.abspath('../../src/benchmarking/sedml'))
-
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/amici_scripts'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/antimony_scripts'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/conversion_scripts'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/compilation/sbml_scripts'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/simulation'))
+sys.path.insert(0, os.path.abspath('../../SPARCED/src/utils'))
+sys.path.insert(0, os.path.abspath('../../benchmarks'))
+sys.path.insert(0, os.path.abspath('../../benchmarks/benchmarks_utils'))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'SPARCED'
-copyright = '2024, The Birtwistle Lab'
-author = 'The Birtwistle Lab'
+copyright = '2024, The Birtwistle & Erdem Labs'
+author = 'The Birtwistle & Erdem Labs'
 release = '2.0.0'
 
 # -- General configuration ---------------------------------------------------

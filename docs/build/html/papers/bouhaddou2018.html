@@ -85,24 +85,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../contents.html">Contents Table</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -110,6 +98,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="summary.html">Replicate Published Papers</a><ul class="current">
@@ -170,14 +162,14 @@
 	  </dark-mode-toggle>
 	</div>
   <section id="bouhaddou-2018-model">
-<h1>Bouhaddou 2018 model<a class="headerlink" href="#bouhaddou-2018-model" title="Permalink to this heading">¶</a></h1>
+<h1>Bouhaddou 2018 model<a class="headerlink" href="#bouhaddou-2018-model" title="Link to this heading">¶</a></h1>
 <p>Files to exactly replicate Bouhaddou2018 model are located in SPARCED Brep
 [TODO: explain how to get back to prior version].</p>
 <p>In this format, mRNAs and protein species are tracked in separate variables.
 The number of species and ratelaws are also the same Bouhaddou2018 model.
 SPARCED is the new, updated and cleaned up version.</p>
 <section id="model-testing-and-performance">
-<h2>Model Testing and Performance<a class="headerlink" href="#model-testing-and-performance" title="Permalink to this heading">¶</a></h2>
+<h2>Model Testing and Performance<a class="headerlink" href="#model-testing-and-performance" title="Link to this heading">¶</a></h2>
 <p>The Docker image of the model and simulations are tested with multiple machines
 (see bellow). The simulation times are:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Model</span> <span class="n">file</span> <span class="n">creation</span> <span class="n">time</span><span class="p">:</span> <span class="o">~</span> <span class="mi">2</span> <span class="nb">min</span>
@@ -231,7 +223,7 @@ Nvidia GTX 1660ti GPU, 64-bit operating system</p></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -254,16 +246,10 @@ Nvidia GTX 1660ti GPU, 64-bit operating system</p></li>
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

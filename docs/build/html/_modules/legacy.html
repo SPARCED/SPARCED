@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>amici_utils &mdash; SPARCED 2.0.0 documentation</title>
+  <title>legacy &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -83,24 +83,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contents.html">Contents Table</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -108,6 +96,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -167,7 +159,7 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <h1>Source code for amici_utils</h1><div class="highlight"><pre>
+  <h1>Source code for legacy</h1><div class="highlight"><pre>
 <span></span><span class="c1">#/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
@@ -175,7 +167,9 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<div class="viewcode-block" id="define_observables"><a class="viewcode-back" href="../reference/compilation.html#amici_utils.define_observables">[docs]</a><span class="k">def</span> <span class="nf">define_observables</span><span class="p">(</span><span class="n">f_observables</span><span class="p">,</span> <span class="n">compartments</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
+<div class="viewcode-block" id="define_observables">
+<a class="viewcode-back" href="../reference/compilation.html#legacy.define_observables">[docs]</a>
+<span class="k">def</span> <span class="nf">define_observables</span><span class="p">(</span><span class="n">f_observables</span><span class="p">,</span> <span class="n">compartments</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create observables for the AMICI model</span>
 
 <span class="sd">    Warning:</span>
@@ -217,30 +211,6 @@
     
     <span class="k">return</span><span class="p">(</span><span class="n">observables</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="extract_amici_model_name"><a class="viewcode-back" href="../reference/compilation.html#amici_utils.extract_amici_model_name">[docs]</a><span class="k">def</span> <span class="nf">extract_amici_model_name</span><span class="p">(</span><span class="n">output_dir_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract the model name from the given AMICI output directory path</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        The model name is considered to be preceded by the last &quot;amici_&quot; prefix</span>
-<span class="sd">        found in the file path string.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">        output_dir_path: The AMICI output directory path.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The extracted model name.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">sub_file_name</span> <span class="o">=</span> <span class="n">output_dir_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;amici_&quot;</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_file_name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: AMICI model name could not be extracted.</span><span class="se">\n</span><span class="s2"> Please make </span><span class="se">\</span>
-<span class="s2">               sure you passed all the required arguments. Current value for </span><span class="se">\</span>
-<span class="s2">               the output directory name is: </span><span class="si">{name}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">output_dir_path</span><span class="p">))</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">model_name</span> <span class="o">=</span> <span class="n">sub_file_name</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sub_file_name</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -252,7 +222,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -275,16 +245,10 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

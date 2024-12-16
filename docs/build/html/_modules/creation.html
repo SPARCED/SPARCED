@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>sbml_utils &mdash; SPARCED 2.0.0 documentation</title>
+  <title>creation &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -83,24 +83,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contents.html">Contents Table</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -108,6 +96,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -167,55 +159,68 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <h1>Source code for sbml_utils</h1><div class="highlight"><pre>
-<span></span><span class="c1">#/usr/bin/env python</span>
+  <h1>Source code for creation</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">import</span> <span class="nn">libsbml</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">constants</span> <span class="k">as</span> <span class="nn">const</span>
+<span class="kn">from</span> <span class="nn">Model</span> <span class="kn">import</span> <span class="n">Model</span> <span class="k">as</span> <span class="n">SparcedModel</span>
+
+<span class="kn">from</span> <span class="nn">utils.files_handling</span> <span class="kn">import</span> <span class="n">append_subfolder</span>
+
+<span class="c1"># EXPLANATIONS --------------------------------------------------------</span>
+<span class="c1"># The existence of two functions is on purpose and intends to cover</span>
+<span class="c1"># several usecases:</span>
+<span class="c1">#   1. Build the path towards an SBML file independently from a model,</span>
+<span class="c1">#      for example if you want to convert an Antimony file into the</span>
+<span class="c1">#      SBML format regardless of the SPARCED pipeline.</span>
+<span class="c1">#      This is the purpose of &#39;build_sbml_model_path()&#39;.</span>
+<span class="c1">#   2. Build the path towards an SBML file that corresponds to a model,</span>
+<span class="c1">#      for example if you want to find where a model&#39;s SBML file should</span>
+<span class="c1">#      be located based on the informations passed into this model.</span>
+<span class="c1">#      This is the purpose of &#39;get_sbml_model_path()&#39;.</span>
+<span class="c1"># Hence, despite the apparent redundancy of those two functions, please</span>
+<span class="c1"># do not remove them as they are complementary.</span>
+<span class="c1"># ---------------------------------------------------------------------</span>
 
 
-<div class="viewcode-block" id="write_compartments_annotations"><a class="viewcode-back" href="../reference/compilation.html#sbml_utils.write_compartments_annotations">[docs]</a><span class="k">def</span> <span class="nf">write_compartments_annotations</span><span class="p">(</span><span class="n">f_sbml</span><span class="p">,</span> <span class="n">compartments</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set compartments annotations in the given SBML file</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        The first row is considered as a header, and hence it is skipped.</span>
-<span class="sd">        Compartment names should be located on the first column of the array.</span>
-<span class="sd">        Annotations should be located on the third column of the array.</span>
+<div class="viewcode-block" id="build_sbml_model_path">
+<a class="viewcode-back" href="../reference/compilation.html#creation.build_sbml_model_path">[docs]</a>
+<span class="k">def</span> <span class="nf">build_sbml_model_path</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reconstruct the path towards an SBML file</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        f_sbml: The loaded SBML file.</span>
-<span class="sd">        compartments: Content of the compartments input file.</span>
+<span class="sd">        model_name: The name of the SBML model.</span>
+<span class="sd">        model-path: The path towards the SBML model&#39;s directory.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Nothing.</span>
+<span class="sd">        The path of the corresponding SBML file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">compartments</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-        <span class="n">f_sbml</span><span class="o">.</span><span class="n">getCompartment</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">setAnnotation</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
+    <span class="n">sbml_file_name</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">SBML_FILE_PREFIX</span> <span class="o">+</span> <span class="n">model_name</span> \
+                   <span class="o">+</span> <span class="n">const</span><span class="o">.</span><span class="n">SBML_FILE_SUFFIX</span>
+    <span class="n">sbml_file_path</span> <span class="o">=</span> <span class="n">append_subfolder</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">sbml_file_name</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">sbml_file_path</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="write_species_annotations"><a class="viewcode-back" href="../reference/compilation.html#sbml_utils.write_species_annotations">[docs]</a><span class="k">def</span> <span class="nf">write_species_annotations</span><span class="p">(</span><span class="n">f_sbml</span><span class="p">,</span> <span class="n">species</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set species annotations in the given SBML file</span>
 
-<span class="sd">    Note:</span>
-<span class="sd">        The first row is considered as a header, and hence it is skipped.</span>
-<span class="sd">        Annotations should be located between the 4th and the last column of</span>
-<span class="sd">        the array.</span>
+<div class="viewcode-block" id="get_sbml_model_path">
+<a class="viewcode-back" href="../reference/compilation.html#creation.get_sbml_model_path">[docs]</a>
+<span class="k">def</span> <span class="nf">get_sbml_model_path</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">SparcedModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="o">|</span><span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the path for an SBML file corresponding to a</span>
+<span class="sd">    SparcedModel.Model object</span>
 
 <span class="sd">    Arguments:</span>
-<span class="sd">        f_sbml: The loaded SBML file.</span>
-<span class="sd">        species: Content of the species input file.</span>
+<span class="sd">        model: A SparcedModel.Model object.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Nothing.</span>
+<span class="sd">        The path of the corresponding SBML file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">species</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-        <span class="n">annotation</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)):</span>
-            <span class="n">specie_annotation</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">specie_annotation</span> <span class="o">==</span> <span class="s2">&quot;nan&quot;</span> <span class="ow">or</span> <span class="n">specie_annotation</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-                <span class="n">annotation</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
-        <span class="n">f_sbml</span><span class="o">.</span><span class="n">getSpecies</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">setAnnotation</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span></div>
+    <span class="k">return</span><span class="p">(</span><span class="n">build_sbml_model_path</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="p">))</span></div>
+
 
 </pre></div>
 
@@ -227,7 +232,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -250,16 +255,10 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

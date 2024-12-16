@@ -15,6 +15,7 @@ def define_compartments(file: IO[str], compartments: np.ndarray) -> None:
         First row is considered as a header, and hence it is skipped.
         First column of the array should contain the compartments names.
         Second column of the array should contain the compartments volumes.
+    
     Arguments:
         file: The open Antimony file.
         compartments: Content of the input compartments file structured
