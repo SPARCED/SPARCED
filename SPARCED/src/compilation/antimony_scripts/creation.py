@@ -5,10 +5,9 @@ import os
 
 import numpy as np
 
+import compilation.antimony_scripts as antimony_script
 import constants as const
 from Model import Model as SparcedModel
-
-import compilation.antimony_scripts as antimony_script
 from utils.data_handling import load_input_data_file
 from utils.files_handling import append_subfolder
 
@@ -24,15 +23,17 @@ def antimony_create_file(model: SparcedModel) -> (str, np.ndarray):
         Antimony_file_path & species.
     """
 
-    antimony_file_name = const.ANTIMONY_FILE_PREFIX + model.name \
-                         + const.ANTIMONY_FILE_SUFFIX
+    antimony_file_name = (
+        const.ANTIMONY_FILE_PREFIX + model.name + const.ANTIMONY_FILE_SUFFIX
+    )
     antimony_file_path = append_subfolder(model.path, antimony_file_name)
     species = antimony_write_file(model, antimony_file_path)
-    return(antimony_file_path, species)
+    return (antimony_file_path, species)
 
-def antimony_write_file(model: SparcedModel,
-                        antimony_file_path: str | os.PathLike
-                        ) -> np.ndarray:
+
+def antimony_write_file(
+    model: SparcedModel, antimony_file_path: str | os.PathLike
+) -> np.ndarray:
     """Generate an Antimony file
 
     Note:
@@ -55,26 +56,29 @@ def antimony_write_file(model: SparcedModel,
         antimony_script.define_compartments(file, model.compartments)
         # Species
         species = load_input_data_file(
-                model.compilation_files[const.YAML_SPECIES])
+            model.compilation_files[const.YAML_SPECIES]
+        )
         antimony_script.define_species(file, species)
         # Reactions
         param_names, param_values = antimony_script.write_reactions(
-                        file,
-                        model.compilation_files[const.YAML_RATELAWS],
-                        model.compilation_files[const.YAML_OUTPUT_PARAMETERS])
+            file,
+            model.compilation_files[const.YAML_RATELAWS],
+            model.compilation_files[const.YAML_OUTPUT_PARAMETERS],
+        )
         # Initial conditions
         antimony_script.set_compartments_ic(file, model.compartments)
         antimony_script.set_species_ic(file, species)
         antimony_script.set_reactions_ic(file, param_names, param_values)
         # Units definition
         antimony_script.define_units(file)
-        file.write("\nend") 
-    return(species)
+        file.write("\nend")
+    return species
 
 
-if __name__ == '__main__':
-    model = SparcedModel.Model(const.DEFAULT_MODEL_NAME,
-                               const.DEFAULT_MODELS_DIRECTORY,
-                               const.DEFAULT_CONFIG_FILE)
+if __name__ == "__main__":
+    model = SparcedModel.Model(
+        const.DEFAULT_MODEL_NAME,
+        const.DEFAULT_MODELS_DIRECTORY,
+        const.DEFAULT_CONFIG_FILE,
+    )
     antimony_create_file(model)
-
