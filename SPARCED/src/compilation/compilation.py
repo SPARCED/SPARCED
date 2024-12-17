@@ -5,11 +5,13 @@ import os
 import sys
 
 import constants as const
-from Model import Model as SparcedModel
-
 from compilation.antimony_scripts.creation import antimony_create_file
-from compilation.conversion_scripts import *
+from compilation.conversion_scripts import (
+    convert_antimony_to_sbml,
+    convert_sbml_to_amici,
+)
 from compilation.sbml_scripts.annotations import sbml_annotate_model
+from Model import Model as SparcedModel
 from utils.arguments import parse_args
 
 
@@ -78,7 +80,7 @@ def compile_model(model: SparcedModel, verbose:bool
         Nothings.
     """
 
-    if model == None:
+    if model is None:
         raise ValueError("No model provided.")
     try:
         antimony_file_path, species = antimony_create_file(model)
