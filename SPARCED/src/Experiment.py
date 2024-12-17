@@ -114,7 +114,6 @@ class Experiment:
                     print("SPARCED VERBOSE: "
                         + f"{protocol[const.YAML_PROTOCOL_NAME]} "
                         + f"n°{cell_number} is now ready to run.\n")
-                print(simulation)
                 species = simulation.run(model, self.sbml_path, initial_conditions, self.simulation_files)
                 del simulation
             cell_number += 1
