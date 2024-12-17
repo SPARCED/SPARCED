@@ -15,9 +15,11 @@ from Model import Model as SparcedModel
 from utils.arguments import parse_args
 
 
-def create_model(model_name=const.DEFAULT_MODEL_NAME,
-                 models_directory=const.DEFAULT_MODELS_DIRECTORY,
-                 config_name=const.DEFAULT_CONFIG_FILE) -> SparcedModel:
+def create_model(
+    model_name=const.DEFAULT_MODEL_NAME,
+    models_directory=const.DEFAULT_MODELS_DIRECTORY,
+    config_name=const.DEFAULT_CONFIG_FILE,
+) -> SparcedModel:
     """Create a SparcedModel.Model object
 
     Arguments:
@@ -31,12 +33,14 @@ def create_model(model_name=const.DEFAULT_MODEL_NAME,
     """
 
     model = SparcedModel(model_name, models_directory, config_name)
-    return(model)
+    return model
 
-def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
-                             models_directory=const.DEFAULT_MODELS_DIRECTORY,
-                             config_name=const.DEFAULT_CONFIG_FILE
-                             ) -> (SparcedModel, str | os.PathLike):
+
+def create_and_compile_model(
+    model_name=const.DEFAULT_MODEL_NAME,
+    models_directory=const.DEFAULT_MODELS_DIRECTORY,
+    config_name=const.DEFAULT_CONFIG_FILE,
+) -> (SparcedModel, str | os.PathLike):
     """Create a SparcedModel.Model object and compile it
 
     Note:
@@ -65,10 +69,10 @@ def create_and_compile_model(model_name=const.DEFAULT_MODEL_NAME,
     model = create_model(model_name, models_directory, config_name)
     verbose = args.verbose
     compiled_model_path = compile_model(model, verbose)
-    return(model, compiled_model_path)
+    return (model, compiled_model_path)
 
-def compile_model(model: SparcedModel, verbose:bool
-                  ) -> str | os.PathLike: 
+
+def compile_model(model: SparcedModel, verbose: bool) -> str | os.PathLike:
     """Generate Antimony, SBML and AMICI models corresponding to a
     SparcedModel.Model object
 
@@ -84,21 +88,18 @@ def compile_model(model: SparcedModel, verbose:bool
         raise ValueError("No model provided.")
     try:
         antimony_file_path, species = antimony_create_file(model)
-        sbml_file_path = convert_antimony_to_sbml(antimony_file_path,
-                                                  model.name,
-                                                  model.path,
-                                                  verbose)
+        sbml_file_path = convert_antimony_to_sbml(
+            antimony_file_path, model.name, model.path, verbose
+        )
     except RuntimeError as error:
         print(f"SPARCED ERROR: {error}\n")
         sys.exit(0)
     sbml_annotate_model(str(sbml_file_path), model.compartments, species)
-    amici_folder_path = convert_sbml_to_amici(sbml_file_path,
-                                              model.name,
-                                              model.path,
-                                              verbose)
-    return(amici_folder_path)
+    amici_folder_path = convert_sbml_to_amici(
+        sbml_file_path, model.name, model.path, verbose
+    )
+    return amici_folder_path
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     create_and_compile_model()
-
