@@ -4,12 +4,12 @@
 import os
 
 import constants as const
-
 from utils.files_handling import append_subfolder
 
 
-def amici_create_folder(model_name: str, model_path: str | os.PathLike
-                        ) -> str | os.PathLike:
+def amici_create_folder(
+    model_name: str, model_path: str | os.PathLike
+) -> str | os.PathLike:
     """Generate the AMICI folder path corresponding to a
     SparcedModel.Model object
 
@@ -23,5 +23,4 @@ def amici_create_folder(model_name: str, model_path: str | os.PathLike
 
     amici_folder_name = const.AMICI_FOLDER_PREFIX + model_name
     amici_folder_path = append_subfolder(model_path, amici_folder_name)
-    return(amici_folder_path)
-
+    return amici_folder_path
