@@ -1,0 +1,21 @@
+# SPARCED's Ruff configuration
+
+indent-width = 4
+line-length = 79
+show-fixes = true
+
+[format]
+docstring-code-format = true
+docstring-code-line-length = 72
+indent-style = "space"
+line-ending = "lf"
+preview = false
+quote-style = "double"
+skip-magic-trailing-comma = false
+
+[lint]
+extend-select = ["E501", "I"]
+
+[lint.ruff]
+parenthesize-tuple-in-subscript = true
+
