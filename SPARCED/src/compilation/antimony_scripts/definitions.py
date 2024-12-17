@@ -15,7 +15,7 @@ def define_compartments(file: IO[str], compartments: np.ndarray) -> None:
         First row is considered as a header, and hence it is skipped.
         First column of the array should contain the compartments names.
         Second column of the array should contain the compartments volumes.
-    
+
     Arguments:
         file: The open Antimony file.
         compartments: Content of the input compartments file structured
@@ -29,6 +29,7 @@ def define_compartments(file: IO[str], compartments: np.ndarray) -> None:
     for c in range(1, len(compartments)):
         file.write(f"Compartment {compartments[c][0]}; ")
     file.write("\n")
+
 
 def define_species(file: IO[str], species: np.ndarray) -> None:
     """Write species names and affiliated compartments in the given
@@ -55,6 +56,7 @@ def define_species(file: IO[str], species: np.ndarray) -> None:
         file.write(f"Species {value[0]} in {value[1]};\n")
     file.write("\n")
 
+
 def define_units(file: IO[str]) -> None:
     """Write unit definitions in the given Antimony file
 
@@ -70,4 +72,3 @@ def define_units(file: IO[str]) -> None:
     file.write(f"  unit volume = {const.UNIT_VOLUME};\n")
     file.write(f"  unit substance = {const.UNIT_SUBSTANCE};\n")
     file.write(f"  unit nM = {const.UNIT_DEF_NM};\n")
-
