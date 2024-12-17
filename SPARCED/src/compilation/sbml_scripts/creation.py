@@ -5,7 +5,6 @@ import os
 
 import constants as const
 from Model import Model as SparcedModel
-
 from utils.files_handling import append_subfolder
 
 # EXPLANATIONS --------------------------------------------------------
@@ -24,8 +23,9 @@ from utils.files_handling import append_subfolder
 # ---------------------------------------------------------------------
 
 
-def build_sbml_model_path(model_name: str, model_path: str | os.PathLike
-                         ) -> str | os.PathLike:
+def build_sbml_model_path(
+    model_name: str, model_path: str | os.PathLike
+) -> str | os.PathLike:
     """Reconstruct the path towards an SBML file
 
     Arguments:
@@ -36,12 +36,14 @@ def build_sbml_model_path(model_name: str, model_path: str | os.PathLike
         The path of the corresponding SBML file.
     """
 
-    sbml_file_name = const.SBML_FILE_PREFIX + model_name \
-                   + const.SBML_FILE_SUFFIX
+    sbml_file_name = (
+        const.SBML_FILE_PREFIX + model_name + const.SBML_FILE_SUFFIX
+    )
     sbml_file_path = append_subfolder(model_path, sbml_file_name)
-    return(sbml_file_path)
+    return sbml_file_path
 
-def get_sbml_model_path(model: SparcedModel) -> str|os.PathLike:
+
+def get_sbml_model_path(model: SparcedModel) -> str | os.PathLike:
     """Generate the path for an SBML file corresponding to a
     SparcedModel.Model object
 
@@ -52,5 +54,4 @@ def get_sbml_model_path(model: SparcedModel) -> str|os.PathLike:
         The path of the corresponding SBML file.
     """
 
-    return(build_sbml_model_path(model.name, model.path))
-
+    return build_sbml_model_path(model.name, model.path)
