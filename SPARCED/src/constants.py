@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 
@@ -8,7 +8,7 @@ AMICI_FOLDER_PREFIX = "amici_"
 # ANTIMONY
 ANTIMONY_FILE_PREFIX = "ant_"
 ANTIMONY_FILE_SUFFIX = ".txt"
-ANTIMONY_HEADER = "Erdem et al., Nat Commun 2022" #TODO: Move to YAML
+ANTIMONY_HEADER = "Erdem et al., Nat Commun 2022"  # TODO: Move to YAML
 
 # DEFAULT GENERAL VALUES
 DEFAULT_CONFIG_FILE = "config.yaml"
@@ -65,4 +65,3 @@ YAML_PROTOCOL_IS_DETERMINISTIC = "deterministic"
 YAML_PROTOCOL_NAME = "name"
 YAML_PROTOCOL_PERTURBATIONS = "perturbations"
 YAML_PROTOCOL_PERTURBATIONS_ID = "perturbations_id"
-
