@@ -7,7 +7,7 @@ import numpy as np
 
 
 def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
-    """ Write compartments initial conditions in the given Antimony file
+    """Write compartments initial conditions in the given Antimony file
 
     Note:
         First row is considered as a header, and hence it is skipped.
@@ -30,9 +30,11 @@ def set_compartments_ic(file: IO[str], compartments: dict[str, str]) -> None:
 
     file.write("\n")
 
-def set_reactions_ic(file: IO[str], p_names: np.ndarray,
-                     p_values: np.ndarray) -> None:
-    """Write reactions parameters initial conditions in the given 
+
+def set_reactions_ic(
+    file: IO[str], p_names: np.ndarray, p_values: np.ndarray
+) -> None:
+    """Write reactions parameters initial conditions in the given
        Antimony file
 
     Warning:
@@ -52,6 +54,7 @@ def set_reactions_ic(file: IO[str], p_names: np.ndarray,
     for count, name in enumerate(p_names):
         file.write(f"{name} = {np.double(p_values[count]):.6e};\n")
     file.write("\n")
+
 
 def set_species_ic(file: IO[str], species: np.ndarray) -> None:
     """Write species initial concentrations in the given Antimony file
@@ -73,4 +76,3 @@ def set_species_ic(file: IO[str], species: np.ndarray) -> None:
     for i, value in enumerate(species[1:]):
         file.write(f"{value[0]} = {np.double(value[2]):.6e};\n")
     file.write("\n")
-
