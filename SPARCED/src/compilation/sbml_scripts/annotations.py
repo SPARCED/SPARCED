@@ -5,8 +5,9 @@ import libsbml
 import numpy as np
 
 
-def sbml_annotate_model(file_path: str, compartments: np.ndarray,
-                                        species: np.ndarray) -> None:
+def sbml_annotate_model(
+    file_path: str, compartments: np.ndarray, species: np.ndarray
+) -> None:
     """Annotate species and compartments of the given SBML model
 
     Arguments:
@@ -29,6 +30,7 @@ def sbml_annotate_model(file_path: str, compartments: np.ndarray,
     writer = libsbml.SBMLWriter()
     writer.writeSBML(document, file_path)
 
+
 def write_compartments_annotations(file, compartments: np.ndarray) -> None:
     """Set compartments annotations in the given SBML file
 
@@ -49,6 +51,7 @@ def write_compartments_annotations(file, compartments: np.ndarray) -> None:
 
     for row in compartments[1:]:
         file.getCompartment(row[0]).setAnnotation(row[2])
+
 
 def write_species_annotations(file, species: np.ndarray) -> None:
     """Set species annotations in the given SBML file
@@ -73,4 +76,3 @@ def write_species_annotations(file, species: np.ndarray) -> None:
             if annotation:
                 all_annotations += " " + row[column]
         file.getSpecies(row[0]).setAnnotation(all_annotations)
-
