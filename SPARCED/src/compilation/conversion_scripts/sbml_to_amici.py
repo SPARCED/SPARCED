@@ -42,7 +42,7 @@ def convert_sbml_to_amici(sbml_file_path: str, model_name: str, model_path: str 
     # Compilation
     importer.sbml2amici(model_name, amici_folder_path, verbose=verbose)
     if verbose:
-        print(f"SPARCED VERBOSE: Finished to convert SBML file of model " +
+        print("SPARCED VERBOSE: Finished to convert SBML file of model " +
               f"{model_name} to AMICI folder.\n")
 
     return(amici_folder_path)

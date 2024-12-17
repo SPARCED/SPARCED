@@ -5,7 +5,6 @@ import os
 import sys
 
 import numpy as np
-from yaml import safe_load
 
 import constants as const
 
@@ -21,7 +20,7 @@ class InvalidModelName(ValueError):
         self.model_name = model_name
 
     def __str__(self):
-        return(f"SPARCED ERROR: Invalid model name.\n"
+        return("SPARCED ERROR: Invalid model name.\n"
              + f"Name: {self.model_name}\n"
              + f"Error: {self.message}\n")
 

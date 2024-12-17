@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
 
-import importlib
-import numpy as np
 
 import constants as const
 from Experiment import Experiment as SparcedExperiment

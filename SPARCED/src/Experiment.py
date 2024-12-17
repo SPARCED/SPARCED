@@ -24,7 +24,7 @@ class NegativeNumberOfReplicates(ValueError):
         self.nb_replicates = int(nb_replicates)
 
     def __str__(self):
-        return(f"SPARCED ERROR: Negative number of replicates.\n"
+        return("SPARCED ERROR: Negative number of replicates.\n"
              + f"Number of replicates: {self.nb_replicates}\n"
              + f"Error: {self.message}\n")
 
@@ -80,7 +80,7 @@ class Experiment:
         model_module = importlib.import_module(model_name)
         model = model_module.getModel()
         if verbose:
-            print(f"SPARCED VERBOSE: Success loading model "
+            print("SPARCED VERBOSE: Success loading model "
                 + f"{self.model_name}.\n")
         return(model)
 
@@ -111,7 +111,7 @@ class Experiment:
                 initial_conditions = self.extract_species_initial_conditions(species)
                 model.setInitialStates(initial_conditions)
                 if self.verbose:
-                    print(f"SPARCED VERBOSE: "
+                    print("SPARCED VERBOSE: "
                         + f"{protocol[const.YAML_PROTOCOL_NAME]} "
                         + f"n°{cell_number} is now ready to run.\n")
                 print(simulation)

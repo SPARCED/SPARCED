@@ -3,7 +3,6 @@
 
 import os
 
-import antimony
 import numpy as np
 
 import constants as const

@@ -11,7 +11,6 @@ from compilation.antimony_scripts.creation import antimony_create_file
 from compilation.conversion_scripts import *
 from compilation.sbml_scripts.annotations import sbml_annotate_model
 from utils.arguments import parse_args
-from utils.files_handling import append_subfolder
 
 
 def create_model(model_name=const.DEFAULT_MODEL_NAME,
