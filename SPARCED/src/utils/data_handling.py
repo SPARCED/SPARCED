@@ -2,92 +2,32 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
 
+import libsbml
 import numpy as np
-import pandas as pd
-from pathlib import Path
-import yaml
+import petab
+from yaml import safe_load
 
-def append_subfolder(folder: str | os.PathLike, subfolder: str,
-                     abort_on_error: bool=False) -> str | os.PathLike:          
-    """Append a subfolder to a folder path
+from utils.files_handling import *
 
-    Arguments:
-        folder: The folder path.
-        subfolder: The subfolder name.
-        abort_on_error: Abort process when encountering an error.
 
-    Returns:
-        The subfolder's path.
-    """
+def load_configuration_file(path: str | os.PathLike, config_name: str):
+        """Load configuration from a YAML file
 
-    folder = Path(folder)
-    try:
-        assert folder.exists()
-    except:
-        print("WARNING: Folder doesn't exist. This is never normal.\nFolder name:{name}."
-              .format(name=folder))
-        if abort_on_error:
-            print("Aborting now.")
-            sys.exit(0)
+        Arguments:
+            path: The path towards the folder with the configuration..
+            config_name: The name of the configuration file.
 
-    subfolder_path = folder / subfolder
-    try:
-        assert subfolder_path.exists()
-    except:
-        print("WARNING: Subfolder doesn't exist yet. This is normal if you are creating a new subfolder.\nSubfolder name: {name}."
-              .format(name=subfolder))
-        if abort_on_error:
-            print("Aborting now.")
-            sys.exit(0)
+        Returns:
+            A dictionnary representing the content of the YAML
+            configuration file.
+        """
 
-    return(subfolder_path)
-
-def convert_excel_to_tsv(f_excel: str) -> None:
-    """Convert an Excel file to TSV (SPARCED's standard input format)           
-
-    This function creates a new .txt file at the same location than the passed  
-    Excel file.
-
-    Warning:
-        This is some old code written four years ago, it hasn't been tested since.
-
-    Arguments:
-        f_excel: The Excel sheet path.
-
-    Returns:
-        Nothing.
-    """
-
-    data = pd.read_excel(f_excel, header=0, index_col=0)
-    data.to_csv((f_excel.split("."))[0] + ".txt", sep="\t") 
-
-def load_input_data_config(data_path: str | os.PathLike, yaml_name: str) -> dict[str, str | os.PathLike]:
-    """Load input data files paths configuration
-
-    Note:
-        File structure is assumed to be organized as follow:
-        > model folder
-        > data subfolder containing a YAML configuration file describing input
-        data organization
-        > model compilation and simulation sub-subfolders containing the input
-        data files
-
-    Arguments:
-        data_path: The input data files folder path.
-        yaml_name: The YAML configuration file name.
-
-    Returns:
-        A dictionnary containing all the input data file paths.
-    """
-
-    # Load data and YAML paths
-    yaml_path = append_subfolder(data_path, yaml_name, True)
-    # Read input data files structure in YAML configuration file
-    with yaml_path.open() as f:
-        input_files_configuration = yaml.safe_load(f)
-    return(input_files_configuration)
+        config_path = append_subfolder(path, config_name)
+        check_path_existence(config_path)
+        with config_path.open() as config_file:
+            configuration = safe_load(config_file)
+        return(configuration)
 
 def load_input_data_file(f_input: str | os.PathLike) -> np.ndarray:
     """Load the given input data file
@@ -104,4 +44,62 @@ def load_input_data_file(f_input: str | os.PathLike) -> np.ndarray:
     data = np.array([np.array(line.strip().split("\t"))
                     for line in open(f_input)], dtype="object")
     return(data)
+
+def load_petab_conditions_file(file: str | os.PathLike, condition_id: str) -> dict[str, str]:
+    """Load a PEtab conditions file for a specific condition
+
+    Arguments:
+        file: The path to the PEtab conditions file.
+        condition_id: The ConditionId of the row to load.
+
+    Returns:
+        A dictionnary structured as key: parameter / value: value.
+    """
+
+    # ConditionId is mandatory
+    if not condition_id:
+        raise ValueError("Missing ConditionId.")
+        return(None)
+    raw_data = petab.v1.get_condition_df(file)
+    try:
+        petab.v1.check_condition_df(raw_data)
+    except AssertionError as error:
+        print(error)
+        return(None)
+    data = {}
+    for k in raw_data.keys():
+        if k != "conditionName":
+            data[k] = raw_data[k][condition_id]
+    return(data)
+
+def load_species_from_sbml(sbml_path: str | os.PathLike
+                           ) -> dict[str, float]:
+    """Load species initial concentrations from an SBML file
+
+    Load species names and initial concentrations from the given SBML
+    file.
+
+    Arguments:
+        sbml_path:  The path to the SBML model.
+
+    Returns:
+        A dictionnary structured as key: name / value: initial
+        concentration.
+    """
+
+    # Load the SBML model
+    reader = libsbml.SBMLReader()
+    document = reader.readSBML(sbml_path)
+    model = document.getModel()
+    # Read species
+    species = {}
+    for specie_id in range(0, model.getNumSpecies()):
+        specie = model.getSpecies(specie_id)
+        name = specie.getId()
+        initial_concentration = specie.getInitialConcentration()
+        if name:
+            species[name] = float(initial_concentration)
+    # TODO: CHECK VALIDITY - Any concentration bellow 1e-6 is considered as zero (0)
+    # species_initial_conditions[np.argwhere(species_initial_conditions <= 1e-6)] = 0.0
+    return(species)
 

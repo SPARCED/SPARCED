@@ -85,24 +85,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../contents.html">Contents Table</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -110,6 +98,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -170,16 +162,16 @@
 	  </dark-mode-toggle>
 	</div>
   <section id="data">
-<h1>Data<a class="headerlink" href="#data" title="Permalink to this heading">¶</a></h1>
+<h1>Data<a class="headerlink" href="#data" title="Link to this heading">¶</a></h1>
 <p>Input data files are written in TSV (tab separated value) format.
 A conversion script from Excel to TSV is available in the
 <a class="reference internal" href="utils.html"><span class="std std-doc">general utilities</span></a>.</p>
 <section id="core">
-<h2>Core<a class="headerlink" href="#core" title="Permalink to this heading">¶</a></h2>
+<h2>Core<a class="headerlink" href="#core" title="Link to this heading">¶</a></h2>
 <p>The core subfolder is dedicated to input files necessary for model creation
 (core SPARCED).</p>
 <section id="compartments">
-<h3>Compartments<a class="headerlink" href="#compartments" title="Permalink to this heading">¶</a></h3>
+<h3>Compartments<a class="headerlink" href="#compartments" title="Link to this heading">¶</a></h3>
 <p>The columns are corresponding to:</p>
 <ul class="simple">
 <li><p>Compartment’s name</p></li>
@@ -188,10 +180,10 @@ A conversion script from Excel to TSV is available in the
 </ul>
 </section>
 <section id="observables">
-<h3>Observables<a class="headerlink" href="#observables" title="Permalink to this heading">¶</a></h3>
+<h3>Observables<a class="headerlink" href="#observables" title="Link to this heading">¶</a></h3>
 </section>
 <section id="ratelaws">
-<h3>Ratelaws<a class="headerlink" href="#ratelaws" title="Permalink to this heading">¶</a></h3>
+<h3>Ratelaws<a class="headerlink" href="#ratelaws" title="Link to this heading">¶</a></h3>
 <p>The columns are corresponding to:</p>
 <ul class="simple">
 <li><p>Reaction’s name</p></li>
@@ -203,7 +195,7 @@ the equation</p></li>
 </ul>
 </section>
 <section id="species">
-<h3>Species<a class="headerlink" href="#species" title="Permalink to this heading">¶</a></h3>
+<h3>Species<a class="headerlink" href="#species" title="Link to this heading">¶</a></h3>
 <p>The columns are corresponding to:</p>
 <ul class="simple">
 <li><p>Specie’s name</p></li>
@@ -214,17 +206,17 @@ the equation</p></li>
 </ul>
 </section>
 <section id="stoicmat">
-<h3>StoicMat<a class="headerlink" href="#stoicmat" title="Permalink to this heading">¶</a></h3>
+<h3>StoicMat<a class="headerlink" href="#stoicmat" title="Link to this heading">¶</a></h3>
 <p><strong>WARNING:</strong> This file is <em>huge</em>, do not attempt to open with anything else but
 Excel, or be prepared for a crash. You have been warned.</p>
 </section>
 </section>
 <section id="simulation">
-<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading">¶</a></h2>
+<h2>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">¶</a></h2>
 <p>The simulation subfolder is dedicated to input files necessary to run a SPARCED
 model simulation.</p>
 <section id="ligands">
-<h3>ligands<a class="headerlink" href="#ligands" title="Permalink to this heading">¶</a></h3>
+<h3>ligands<a class="headerlink" href="#ligands" title="Link to this heading">¶</a></h3>
 <p>The columns are corresponding to:</p>
 <ul class="simple">
 <li><p>Ligand’s human-readable name</p></li>
@@ -233,11 +225,11 @@ model simulation.</p>
 </ul>
 </section>
 <section id="genereg">
-<h3>GeneReg<a class="headerlink" href="#genereg" title="Permalink to this heading">¶</a></h3>
+<h3>GeneReg<a class="headerlink" href="#genereg" title="Link to this heading">¶</a></h3>
 <p>Don’t touch this.</p>
 </section>
 <section id="omicsdata">
-<h3>OmicsData<a class="headerlink" href="#omicsdata" title="Permalink to this heading">¶</a></h3>
+<h3>OmicsData<a class="headerlink" href="#omicsdata" title="Link to this heading">¶</a></h3>
 <p>Don’t touch this.</p>
 </section>
 </section>
@@ -261,7 +253,7 @@ model simulation.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -284,16 +276,10 @@ model simulation.</p>
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

@@ -8,7 +8,6 @@ Contents
    :maxdepth: 1
 
    about
-   contents
    installation-guide
    tutorials/summary
    papers/summary

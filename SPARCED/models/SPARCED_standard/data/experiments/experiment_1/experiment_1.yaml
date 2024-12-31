@@ -1,0 +1,21 @@
+# Experiment 1
+# Run SPARCED standard with the default settings of the Lineage Paper
+# Last update: 2024-12-12
+
+# Experiment settings
+name: "Experiment_1-Default"
+stamp: True
+output_directory: "./../results/"
+population_size: 1
+verbose: True
+exchange: 30
+
+# Protocol steps
+protocol:
+  - 1:
+      name: "Simulation"
+      deterministic: True
+      duration: 24.0
+      perturbations: "perturbations.tsv"
+      perturbations_id: "default"
+

@@ -13,6 +13,8 @@ are sub-models of the large-scale mechanistic model.
 
 ## Instructions & Beginners
 
+To learn 
+
 A beginner's installation guide of SPARCED for newcomers in computer science
 is available [here](installation-guide.md)
 
@@ -40,9 +42,10 @@ particular in the [section dedicated to our papers](papers/summary.rst).
 SPARCED is a product of the [Birtwistle Lab](http://www.birtwistlelab.com/).
 
 We greatly appreciate the help from multiple colloborators, including:
-  - the [Feltus Lab](https://www.clemson.edu/science/departments/genetics-biochemistry/people/profiles/ffeltus)
-  - the [Hasenauer Lab](https://www.mathematics-and-life-sciences.uni-bonn.de/en/group-members/jan-hasenauer)
-  - [Robert C. Blake](https://bbs.llnl.gov/RobertBlake.html) from LLNL
+
+- the [Feltus Lab](https://www.clemson.edu/science/departments/genetics-biochemistry/people/profiles/ffeltus)
+- the [Hasenauer Lab](https://www.mathematics-and-life-sciences.uni-bonn.de/en/group-members/jan-hasenauer)
+- [Robert C. Blake](https://bbs.llnl.gov/RobertBlake.html) from LLNL
 
 _This material is based on work supported by the National Science Foundation
 under Grant Nos. MRI# 2024205, MRI# 1725573, and CRI# 2010270._

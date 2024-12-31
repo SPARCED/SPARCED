@@ -7,21 +7,28 @@ Arguments
 
 .. autofunction:: arguments.parse_args()
 
+Combine results
+-------------------------------------------------------------------------------
+
+.. autofunction:: combine_results.combine_results()
+
 Data handling
 -------------------------------------------------------------------------------
 
-.. autofunction:: data_handling.append_subfolder()
-
-.. autofunction:: data_handling.convert_excel_to_tsv()
-
-.. autofunction:: data_handling.load_input_data_config()
+.. autofunction:: data_handling.load_configuration_file()
 
 .. autofunction:: data_handling.load_input_data_file()
 
-Sanitization
+.. autofunction:: data_handling.load_petab_conditions_file()
+
+.. autofunction:: data_handling.load_species_from_sbml()
+
+Files handling
 -------------------------------------------------------------------------------
 
-.. autofunction:: sanitize.sanitize_model_name()
+.. autofunction:: files_handling.append_subfolder()
 
-.. autofunction:: sanitize.sanitize_popsize()
+.. autofunction:: files_handling.check_path_existence()
+
+.. autofunction:: files_handling.convert_excel_to_tsv()
 
