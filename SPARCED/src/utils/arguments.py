@@ -17,47 +17,47 @@ def parse_args():
     parser = argparse.ArgumentParser()
     
     # Compilation
-    parser.add_argument('-o', '--output_parameters',    default="out_Parameters.txt",
+    parser.add_argument('-o', '--output_parameters',
                         help="desired name for the output parameters file")
     
     # Compilation & simulation
-    parser.add_argument('-i', '--input_data',           default="data/",
+    parser.add_argument('-i', '--input_data',
                         help="name of the model subfolder containing the \
                               SPARCED formated input files")
-    parser.add_argument('-m', '--model',                default="./../models/",
+    parser.add_argument('-m', '--model',
                         help="relative path to the directory containing the \
                               models folders")
-    parser.add_argument('-n', '--name',                  default=None,
+    parser.add_argument('-n', '--name',
                         help="name of the model\nCompilation: desired name for \
                               the generated model (should be identical to \
                               model's folder name).\nSimulation: name of the \
                               input model.")
-    parser.add_argument('-v', '--verbose',              action='store_false',
+    parser.add_argument('-v', '--verbose',
                         help="don't display additional details during execution")
-    parser.add_argument('-w', '--wild',                 action='store_true',
+    parser.add_argument('-w', '--wild',
                         help="UNDER CONSTRUCTION\nrunning wild (without SPARCED \
                               hard-coded values/behaviors")
-    parser.add_argument('-y', '--yaml',                 default="config.yaml",
+    parser.add_argument('-y', '--yaml',
                         help="name of the YAML file with all the input file names")
 
     # Simulation
     # -- Uppercase
-    parser.add_argument('-D', '--deterministic',        action="store_false",
+    parser.add_argument('-D', '--deterministic',
                         help="don't run simulation in deterministic mode")
-    parser.add_argument('-P', '--perturbations',        default=None,
+    parser.add_argument('-P', '--perturbations',
                         help="name of the perturbations file to use (will \
                               override default)")
     # -- Lowercase
-    parser.add_argument('-p', '--population_size',      default=1,
+    parser.add_argument('-p', '--population_size',
                         help="desired cell population size for the simulation")
-    parser.add_argument('-r', '--results',              default="./../results/New-Simulation/",
+    parser.add_argument('-r', '--results',
                         help="relative  path to the directory where simulation \
                               results will be saved")
-    parser.add_argument('-s', '--simulation',           default="GrowthStim",
+    parser.add_argument('-s', '--simulation',
                         help="desired name for the simulation output files")
-    parser.add_argument('-t', '--time',                 default=1.0,
+    parser.add_argument('-t', '--time',
                         help="desired virtual duration of the simulation (h)")
-    parser.add_argument('-x', '--exchange',             default=30,
+    parser.add_argument('-x', '--exchange',
                          help="timeframe between modules information exchange \
                                during the simulation")
 

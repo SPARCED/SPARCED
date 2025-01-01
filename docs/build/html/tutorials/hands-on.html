@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="summary.html"/>
-        <link rel="next" title="Replicate Published Papers" href="../papers/summary.html"/>
+        <link rel="next" title="Using the SPARCED Command Line Interface (CLI)" href="command-line.html"/>
         <link rel="prev" title="Jupyter Notebook" href="notebook.html"/>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -85,24 +85,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../contents.html">Contents Table</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -110,6 +98,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="summary.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -170,8 +162,112 @@
 	  </dark-mode-toggle>
 	</div>
   <section id="sparced-hands-on-primer-tutorial">
-<h1>SPARCED Hands-On Primer Tutorial<a class="headerlink" href="#sparced-hands-on-primer-tutorial" title="Permalink to this heading">¶</a></h1>
-<p>How to run the Python files</p>
+<h1>SPARCED Hands-On Primer Tutorial<a class="headerlink" href="#sparced-hands-on-primer-tutorial" title="Link to this heading">¶</a></h1>
+<p>Welcome to the SPARCED Hands-On Primer Tutorial! This guide walks you through
+how to run the Python files in the SPARCED package for tasks like model compilation,
+simulations, benchmarking, and visualizations.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<p>Before running the Python files, ensure you have the following installed:</p>
+<ol class="arabic">
+<li><p><strong>Python 3.10+</strong></p></li>
+<li><p>Required dependencies from <cite>requirements.txt</cite>:
+Run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="o">./</span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+<li><p>SPARCED source code properly cloned or installed.</p></li>
+</ol>
+</section>
+<section id="running-python-scripts">
+<h2>Running Python Scripts<a class="headerlink" href="#running-python-scripts" title="Link to this heading">¶</a></h2>
+<p>The SPARCED package provides various utilities for simulations, benchmarks,
+and data visualization. Below are the key Python files and their purposes.</p>
+<section id="model-compilation">
+<h3>Model Compilation<a class="headerlink" href="#model-compilation" title="Link to this heading">¶</a></h3>
+<p>To compile a model using Antimony or SBML, use the following script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/compilation/create_model.py<span class="w"> </span>--input<span class="w"> </span>&lt;path/to/model/file&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;path/to/output&gt;
+</pre></div>
+</div>
+<p>Replace <cite>&lt;path/to/model/file&gt;</cite> with the location of your Antimony or SBML model and <cite>&lt;path/to/output&gt;</cite> with the desired output path.</p>
+</section>
+<section id="simulation-execution">
+<h3>Simulation Execution<a class="headerlink" href="#simulation-execution" title="Link to this heading">¶</a></h3>
+<p>Run a simulation using pre-defined models and conditions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/simulation/run_model.py<span class="w"> </span>--model<span class="w"> </span>SPARCED_standard<span class="w"> </span>--condition<span class="w"> </span>&lt;condition_file&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>–model</cite>: Specify the model name (e.g., <cite>SPARCED_standard</cite>).</p></li>
+<li><p><cite>–condition</cite>: Path to the condition file for the simulation.</p></li>
+</ul>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/simulation/run_model.py<span class="w"> </span>--model<span class="w"> </span>SPARCED_standard<span class="w"> </span>--condition<span class="w"> </span>data/simulation/standard_GeneReg.txt
+</pre></div>
+</div>
+</section>
+<section id="benchmark-generation">
+<h3>Benchmark Generation<a class="headerlink" href="#benchmark-generation" title="Link to this heading">¶</a></h3>
+<p>To generate a benchmark, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/benchmarking/creation/new-benchmark-generator.py<span class="w"> </span>--output<span class="w"> </span>benchmarks/new_benchmark.yml
+</pre></div>
+</div>
+<p>This will create a new benchmark YAML file in the specified location.</p>
+</section>
+<section id="benchmark-validation">
+<h3>Benchmark Validation<a class="headerlink" href="#benchmark-validation" title="Link to this heading">¶</a></h3>
+<p>To validate a model against a benchmark:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/benchmarking/simulation/model-benchmark-validation.py<span class="w"> </span>--benchmark<span class="w"> </span>benchmarks/new_benchmark.yml
+</pre></div>
+</div>
+</section>
+<section id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">¶</a></h3>
+<p>Visualize simulation results using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/benchmarking/visualization/visualization.py<span class="w"> </span>--input<span class="w"> </span>&lt;path/to/results&gt;<span class="w"> </span>--output<span class="w"> </span>&lt;path/to/visualization&gt;
+</pre></div>
+</div>
+<p>This script processes the results and generates graphical outputs.</p>
+</section>
+</section>
+<section id="key-examples">
+<h2>Key Examples<a class="headerlink" href="#key-examples" title="Link to this heading">¶</a></h2>
+<p>Here are some hands-on examples to get you started:</p>
+<ol class="arabic">
+<li><p><strong>Running a Simple Model Simulation</strong>:
+.. code-block:: bash</p>
+<blockquote>
+<div><p>python src/simulation/run_model.py –model SPARCED_standard –condition data/simulation/standard_GeneReg.txt</p>
+</div></blockquote>
+</li>
+<li><p><strong>Validating a Model Against Benchmarks</strong>:
+.. code-block:: bash</p>
+<blockquote>
+<div><p>python src/simulation/model-benchmark-validation.py –benchmark benchmarks/TRAIl_percent-death.yml</p>
+</div></blockquote>
+</li>
+<li><p><strong>Generating a Custom Visualization</strong>:
+.. code-block:: bash</p>
+<blockquote>
+<div><p>python src/visualization/visualization.py –input results/New-Simulation/Control –output figures/Control_Visualization.png</p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>For more details, refer to the <strong>SPARCED Documentation</strong>.</p></li>
+<li><p>Check out the Jupyter notebooks in the <cite>examples/notebooks</cite> directory for interactive tutorials.</p></li>
+</ul>
+</section>
+<section id="questions-or-issues">
+<h2>Questions or Issues?<a class="headerlink" href="#questions-or-issues" title="Link to this heading">¶</a></h2>
+<p>If you encounter any issues, feel free to open an issue on the GitHub repository
+or contact the SPARCED support team.</p>
+</section>
 </section>
 
 
@@ -180,7 +276,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../papers/summary.html" class="btn btn-neutral float-right" title="Replicate Published Papers">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="command-line.html" class="btn btn-neutral float-right" title="Using the SPARCED Command Line Interface (CLI)">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="notebook.html" class="btn btn-neutral" title="Jupyter Notebook"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -192,7 +288,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -215,16 +311,10 @@
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

@@ -36,7 +36,6 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
-        <link rel="up" title="Contents Table" href="../contents.html"/>
         <link rel="next" title="Data" href="data.html"/>
         <link rel="prev" title="Mutsuddy 2023 model" href="../papers/mutsuddy2023.html"/>
 
@@ -85,24 +84,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../contents.html">Contents Table</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -110,6 +97,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -170,14 +161,14 @@
 	  </dark-mode-toggle>
 	</div>
   <section id="reference-documentation">
-<h1>Reference Documentation<a class="headerlink" href="#reference-documentation" title="Permalink to this heading">¶</a></h1>
+<h1>Reference Documentation<a class="headerlink" href="#reference-documentation" title="Link to this heading">¶</a></h1>
 <section id="models">
-<h2>Models<a class="headerlink" href="#models" title="Permalink to this heading">¶</a></h2>
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">¶</a></h2>
 <p>SPARCED-standard will soon be the reference model.
 In the meantime, we consider SPARCED-notebook as the reference.</p>
 </section>
 <section id="input-files">
-<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this heading">¶</a></h2>
+<h2>Input files<a class="headerlink" href="#input-files" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="data.html">Data</a><ul>
@@ -201,25 +192,63 @@ In the meantime, we consider SPARCED-notebook as the reference.</p>
 </div>
 </section>
 <section id="source-code">
-<h2>Source code<a class="headerlink" href="#source-code" title="Permalink to this heading">¶</a></h2>
+<h2>Source code<a class="headerlink" href="#source-code" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">General Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#arguments">Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#data-handling">Data handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#sanitization">Sanitization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#arguments">Arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#arguments.parse_args"><code class="docutils literal notranslate"><span class="pre">parse_args()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="compilation.html">Model Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#combine-results">Combine results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#combine_results.combine_results"><code class="docutils literal notranslate"><span class="pre">combine_results()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#data-handling">Data handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#data_handling.load_configuration_file"><code class="docutils literal notranslate"><span class="pre">load_configuration_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#data_handling.load_input_data_file"><code class="docutils literal notranslate"><span class="pre">load_input_data_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#data_handling.load_petab_conditions_file"><code class="docutils literal notranslate"><span class="pre">load_petab_conditions_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#data_handling.load_species_from_sbml"><code class="docutils literal notranslate"><span class="pre">load_species_from_sbml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#files-handling">Files handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#files_handling.append_subfolder"><code class="docutils literal notranslate"><span class="pre">append_subfolder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#files_handling.check_path_existence"><code class="docutils literal notranslate"><span class="pre">check_path_existence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#files_handling.convert_excel_to_tsv"><code class="docutils literal notranslate"><span class="pre">convert_excel_to_tsv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="compilation.html">Compilation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html#general">General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation.html#amici">AMICI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation.html#antimony">Antimony</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compilation.html#sbml">SBML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#amici">AMICI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#legacy.define_observables"><code class="docutils literal notranslate"><span class="pre">define_observables()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="simulation.html">Model Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#antimony">Antimony</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#definitions.define_compartments"><code class="docutils literal notranslate"><span class="pre">define_compartments()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#definitions.define_species"><code class="docutils literal notranslate"><span class="pre">define_species()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#definitions.define_units"><code class="docutils literal notranslate"><span class="pre">define_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#initial_conditions.set_compartments_ic"><code class="docutils literal notranslate"><span class="pre">set_compartments_ic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#initial_conditions.set_reactions_ic"><code class="docutils literal notranslate"><span class="pre">set_reactions_ic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#initial_conditions.set_species_ic"><code class="docutils literal notranslate"><span class="pre">set_species_ic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#reactions._read_reactions_species"><code class="docutils literal notranslate"><span class="pre">_read_reactions_species()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#reactions.write_reactions"><code class="docutils literal notranslate"><span class="pre">write_reactions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#conversion-scripts">Conversion scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html#sbml">SBML</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#annotations.sbml_annotate_model"><code class="docutils literal notranslate"><span class="pre">sbml_annotate_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#annotations.write_compartments_annotations"><code class="docutils literal notranslate"><span class="pre">write_compartments_annotations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#annotations.write_species_annotations"><code class="docutils literal notranslate"><span class="pre">write_species_annotations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#creation.build_sbml_model_path"><code class="docutils literal notranslate"><span class="pre">build_sbml_model_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compilation.html#creation.get_sbml_model_path"><code class="docutils literal notranslate"><span class="pre">get_sbml_model_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">Simulation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html#general">General</a></li>
-<li class="toctree-l2"><a class="reference internal" href="simulation.html#utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation.html#modules">Modules</a></li>
 </ul>
 </li>
@@ -246,7 +275,7 @@ In the meantime, we consider SPARCED-notebook as the reference.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -269,16 +298,10 @@ In the meantime, we consider SPARCED-notebook as the reference.</p>
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

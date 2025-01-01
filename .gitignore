@@ -2,6 +2,8 @@
 *.py[cod]
 __pycache__/
 
+# AMICI builds
+SPARCED/models/*/amici_*/
 # Simulation results except the README in default folder and some results for
 # default control simulations
 SPARCED/results/*

@@ -36,9 +36,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="SPARCED 2.0.0 documentation" href="index.html"/>
-        <link rel="up" title="Contents Table" href="contents.html"/>
         <link rel="next" title="Tutorials" href="tutorials/summary.html"/>
-        <link rel="prev" title="Contents Table" href="contents.html"/>
+        <link rel="prev" title="About" href="about.html"/>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="cache-control" content="public" />
@@ -85,24 +84,12 @@
 <li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="contents.html">Contents Table</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="about.html">About</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#clean">Clean</a></li>
 </ul>
@@ -110,6 +97,10 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="papers/summary.html">Replicate Published Papers</a><ul>
@@ -170,47 +161,172 @@
 	  </dark-mode-toggle>
 	</div>
   <section id="the-sparced-installation-guide-for-absolute-beginners">
-<h1>The SPARCED Installation Guide for Absolute Beginners<a class="headerlink" href="#the-sparced-installation-guide-for-absolute-beginners" title="Permalink to this heading">¶</a></h1>
-<p><em>Written by Aurore Amrit</em></p>
+<h1>The SPARCED Installation Guide for Absolute Beginners<a class="headerlink" href="#the-sparced-installation-guide-for-absolute-beginners" title="Link to this heading">¶</a></h1>
+<p><em>Written by Aurore Amrit</em> <em>and Jonah R. Huggins</em></p>
 <p>Hi! 🌄</p>
-<p>If you are new to SPARCED and wish to get a working environment setup on
-Ubuntu, then you are at the right place!
-This is a document I wrote as a summer intern at the Birtwistle lab to make the
-process easier for newcomers like me 🙂</p>
+<p>If you are new to SPARCED and wish to get a working environment setup on Ubuntu, then you are at the right place! This document was started by Aurore while she was a summer intern at the Birtwistle lab to make the process easier for newcomers like you 🙂</p>
 <section id="environment">
-<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this heading">¶</a></h2>
-<p>I am running an <strong>Ubuntu 22.04 LTS</strong> virtual machine on <strong>VirtualBox</strong>.
-This guide should work even if you are using another hypervisor than VirtualBox
-or that you are running Ubuntu directly on your computer.
-With a few arrangements, the described steps should also work for other
-versions of Ubuntu or any Debian-based Linux distribution.</p>
-<p>:warning: Make sure you have enough disk space (30 GB is a minimum) :warning:</p>
-<p>Before starting, open a terminal and run the following commands to make sure
-everything is up to date:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-sudo<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">¶</a></h2>
+<p>Kinetic models are often reliant on Ordinary Differential Equation solvers to perform the simulated ‘heavy-lifting’. Given the Large-scale nature of the SPARCED model, we use <a class="reference external" href="https://amici.readthedocs.io/en/v0.11.12/">AMICI (v0.11.12)</a>, an ODE solver specifically made for large-scale kinetic modeling. However, AMICI’s reliance on C/C++ solvers as well as BLAS, complicate straightforward installation outside of Ubuntu. Therefore, we have tried to be as accomodating as possible to the broad community in enabling cross-platform support.</p>
+<p>SPARCED runs seamlessly on <strong>Ubuntu 22.04 LTS</strong> , either as a virtual machine (i.e. <strong>VirtualBox</strong>), a container (<strong>Singularity</strong> or <strong>Dockerfile</strong>), or on <strong>Windows-Subsystem for Linux.</strong> This guide should work even if you are using another hypervisor than VirtualBox or that you are running Ubuntu directly on your computer. With a few arrangements, the described steps should also work for other versions of Ubuntu or any Debian-based Linux distribution.</p>
+<p>⚠️ Make sure you have enough disk space (30 GB is a minimum) ⚠️</p>
+</section>
+<section id="command-line-interface-installation">
+<h2>Command Line Interface Installation<a class="headerlink" href="#command-line-interface-installation" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"> <span class="pre">requirements.txt</span></code> file provided in the project root directory is an executable BASH script designed to install SPARCED dependencies in Ubuntu 22.04. For cross-platform compatibility on Linux, MacOS, Windows, and Linux-based High-Performance Computing (HPC), instructions have been provided (including Docker and Singularity).</p>
+<p>Links to <a class="reference external" href="https://docs.docker.com/get-started/get-docker/">Docker</a>, <a class="reference external" href="https://docs.sylabs.io/guides/3.0/user-guide/installation.html">Singularity</a>, and <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> installations are provided below for convenience.</p>
+<section id="ubuntu-22-04-and-windows-subsystem-for-linux-wsl2">
+<h3>Ubuntu 22.04 and Windows-Subsystem for Linux (WSL2)<a class="headerlink" href="#ubuntu-22-04-and-windows-subsystem-for-linux-wsl2" title="Link to this heading">¶</a></h3>
+<p>Installation is seamless when using the BASH-executable <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file, which is reliant on a <a class="reference external" href="https://peps.python.org/pep-0621/">PEP 621 - adherent</a> <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file located adjacently in the project root directory.</p>
+<p>To install, execute the following commands within the SPARCED root directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>./requirements.txt<span class="w"> </span><span class="c1"># provides authorized installation access</span>
+./requirements.txt<span class="w"> </span><span class="c1"># Installation command</span>
 </pre></div>
 </div>
-<p>:coin: <strong>Tip:</strong> Ubuntu’s terminal has autocompletion, so if you don’t know the
-end of the name of a file (for example because of version numbers) while
-entering a command in your terminal, just press <code class="docutils literal notranslate"><span class="pre">[tab]</span></code> and see if it
-fills in correctly.</p>
+<p>After installation is complete, restart your shell for the changes to take effect.</p>
 </section>
-<section id="virtualbox-guest-additions">
-<h2>VirtualBox Guest Additions<a class="headerlink" href="#virtualbox-guest-additions" title="Permalink to this heading">¶</a></h2>
-<p><em>If you are not using VirtualBox, skip this section.</em></p>
-<p>In the menu at the top of the virtual machine you are running, go to
-<em>Devices</em>&gt;<em>Insert Guest Additions CD image</em>, then in your terminal run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>dkms<span class="w"> </span>linux-headers-generic<span class="w"> </span><span class="c1"># Necessary if you chose the minimal installation of Ubuntu</span>
-lsblk<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;rom&quot;</span>
-<span class="nb">cd</span><span class="w"> </span>/media/<span class="o">{</span>username<span class="o">}</span>/VBox_GAs_<span class="o">{</span>version<span class="w"> </span>number<span class="o">}</span><span class="w"> </span><span class="c1"># with {username} being your username and {version number} the version number</span>
-sudo<span class="w"> </span>./VBoxLinuxAdditions.run
+<section id="macos-windows-hpc-and-non-root-users-installation-via-containers">
+<h3>MacOS, Windows, HPC, and Non-Root Users: Installation via Containers<a class="headerlink" href="#macos-windows-hpc-and-non-root-users-installation-via-containers" title="Link to this heading">¶</a></h3>
+<section id="docker">
+<h4>Docker<a class="headerlink" href="#docker" title="Link to this heading">¶</a></h4>
+<p>For MacOS and Windows, we strongly recommend installing the Docker container.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you haven&#39;t done so already:</span>
+<span class="n">docker</span> <span class="n">login</span> 
+<span class="c1"># Pull the container:</span>
+<span class="n">docker</span> <span class="n">pull</span> <span class="n">jonahrileyhuggins</span><span class="o">/</span><span class="n">sparced</span><span class="o">-</span><span class="n">tools</span><span class="p">:</span><span class="n">latest</span>
 </pre></div>
 </div>
-<p>You will need to restart the VM after that. Don’t forget to eject the CD! 😉</p>
+<p>Alternatively, the Docker container can be built locally:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">buildx</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">sparced</span><span class="o">-</span><span class="n">tools</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">SPARCED</span><span class="o">/</span><span class="n">container</span><span class="o">/</span><span class="n">Dockerfile</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Operating inside of the container enables the use of the SPARCED toolset without having to install the python dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="n">sparced</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+</div>
+<p>Further, users are able to bind their local SPARCED directory with the container’s SPARCED directory, allowing for native, local modifications on the host system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">-</span><span class="n">v</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span>\<span class="n">path</span>\<span class="n">to</span>\<span class="n">SPARCED</span><span class="p">:</span><span class="o">/</span><span class="n">SPARCED</span> <span class="n">sparced</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+</div>
+<p><strong>Flags:</strong></p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">--rm</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Stands for:</strong> <em>Remove</em></p></li>
+<li><p><strong>Function:</strong> Automatically removes the container when it stops</p></li>
+<li><p><strong>Why use it</strong></p>
+<ul>
+<li><p>Prevents the accumulation of stopped containers that would otherwise take up system resources.</p></li>
+<li><p>Useful for temporary containers where you don’t need to persist the container itself after it has run.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><code class="docutils literal notranslate"><span class="pre">-i</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Stands for:</strong> <em>Interactive</em></p></li>
+<li><p><strong>Function:</strong> Keeps the standard input (<code class="docutils literal notranslate"><span class="pre">stdin</span></code>) open, even if not attached to a terminal.</p></li>
+<li><p><strong>Why use it?</strong></p>
+<ul>
+<li><p>Allows the container to accept input from the user during runtime.</p></li>
+<li><p>Especially useful when paired with <code class="docutils literal notranslate"><span class="pre">-t</span></code> for running an interactive shell session.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><code class="docutils literal notranslate"><span class="pre">-t</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Stands for:</strong> <em>TTY (teletypewriter)</em></p></li>
+<li><p><strong>Function:</strong> Allocates a pseudo-terminal for the container.</p></li>
+<li><p><strong>Why use it?</strong></p>
+<ul>
+<li><p>Allows for better interactivity, like being able to run <code class="docutils literal notranslate"><span class="pre">bash</span></code> or <code class="docutils literal notranslate"><span class="pre">sh</span></code> inside the container and see a command prompt.</p></li>
+<li><p>Often paired with <code class="docutils literal notranslate"><span class="pre">-i</span></code> for fully interactive sessions.</p></li>
+</ul>
+</li>
+</ul>
 </section>
-<section id="openmpi">
-<h2>OpenMPI<a class="headerlink" href="#openmpi" title="Permalink to this heading">¶</a></h2>
+<section id="singularity">
+<h4><strong>Singularity</strong><a class="headerlink" href="#singularity" title="Link to this heading">¶</a></h4>
+<p>Singularity is a containerization platform designed specifically for high-performance computing (HPC) and research environments. It allows users to create, distribute, and execute portable, reproducible containers across different systems. Unlike Docker, Singularity focuses on usability in environments where users don’t have root access, such as shared HPC clusters.</p>
+<p><strong>Key Features:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Rootless Execution:</strong> Users don’t need root privileges to run containers, enhancing security.</p></li>
+<li><p><strong>File System Binding:</strong> Provides seamless integration with the host system by binding directories into the container.</p></li>
+<li><p><strong>Portability:</strong> Containers can be moved and executed across different platforms without modification.</p></li>
+<li><p><strong>Support for MPI:</strong> Well-suited for parallel computing environments, allowing easy integration with MPI libraries.</p></li>
+</ol>
+<hr class="docutils" />
+<section id="building-the-singularity-container-from-a-definition-file">
+<h5><strong>Building the Singularity Container from a Definition File</strong><a class="headerlink" href="#building-the-singularity-container-from-a-definition-file" title="Link to this heading">¶</a></h5>
+<p>To build a container using the <code class="docutils literal notranslate"><span class="pre">sparced.def</span></code> file, execute the following command from the project root directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>build<span class="w"> </span>--fakeroot<span class="w"> </span>container/sparced.sif<span class="w"> </span>container/sparced.def
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sparced.sif</span></code>:</strong> The output file, a Singularity Image File (SIF).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sparced.def</span></code>:</strong> The definition file that specifies the container’s environment and setup.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">--fakeroot</span></code>:</strong> Flag for building the singularity container without root access</p></li>
+</ul>
+<p>To verify that the container is successfully built, execute the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>inspect<span class="w"> </span>container/sparced.sif
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="how-to-shell-into-and-interact-with-the-singularity-container-while-binding-the-host-sparced-directory">
+<h5><strong>How to Shell into and Interact with the Singularity Container While Binding the Host SPARCED Directory</strong><a class="headerlink" href="#how-to-shell-into-and-interact-with-the-singularity-container-while-binding-the-host-sparced-directory" title="Link to this heading">¶</a></h5>
+<ol class="arabic">
+<li><p><strong>Bind the Host Directory:</strong>
+Use the <code class="docutils literal notranslate"><span class="pre">--bind</span></code> option to link a host directory into the container.</p></li>
+<li><p><strong>Run the Container:</strong>
+To open a shell inside the container with the <code class="docutils literal notranslate"><span class="pre">SPARCED</span></code> directory bound:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>shell<span class="w"> </span>--bind<span class="w"> </span>/path/to/host/SPARCED:/SPARCED<span class="w"> </span>container/sparced.sif
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">/path/to/host/SPARCED</span></code>:</strong> Replace this with the absolute path to your host’s SPARCED directory.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">/SPARCED</span></code>:</strong> This is the directory inside the container where the host directory will be accessible.</p></li>
+</ul>
+</li>
+<li><p><strong>Operate Within the Container:</strong>
+Once inside the container, you’ll see a prompt. Run commands as if you’re working on a standalone system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>compile<span class="w"> </span>-n<span class="w"> </span>Basic_model
+</pre></div>
+</div>
+</li>
+<li><p><strong>Exit the Container:</strong>
+Type <code class="docutils literal notranslate"><span class="pre">exit</span></code> to leave the container.</p></li>
+</ol>
+<hr class="docutils" />
+<p>If successful, the below configurations are not necessary. This is a conda-free installation.</p>
+</section>
+</section>
+</section>
+<section id="installation-verification">
+<h3>Installation verification<a class="headerlink" href="#installation-verification" title="Link to this heading">¶</a></h3>
+<p>After installation is complete, test the installation via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sparced<span class="w"> </span>-h
+</pre></div>
+</div>
+<p>⚠️ Note: Ubuntu users might have to restart their shell session for the changes to take effect. ⚠️</p>
+<p>Correct installation should output the following help information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">SPARCED</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">{</span><span class="nb">compile</span><span class="p">,</span><span class="n">simulate</span><span class="p">,</span><span class="n">validate</span><span class="p">}</span> <span class="o">...</span>
+
+<span class="n">SPARCED</span> <span class="n">CLI</span> <span class="n">tool</span><span class="o">.</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="nb">compile</span><span class="p">,</span><span class="n">simulate</span><span class="p">,</span><span class="n">validate</span><span class="p">}</span>
+                        <span class="n">Subcommands</span><span class="p">:</span> <span class="nb">compile</span><span class="p">,</span> <span class="n">simulate</span><span class="p">,</span> <span class="n">benchmark</span>
+    <span class="nb">compile</span>             <span class="n">Compile</span> <span class="n">a</span> <span class="n">model</span><span class="o">.</span>
+    <span class="n">simulate</span>            <span class="n">Run</span> <span class="n">a</span> <span class="n">simulation</span><span class="o">.</span>
+    <span class="n">validate</span>            <span class="n">Benchmark</span> <span class="n">a</span> <span class="n">model</span><span class="o">.</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="openmpi-on-windows">
+<h2>OpenMPI on Windows<a class="headerlink" href="#openmpi-on-windows" title="Link to this heading">¶</a></h2>
 <p><em>If you are not going to use parallel computation on your computer,
 skip this section.</em></p>
 <p>If you want to run some parallel code on your computer (for example to debug on
@@ -242,9 +358,9 @@ make<span class="w"> </span>install
 fix it without having to reinstall everything, please notify me! 🙏</p>
 </section>
 <section id="git-github-ssh">
-<h2>Git, GitHub &amp; SSH<a class="headerlink" href="#git-github-ssh" title="Permalink to this heading">¶</a></h2>
+<h2>Git, GitHub &amp; SSH<a class="headerlink" href="#git-github-ssh" title="Link to this heading">¶</a></h2>
 <section id="git">
-<h3>Git<a class="headerlink" href="#git" title="Permalink to this heading">¶</a></h3>
+<h3>Git<a class="headerlink" href="#git" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git-all
 </pre></div>
 </div>
@@ -255,7 +371,7 @@ git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"
 </div>
 </section>
 <section id="ssh-for-github">
-<h3>SSH for GitHub<a class="headerlink" href="#ssh-for-github" title="Permalink to this heading">¶</a></h3>
+<h3>SSH for GitHub<a class="headerlink" href="#ssh-for-github" title="Link to this heading">¶</a></h3>
 <p>I assume that you already have an account on <a class="reference external" href="https://github.com/">GitHub</a>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;{email}&quot;</span><span class="w"> </span><span class="c1"># with {email} being your email for GitHub</span>
 <span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span>
@@ -276,7 +392,7 @@ save the key.</p>
 </section>
 </section>
 <section id="anaconda">
-<h2>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this heading">¶</a></h2>
+<h2>Anaconda<a class="headerlink" href="#anaconda" title="Link to this heading">¶</a></h2>
 <p>Download the
 <a class="reference external" href="https://www.anaconda.com/products/distribution#linux">Anaconda installer for Linux</a>,
 then run the following commands in your terminal:</p>
@@ -298,11 +414,11 @@ the terminal. If you want to disable this behavior, enter:</p>
 </pre></div>
 </div>
 <p>To make sure Anaconda is up to date, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>update<span class="w"> </span>-all
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>update<span class="w"> </span>--all
 </pre></div>
 </div>
 <section id="id1">
-<h3>Environment<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<h3>Environment<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>Create a new Anaconda environment using the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>sparced<span class="w"> </span><span class="c1"># Creates an environment named &quot;sparced&quot;</span>
 <span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>sparced<span class="w"> </span><span class="c1"># Activates the &quot;sparced&quot; environment</span>
@@ -312,7 +428,7 @@ the terminal. If you want to disable this behavior, enter:</p>
 “sparced” environment each time you reopen your terminal.</p>
 </section>
 <section id="python-packages">
-<h3>Python Packages<a class="headerlink" href="#python-packages" title="Permalink to this heading">¶</a></h3>
+<h3>Python Packages<a class="headerlink" href="#python-packages" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>matplotlib<span class="w"> </span>pandas<span class="w"> </span>scipy
 pip<span class="w"> </span>install<span class="w"> </span>python-libsbml<span class="o">==</span><span class="m">5</span>.18.0
 pip<span class="w"> </span>install<span class="w"> </span>-Iv<span class="w"> </span><span class="nv">antimony</span><span class="o">==</span><span class="m">2</span>.12.0.1<span class="w"> </span><span class="c1"># WARNING: antimony &gt;= 2.13.0 doesn&#39;t work with SPARCED</span>
@@ -320,7 +436,7 @@ pip<span class="w"> </span>install<span class="w"> </span>-Iv<span class="w"> </
 </div>
 </section>
 <section id="the-amici-package">
-<h3>The Amici Package<a class="headerlink" href="#the-amici-package" title="Permalink to this heading">¶</a></h3>
+<h3>The Amici Package<a class="headerlink" href="#the-amici-package" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libatlas-base-dev<span class="w"> </span>swig
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">amici</span><span class="o">==</span><span class="m">0</span>.11.12<span class="w"> </span><span class="c1"># WARNING: newer versions don&#39;t work with SPARCED</span>
 </pre></div>
@@ -333,7 +449,7 @@ Palmetto), to fix it run:</p>
 </div>
 </section>
 <section id="the-mpi4py-package">
-<h3>The mpi4py Package<a class="headerlink" href="#the-mpi4py-package" title="Permalink to this heading">¶</a></h3>
+<h3>The mpi4py Package<a class="headerlink" href="#the-mpi4py-package" title="Link to this heading">¶</a></h3>
 <p><em>If you are not going to use parallel computation, skip this section.</em></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>remove<span class="w"> </span>compilers<span class="w"> </span><span class="c1"># if the compilers package is missing then don&#39;t install it!</span>
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>forge<span class="w"> </span>mpi4py<span class="w"> </span><span class="c1"># if you encounter any dependency version failure, try downgrading to Python 3.11 by typing &#39;conda install python=3.11&#39;</span>
@@ -343,13 +459,8 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 </div>
 </section>
 </section>
-<section id="todo-docker">
-<h2>TODO: Docker<a class="headerlink" href="#todo-docker" title="Permalink to this heading">¶</a></h2>
-<p><em>If you are not going to run SPARCED inside the official Jupyter Notebook
-container, skip this section.</em></p>
-</section>
 <section id="sparced">
-<h2>SPARCED 🎆<a class="headerlink" href="#sparced" title="Permalink to this heading">¶</a></h2>
+<h2>SPARCED 🎆<a class="headerlink" href="#sparced" title="Link to this heading">¶</a></h2>
 <p>This is only a setup suggestion:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Documents
 mkdir<span class="w"> </span>birtwistle-lab<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>birtwistle-lab
@@ -360,7 +471,7 @@ git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="
 </div>
 </section>
 <section id="clean">
-<h2>Clean<a class="headerlink" href="#clean" title="Permalink to this heading">¶</a></h2>
+<h2>Clean<a class="headerlink" href="#clean" title="Link to this heading">¶</a></h2>
 <p>Remove all unused packages that were installed by dependencies during the setup:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>autoremove
 </pre></div>
@@ -378,7 +489,7 @@ git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="
         <a href="tutorials/summary.html" class="btn btn-neutral float-right" title="Tutorials">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="contents.html" class="btn btn-neutral" title="Contents Table"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="about.html" class="btn btn-neutral" title="About"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -387,7 +498,7 @@ git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -410,16 +521,10 @@ git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="
     <script type="text/javascript" src="_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="_static/sphinx_highlight.js">
 
     </script>
 

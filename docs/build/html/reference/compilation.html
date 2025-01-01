@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="">
 
   
-  <title>Model Creation &mdash; SPARCED 2.0.0 documentation</title>
+  <title>Compilation &mdash; SPARCED 2.0.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="SPARCED 2.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Reference Documentation" href="summary.html"/>
-        <link rel="next" title="Model Simulation" href="simulation.html"/>
+        <link rel="next" title="Simulation" href="simulation.html"/>
         <link rel="prev" title="General Utilities" href="utils.html"/>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -85,24 +85,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../contents.html">Contents Table</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../about.html">About</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="summary.html">Reference Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../future-dev.html">Future developments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../license.html">License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contents.html#indices-and-tables">Indices and tables</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#virtualbox-guest-additions">VirtualBox Guest Additions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi">OpenMPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#anaconda">Anaconda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#todo-docker">TODO: Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#sparced">SPARCED 🎆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation-guide.html#clean">Clean</a></li>
 </ul>
@@ -110,6 +98,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/summary.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/notebook.html">Jupyter Notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/SPARCED%20Data%20Format/Species-Nomenclature.html">Species Naming Conventions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../papers/summary.html">Replicate Published Papers</a><ul>
@@ -169,104 +161,18 @@
 	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
 	  </dark-mode-toggle>
 	</div>
-  <section id="model-creation">
-<h1>Model Creation<a class="headerlink" href="#model-creation" title="Permalink to this heading">¶</a></h1>
+  <section id="compilation">
+<h1>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">¶</a></h1>
 <section id="general">
-<h2>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h2>
-<p>Main function for model creation</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="create_model.create_model">
-<span class="sig-prename descclassname"><span class="pre">create_model.</span></span><span class="sig-name descname"><span class="pre">create_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/create_model.html#create_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#create_model.create_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate Antimony, SBML and AMICI models based on given input data files.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The model name should not contain any dash (‘-’) characters as those
-are not supported by Antimony.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_name</strong> – The name of the model.</p></li>
-<li><p><strong>model_path</strong> – The path to the model folder.</p></li>
-<li><p><strong>input_files</strong> – A dictionnary containing paths towards input data file.</p></li>
-<li><p><strong>output_parameters</strong> – The desired name for the output parameters file.</p></li>
-<li><p><strong>verbose</strong> – Verbose.</p></li>
-<li><p><strong>is_SPARCED</strong> – Use SPARCED hard-coded values/behaviors.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Nothing.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>Launcher</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="launcher.launch_model_creation">
-<span class="sig-prename descclassname"><span class="pre">launcher.</span></span><span class="sig-name descname"><span class="pre">launch_model_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launcher.html#launch_model_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launcher.launch_model_creation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Launch model creation function</p>
-<p>Small routine to process the parsed arguments and call create_model()</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None.</strong> – </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Nothing.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="launcher.load_compilation_input_files">
-<span class="sig-prename descclassname"><span class="pre">launcher.</span></span><span class="sig-name descname"><span class="pre">load_compilation_input_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/launcher.html#load_compilation_input_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#launcher.load_compilation_input_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load compilation input data files paths dictionnary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model_path</strong> – The model folder path.</p></li>
-<li><p><strong>data_folder</strong> – The input data files folder name.</p></li>
-<li><p><strong>yaml_name</strong> – The YAML configuration file name.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionnary containing all the input data file paths.</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>General<a class="headerlink" href="#general" title="Link to this heading">¶</a></h2>
 </section>
 <section id="amici">
-<h2>AMICI<a class="headerlink" href="#amici" title="Permalink to this heading">¶</a></h2>
-<p>Model compilation</p>
+<h2>AMICI<a class="headerlink" href="#amici" title="Link to this heading">¶</a></h2>
+<p>Creation</p>
+<p>Legacy</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="model_compilation.compile_sbml_to_amici">
-<span class="sig-prename descclassname"><span class="pre">model_compilation.</span></span><span class="sig-name descname"><span class="pre">compile_sbml_to_amici</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/model_compilation.html#compile_sbml_to_amici"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#model_compilation.compile_sbml_to_amici" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compile the given SBML model into an AMICI model</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Passing observables and constant parameters to the importer is
-currently broken, in the original script too.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sbml_file_name</strong> – The SBML file path.</p></li>
-<li><p><strong>model_output_dir</strong> – Output directory path for the generated AMICI model.</p></li>
-<li><p><strong>f_observables</strong> – The observables input file path.</p></li>
-<li><p><strong>compartments</strong> – Content of the compartments input file.</p></li>
-<li><p><strong>species</strong> – Content of the species input file.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Nothing.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>Utilities</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="amici_utils.define_observables">
-<span class="sig-prename descclassname"><span class="pre">amici_utils.</span></span><span class="sig-name descname"><span class="pre">define_observables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/amici_utils.html#define_observables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#amici_utils.define_observables" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="legacy.define_observables">
+<span class="sig-prename descclassname"><span class="pre">legacy.</span></span><span class="sig-name descname"><span class="pre">define_observables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/legacy.html#define_observables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#legacy.define_observables" title="Link to this definition">¶</a></dt>
 <dd><p>Create observables for the AMICI model</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -274,86 +180,27 @@ currently broken, in the original script too.</p>
 </div>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="amici_utils.extract_amici_model_name">
-<span class="sig-prename descclassname"><span class="pre">amici_utils.</span></span><span class="sig-name descname"><span class="pre">extract_amici_model_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/amici_utils.html#extract_amici_model_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#amici_utils.extract_amici_model_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract the model name from the given AMICI output directory path</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The model name is considered to be preceded by the last “<a class="reference internal" href="#amici">amici</a>” prefix
-found in the file path string.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>output_dir_path</strong> – The AMICI output directory path.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The extracted model name.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 <section id="antimony">
-<h2>Antimony<a class="headerlink" href="#antimony" title="Permalink to this heading">¶</a></h2>
-<p>Model writing</p>
+<h2>Antimony<a class="headerlink" href="#antimony" title="Link to this heading">¶</a></h2>
+<p>Creation</p>
+<p>Definitions</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="model_writing.antimony_write_model">
-<span class="sig-prename descclassname"><span class="pre">model_writing.</span></span><span class="sig-name descname"><span class="pre">antimony_write_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/model_writing.html#antimony_write_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#model_writing.antimony_write_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate an Antimony file</p>
-<p>Provided an empty Antimony file and paths to the SPARCED formatted input
-data files, generate the content of the Antimony file.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This process also creates a parameters file as an output.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f_antimony</strong> – The path of the empty Antimony file to write in.</p></li>
-<li><p><strong>input_files</strong> – The dictionnary containing the input data files paths.</p></li>
-<li><p><strong>f_output_parameters</strong> – The name of the output parameters file.</p></li>
-<li><p><strong>is_SPARCED</strong> – A flag to raise SPARCED specific behavior or not.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The contents of the compartments and species files.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>Writing Utilities</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="antimony_write.antimony_write_constant_variables">
-<span class="sig-prename descclassname"><span class="pre">antimony_write.</span></span><span class="sig-name descname"><span class="pre">antimony_write_constant_variables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write.html#antimony_write_constant_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write.antimony_write_constant_variables" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write constant variables in the given Antimony file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f_antimony</strong> – The open Antimony file.</p></li>
-<li><p><strong>constants</strong> – The constant variables to declare.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Nothing.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="antimony_write.antimony_write_compartments_names">
-<span class="sig-prename descclassname"><span class="pre">antimony_write.</span></span><span class="sig-name descname"><span class="pre">antimony_write_compartments_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write.html#antimony_write_compartments_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write.antimony_write_compartments_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="definitions.define_compartments">
+<span class="sig-prename descclassname"><span class="pre">definitions.</span></span><span class="sig-name descname"><span class="pre">define_compartments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/definitions.html#define_compartments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#definitions.define_compartments" title="Link to this definition">¶</a></dt>
 <dd><p>Write compartments names in the given Antimony file</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first row is considered as a header, and hence it is skipped.
-Names should be located on the first column of the array.</p>
+<p>First row is considered as a header, and hence it is skipped.
+First column of the array should contain the compartments names.
+Second column of the array should contain the compartments volumes.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_antimony</strong> – The open Antimony file.</p></li>
-<li><p><strong>compartments</strong> – Content of the input compartments file.</p></li>
+<li><p><strong>file</strong> – The open Antimony file.</p></li>
+<li><p><strong>compartments</strong> – Content of the input compartments file structured
+as specified in the __Note__ section.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -363,42 +210,24 @@ Names should be located on the first column of the array.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="antimony_write.antimony_write_reactions">
-<span class="sig-prename descclassname"><span class="pre">antimony_write.</span></span><span class="sig-name descname"><span class="pre">antimony_write_reactions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write.html#antimony_write_reactions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write.antimony_write_reactions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write reactions in the given Antimony file</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This function contains a massive copy/paste from some older code.
-TODO Clean function and remove hard-coded values.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> – The open Antimony file.</p></li>
-<li><p><strong>f_ratelaws</strong> – The ratelaws file path.</p></li>
-<li><p><strong>f_stoichmat</strong> – The stoichiometric matrix file path.</p></li>
-<li><p><strong>f_outp</strong> – The output parameters file path.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A typle with the parameters’ names list and the parameters’ values list.</p>
+<dt class="sig sig-object py" id="definitions.define_species">
+<span class="sig-prename descclassname"><span class="pre">definitions.</span></span><span class="sig-name descname"><span class="pre">define_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/definitions.html#define_species"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#definitions.define_species" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Write species names and affiliated compartments in the given</dt><dd><p>Antimony file</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="antimony_write.antimony_write_species_names">
-<span class="sig-prename descclassname"><span class="pre">antimony_write.</span></span><span class="sig-name descname"><span class="pre">antimony_write_species_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write.html#antimony_write_species_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write.antimony_write_species_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write species names and affiliated compartments in the given Antimony file</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first row is considered as a header, and hence it is skipped.
-Species names should be located on the first column of the array.
-Species compartments should be located on the second column of the array.</p>
+<p>First row is considered as a header, and hence it is skipped.
+First column of the array should contain species names.
+Second column of the array should contain species compartments.</p>
 </div>
-<dl class="simple">
-<dt>Argurments:</dt><dd><p>f_antimony: The open Antimony file.
-species: Content of the input species file.</p>
+<dl>
+<dt>Argurments:</dt><dd><p>file: The open Antimony file.
+species: Content of the input species file structured as</p>
+<blockquote>
+<div><p>specified in the __Note__ section.</p>
+</div></blockquote>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -409,13 +238,9 @@ species: Content of the input species file.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="antimony_write.antimony_write_unit_definitions">
-<span class="sig-prename descclassname"><span class="pre">antimony_write.</span></span><span class="sig-name descname"><span class="pre">antimony_write_unit_definitions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write.html#antimony_write_unit_definitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write.antimony_write_unit_definitions" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="definitions.define_units">
+<span class="sig-prename descclassname"><span class="pre">definitions.</span></span><span class="sig-name descname"><span class="pre">define_units</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/definitions.html#define_units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#definitions.define_units" title="Link to this definition">¶</a></dt>
 <dd><p>Write unit definitions in the given Antimony file</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This function contains hard-coded values</p>
-</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f_antimony</strong> – The open Antimony file.</p>
@@ -426,22 +251,23 @@ species: Content of the input species file.</p>
 </dl>
 </dd></dl>
 
-<p>Writing Initial Conditions Utilities</p>
+<p>Initial Conditions</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="antimony_write_IC.antimony_write_compartments_IC">
-<span class="sig-prename descclassname"><span class="pre">antimony_write_IC.</span></span><span class="sig-name descname"><span class="pre">antimony_write_compartments_IC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write_IC.html#antimony_write_compartments_IC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write_IC.antimony_write_compartments_IC" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="initial_conditions.set_compartments_ic">
+<span class="sig-prename descclassname"><span class="pre">initial_conditions.</span></span><span class="sig-name descname"><span class="pre">set_compartments_ic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/initial_conditions.html#set_compartments_ic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#initial_conditions.set_compartments_ic" title="Link to this definition">¶</a></dt>
 <dd><p>Write compartments initial conditions in the given Antimony file</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first row is considered as a header, and hence it is skipped.
-Names should be located on the first column of the array.
-Volumes should be located on the second column of the array.</p>
+<p>First row is considered as a header, and hence it is skipped.
+First column of the array should contain compartments name.
+Second column of the array should contain compartments concentrations.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_antimony</strong> – The open Antimony file.</p></li>
-<li><p><strong>compartments</strong> – The content of the input compartments file.</p></li>
+<li><p><strong>file</strong> – The open Antimony file.</p></li>
+<li><p><strong>compartments</strong> – Content of the input compartments file structured
+as specified in the __Note__ section.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -451,18 +277,21 @@ Volumes should be located on the second column of the array.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="antimony_write_IC.antimony_write_reactions_IC">
-<span class="sig-prename descclassname"><span class="pre">antimony_write_IC.</span></span><span class="sig-name descname"><span class="pre">antimony_write_reactions_IC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write_IC.html#antimony_write_reactions_IC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write_IC.antimony_write_reactions_IC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write reactions parameters initial conditions in the given Antimony file</p>
+<dt class="sig sig-object py" id="initial_conditions.set_reactions_ic">
+<span class="sig-prename descclassname"><span class="pre">initial_conditions.</span></span><span class="sig-name descname"><span class="pre">set_reactions_ic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/initial_conditions.html#set_reactions_ic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#initial_conditions.set_reactions_ic" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Write reactions parameters initial conditions in the given</dt><dd><p>Antimony file</p>
+</dd>
+</dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>TODO use only one array for the parameters instead of taking the risk to
-separate names from values.</p>
+<p>TODO use only one array for the parameters instead of taking
+the risk to separate names from values.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_antimony</strong> – The open Antimony file.</p></li>
+<li><p><strong>file</strong> – The open Antimony file.</p></li>
 <li><p><strong>p_names</strong> – The parameters names.</p></li>
 <li><p><strong>p_values</strong> – The parameters values.</p></li>
 </ul>
@@ -474,19 +303,19 @@ separate names from values.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="antimony_write_IC.antimony_write_species_IC">
-<span class="sig-prename descclassname"><span class="pre">antimony_write_IC.</span></span><span class="sig-name descname"><span class="pre">antimony_write_species_IC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/antimony_write_IC.html#antimony_write_species_IC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#antimony_write_IC.antimony_write_species_IC" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="initial_conditions.set_species_ic">
+<span class="sig-prename descclassname"><span class="pre">initial_conditions.</span></span><span class="sig-name descname"><span class="pre">set_species_ic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/initial_conditions.html#set_species_ic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#initial_conditions.set_species_ic" title="Link to this definition">¶</a></dt>
 <dd><p>Write species initial concentrations in the given Antimony file</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first row is considered as a header, and hence it is skipped.
-Species names should be located on the first column of the array.
-Species concentrations should be located on the third column of the array.</p>
+<p>First row is considered as a header, and hence it is skipped.
+First column of the array should contain species names.
+Third column of the array should contain species concentrations.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_antimony</strong> – The open Antimony file.</p></li>
+<li><p><strong>file</strong> – The open Antimony file.</p></li>
 <li><p><strong>species</strong> – Content of the input species file.</p></li>
 </ul>
 </dd>
@@ -496,20 +325,57 @@ Species concentrations should be located on the third column of the array.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="reactions._read_reactions_species">
+<span class="sig-prename descclassname"><span class="pre">reactions.</span></span><span class="sig-name descname"><span class="pre">_read_reactions_species</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reactions.html#_read_reactions_species"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reactions._read_reactions_species" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> – The reaction description.</p></li>
+<li><p><strong>formula</strong> – The formula string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple structured as (formula, reactants, products).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="reactions.write_reactions">
+<span class="sig-prename descclassname"><span class="pre">reactions.</span></span><span class="sig-name descname"><span class="pre">write_reactions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reactions.html#write_reactions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#reactions.write_reactions" title="Link to this definition">¶</a></dt>
+<dd><p>Write SparcedModel.Model reactions into an Antimony file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_antimony</strong> – The open Antimony file.</p></li>
+<li><p><strong>model</strong> – A SpacedModel.Model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple with the parameters’ names list and the parameters’
+values list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="conversion-scripts">
+<h2>Conversion scripts<a class="headerlink" href="#conversion-scripts" title="Link to this heading">¶</a></h2>
 </section>
 <section id="sbml">
-<h2>SBML<a class="headerlink" href="#sbml" title="Permalink to this heading">¶</a></h2>
-<p>Model annotation</p>
+<h2>SBML<a class="headerlink" href="#sbml" title="Link to this heading">¶</a></h2>
+<p>Annotations</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="model_annotation.sbml_annotate_model">
-<span class="sig-prename descclassname"><span class="pre">model_annotation.</span></span><span class="sig-name descname"><span class="pre">sbml_annotate_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/model_annotation.html#sbml_annotate_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#model_annotation.sbml_annotate_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="annotations.sbml_annotate_model">
+<span class="sig-prename descclassname"><span class="pre">annotations.</span></span><span class="sig-name descname"><span class="pre">sbml_annotate_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/annotations.html#sbml_annotate_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#annotations.sbml_annotate_model" title="Link to this definition">¶</a></dt>
 <dd><p>Annotate species and compartments of the given SBML model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sbml_file_name</strong> – The SBML file path.</p></li>
-<li><p><strong>species</strong> – Content of the species input file.</p></li>
+<li><p><strong>file_path</strong> – The path towards the SBML file.</p></li>
 <li><p><strong>compartments</strong> – Content of the compartments input file.</p></li>
+<li><p><strong>species</strong> – Content of the species input file.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -518,22 +384,23 @@ Species concentrations should be located on the third column of the array.</p>
 </dl>
 </dd></dl>
 
-<p>Utilities</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="sbml_utils.write_compartments_annotations">
-<span class="sig-prename descclassname"><span class="pre">sbml_utils.</span></span><span class="sig-name descname"><span class="pre">write_compartments_annotations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbml_utils.html#write_compartments_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbml_utils.write_compartments_annotations" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="annotations.write_compartments_annotations">
+<span class="sig-prename descclassname"><span class="pre">annotations.</span></span><span class="sig-name descname"><span class="pre">write_compartments_annotations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/annotations.html#write_compartments_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#annotations.write_compartments_annotations" title="Link to this definition">¶</a></dt>
 <dd><p>Set compartments annotations in the given SBML file</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first row is considered as a header, and hence it is skipped.
-Compartment names should be located on the first column of the array.
-Annotations should be located on the third column of the array.</p>
+<p>First row should be the header and will be skipped.
+First column contains the compartments names.
+Annotations are expected to be located on the 3rd column of the
+array.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_sbml</strong> – The loaded SBML file.</p></li>
-<li><p><strong>compartments</strong> – Content of the compartments input file.</p></li>
+<li><p><strong>file</strong> – The loaded SBML file.</p></li>
+<li><p><strong>compartments</strong> – Content of the compartments input file as
+specified in the __Note__ section.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -543,24 +410,57 @@ Annotations should be located on the third column of the array.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="sbml_utils.write_species_annotations">
-<span class="sig-prename descclassname"><span class="pre">sbml_utils.</span></span><span class="sig-name descname"><span class="pre">write_species_annotations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sbml_utils.html#write_species_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sbml_utils.write_species_annotations" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="annotations.write_species_annotations">
+<span class="sig-prename descclassname"><span class="pre">annotations.</span></span><span class="sig-name descname"><span class="pre">write_species_annotations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/annotations.html#write_species_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#annotations.write_species_annotations" title="Link to this definition">¶</a></dt>
 <dd><p>Set species annotations in the given SBML file</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first row is considered as a header, and hence it is skipped.
-Annotations should be located between the 4th and the last column of
-the array.</p>
+<p>First row should be the header and will be skipped.
+Annotations are expected to be located between the 4th and the
+last column of the array.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_sbml</strong> – The loaded SBML file.</p></li>
+<li><p><strong>file</strong> – The loaded SBML file.</p></li>
 <li><p><strong>species</strong> – Content of the species input file.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Creation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="creation.build_sbml_model_path">
+<span class="sig-prename descclassname"><span class="pre">creation.</span></span><span class="sig-name descname"><span class="pre">build_sbml_model_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/creation.html#build_sbml_model_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#creation.build_sbml_model_path" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruct the path towards an SBML file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_name</strong> – The name of the SBML model.</p></li>
+<li><p><strong>model-path</strong> – The path towards the SBML model’s directory.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The path of the corresponding SBML file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="creation.get_sbml_model_path">
+<span class="sig-prename descclassname"><span class="pre">creation.</span></span><span class="sig-name descname"><span class="pre">get_sbml_model_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/creation.html#get_sbml_model_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#creation.get_sbml_model_path" title="Link to this definition">¶</a></dt>
+<dd><p>Generate the path for an SBML file corresponding to a
+SparcedModel.Model object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> – A SparcedModel.Model object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The path of the corresponding SBML file.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -574,7 +474,7 @@ the array.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="simulation.html" class="btn btn-neutral float-right" title="Model Simulation">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="simulation.html" class="btn btn-neutral float-right" title="Simulation">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="utils.html" class="btn btn-neutral" title="General Utilities"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -586,7 +486,7 @@ the array.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2024, The Birtwistle Lab.
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
     </p>
   </div>
 
@@ -609,16 +509,10 @@ the array.</p>
     <script type="text/javascript" src="../_static/documentation_options.js">
 
     </script>
-    <script type="text/javascript" src="../_static/jquery.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/underscore.js">
-
-    </script>
-    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js">
-
-    </script>
     <script type="text/javascript" src="../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../_static/sphinx_highlight.js">
 
     </script>
 

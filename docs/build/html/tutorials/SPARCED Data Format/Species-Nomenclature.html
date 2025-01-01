@@ -1,0 +1,450 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="" lang="" version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="">
+    <link rel="icon" type="image/x-icon" href="">
+
+  
+  <title>Species Naming Conventions &mdash; SPARCED 2.0.0 documentation</title>
+  
+
+  
+
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+
+
+  <link rel="stylesheet" href="../../_static/css/img.css" type="text/css"/>
+  
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/pdj.css" type="text/css" />
+  
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/darker.css" type="text/css" media="(prefers-color-scheme: dark)"/>
+        <link rel="author" title="About these documents"
+              href="../../about.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="SPARCED 2.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Tutorials" href="../summary.html"/>
+        <link rel="next" title="Replicate Published Papers" href="../../papers/summary.html"/>
+        <link rel="prev" title="SPARCED input file format specification" href="SPARCED%20v2.html"/>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script type="module" src="https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs"></script>
+
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+	
+        <a href="../../index.html" class="fa fa-home"> SPARCED </a>
+	
+	
+        <div role="search">
+	  
+	  <form id ="rtd-search-form" class="wy-form"
+		action="../../search.html" method="get">
+	    <input type="text" name="q" placeholder="Search docs" />
+	    <input type="hidden" name="check_keywords" value="yes" />
+	    <input type="hidden" name="area" value="default" />
+	  </form>
+	  
+	</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#instructions-beginners">Instructions &amp; Beginners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#replicate-our-results">Replicate our results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#further-information">Further information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation-guide.html">The SPARCED Installation Guide for Absolute Beginners</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#environment">Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#command-line-interface-installation">Command Line Interface Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#openmpi-on-windows">OpenMPI on Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#git-github-ssh">Git, GitHub &amp; SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#anaconda">Anaconda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#sparced">SPARCED 🎆</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation-guide.html#clean">Clean</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../summary.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hands-on.html">SPARCED Hands-On Primer Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../command-line.html">Using the SPARCED Command Line Interface (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../container.html">Building and Running the SPARCED Singularity Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPARCED%20v2.html">SPARCED input file format specification</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Species Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../papers/summary.html">Replicate Published Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/bouhaddou2018.html">Bouhaddou 2018 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/erdem2022.html">Erdem 2022 model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../papers/mutsuddy2023.html">Mutsuddy 2023 model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/summary.html">Reference Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/summary.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/summary.html#input-files">Input files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/summary.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../future-dev.html">Future developments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+          
+        
+
+      </div>
+      &nbsp;
+    </nav>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      <nav class="wy-nav-top" id="barra-mobile" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">SPARCED </a>
+      </nav>
+
+      <div class="wy-nav-content">
+	<div class="fundo-claro">
+	</div>
+	<div class="fundo-escuro">
+	</div>
+
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+	    
+	    <!-- <ul class="wy-breadcrumbs"> -->
+	    <!--   <li><a href="#">Docs</a> &raquo;</li> -->
+
+	    <!--   <li>Features</li> -->
+	    <!--   <li class="wy-breadcrumbs-aside"> -->
+
+	    <!-- 	<a href="_sources/index.txt" rel="nofollow"> View page source</a> -->
+
+	    <!--   </li> -->
+	    <!-- </ul> -->
+	    <!-- <hr/> -->
+	  </div>
+          <div role="main" class="">
+
+	    <div id="content" class="hfeed entry-container hentry">
+      	<div id="dark-mode-toggle-container">
+	  <dark-mode-toggle appearance="toggle" dark="switch to light mode" light="switch to dark mode">
+	  </dark-mode-toggle>
+	</div>
+  <section id="species-naming-conventions">
+<h1>Species Naming Conventions<a class="headerlink" href="#species-naming-conventions" title="Link to this heading">¶</a></h1>
+<p>This page defines the standardized naming conventions for species in SPARCED, designed for compatibility with PEtab, SBML, and PCRE2.</p>
+<section id="general-principles">
+<h2>General Principles<a class="headerlink" href="#general-principles" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Uniqueness</strong>: Each species name must be unique across the model.</p></li>
+<li><p><strong>Readability</strong>: Names should be human-readable and concise, while avoiding ambiguity.</p></li>
+<li><p><strong>Compatibility</strong>: Naming conventions comply with PEtab, SBML, and PCRE2 standards.</p></li>
+<li><p><strong>Minimal Redundancy</strong>: Compartments are specified only if the species resides outside its “home” compartment (e.g., TGFb is extracellular by default).</p></li>
+</ol>
+</section>
+<section id="naming-structure">
+<h2>Naming Structure<a class="headerlink" href="#naming-structure" title="Link to this heading">¶</a></h2>
+<p>The general structure for species names is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Modifiers][Residue&amp;Position]_[BaseSpecies][__[AdditionalSpecies]][_Compartment]
+</pre></div>
+</div>
+</section>
+<section id="where">
+<h2>Where:<a class="headerlink" href="#where" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><cite>Modifiers</cite>: Prefixes indicating the modification state (e.g., <cite>p</cite> for phosphorylation, <cite>u</cite> for ubiquitination).</p></li>
+<li><p><cite>Residue&amp;Position</cite>: For species with specific post-translational modification (PTM) sites, denote the residue and its position (e.g., <cite>S15</cite> for serine 15).</p></li>
+<li><p><cite>BaseSpecies</cite>: The core species name (e.g., <cite>CyclinD</cite>, <cite>Cdk4</cite>).</p></li>
+<li><p><cite>AdditionalSpecies</cite>: For complexes, additional species are concatenated using <cite>__</cite> (double underscores).</p></li>
+<li><p><cite>Compartment</cite>: The compartment is specified only when the species is outside its default “home” compartment.</p></li>
+</ul>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Single Species with PTM</strong>:</p>
+<ul class="simple">
+<li><p><cite>pS15_TGFb_cytoplasm</cite>: TGFb phosphorylated at serine 15, located in the cytoplasm.</p></li>
+</ul>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Two-Component Complex</strong>:</p>
+<ul class="simple">
+<li><p><cite>pS15_CyclinD__pT298_Cdk4_nucleus</cite>: CyclinD phosphorylated at serine 15 and Cdk4 phosphorylated at threonine 298, in the nucleus.</p></li>
+</ul>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Multi-Component Complex</strong>:</p>
+<ul class="simple">
+<li><p><cite>pS15_CyclinD__pT298_Cdk4__pY104_EGFR_membrane</cite>: CyclinD, Cdk4, and EGFR phosphorylated at specific residues, forming a complex at the membrane.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="prefixes">
+<h2>Prefixes<a class="headerlink" href="#prefixes" title="Link to this heading">¶</a></h2>
+<p>The following table summarizes standard prefixes for species modifiers:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Prefixes for Species Modifiers</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Prefix</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>p</cite></p></td>
+<td><p>Phosphorylation</p></td>
+<td><p><cite>pS15_TGFb</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>u</cite></p></td>
+<td><p>Ubiquitination</p></td>
+<td><p><cite>uK48_TGFbR1</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>m</cite></p></td>
+<td><p>Methylation</p></td>
+<td><p><cite>mK9_HistoneH3</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>a</cite></p></td>
+<td><p>Acetylation</p></td>
+<td><p><cite>aK27_HistoneH3</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>g</cite></p></td>
+<td><p>Glycosylation</p></td>
+<td><p><cite>gN100_EGFR</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>c</cite></p></td>
+<td><p>Cysteinylation</p></td>
+<td><p><cite>cC100_EGFR</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><cite>i</cite></p></td>
+<td><p>Inactivated state</p></td>
+<td><p><cite>i_Cdk4</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>m</cite></p></td>
+<td><p>mRNA species of Gene names</p></td>
+<td><p><cite>m_CCND1</cite></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="suffixes">
+<h2>Suffixes<a class="headerlink" href="#suffixes" title="Link to this heading">¶</a></h2>
+<p>The following table summarizes compartment suffixes and their use cases:</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Suffixes for Compartments</span><a class="headerlink" href="#id3" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Suffix</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>_extracellular</cite></p></td>
+<td><p>Species outside the cell.</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>_cytoplasm</cite></p></td>
+<td><p>Species in the cytoplasm.</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>_nucleus</cite></p></td>
+<td><p>Species in the nucleus.</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>_endosome</cite></p></td>
+<td><p>Species bound to a membrane.</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>_mitochondria</cite></p></td>
+<td><p>Species in the mitochondria.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="guidelines-for-complexes">
+<h2>Guidelines for Complexes<a class="headerlink" href="#guidelines-for-complexes" title="Link to this heading">¶</a></h2>
+<p>For complexes, each species is listed in order, separated by double underscores (<cite>__</cite>). If a component species has PTMs, these are specified as part of its name. Compartments are only appended to the entire complex name, not individual components.</p>
+<section id="id1">
+<h3><strong>Examples</strong>:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">- Single PTM Complex: <cite>pS15_CyclinD__Cdk4_cytoplasm</cite></div>
+<div class="line">- Multi-PTM Complex: <cite>pS15_CyclinD__pT298_Cdk4__pY104_EGFR_membrane</cite></div>
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="potential-pitfalls">
+<h2>Potential Pitfalls<a class="headerlink" href="#potential-pitfalls" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Ambiguity in Residue Position</strong>:</p>
+<ul class="simple">
+<li><p>Always specify residues and positions for clarity in PTM names.</p></li>
+<li><p>Example: Avoid <cite>p_CyclinD</cite> if <cite>pS15_CyclinD</cite> is more precise.</p></li>
+</ul>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Complex Names Becoming Too Long</strong>:</p>
+<ul class="simple">
+<li><p>Avoid redundancy in component names.</p></li>
+<li><p>Use short, standard prefixes for PTMs. Look at synonyms on UniProt for inspiration.</p></li>
+</ul>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Tool Compatibility</strong>:</p>
+<ul class="simple">
+<li><p>Avoid special characters like parentheses <cite>()</cite> or symbols like <cite>&amp;</cite> that might break tools.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="regex-validation">
+<h2>Regex Validation<a class="headerlink" href="#regex-validation" title="Link to this heading">¶</a></h2>
+<p>The following regular expression ensures compatibility with PEtab, SBML, and PCRE2:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>^[a-zA-Z0-9_]+(__[a-zA-Z0-9_]+)*(_[a-zA-Z0-9_]+)?$
+</pre></div>
+</div>
+<p>This regex enforces:
+- Alphanumeric names with underscores.
+- Double underscores (<cite>__</cite>) for complex species.
+- Optional compartment suffixes.</p>
+</section>
+<section id="automating-naming">
+<h2>Automating Naming<a class="headerlink" href="#automating-naming" title="Link to this heading">¶</a></h2>
+<p>To minimize errors and maintain consistency, consider automating the naming process with a script. Below is an example Python snippet for generating valid species names:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_species_name</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">ptms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compartment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">base</span>
+    <span class="k">if</span> <span class="n">ptms</span><span class="p">:</span>
+        <span class="n">ptm_str</span> <span class="o">=</span> <span class="s2">&quot;__&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ptms</span><span class="p">])</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ptm_str</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">compartment</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">compartment</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">name</span>
+
+<span class="c1"># Example Usage</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generate_species_name</span><span class="p">(</span><span class="s2">&quot;CyclinD&quot;</span><span class="p">,</span> <span class="n">ptms</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;pS&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)],</span> <span class="n">compartment</span><span class="o">=</span><span class="s2">&quot;nucleus&quot;</span><span class="p">))</span>
+<span class="c1"># Output: pS15_CyclinD_nucleus</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+</section>
+
+
+	    </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../papers/summary.html" class="btn btn-neutral float-right" title="Replicate Published Papers">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SPARCED%20v2.html" class="btn btn-neutral" title="SPARCED input file format specification"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2024, The Birtwistle &amp; Erdem Labs.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/jucacrispim/sphinx_pdj_theme">theme</a> provided by <a href="https://poraodojuca.dev">Porão do Juca</a>.
+
+</footer>
+	</div>
+	</div>
+	  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+    <script type="text/javascript" src="../../_static/documentation_options.js">
+
+    </script>
+    <script type="text/javascript" src="../../_static/doctools.js">
+
+    </script>
+    <script type="text/javascript" src="../../_static/sphinx_highlight.js">
+
+    </script>
+
+  
+
+   <script type="text/javascript"
+           src="../../_static/js/theme.js"></script>
+
+   <script type="text/javascript"
+           src="../../_static/js/pdj.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+  </body>
+</html>
